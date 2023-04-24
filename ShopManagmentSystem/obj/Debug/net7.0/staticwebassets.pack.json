@@ -5,244 +5,684 @@
       "PackagePath": "staticwebassets\\ShopManagmentSystem.bundle.scp.css"
     },
     {
-      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\css\\site.css",
-      "PackagePath": "staticwebassets\\css\\site.css"
+      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\css\\perfect-scrollbar.css",
+      "PackagePath": "staticwebassets\\css\\perfect-scrollbar.css"
+    },
+    {
+      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\css\\style.css",
+      "PackagePath": "staticwebassets\\css\\style.css"
+    },
+    {
+      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\css\\style.css.map",
+      "PackagePath": "staticwebassets\\css\\style.css.map"
     },
     {
       "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\favicon.ico",
       "PackagePath": "staticwebassets\\favicon.ico"
     },
     {
-      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\js\\site.js",
-      "PackagePath": "staticwebassets\\js\\site.js"
+      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\icons\\avasta\\css\\style.css",
+      "PackagePath": "staticwebassets\\icons\\avasta\\css\\style.css"
     },
     {
-      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\lib\\bootstrap\\LICENSE",
-      "PackagePath": "staticwebassets\\lib\\bootstrap"
+      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\icons\\avasta\\fonts\\avasta.eot",
+      "PackagePath": "staticwebassets\\icons\\avasta\\fonts\\avasta.eot"
     },
     {
-      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css",
-      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css"
+      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\icons\\avasta\\fonts\\avasta.svg",
+      "PackagePath": "staticwebassets\\icons\\avasta\\fonts\\avasta.svg"
     },
     {
-      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css.map",
-      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css.map"
+      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\icons\\avasta\\fonts\\avasta.ttf",
+      "PackagePath": "staticwebassets\\icons\\avasta\\fonts\\avasta.ttf"
     },
     {
-      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css",
-      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css"
+      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\icons\\avasta\\fonts\\avasta.woff",
+      "PackagePath": "staticwebassets\\icons\\avasta\\fonts\\avasta.woff"
     },
     {
-      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css.map",
-      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css.map"
+      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\icons\\avasta\\fonts\\avasta.woff2",
+      "PackagePath": "staticwebassets\\icons\\avasta\\fonts\\avasta.woff2"
     },
     {
-      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css",
-      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css"
+      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\icons\\font-awesome-old\\css\\font-awesome.min.css",
+      "PackagePath": "staticwebassets\\icons\\font-awesome-old\\css\\font-awesome.min.css"
     },
     {
-      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css.map",
-      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css.map"
+      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\icons\\font-awesome-old\\fonts\\fontawesome-webfont3e6e.eot",
+      "PackagePath": "staticwebassets\\icons\\font-awesome-old\\fonts\\fontawesome-webfont3e6e.eot"
     },
     {
-      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css",
-      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css"
+      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\icons\\font-awesome-old\\fonts\\fontawesome-webfont3e6e.svg",
+      "PackagePath": "staticwebassets\\icons\\font-awesome-old\\fonts\\fontawesome-webfont3e6e.svg"
     },
     {
-      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css.map",
-      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css.map"
+      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\icons\\font-awesome-old\\fonts\\fontawesome-webfont3e6e.ttf",
+      "PackagePath": "staticwebassets\\icons\\font-awesome-old\\fonts\\fontawesome-webfont3e6e.ttf"
     },
     {
-      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css",
-      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css"
+      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\icons\\font-awesome-old\\fonts\\fontawesome-webfont3e6e.woff",
+      "PackagePath": "staticwebassets\\icons\\font-awesome-old\\fonts\\fontawesome-webfont3e6e.woff"
     },
     {
-      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css.map",
-      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css.map"
+      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\icons\\font-awesome-old\\fonts\\fontawesome-webfont3e6e.woff2",
+      "PackagePath": "staticwebassets\\icons\\font-awesome-old\\fonts\\fontawesome-webfont3e6e.woff2"
     },
     {
-      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css",
-      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css"
+      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\icons\\font-awesome-old\\fonts\\fontawesome-webfontd41d.eot",
+      "PackagePath": "staticwebassets\\icons\\font-awesome-old\\fonts\\fontawesome-webfontd41d.eot"
     },
     {
-      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css.map",
-      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css.map"
+      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\icons\\helveticaNeue\\css\\helveticaNeue.css",
+      "PackagePath": "staticwebassets\\icons\\helveticaNeue\\css\\helveticaNeue.css"
     },
     {
-      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css",
-      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css"
+      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\icons\\helveticaNeue\\fonts\\HelveticaNeue.eot",
+      "PackagePath": "staticwebassets\\icons\\helveticaNeue\\fonts\\HelveticaNeue.eot"
     },
     {
-      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css.map",
-      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css.map"
+      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\icons\\helveticaNeue\\fonts\\HelveticaNeue.svg",
+      "PackagePath": "staticwebassets\\icons\\helveticaNeue\\fonts\\HelveticaNeue.svg"
     },
     {
-      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css",
-      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css"
+      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\icons\\helveticaNeue\\fonts\\HelveticaNeue.ttf",
+      "PackagePath": "staticwebassets\\icons\\helveticaNeue\\fonts\\HelveticaNeue.ttf"
     },
     {
-      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css.map",
-      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css.map"
+      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\icons\\helveticaNeue\\fonts\\HelveticaNeue.woff",
+      "PackagePath": "staticwebassets\\icons\\helveticaNeue\\fonts\\HelveticaNeue.woff"
     },
     {
-      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css",
-      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css"
+      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\icons\\helveticaNeue\\fonts\\HelveticaNeue.woff2",
+      "PackagePath": "staticwebassets\\icons\\helveticaNeue\\fonts\\HelveticaNeue.woff2"
     },
     {
-      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css.map",
-      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css.map"
+      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\icons\\helveticaNeue\\fonts\\HelveticaNeueMed.eot",
+      "PackagePath": "staticwebassets\\icons\\helveticaNeue\\fonts\\HelveticaNeueMed.eot"
     },
     {
-      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css",
-      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css"
+      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\icons\\helveticaNeue\\fonts\\HelveticaNeueMed.svg",
+      "PackagePath": "staticwebassets\\icons\\helveticaNeue\\fonts\\HelveticaNeueMed.svg"
     },
     {
-      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css.map",
-      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css.map"
+      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\icons\\helveticaNeue\\fonts\\HelveticaNeueMed.ttf",
+      "PackagePath": "staticwebassets\\icons\\helveticaNeue\\fonts\\HelveticaNeueMed.ttf"
     },
     {
-      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css",
-      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css"
+      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\icons\\helveticaNeue\\fonts\\HelveticaNeueMed.woff",
+      "PackagePath": "staticwebassets\\icons\\helveticaNeue\\fonts\\HelveticaNeueMed.woff"
     },
     {
-      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css.map",
-      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css.map"
+      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\icons\\helveticaNeue\\fonts\\HelveticaNeueMed.woff2",
+      "PackagePath": "staticwebassets\\icons\\helveticaNeue\\fonts\\HelveticaNeueMed.woff2"
     },
     {
-      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css",
-      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css"
+      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\icons\\line-awesome\\css\\line-awesome.min.css",
+      "PackagePath": "staticwebassets\\icons\\line-awesome\\css\\line-awesome.min.css"
     },
     {
-      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css.map",
-      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css.map"
+      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\icons\\line-awesome\\fonts\\line-awesome.eot",
+      "PackagePath": "staticwebassets\\icons\\line-awesome\\fonts\\line-awesome.eot"
     },
     {
-      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css",
-      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.css"
+      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\icons\\line-awesome\\fonts\\line-awesome.svg",
+      "PackagePath": "staticwebassets\\icons\\line-awesome\\fonts\\line-awesome.svg"
     },
     {
-      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css.map",
-      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.css.map"
+      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\icons\\line-awesome\\fonts\\line-awesome.ttf",
+      "PackagePath": "staticwebassets\\icons\\line-awesome\\fonts\\line-awesome.ttf"
     },
     {
-      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.min.css",
-      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.min.css"
+      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\icons\\line-awesome\\fonts\\line-awesome.woff",
+      "PackagePath": "staticwebassets\\icons\\line-awesome\\fonts\\line-awesome.woff"
     },
     {
-      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.min.css.map",
-      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.min.css.map"
+      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\icons\\line-awesome\\fonts\\line-awesome.woff2",
+      "PackagePath": "staticwebassets\\icons\\line-awesome\\fonts\\line-awesome.woff2"
     },
     {
-      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css",
-      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css"
+      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\icons\\material-design-iconic-font\\css\\materialdesignicons.min.css",
+      "PackagePath": "staticwebassets\\icons\\material-design-iconic-font\\css\\materialdesignicons.min.css"
     },
     {
-      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css.map",
-      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css.map"
+      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\icons\\material-design-iconic-font\\fonts\\materialdesignicons-webfont.eot",
+      "PackagePath": "staticwebassets\\icons\\material-design-iconic-font\\fonts\\materialdesignicons-webfont.eot"
     },
     {
-      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css",
-      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css"
+      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\icons\\material-design-iconic-font\\fonts\\materialdesignicons-webfont.svg",
+      "PackagePath": "staticwebassets\\icons\\material-design-iconic-font\\fonts\\materialdesignicons-webfont.svg"
     },
     {
-      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css.map",
-      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css.map"
+      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\icons\\material-design-iconic-font\\fonts\\materialdesignicons-webfont.ttf",
+      "PackagePath": "staticwebassets\\icons\\material-design-iconic-font\\fonts\\materialdesignicons-webfont.ttf"
     },
     {
-      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js",
-      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js"
+      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\icons\\material-design-iconic-font\\fonts\\materialdesignicons-webfont.woff",
+      "PackagePath": "staticwebassets\\icons\\material-design-iconic-font\\fonts\\materialdesignicons-webfont.woff"
     },
     {
-      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js.map",
-      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js.map"
+      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\icons\\material-design-iconic-font\\fonts\\materialdesignicons-webfont.woff2",
+      "PackagePath": "staticwebassets\\icons\\material-design-iconic-font\\fonts\\materialdesignicons-webfont.woff2"
     },
     {
-      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js",
-      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js"
+      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\icons\\simple-line-icons\\css\\simple-line-icons.css",
+      "PackagePath": "staticwebassets\\icons\\simple-line-icons\\css\\simple-line-icons.css"
     },
     {
-      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js.map",
-      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js.map"
+      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\icons\\simple-line-icons\\fonts\\Simple-Line-Icons4c82.eot",
+      "PackagePath": "staticwebassets\\icons\\simple-line-icons\\fonts\\Simple-Line-Icons4c82.eot"
     },
     {
-      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js",
-      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js"
+      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\icons\\simple-line-icons\\fonts\\Simple-Line-Icons4c82.svg",
+      "PackagePath": "staticwebassets\\icons\\simple-line-icons\\fonts\\Simple-Line-Icons4c82.svg"
     },
     {
-      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js.map",
-      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js.map"
+      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\icons\\simple-line-icons\\fonts\\Simple-Line-Icons4c82.ttf",
+      "PackagePath": "staticwebassets\\icons\\simple-line-icons\\fonts\\Simple-Line-Icons4c82.ttf"
     },
     {
-      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js",
-      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js"
+      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\icons\\simple-line-icons\\fonts\\Simple-Line-Icons4c82.woff",
+      "PackagePath": "staticwebassets\\icons\\simple-line-icons\\fonts\\Simple-Line-Icons4c82.woff"
     },
     {
-      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js.map",
-      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js.map"
+      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\icons\\simple-line-icons\\fonts\\Simple-Line-Icons4c82.woff2",
+      "PackagePath": "staticwebassets\\icons\\simple-line-icons\\fonts\\Simple-Line-Icons4c82.woff2"
     },
     {
-      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.js",
-      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.js"
+      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\icons\\simple-line-icons\\fonts\\Simple-Line-Iconsd41d.eot",
+      "PackagePath": "staticwebassets\\icons\\simple-line-icons\\fonts\\Simple-Line-Iconsd41d.eot"
     },
     {
-      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.js.map",
-      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.js.map"
+      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\icons\\themify-icons\\css\\themify-icons.css",
+      "PackagePath": "staticwebassets\\icons\\themify-icons\\css\\themify-icons.css"
     },
     {
-      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js",
-      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.min.js"
+      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\icons\\themify-icons\\fonts\\themify.ttf",
+      "PackagePath": "staticwebassets\\icons\\themify-icons\\fonts\\themify.ttf"
     },
     {
-      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js.map",
-      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.min.js.map"
+      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\icons\\themify-icons\\fonts\\themify.woff",
+      "PackagePath": "staticwebassets\\icons\\themify-icons\\fonts\\themify.woff"
     },
     {
-      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\lib\\jquery-validation-unobtrusive\\LICENSE.txt",
-      "PackagePath": "staticwebassets\\lib\\jquery-validation-unobtrusive\\LICENSE.txt"
+      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\icons\\themify-icons\\fonts\\themify9f24.eot",
+      "PackagePath": "staticwebassets\\icons\\themify-icons\\fonts\\themify9f24.eot"
     },
     {
-      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.js",
-      "PackagePath": "staticwebassets\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.js"
+      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\icons\\themify-icons\\fonts\\themify9f24.svg",
+      "PackagePath": "staticwebassets\\icons\\themify-icons\\fonts\\themify9f24.svg"
     },
     {
-      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.min.js",
-      "PackagePath": "staticwebassets\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.min.js"
+      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\icons\\themify-icons\\fonts\\themifyd41d.eot",
+      "PackagePath": "staticwebassets\\icons\\themify-icons\\fonts\\themifyd41d.eot"
     },
     {
-      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\lib\\jquery-validation\\LICENSE.md",
-      "PackagePath": "staticwebassets\\lib\\jquery-validation\\LICENSE.md"
+      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\images\\1.jpg",
+      "PackagePath": "staticwebassets\\images\\1.jpg"
     },
     {
-      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\lib\\jquery-validation\\dist\\additional-methods.js",
-      "PackagePath": "staticwebassets\\lib\\jquery-validation\\dist\\additional-methods.js"
+      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\images\\avatar\\1.png",
+      "PackagePath": "staticwebassets\\images\\avatar\\1.png"
     },
     {
-      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\lib\\jquery-validation\\dist\\additional-methods.min.js",
-      "PackagePath": "staticwebassets\\lib\\jquery-validation\\dist\\additional-methods.min.js"
+      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\images\\avatar\\2.png",
+      "PackagePath": "staticwebassets\\images\\avatar\\2.png"
     },
     {
-      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.js",
-      "PackagePath": "staticwebassets\\lib\\jquery-validation\\dist\\jquery.validate.js"
+      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\images\\avatar\\3.png",
+      "PackagePath": "staticwebassets\\images\\avatar\\3.png"
     },
     {
-      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.min.js",
-      "PackagePath": "staticwebassets\\lib\\jquery-validation\\dist\\jquery.validate.min.js"
+      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\images\\avatar\\4.png",
+      "PackagePath": "staticwebassets\\images\\avatar\\4.png"
     },
     {
-      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\lib\\jquery\\LICENSE.txt",
-      "PackagePath": "staticwebassets\\lib\\jquery\\LICENSE.txt"
+      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\images\\avatar\\5.png",
+      "PackagePath": "staticwebassets\\images\\avatar\\5.png"
     },
     {
-      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\lib\\jquery\\dist\\jquery.js",
-      "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.js"
+      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\images\\card\\1.png",
+      "PackagePath": "staticwebassets\\images\\card\\1.png"
     },
     {
-      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\lib\\jquery\\dist\\jquery.min.js",
-      "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.min.js"
+      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\images\\card\\2.png",
+      "PackagePath": "staticwebassets\\images\\card\\2.png"
     },
     {
-      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\lib\\jquery\\dist\\jquery.min.map",
-      "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.min.map"
+      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\images\\favicon.png",
+      "PackagePath": "staticwebassets\\images\\favicon.png"
+    },
+    {
+      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\images\\logo-text.png",
+      "PackagePath": "staticwebassets\\images\\logo-text.png"
+    },
+    {
+      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\images\\logo.png",
+      "PackagePath": "staticwebassets\\images\\logo.png"
+    },
+    {
+      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\images\\logo.svg",
+      "PackagePath": "staticwebassets\\images\\logo.svg"
+    },
+    {
+      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\images\\product\\1.jpg",
+      "PackagePath": "staticwebassets\\images\\product\\1.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\images\\product\\2.jpg",
+      "PackagePath": "staticwebassets\\images\\product\\2.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\images\\product\\3.jpg",
+      "PackagePath": "staticwebassets\\images\\product\\3.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\images\\product\\4.jpg",
+      "PackagePath": "staticwebassets\\images\\product\\4.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\images\\product\\5.jpg",
+      "PackagePath": "staticwebassets\\images\\product\\5.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\images\\product\\6.jpg",
+      "PackagePath": "staticwebassets\\images\\product\\6.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\images\\product\\7.jpg",
+      "PackagePath": "staticwebassets\\images\\product\\7.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\images\\profile\\1.jpg",
+      "PackagePath": "staticwebassets\\images\\profile\\1.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\images\\profile\\1.png",
+      "PackagePath": "staticwebassets\\images\\profile\\1.png"
+    },
+    {
+      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\images\\profile\\2.jpg",
+      "PackagePath": "staticwebassets\\images\\profile\\2.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\images\\profile\\3.jpg",
+      "PackagePath": "staticwebassets\\images\\profile\\3.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\images\\profile\\4.jpg",
+      "PackagePath": "staticwebassets\\images\\profile\\4.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\images\\profile\\5.jpg",
+      "PackagePath": "staticwebassets\\images\\profile\\5.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\images\\profile\\6.jpg",
+      "PackagePath": "staticwebassets\\images\\profile\\6.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\images\\profile\\7.jpg",
+      "PackagePath": "staticwebassets\\images\\profile\\7.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\images\\profile\\8.jpg",
+      "PackagePath": "staticwebassets\\images\\profile\\8.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\images\\profile\\9.jpg",
+      "PackagePath": "staticwebassets\\images\\profile\\9.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\images\\profile\\cover.jpg",
+      "PackagePath": "staticwebassets\\images\\profile\\cover.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\images\\profile\\profile.png",
+      "PackagePath": "staticwebassets\\images\\profile\\profile.png"
+    },
+    {
+      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\images\\svg\\actions.svg",
+      "PackagePath": "staticwebassets\\images\\svg\\actions.svg"
+    },
+    {
+      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\images\\svg\\apps.svg",
+      "PackagePath": "staticwebassets\\images\\svg\\apps.svg"
+    },
+    {
+      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\images\\svg\\arrow_down.svg",
+      "PackagePath": "staticwebassets\\images\\svg\\arrow_down.svg"
+    },
+    {
+      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\images\\svg\\arrow_right.svg",
+      "PackagePath": "staticwebassets\\images\\svg\\arrow_right.svg"
+    },
+    {
+      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\images\\svg\\arrow_up.svg",
+      "PackagePath": "staticwebassets\\images\\svg\\arrow_up.svg"
+    },
+    {
+      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\images\\svg\\calendar.svg",
+      "PackagePath": "staticwebassets\\images\\svg\\calendar.svg"
+    },
+    {
+      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\images\\svg\\calendar_check.svg",
+      "PackagePath": "staticwebassets\\images\\svg\\calendar_check.svg"
+    },
+    {
+      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\images\\svg\\calendar_minus.svg",
+      "PackagePath": "staticwebassets\\images\\svg\\calendar_minus.svg"
+    },
+    {
+      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\images\\svg\\calendar_plus.svg",
+      "PackagePath": "staticwebassets\\images\\svg\\calendar_plus.svg"
+    },
+    {
+      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\images\\svg\\chart.svg",
+      "PackagePath": "staticwebassets\\images\\svg\\chart.svg"
+    },
+    {
+      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\images\\svg\\chat.svg",
+      "PackagePath": "staticwebassets\\images\\svg\\chat.svg"
+    },
+    {
+      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\images\\svg\\clip.svg",
+      "PackagePath": "staticwebassets\\images\\svg\\clip.svg"
+    },
+    {
+      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\images\\svg\\close.svg",
+      "PackagePath": "staticwebassets\\images\\svg\\close.svg"
+    },
+    {
+      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\images\\svg\\close_menu.svg",
+      "PackagePath": "staticwebassets\\images\\svg\\close_menu.svg"
+    },
+    {
+      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\images\\svg\\cog.svg",
+      "PackagePath": "staticwebassets\\images\\svg\\cog.svg"
+    },
+    {
+      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\images\\svg\\contacts.svg",
+      "PackagePath": "staticwebassets\\images\\svg\\contacts.svg"
+    },
+    {
+      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\images\\svg\\dashboard.svg",
+      "PackagePath": "staticwebassets\\images\\svg\\dashboard.svg"
+    },
+    {
+      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\images\\svg\\edit_profile.svg",
+      "PackagePath": "staticwebassets\\images\\svg\\edit_profile.svg"
+    },
+    {
+      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\images\\svg\\email.svg",
+      "PackagePath": "staticwebassets\\images\\svg\\email.svg"
+    },
+    {
+      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\images\\svg\\emo.svg",
+      "PackagePath": "staticwebassets\\images\\svg\\emo.svg"
+    },
+    {
+      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\images\\svg\\file_edit.svg",
+      "PackagePath": "staticwebassets\\images\\svg\\file_edit.svg"
+    },
+    {
+      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\images\\svg\\file_excel.svg",
+      "PackagePath": "staticwebassets\\images\\svg\\file_excel.svg"
+    },
+    {
+      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\images\\svg\\file_list.svg",
+      "PackagePath": "staticwebassets\\images\\svg\\file_list.svg"
+    },
+    {
+      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\images\\svg\\file_plus.svg",
+      "PackagePath": "staticwebassets\\images\\svg\\file_plus.svg"
+    },
+    {
+      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\images\\svg\\file_report.svg",
+      "PackagePath": "staticwebassets\\images\\svg\\file_report.svg"
+    },
+    {
+      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\images\\svg\\file_text.svg",
+      "PackagePath": "staticwebassets\\images\\svg\\file_text.svg"
+    },
+    {
+      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\images\\svg\\file_user.svg",
+      "PackagePath": "staticwebassets\\images\\svg\\file_user.svg"
+    },
+    {
+      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\images\\svg\\file_word.svg",
+      "PackagePath": "staticwebassets\\images\\svg\\file_word.svg"
+    },
+    {
+      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\images\\svg\\forms.svg",
+      "PackagePath": "staticwebassets\\images\\svg\\forms.svg"
+    },
+    {
+      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\images\\svg\\invoice.svg",
+      "PackagePath": "staticwebassets\\images\\svg\\invoice.svg"
+    },
+    {
+      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\images\\svg\\microphone.svg",
+      "PackagePath": "staticwebassets\\images\\svg\\microphone.svg"
+    },
+    {
+      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\images\\svg\\money.svg",
+      "PackagePath": "staticwebassets\\images\\svg\\money.svg"
+    },
+    {
+      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\images\\svg\\more.svg",
+      "PackagePath": "staticwebassets\\images\\svg\\more.svg"
+    },
+    {
+      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\images\\svg\\notification.svg",
+      "PackagePath": "staticwebassets\\images\\svg\\notification.svg"
+    },
+    {
+      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\images\\svg\\plane.svg",
+      "PackagePath": "staticwebassets\\images\\svg\\plane.svg"
+    },
+    {
+      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\images\\svg\\profile.svg",
+      "PackagePath": "staticwebassets\\images\\svg\\profile.svg"
+    },
+    {
+      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\images\\svg\\project.svg",
+      "PackagePath": "staticwebassets\\images\\svg\\project.svg"
+    },
+    {
+      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\images\\svg\\reload.svg",
+      "PackagePath": "staticwebassets\\images\\svg\\reload.svg"
+    },
+    {
+      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\images\\svg\\reports.svg",
+      "PackagePath": "staticwebassets\\images\\svg\\reports.svg"
+    },
+    {
+      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\images\\svg\\schedule.svg",
+      "PackagePath": "staticwebassets\\images\\svg\\schedule.svg"
+    },
+    {
+      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\images\\svg\\search.svg",
+      "PackagePath": "staticwebassets\\images\\svg\\search.svg"
+    },
+    {
+      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\images\\svg\\setting.svg",
+      "PackagePath": "staticwebassets\\images\\svg\\setting.svg"
+    },
+    {
+      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\images\\svg\\signout.svg",
+      "PackagePath": "staticwebassets\\images\\svg\\signout.svg"
+    },
+    {
+      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\images\\svg\\ui_element.svg",
+      "PackagePath": "staticwebassets\\images\\svg\\ui_element.svg"
+    },
+    {
+      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\images\\svg\\user.svg",
+      "PackagePath": "staticwebassets\\images\\svg\\user.svg"
+    },
+    {
+      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\images\\svg\\video_play.svg",
+      "PackagePath": "staticwebassets\\images\\svg\\video_play.svg"
+    },
+    {
+      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\images\\tab\\1.jpg",
+      "PackagePath": "staticwebassets\\images\\tab\\1.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\images\\tab\\10.jpg",
+      "PackagePath": "staticwebassets\\images\\tab\\10.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\images\\tab\\11.jpg",
+      "PackagePath": "staticwebassets\\images\\tab\\11.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\images\\tab\\12.jpg",
+      "PackagePath": "staticwebassets\\images\\tab\\12.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\images\\tab\\13.jpg",
+      "PackagePath": "staticwebassets\\images\\tab\\13.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\images\\tab\\14.jpg",
+      "PackagePath": "staticwebassets\\images\\tab\\14.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\images\\tab\\15.jpg",
+      "PackagePath": "staticwebassets\\images\\tab\\15.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\images\\tab\\16.jpg",
+      "PackagePath": "staticwebassets\\images\\tab\\16.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\images\\tab\\17.jpg",
+      "PackagePath": "staticwebassets\\images\\tab\\17.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\images\\tab\\2.jpg",
+      "PackagePath": "staticwebassets\\images\\tab\\2.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\images\\tab\\3.jpg",
+      "PackagePath": "staticwebassets\\images\\tab\\3.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\images\\tab\\4.jpg",
+      "PackagePath": "staticwebassets\\images\\tab\\4.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\images\\tab\\5.jpg",
+      "PackagePath": "staticwebassets\\images\\tab\\5.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\images\\tab\\6.jpg",
+      "PackagePath": "staticwebassets\\images\\tab\\6.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\images\\tab\\7.jpg",
+      "PackagePath": "staticwebassets\\images\\tab\\7.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\images\\tab\\8.jpg",
+      "PackagePath": "staticwebassets\\images\\tab\\8.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\images\\tab\\9.jpg",
+      "PackagePath": "staticwebassets\\images\\tab\\9.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\js\\custom.min.js",
+      "PackagePath": "staticwebassets\\js\\custom.min.js"
+    },
+    {
+      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\js\\layout-compact-nav.js",
+      "PackagePath": "staticwebassets\\js\\layout-compact-nav.js"
+    },
+    {
+      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\js\\layout-dark.js",
+      "PackagePath": "staticwebassets\\js\\layout-dark.js"
+    },
+    {
+      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\js\\layout-fixed-header.js",
+      "PackagePath": "staticwebassets\\js\\layout-fixed-header.js"
+    },
+    {
+      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\js\\layout-fixed-nav.js",
+      "PackagePath": "staticwebassets\\js\\layout-fixed-nav.js"
+    },
+    {
+      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\js\\layout-full-nav.js",
+      "PackagePath": "staticwebassets\\js\\layout-full-nav.js"
+    },
+    {
+      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\js\\layout-light.js",
+      "PackagePath": "staticwebassets\\js\\layout-light.js"
+    },
+    {
+      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\js\\layout-mini-nav.js",
+      "PackagePath": "staticwebassets\\js\\layout-mini-nav.js"
+    },
+    {
+      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\js\\layout-rtl.js",
+      "PackagePath": "staticwebassets\\js\\layout-rtl.js"
+    },
+    {
+      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\js\\quixnav-init.js",
+      "PackagePath": "staticwebassets\\js\\quixnav-init.js"
+    },
+    {
+      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\js\\settings.js",
+      "PackagePath": "staticwebassets\\js\\settings.js"
+    },
+    {
+      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\js\\styleSwitcher.js",
+      "PackagePath": "staticwebassets\\js\\styleSwitcher.js"
+    },
+    {
+      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\vendor\\jqvmap\\css\\jqvmap.min.css",
+      "PackagePath": "staticwebassets\\vendor\\jqvmap\\css\\jqvmap.min.css"
+    },
+    {
+      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\vendor\\jqvmap\\js\\jquery.vmap.australia.js",
+      "PackagePath": "staticwebassets\\vendor\\jqvmap\\js\\jquery.vmap.australia.js"
+    },
+    {
+      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\vendor\\jqvmap\\js\\jquery.vmap.min.js",
+      "PackagePath": "staticwebassets\\vendor\\jqvmap\\js\\jquery.vmap.min.js"
+    },
+    {
+      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\vendor\\jqvmap\\js\\jquery.vmap.usa.js",
+      "PackagePath": "staticwebassets\\vendor\\jqvmap\\js\\jquery.vmap.usa.js"
+    },
+    {
+      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\vendor\\jqvmap\\js\\jquery.vmap.world.js",
+      "PackagePath": "staticwebassets\\vendor\\jqvmap\\js\\jquery.vmap.world.js"
+    },
+    {
+      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\vendor\\owl-carousel\\css\\owl.carousel.min.css",
+      "PackagePath": "staticwebassets\\vendor\\owl-carousel\\css\\owl.carousel.min.css"
+    },
+    {
+      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\vendor\\owl-carousel\\css\\owl.theme.default.min.css",
+      "PackagePath": "staticwebassets\\vendor\\owl-carousel\\css\\owl.theme.default.min.css"
+    },
+    {
+      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\vendor\\owl-carousel\\js\\owl.carousel.min.js",
+      "PackagePath": "staticwebassets\\vendor\\owl-carousel\\js\\owl.carousel.min.js"
+    },
+    {
+      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\vendor\\owl.carousel\\dist\\css\\owl.carousel.min.css",
+      "PackagePath": "staticwebassets\\vendor\\owl.carousel\\dist\\css\\owl.carousel.min.css"
+    },
+    {
+      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\vendor\\owl.carousel\\dist\\css\\owl.theme.default.min.css",
+      "PackagePath": "staticwebassets\\vendor\\owl.carousel\\dist\\css\\owl.theme.default.min.css"
+    },
+    {
+      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\vendor\\owl.carousel\\dist\\js\\owl.carousel.min.js",
+      "PackagePath": "staticwebassets\\vendor\\owl.carousel\\dist\\js\\owl.carousel.min.js"
     },
     {
       "Id": "obj\\Debug\\net7.0\\staticwebassets\\msbuild.ShopManagmentSystem.Microsoft.AspNetCore.StaticWebAssets.props",
