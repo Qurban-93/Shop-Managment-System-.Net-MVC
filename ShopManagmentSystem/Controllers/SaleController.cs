@@ -17,9 +17,23 @@ namespace ShopManagmentSystem.Controllers
             _context = context;
         }
 
-        public IActionResult Index()
+        [HttpPost]
+        public IActionResult Delete(int? id)
         {
-            return View();
+            if (id == null || id == 0) return NotFound();
+            List<ProductVM> products;
+            string basket = Request.Cookies["basket"];
+            if (basket == null) return NotFound();       
+            products = JsonConvert.DeserializeObject<List<ProductVM>>(basket);
+            if (products.Any(p => p.Id == id))
+            {
+                products.Remove(products.FirstOrDefault(p => p.Id == id));
+                Response.Cookies.Append("Basket", JsonConvert.SerializeObject(products),
+                new CookieOptions { MaxAge = TimeSpan.FromMinutes(1) });
+                return Ok();
+            }
+                       
+            return NotFound();
         }
 
         [HttpPost]

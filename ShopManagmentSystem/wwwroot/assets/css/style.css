@@ -264,4 +264,9 @@ body {
   display: inline-block;
   font-size: 16px;
   cursor: pointer;
+}
+.home_index .deleteBasketItem {
+  cursor: pointer;
+  font-size: 20px;
+  color: red;
 }/*# sourceMappingURL=style.css.map */
