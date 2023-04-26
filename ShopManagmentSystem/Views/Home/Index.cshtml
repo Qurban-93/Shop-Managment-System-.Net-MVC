@@ -1,31 +1,28 @@
 ﻿@model HomeVM
 
-<table class="table table-dark">
-    <thead>
+<div class="home_index">
+    <table>
         <tr>
-            <th scope="col">Brand</th>
-            <th scope="col">Name</th>
-            <th scope="col">Color</th>
-            <th scope="col">Price</th>
-            <th scope="col">Series</th>
-            <th scope="col">Category</th>
-            <th scope="col">Add to Sale</th>
+            <th>Brand</th>
+            <th>Name</th>
+            <th>Color</th>
+            <th>Price</th>
+            <th>Category</th>
+            <th>Series</th>
+            <th>Add Order</th>
+
         </tr>
-    </thead>
-    <tbody>
-        
-            @foreach (var item in Model.Products)
+        @foreach (Product product in Model.Products)
         {
             <tr>
-                <td>@item.Brand.BrandName</td>
-                <td>@item.Name</td>
-                <td>@item.Color.ColorName</td>
-                <td>@item.Price</td>
-                <td>@item.Series</td>
-                <td>@item.ProductCategory.Name</td>
-                <td><a class="btn btn-warning">Add</a> </td>
+                <td>@product.Brand.BrandName</td>
+                <td>@product.Name</td>
+                <td>@product.Color.ColorName</td>
+                <td>@product.Price $</td>
+                <td>@product.ProductCategory.Name</td>
+                <td>@product.Series</td>
+                <td><a data-id="@product.Id" class="order"><i class='bx bx-basket'></i></a></td>
             </tr>
         }
-       
-    </tbody>
-</table>
+    </table>
+</div>
