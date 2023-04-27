@@ -53,7 +53,7 @@ body {
   top: 0;
   left: 0;
   background: #11101d;
-  padding: 6px 14px;
+  padding: 6px 14px !important;
   transition: all 0.5s ease;
 }
 .sidebar .links_name {
@@ -74,14 +74,14 @@ body {
   cursor: pointer;
 }
 .sidebar ul {
-  margin-top: 20px;
+  margin-top: 20px !important;
+  padding-left: 0 !important;
 }
 .sidebar ul li {
   list-style: none;
   position: relative;
   height: 50px;
   width: 100%;
-  margin: 0 5px;
   line-height: 50px;
 }
 .sidebar ul li:hover .tooltip {
@@ -94,6 +94,7 @@ body {
   font-size: 13px;
   left: 34px;
   top: -10px;
+  color: red;
 }
 .sidebar ul li .tooltip {
   position: absolute;
@@ -218,7 +219,7 @@ body {
   border-radius: 12px;
 }
 .sidebar .profile_content .profile .profile_details .name_job {
-  margin-left: 10px;
+  margin-left: 10px !important;
 }
 .sidebar .profile_content .profile .profile_details .name_job .name {
   font-size: 15px;
@@ -236,28 +237,11 @@ body {
   transition: all 0.5s ease;
 }
 
-.home_index table {
-  font-family: arial, sans-serif;
-  border-collapse: collapse;
-  width: 100%;
-}
-.home_index td, .home_index th {
-  border: 1px solid #dddddd;
-  text-align: left;
-  padding: 8px;
-  font-size: 15px;
-}
-.home_index th {
-  color: #2313cb;
-}
-.home_index tr:nth-child(even) {
-  background-color: #dddddd;
-}
 .home_index .order {
   background-color: rgb(39, 39, 77);
   border-radius: 10px;
   border: none;
-  color: white;
+  color: rgb(255, 255, 255);
   padding: 10px;
   text-align: center;
   text-decoration: none;

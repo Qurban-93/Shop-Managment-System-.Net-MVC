@@ -9,13 +9,13 @@
         <i class='bx bx-menu' id="btn"></i>
     </div>
     <ul class="nav_list">
-        <li>
+       @* <li>
             <form method="get" asp-action="index" asp-controller="home">
                 <i class='bx bx-search'></i>
                 <input type="text" name="search" placeholder="Search...">
-                <button type="submit" @* class="tooltip"*@>Search</button>
+                <button type="submit" class="tooltip">Search</button>
             </form>
-        </li>
+        </li>*@
         <li>
             <a asp-action="index" asp-controller="home">
                 <i class='bx bx-grid-alt'></i>
@@ -55,6 +55,7 @@
             <a asp-action="orders" asp-controller="sale">
                 <i class='bx bx-cart-alt'></i>
                 <span class="count">@Model</span>
+                <span class="links_name">Orders</span>
             </a>
             <span class="tooltip">Order</span>
         </li>

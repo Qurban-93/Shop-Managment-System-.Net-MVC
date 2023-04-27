@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using ShopManagmentSystem.DAL;
@@ -27,10 +28,12 @@ namespace ShopManagmentSystem.Controllers
             products = JsonConvert.DeserializeObject<List<ProductVM>>(basket);
             if (products.Any(p => p.Id == id))
             {
+                double price = products.FirstOrDefault(p => p.Id == id).Price;
                 products.Remove(products.FirstOrDefault(p => p.Id == id));
+
                 Response.Cookies.Append("Basket", JsonConvert.SerializeObject(products),
-                new CookieOptions { MaxAge = TimeSpan.FromMinutes(1) });
-                return Ok();
+                new CookieOptions { MaxAge = TimeSpan.FromMinutes(10) });
+                return Ok(price);
             }
                        
             return NotFound();
@@ -73,7 +76,7 @@ namespace ShopManagmentSystem.Controllers
 
             products.Add(productVM);
             Response.Cookies.Append("Basket", JsonConvert.SerializeObject(products),
-            new CookieOptions { MaxAge = TimeSpan.FromMinutes(1) });
+            new CookieOptions { MaxAge = TimeSpan.FromMinutes(10) });
 
             return Ok();
         }
@@ -86,8 +89,32 @@ namespace ShopManagmentSystem.Controllers
             if (basket != null)
             {
                 products = JsonConvert.DeserializeObject<List<ProductVM>>(basket);
-            }      
-            return View(products);
+            }
+            SaleVM saleVM = new SaleVM();
+            saleVM.Products = products;
+            saleVM.TotalPrice = products.Sum(p => p.Price);
+            ViewBag.Sellers = new SelectList(_context.Employees.ToList(),"Id", "FullName");
+            return View(saleVM);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Orders(SaleVM saleVM)
+        {
+            if (!ModelState.IsValid)
+            {
+                List<ProductVM> products = new();
+                string basket = Request.Cookies["basket"];
+                if (basket != null)
+                {
+                    products = JsonConvert.DeserializeObject<List<ProductVM>>(basket);
+                }                
+                saleVM.Products = products;
+                saleVM.TotalPrice = products.Sum(p => p.Price);
+                ViewBag.Sellers = new SelectList(_context.Employees.ToList(), "Id", "FullName");
+                return View(saleVM);
+            }
+            if (saleVM == null) return BadRequest();
+            return View(saleVM);
         }
     }
 }
