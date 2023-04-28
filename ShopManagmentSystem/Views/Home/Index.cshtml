@@ -2,7 +2,14 @@
 
 <div class="home_index">
     <div class="container">
-        <div class="row">         
+        <div class="row">
+            <h1 class="text-center">Product List</h1>
+            @if (TempData["Success"] != null)
+            {
+            }
+            <div id="alert_sale" class="alert alert-success text-center" role="alert">
+                The sale is realized!
+            </div>
             <table class="table">
                 <thead class="thead-light">
                     <tr>
@@ -32,31 +39,4 @@
             </table>
         </div>
     </div>
-
-
-
-    @*  <table>
-    <tr>
-    <th>Brand</th>
-    <th>Name</th>
-    <th>Color</th>
-    <th>Price</th>
-    <th>Category</th>
-    <th>Series</th>
-    <th>Add Order</th>
-
-    </tr>
-    @foreach (Product product in Model.Products)
-    {
-    <tr>
-    <td>@product.Brand.BrandName</td>
-    <td>@product.Name</td>
-    <td>@product.Color.ColorName</td>
-    <td>@product.Price $</td>
-    <td>@product.ProductCategory.Name</td>
-    <td>@product.Series</td>
-    <td><a data-id="@product.Id" class="order"><i class='bx bx-basket'></i></a></td>
-    </tr>
-    }
-    </table>*@
 </div>

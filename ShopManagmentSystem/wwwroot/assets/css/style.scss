@@ -152,6 +152,7 @@ body{
                 border-radius: 12px;
                 line-height: 50px;
                 text-align: center;
+                font-size: 20px;
          }
 
         .bx-search{
@@ -302,7 +303,13 @@ body{
     
 }
 .home_index{
-    
+
+    #alert_sale{
+        transition: all 0.8s ease;
+    }
+    thead{
+        background-color: gray;
+    }
 
     .order{
         background-color: rgb(39, 39, 77);

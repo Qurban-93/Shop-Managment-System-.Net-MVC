@@ -17,51 +17,31 @@ namespace ShopManagmentSystem.Controllers
             _appDbContext = appDbContext;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {   
             HomeVM home = new HomeVM();
 
-            var products = _appDbContext.Products
-                    .Include(p => p.ProductCategory)
-                    .Include(p=>p.Brand)
-                    .Include(p => p.Color).ToList();
 
-            List<ProductVM> productsInBasket;
+            List<Order> orders =await _appDbContext.Orders.ToListAsync();         
+            List<Product> products = await _appDbContext.Products
+                .Include(p => p.ProductCategory)
+                .Include(p=>p.Brand)
+                .Include(p => p.Color)
+                .Where(p=>!p.IsSold)
+                .ToListAsync();
 
-            string basket = Request.Cookies["basket"];
-
-            if (basket == null)
-            {
-                productsInBasket = new();
-
-            }
-            else
-            {
-                productsInBasket = JsonConvert.DeserializeObject<List<ProductVM>>(basket);
-                foreach (var item in productsInBasket)
+            if (orders != null || orders.Count > 0 )
+            {       
+                foreach (var item in orders)
                 {
-                    if (products.Any(p=>p.Id == item.Id))
+                    if (products.Any(p => p.Id == item.ProdId))
                     {
-                        products.Remove(products.FirstOrDefault(p => p.Id == item.Id));
+                        products.Remove(products.FirstOrDefault(p => p.Id == item.ProdId));
                     }
                 }
+
             }
-
-            //if (!string.IsNullOrWhiteSpace(search))
-            //{
-            //   var searchProd =  query.Where(p=>p.Name.Contains(search) || p.Brand.BrandName.Contains(search)).ToList();
-            //    foreach (var item in searchProd)
-            //    {
-            //        if(productsBasket.Any(p=>p.Id == item.Id))
-            //        {
-            //            searchProd.Remove(item);
-            //        }
-            //    }
-
-            //    home.Products = searchProd;
-            //    return View(home);
-            //}
-
+            
             home.Products = products;
 
             return View(home);

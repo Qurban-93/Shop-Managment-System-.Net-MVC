@@ -16,5 +16,6 @@ namespace ShopManagmentSystem.Models
         public int? BrandId { get; set; }
         public Brand Brand { get; set; }
         public List<ProductImage> Images { get; set; }
+        public bool IsSold { get; set; }
     }
 }

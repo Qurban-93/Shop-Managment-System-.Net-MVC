@@ -17,6 +17,7 @@ namespace ShopManagmentSystem.DAL
         public DbSet<Customer> Customers { get; set; }
         public DbSet<ProductImage> ProductImages { get; set; }
         public DbSet<Sale> Sales { get; set; }
+        public DbSet<Order> Orders { get; set; }
 
 
 

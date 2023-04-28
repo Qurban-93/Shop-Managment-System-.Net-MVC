@@ -1,7 +1,7 @@
 ﻿@model SaleVM
 
 <div class="container home_index">
-    @if (Model.Products.Count > 0)
+    @if (Model.Orders.Count > 0)
     {
         <h1 class="text-center">Selected products</h1>
         <table class="table table-dark">
@@ -17,16 +17,16 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach (ProductVM product in Model.Products)
+                @foreach (Order order in Model.Orders)
                 {
                     <tr>
-                        <td>@product.Brand</td>
-                        <td>@product.Name</td>
-                        <td>@product.Color</td>
-                        <td class="price">@product.Price</td>
-                        <td>@product.Category</td>
-                        <td>@product.Series</td>
-                        <td><a class="deleteBasketItem" data-id="@product.Id"><i class='bx bx-trash'></i> </a></td>
+                        <td>@order.Brand</td>
+                        <td>@order.Name</td>
+                        <td>@order.Color</td>
+                        <td class="price">@order.Price</td>
+                        <td>@order.Category</td>
+                        <td>@order.Series</td>
+                        <td><a class="deleteBasketItem" data-id="@order.ProdId"><i class='bx bx-trash'></i> </a></td>
 
                     </tr>
                 }
@@ -35,38 +35,39 @@
                 <tr>
                     <td>Total Price :</td>
                     <td>
-                        <span class="total_price">@(Model.Products.Sum(p => p.Price))</span> $
+                        <span class="total_price">@Model.Orders.Sum(p=>p.Price)</span> $
                     </td>
                     <td>Items :</td>
-                    <td><span class="item_count">@(Model.Products.Count)</span>eded</td>
+                    <td><span class="item_count">@(Model.Orders.Count)</span> eded</td>
                 </tr>
             </tfoot>
         </table>
         <div class="mt-2">
-            <form method="post">               
-                <input type="hidden" asp-for="TotalPrice">           
-                <div class="form-group mt-2">
-                    <label class="text-info">Pay With Card</label>
-                    <input class="form-control" asp-for="PayWithCard" placeholder="Enter amount">
-                    
-                </div>
-                <div class="form-group mt-2">
-                    <label class="text-info">Add Customer</label>
-                    <input class="form-control" asp-for="Customer" placeholder="Enter Customer Name">
-                    <span class="text-danger" asp-validation-for="Customer"></span>
-                </div>
-                <div class="form-group mt-2">
-                    <label class="text-info">Customer Email</label>
-                    <input class="form-control" asp-for="CustomerEmail" placeholder="Enter Customer Email">
-                    <span class="text-danger" asp-validation-for="CustomerEmail"></span>
-                </div>
+            <form method="post">                                   
                 <div class="form-group mt-2">
                     <label class="text-info">Select Seller</label>
                     <select asp-for="EmployeeId" asp-items="@ViewBag.Sellers" class="form-control">                      
                     </select>
                     <span class="text-danger" asp-validation-for="EmployeeId"></span>
                 </div>
-                <button type="submit" class="btn btn-primary mt-2">Sale</button>
+                <div class="form-group mt-2">
+                    <label class="text-info">Mail or Phone Number for Customer</label>
+                    <input class="form-control" asp-for="CustomerEmailOrPhoneNumber" placeholder="Example: +994501234567 or example.mail.com">
+                    <span class="text-danger" asp-validation-for="CustomerEmailOrPhoneNumber"></span>
+                </div>
+                <div class="form-group mt-2">
+                    <label class="text-info">Pay With Card</label>
+                    <input class="form-control" asp-for="CashlessPayment" type="number" placeholder="Enter the amount">
+                    <span class="text-danger" asp-validation-for="CashlessPayment"></span>
+
+                </div>             
+                <div class="form-group mt-2">
+                    <label class="text-info">Discount</label>
+                    <input class="form-control" asp-for="Discount" type="number" placeholder="Enter the amount">
+                    <span class="text-danger" asp-validation-for="Discount"></span>
+
+                </div>
+                <button type="submit" class="btn btn-primary mt-2">Complete</button>
             </form>
         </div>
 
