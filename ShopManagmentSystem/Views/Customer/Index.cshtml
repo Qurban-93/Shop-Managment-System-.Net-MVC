@@ -3,7 +3,14 @@
 <div class="home_index">
     <div class="container">
         <div class="row">
-            <h1>Customer List</h1>
+            <h1 class="text-center">Customer List</h1>
+            <form method="get">
+                <div class="mb-3 col-lg-4 d-flex search_product">
+                    <input type="text" class="form-control col-3" name="search" placeholder="Search" value="@ViewBag.SearchValue">
+                    <button type="submit" class="btn btn-primary col-2">Search</button>
+                </div>
+            </form>
+            <a class="btn btn-primary col-2 mb-2" asp-action="create" asp-controller="customer"> Add New Customer </a>
             <table class="table">
                 <thead class="thead-light">
                     <tr>

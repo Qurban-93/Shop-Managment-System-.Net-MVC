@@ -244,6 +244,12 @@ body {
 .home_index thead {
   background-color: gray;
 }
+.home_index .search_product {
+  margin: auto;
+}
+.home_index .search_product button {
+  margin-left: 10px;
+}
 .home_index .order {
   background-color: rgb(39, 39, 77);
   border-radius: 10px;
@@ -260,4 +266,49 @@ body {
   cursor: pointer;
   font-size: 20px;
   color: red;
+}
+
+.add_customer {
+  margin: auto;
+}
+.add_customer html, .add_customer body {
+  display: flex;
+  justify-content: center;
+  font-family: Roboto, Arial, sans-serif;
+  font-size: 15px;
+}
+.add_customer form {
+  border: 5px solid #f1f1f1;
+}
+.add_customer .icon {
+  margin-top: 10px;
+  font-size: 110px;
+  display: flex;
+  justify-content: center;
+  color: #4286f4;
+}
+.add_customer h1 {
+  margin-top: 20px;
+  text-align: center;
+}
+.add_customer button:hover {
+  opacity: 0.8;
+}
+.add_customer .formcontainer {
+  text-align: center;
+  margin: 14px 50px 12px;
+}
+.add_customer .containerr {
+  padding: 16px 0;
+  text-align: left;
+}
+.add_customer .containerr label {
+  margin-bottom: 8px;
+  margin-top: 8px;
+}
+@media screen and (max-width: 300px) {
+  .add_customer span.psw {
+    display: block;
+    float: none;
+  }
 }/*# sourceMappingURL=style.css.map */

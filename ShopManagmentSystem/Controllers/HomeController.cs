@@ -17,19 +17,31 @@ namespace ShopManagmentSystem.Controllers
             _appDbContext = appDbContext;
         }
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string? search)
         {   
             HomeVM home = new HomeVM();
-
-
-            List<Order> orders =await _appDbContext.Orders.ToListAsync();         
-            List<Product> products = await _appDbContext.Products
+            List<Product> products = new();
+            var query = _appDbContext.Products
                 .Include(p => p.ProductCategory)
-                .Include(p=>p.Brand)
+                .Include(p => p.Brand)
                 .Include(p => p.Color)
-                .Where(p=>!p.IsSold)
-                .ToListAsync();
+                .Where(p => !p.IsSold);
 
+            if (!string.IsNullOrWhiteSpace(search))
+            {
+                products = await query.Where(p => 
+                p.Name.Contains(search.Trim().ToLower()) ||
+                p.Brand.BrandName.Contains(search.Trim().ToLower()) ||
+                p.ProductCategory.Name.Contains(search.Trim().ToLower())).ToListAsync();
+              
+            }
+            else
+            {
+                products = await query.ToListAsync();
+            }
+
+            List<Order> orders =await _appDbContext.Orders.ToListAsync();        
+                
             if (orders != null || orders.Count > 0 )
             {       
                 foreach (var item in orders)
@@ -43,6 +55,7 @@ namespace ShopManagmentSystem.Controllers
             }
             
             home.Products = products;
+            ViewBag.SearchValue = search;
 
             return View(home);
         }

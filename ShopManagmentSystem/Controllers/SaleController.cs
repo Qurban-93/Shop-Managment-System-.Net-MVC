@@ -17,6 +17,26 @@ namespace ShopManagmentSystem.Controllers
         {
             _context = context;
         }
+        public async Task<IActionResult> Index(string search)
+        {
+            if (!string.IsNullOrWhiteSpace(search))
+            {
+                return View(await _context.Sales
+                .Include(s => s.Products)
+                .Include(s => s.Customer)
+                .Include(s => s.Employee)
+                .Where(s=>s.Customer.FullName.Contains(search.Trim().ToLower()))
+                .ToListAsync());
+            }
+            return View(await _context.Sales
+                .Include(s=>s.Products)
+                .Include(s=>s.Customer)
+                .Include(s=>s.Employee)
+                .ToListAsync());
+        }
+
+
+
 
         [HttpPost]
         public async Task<IActionResult> Delete(int? id)
@@ -140,6 +160,9 @@ namespace ShopManagmentSystem.Controllers
             newSale.CashlessPayment = saleVM.CashlessPayment;
             newSale.TotalProfit = (products.Sum(p => p.Price) - saleVM.Discount) - products.Sum(p => p.CostPrice);
             newSale.EmployeeId = saleVM.EmployeeId;
+            newSale.CreateDate = DateTime.Now;
+            customer.TotalCost += products.Sum(p => p.Price) - saleVM.Discount;
+
 
             foreach (var item in products)
             {

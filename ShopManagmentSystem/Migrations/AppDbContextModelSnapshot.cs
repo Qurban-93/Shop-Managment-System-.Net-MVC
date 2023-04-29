@@ -240,7 +240,7 @@ namespace ShopManagmentSystem.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Brands");
+                    b.ToTable("Brands", (string)null);
                 });
 
             modelBuilder.Entity("ShopManagmentSystem.Models.Color", b =>
@@ -263,7 +263,7 @@ namespace ShopManagmentSystem.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Colors");
+                    b.ToTable("Colors", (string)null);
                 });
 
             modelBuilder.Entity("ShopManagmentSystem.Models.Customer", b =>
@@ -301,7 +301,7 @@ namespace ShopManagmentSystem.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Customers");
+                    b.ToTable("Customers", (string)null);
                 });
 
             modelBuilder.Entity("ShopManagmentSystem.Models.Employee", b =>
@@ -339,7 +339,7 @@ namespace ShopManagmentSystem.Migrations
 
                     b.HasIndex("EmployeePostionId");
 
-                    b.ToTable("Employees");
+                    b.ToTable("Employees", (string)null);
                 });
 
             modelBuilder.Entity("ShopManagmentSystem.Models.EmployeePostion", b =>
@@ -362,7 +362,7 @@ namespace ShopManagmentSystem.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("EmployeePostions");
+                    b.ToTable("EmployeePostions", (string)null);
                 });
 
             modelBuilder.Entity("ShopManagmentSystem.Models.Order", b =>
@@ -401,7 +401,7 @@ namespace ShopManagmentSystem.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Orders");
+                    b.ToTable("Orders", (string)null);
                 });
 
             modelBuilder.Entity("ShopManagmentSystem.Models.Product", b =>
@@ -460,7 +460,7 @@ namespace ShopManagmentSystem.Migrations
 
                     b.HasIndex("SaleId");
 
-                    b.ToTable("Products");
+                    b.ToTable("Products", (string)null);
                 });
 
             modelBuilder.Entity("ShopManagmentSystem.Models.ProductCategory", b =>
@@ -483,7 +483,7 @@ namespace ShopManagmentSystem.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("ProductCategories");
+                    b.ToTable("ProductCategories", (string)null);
                 });
 
             modelBuilder.Entity("ShopManagmentSystem.Models.ProductImage", b =>
@@ -511,7 +511,7 @@ namespace ShopManagmentSystem.Migrations
 
                     b.HasIndex("ProductId");
 
-                    b.ToTable("ProductImages");
+                    b.ToTable("ProductImages", (string)null);
                 });
 
             modelBuilder.Entity("ShopManagmentSystem.Models.Sale", b =>
@@ -552,7 +552,7 @@ namespace ShopManagmentSystem.Migrations
 
                     b.HasIndex("EmployeeId");
 
-                    b.ToTable("Sales");
+                    b.ToTable("Sales", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
