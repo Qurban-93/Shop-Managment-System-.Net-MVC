@@ -15,7 +15,11 @@
     <title>Document</title>
 </head>
 <body>
-    @await Component.InvokeAsync("Layout");
+    @if (User.Identity.IsAuthenticated)
+    {
+        @await Component.InvokeAsync("Layout");
+        
+    }
     <div class="home_content">
         @RenderBody()
     </div>

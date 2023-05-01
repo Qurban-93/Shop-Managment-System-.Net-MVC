@@ -1,6 +1,10 @@
 {
   "Files": [
     {
+      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\Template\\Verify.html",
+      "PackagePath": "staticwebassets\\Template\\Verify.html"
+    },
+    {
       "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\assets\\css\\style.css",
       "PackagePath": "staticwebassets\\assets\\css\\style.css"
     },

@@ -6,9 +6,18 @@
         <div class="row">
             <h1 class="text-center">Sales List</h1>
             <form method="get">
-                <div class="mb-3 col-lg-4 d-flex search_product">                 
-                    <input type="text" class="form-control col-3" name="search" placeholder="Search" value="@ViewBag.SearchValue">
-                    <button type="submit" class="btn btn-primary col-2">Search</button>
+                <div class="mb-3 col-lg-8 d-flex search_product">                 
+                    <div >
+                        <input type="text" class="form-control" name="search" placeholder="Search" value="@ViewBag.SearchValue">
+                    </div>
+                    <div>
+                        <input type="date" class="form-control" name="fromDate" value="@ViewBag.FromData" />
+                    </div>
+                    <div>
+                        <input type="date" class="form-control" name="toDate" value="@ViewBag.ToDate" />
+                        <span class="text-danger">@(ViewBag.Error != null ? ViewBag.Error:"")</span>
+                    </div>
+                    <button type="submit" class="btn btn-primary col-lg-2">Search</button>
                 </div>       
             </form>
             <table class="table">
@@ -18,9 +27,10 @@
                         <th scope="col">Customer Name</th>
                         <th scope="col">Discount</th>
                         <th scope="col">Cashless Payment</th>
-                        <th scope="col">Seller Name</th>
-                        <th scope="col">Products Count</th>
                         <th scope="col">Total Price</th>
+                        <th scope="col">Products Count</th>
+                        <th scope="col">Seller Name</th>
+                        <th scope="col">Branch</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -28,12 +38,13 @@
                     {
                         <tr>    
                             <td>@sale.CreateDate.ToString("dd MMMM yyyy, hh:mm:ss")</td>
-                            <td>@sale.Customer.FullName</td>
-                            <td>@sale.Discount</td>
-                            <td>@sale.CashlessPayment</td>
-                            <td>@sale.Employee.FullName</td>
-                            <td>@sale.Products.Count</td>
-                            <td>@sale.TotalPrice</td>                                             
+                            <td>@sale.Customer?.FullName</td>
+                            <td>@sale.Discount $</td>
+                            <td>@sale.CashlessPayment $</td>
+                            <td>@sale.TotalPrice $</td>                                             
+                            <td>@sale.Products?.Count eded</td>
+                            <td>@sale.Employee?.FullName</td>
+                            <td>@sale.Branch.Name</td>                      
                         </tr>
                     }
                 </tbody>

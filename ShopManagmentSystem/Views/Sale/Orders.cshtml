@@ -1,7 +1,7 @@
 ﻿@model SaleVM
 
 <div class="container home_index">
-    @if (Model.Orders.Count > 0)
+    @if (Model?.Orders?.Count > 0)
     {
         <h1 class="text-center">Selected products</h1>
         <table class="table table-dark">

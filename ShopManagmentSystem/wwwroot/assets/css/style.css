@@ -246,6 +246,8 @@ body {
 }
 .home_index .search_product {
   margin: auto;
+  display: flex;
+  justify-content: space-between;
 }
 .home_index .search_product button {
   margin-left: 10px;
@@ -306,9 +308,8 @@ body {
   margin-bottom: 8px;
   margin-top: 8px;
 }
-@media screen and (max-width: 300px) {
-  .add_customer span.psw {
-    display: block;
-    float: none;
-  }
+
+.search_product .date_input {
+  width: 60%;
+  margin-left: 5px;
 }/*# sourceMappingURL=style.css.map */

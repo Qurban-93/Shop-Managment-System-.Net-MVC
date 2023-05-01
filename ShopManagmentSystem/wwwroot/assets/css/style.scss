@@ -314,6 +314,8 @@ body{
 
     .search_product{
         margin: auto;
+        display: flex;
+        justify-content: space-between;
         button{
             margin-left: 10px;
         }
@@ -341,46 +343,56 @@ body{
 }
 
 .add_customer{
-    margin: auto;
-    html, body {
-            display: flex;
-            justify-content: center;
-            font-family: Roboto, Arial, sans-serif;
-            font-size: 15px;
-        }
-        form {
-            border: 5px solid #f1f1f1;
-        }
-        .icon {
-            margin-top: 10px;
-            font-size: 110px;
-            display: flex;
-            justify-content: center;
-            color: #4286f4;
-        }
-        h1 {
-            margin-top: 20px;
-            text-align:center;    
-        }
-        button:hover {
-            opacity: 0.8;
-        }
-        .formcontainer {
-            text-align: center;
-            margin: 14px 50px 12px;
-        }
-        .containerr {
-            padding: 16px 0;
-            text-align:left;
+
+        margin: auto;
+            html, body {
+                display: flex;
+                justify-content: center;
+                font-family: Roboto, Arial, sans-serif;
+                font-size: 15px;
+            }
+            form {
+                border: 5px solid #f1f1f1;
+            }
+            .icon {
+                margin-top: 10px;
+                font-size: 110px;
+                display: flex;
+                justify-content: center;
+                color: #4286f4;
+            }
+
+            h1 {
+                margin-top: 20px;
+                text-align:center;    
+            }
+
+            button:hover {
+                opacity: 0.8;
+            }
+
+            .formcontainer {
+                text-align: center;
+                margin: 14px 50px 12px;
+            }
+
+            .containerr {
+                padding: 16px 0;
+                text-align:left;
+
             label{
                 margin-bottom:8px;
                 margin-top: 8px;
             }
 
-        }
-        @media screen and (max-width: 300px) {
-        span.psw {
-        display: block;
-        float: none;
-        }
-}}
+    }
+    
+}   
+
+.search_product{
+    
+    .date_input{
+        width: 60%;
+        margin-left: 5px;
+    }
+}

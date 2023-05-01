@@ -9,5 +9,6 @@ namespace ShopManagmentSystem.Models
         public string Number { get; set; }
         public int EmployeePositionId { get; set; }
         public EmployeePostion EmployeePostion { get; set; }
+        public int? BranchId { get; set; }
     }
 }

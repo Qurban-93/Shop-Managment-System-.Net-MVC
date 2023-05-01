@@ -74,71 +74,6 @@ namespace ShopManagmentSystem.Migrations
                     b.ToTable("AspNetRoleClaims", (string)null);
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUser", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<int>("AccessFailedCount")
-                        .HasColumnType("int");
-
-                    b.Property<string>("ConcurrencyStamp")
-                        .IsConcurrencyToken()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Email")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.Property<bool>("EmailConfirmed")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("LockoutEnabled")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTimeOffset?>("LockoutEnd")
-                        .HasColumnType("datetimeoffset");
-
-                    b.Property<string>("NormalizedEmail")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.Property<string>("NormalizedUserName")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.Property<string>("PasswordHash")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PhoneNumber")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("PhoneNumberConfirmed")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("SecurityStamp")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("TwoFactorEnabled")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("UserName")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("NormalizedEmail")
-                        .HasDatabaseName("EmailIndex");
-
-                    b.HasIndex("NormalizedUserName")
-                        .IsUnique()
-                        .HasDatabaseName("UserNameIndex")
-                        .HasFilter("[NormalizedUserName] IS NOT NULL");
-
-                    b.ToTable("AspNetUsers", (string)null);
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
                     b.Property<int>("Id")
@@ -220,6 +155,94 @@ namespace ShopManagmentSystem.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("ShopManagmentSystem.Models.AppUser", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("AccessFailedCount")
+                        .HasColumnType("int");
+
+                    b.Property<int>("BranchId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Email")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<bool>("EmailConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("LockoutEnabled")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTimeOffset?>("LockoutEnd")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<string>("NormalizedEmail")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<string>("NormalizedUserName")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<string>("PasswordHash")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PhoneNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("PhoneNumberConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("SecurityStamp")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("TwoFactorEnabled")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("UserName")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("NormalizedEmail")
+                        .HasDatabaseName("EmailIndex");
+
+                    b.HasIndex("NormalizedUserName")
+                        .IsUnique()
+                        .HasDatabaseName("UserNameIndex")
+                        .HasFilter("[NormalizedUserName] IS NOT NULL");
+
+                    b.ToTable("AspNetUsers", (string)null);
+                });
+
+            modelBuilder.Entity("ShopManagmentSystem.Models.Branch", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int?>("AppUserId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Branches");
+                });
+
             modelBuilder.Entity("ShopManagmentSystem.Models.Brand", b =>
                 {
                     b.Property<int>("Id")
@@ -240,7 +263,7 @@ namespace ShopManagmentSystem.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Brands", (string)null);
+                    b.ToTable("Brands");
                 });
 
             modelBuilder.Entity("ShopManagmentSystem.Models.Color", b =>
@@ -263,7 +286,7 @@ namespace ShopManagmentSystem.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Colors", (string)null);
+                    b.ToTable("Colors");
                 });
 
             modelBuilder.Entity("ShopManagmentSystem.Models.Customer", b =>
@@ -301,7 +324,7 @@ namespace ShopManagmentSystem.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Customers", (string)null);
+                    b.ToTable("Customers");
                 });
 
             modelBuilder.Entity("ShopManagmentSystem.Models.Employee", b =>
@@ -314,6 +337,9 @@ namespace ShopManagmentSystem.Migrations
 
                     b.Property<byte>("Age")
                         .HasColumnType("tinyint");
+
+                    b.Property<int?>("BranchId")
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("CreateDate")
                         .HasColumnType("datetime2");
@@ -337,9 +363,11 @@ namespace ShopManagmentSystem.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("BranchId");
+
                     b.HasIndex("EmployeePostionId");
 
-                    b.ToTable("Employees", (string)null);
+                    b.ToTable("Employees");
                 });
 
             modelBuilder.Entity("ShopManagmentSystem.Models.EmployeePostion", b =>
@@ -362,7 +390,7 @@ namespace ShopManagmentSystem.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("EmployeePostions", (string)null);
+                    b.ToTable("EmployeePostions");
                 });
 
             modelBuilder.Entity("ShopManagmentSystem.Models.Order", b =>
@@ -372,6 +400,9 @@ namespace ShopManagmentSystem.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int?>("BranchId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Brand")
                         .IsRequired()
@@ -401,7 +432,9 @@ namespace ShopManagmentSystem.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Orders", (string)null);
+                    b.HasIndex("BranchId");
+
+                    b.ToTable("Orders");
                 });
 
             modelBuilder.Entity("ShopManagmentSystem.Models.Product", b =>
@@ -411,6 +444,9 @@ namespace ShopManagmentSystem.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int?>("BranchId")
+                        .HasColumnType("int");
 
                     b.Property<int?>("BrandId")
                         .HasColumnType("int");
@@ -452,6 +488,8 @@ namespace ShopManagmentSystem.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("BranchId");
+
                     b.HasIndex("BrandId");
 
                     b.HasIndex("ColorId");
@@ -460,7 +498,7 @@ namespace ShopManagmentSystem.Migrations
 
                     b.HasIndex("SaleId");
 
-                    b.ToTable("Products", (string)null);
+                    b.ToTable("Products");
                 });
 
             modelBuilder.Entity("ShopManagmentSystem.Models.ProductCategory", b =>
@@ -483,7 +521,7 @@ namespace ShopManagmentSystem.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("ProductCategories", (string)null);
+                    b.ToTable("ProductCategories");
                 });
 
             modelBuilder.Entity("ShopManagmentSystem.Models.ProductImage", b =>
@@ -511,7 +549,7 @@ namespace ShopManagmentSystem.Migrations
 
                     b.HasIndex("ProductId");
 
-                    b.ToTable("ProductImages", (string)null);
+                    b.ToTable("ProductImages");
                 });
 
             modelBuilder.Entity("ShopManagmentSystem.Models.Sale", b =>
@@ -521,6 +559,9 @@ namespace ShopManagmentSystem.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int?>("BranchId")
+                        .HasColumnType("int");
 
                     b.Property<double>("CashlessPayment")
                         .HasColumnType("float");
@@ -548,11 +589,13 @@ namespace ShopManagmentSystem.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("BranchId");
+
                     b.HasIndex("CustomerId");
 
                     b.HasIndex("EmployeeId");
 
-                    b.ToTable("Sales", (string)null);
+                    b.ToTable("Sales");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -566,7 +609,7 @@ namespace ShopManagmentSystem.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
+                    b.HasOne("ShopManagmentSystem.Models.AppUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -575,7 +618,7 @@ namespace ShopManagmentSystem.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
+                    b.HasOne("ShopManagmentSystem.Models.AppUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -590,7 +633,7 @@ namespace ShopManagmentSystem.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
+                    b.HasOne("ShopManagmentSystem.Models.AppUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -599,7 +642,7 @@ namespace ShopManagmentSystem.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
+                    b.HasOne("ShopManagmentSystem.Models.AppUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -608,6 +651,10 @@ namespace ShopManagmentSystem.Migrations
 
             modelBuilder.Entity("ShopManagmentSystem.Models.Employee", b =>
                 {
+                    b.HasOne("ShopManagmentSystem.Models.Branch", null)
+                        .WithMany("MyProperty")
+                        .HasForeignKey("BranchId");
+
                     b.HasOne("ShopManagmentSystem.Models.EmployeePostion", "EmployeePostion")
                         .WithMany()
                         .HasForeignKey("EmployeePostionId")
@@ -617,8 +664,19 @@ namespace ShopManagmentSystem.Migrations
                     b.Navigation("EmployeePostion");
                 });
 
+            modelBuilder.Entity("ShopManagmentSystem.Models.Order", b =>
+                {
+                    b.HasOne("ShopManagmentSystem.Models.Branch", null)
+                        .WithMany("Orders")
+                        .HasForeignKey("BranchId");
+                });
+
             modelBuilder.Entity("ShopManagmentSystem.Models.Product", b =>
                 {
+                    b.HasOne("ShopManagmentSystem.Models.Branch", null)
+                        .WithMany("Products")
+                        .HasForeignKey("BranchId");
+
                     b.HasOne("ShopManagmentSystem.Models.Brand", "Brand")
                         .WithMany("Products")
                         .HasForeignKey("BrandId");
@@ -657,6 +715,10 @@ namespace ShopManagmentSystem.Migrations
 
             modelBuilder.Entity("ShopManagmentSystem.Models.Sale", b =>
                 {
+                    b.HasOne("ShopManagmentSystem.Models.Branch", null)
+                        .WithMany("Sales")
+                        .HasForeignKey("BranchId");
+
                     b.HasOne("ShopManagmentSystem.Models.Customer", "Customer")
                         .WithMany("Sales")
                         .HasForeignKey("CustomerId")
@@ -672,6 +734,17 @@ namespace ShopManagmentSystem.Migrations
                     b.Navigation("Customer");
 
                     b.Navigation("Employee");
+                });
+
+            modelBuilder.Entity("ShopManagmentSystem.Models.Branch", b =>
+                {
+                    b.Navigation("MyProperty");
+
+                    b.Navigation("Orders");
+
+                    b.Navigation("Products");
+
+                    b.Navigation("Sales");
                 });
 
             modelBuilder.Entity("ShopManagmentSystem.Models.Brand", b =>

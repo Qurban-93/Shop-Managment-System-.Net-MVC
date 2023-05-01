@@ -3,7 +3,8 @@
 namespace ShopManagmentSystem.Models
 {
     public class AppUser: IdentityUser
-    {
-        public string FullName { get; set; }
+    {   
+        public int BranchId { get; set; }
+        public Branch Branch { get; set; }
     }
 }

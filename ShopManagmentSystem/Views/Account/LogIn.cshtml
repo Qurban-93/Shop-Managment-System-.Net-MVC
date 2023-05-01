@@ -1,0 +1,34 @@
+﻿@model LoginVM
+
+<div class="col-lg-6 m-auto">
+    <div class="d-flex align-items-center justify-content-between mb-3">
+        <a href="index.html" class="">
+            <h3 class="text-primary"><i class="fa fa-hashtag me-2"></i>DASHMIN</h3>
+        </a>
+        <h3>Sign Up</h3>
+    </div>
+    <div class="text-danger" asp-validation-summary="ModelOnly"></div>
+    <form method="post">
+        <div class="form-floating mb-3">
+            <input asp-for="UserName" class="form-control" placeholder="Full Name">
+            <label asp-for="UserName"></label>
+            <span class="text-danger" asp-validation-for="UserName"></span>
+        </div>
+        <div class="form-floating mb-4">
+            <input asp-for="Password" class="form-control" placeholder="Password">
+            <label asp-for="Password">Password</label>
+            <span class="text-danger" asp-validation-for="Password"></span>
+        </div>
+
+        <div class="d-flex align-items-center justify-content-between mb-4">
+            <div class="form-check">
+                <input asp-for="RememmberMe" class="form-check-input">
+                <label class="form-check-label" asp-for="RememmberMe">Check me out</label>
+            </div>
+            <a asp-action="ForgotPassword">Forgot Password</a>
+        </div>
+        <button type="submit" class="btn btn-primary py-3 w-100 mb-4">Sign Up</button>
+    </form>
+    <p class="text-center mb-0">You dont have Account? <a asp-action="register">Sign Up Now!</a></p>
+</div>
+

@@ -11,10 +11,9 @@ setTimeout(() => {
 }, "3000");
 
 setTimeout(() => {
-    if (alertSale != undefined) {
+    if (alertSale != undefined || alertSale != null) {
         HideAlertSale();
     }
-    HideAlertSale();
 }, "2000");
 
 
