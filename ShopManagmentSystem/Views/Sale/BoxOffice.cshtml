@@ -1,0 +1,52 @@
+﻿@model List<Sale>
+
+<div class="container">
+    <div class="row">
+        <h1 class="text-center">Box Office</h1>
+        <form method="get">
+            <div class="mb-3 col-lg-8 d-flex search_product">           
+                <div>  
+                    <input type="datetime-local" class="form-control" name="fromDate" value="@ViewBag.FromData" />
+                </div>
+                <div>                
+                    <input type="datetime-local" class="form-control" name="toDate" value="@ViewBag.ToDate" />
+                    <span class="text-danger">@(ViewBag.Error != null ? ViewBag.Error : "")</span>
+                </div>
+                <button type="submit" class="btn btn-primary col-lg-2">Search</button>
+            </div>
+        </form>
+        <span> @ViewBag.FromData : @ViewBag.ToDate  </span>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Date<i class="fa-regular fa-calendar"></i></th>
+                    <th scope="col">Incoming<i class="fa-solid fa-plus"></i></th>
+                    <th scope="col">Cashless Payment <i class="fa-regular fa-credit-card"></i></th>
+                    <th scope="col">Discount <i class="fa-solid fa-percent"></i></th>
+                    <th scope="col">Total <i class="fa-solid fa-wallet"></i></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (Sale item in Model)
+                {
+                    <tr>
+                        <td>@item.CreateDate</td>
+                        <td>@item.TotalPrice <i class="fa-solid fa-manat-sign"></i></td>
+                        <td>@item.CashlessPayment <i class="fa-solid fa-manat-sign"></i></td>
+                        <td>@item.Discount <i class="fa-solid fa-manat-sign"></i></td>
+                        <td>@(item.TotalPrice - item.Discount) <i class="fa-solid fa-manat-sign"></i></td>
+                    </tr>
+                }
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td> TOTAL </td>
+                    <td>@(Model.Sum(s => s.TotalPrice)) <i class="fa-solid fa-manat-sign"></i></td>
+                    <td>@(Model.Sum(s => s.CashlessPayment)) <i class="fa-solid fa-manat-sign"></i></td>
+                    <td>@(Model.Sum(s => s.Discount)) <i class="fa-solid fa-manat-sign"></i></td>
+                    <td>@(Model.Sum(s => s.TotalPrice) - Model.Sum(s => s.Discount)) <i class="fa-solid fa-manat-sign"></i></td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+</div>

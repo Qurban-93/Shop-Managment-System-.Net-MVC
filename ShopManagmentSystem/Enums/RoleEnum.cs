@@ -3,7 +3,7 @@
     public enum RoleEnum
     {
         SuperAdmin,
-        Admin,
-        User
+        Admin_Shop,
+        Shop,
     }
 }

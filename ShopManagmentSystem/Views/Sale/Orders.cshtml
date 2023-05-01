@@ -3,7 +3,7 @@
 <div class="container home_index">
     @if (Model?.Orders?.Count > 0)
     {
-        <h1 class="text-center">Selected products</h1>
+        <h1 class="text-center"> Selected products <i class="fa-solid fa-cart-plus"></i></h1>
         <table class="table table-dark">
             <thead>
                 <tr>
@@ -26,7 +26,9 @@
                         <td class="price">@order.Price</td>
                         <td>@order.Category</td>
                         <td>@order.Series</td>
-                        <td><a class="deleteBasketItem" data-id="@order.ProdId"><i class='bx bx-trash'></i> </a></td>
+                        <td><a class="deleteBasketItem" data-id="@order.ProdId"><i class="fa-solid fa-trash"></i></a>
+
+                    </td>
 
                     </tr>
                 }

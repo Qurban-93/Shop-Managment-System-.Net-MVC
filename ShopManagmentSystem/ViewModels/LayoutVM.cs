@@ -5,6 +5,6 @@ namespace ShopManagmentSystem.ViewModels
     public class LayoutVM
     {
         public int CountOrder { get; set; }
-        public AppUser AppUser { get; set; }
+        public IList<string> Role { get; set; }
     }
 }

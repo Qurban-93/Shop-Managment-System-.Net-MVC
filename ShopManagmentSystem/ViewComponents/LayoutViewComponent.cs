@@ -24,13 +24,14 @@ namespace ShopManagmentSystem.ViewComponents
             LayoutVM layoutVM = new LayoutVM();
             if (User.Identity.IsAuthenticated)
             {
-                AppUser appUser = await _userManager.FindByNameAsync(User.Identity.Name);
-                int count = await _appDbContext.Orders.Where(o => o.BranchId == appUser.BranchId).CountAsync();
+                AppUser user = await _userManager.FindByNameAsync(User.Identity.Name);
+                int count = await _appDbContext.Orders.Where(o => o.BranchId == user.BranchId).CountAsync();
                 layoutVM.CountOrder = count;
-                layoutVM.AppUser = appUser;
+                layoutVM.Role =await _userManager.GetRolesAsync(user);
                 return View(layoutVM);
-
             }  
+            layoutVM.CountOrder = 0;
+
             return View(layoutVM);
         }
     }
