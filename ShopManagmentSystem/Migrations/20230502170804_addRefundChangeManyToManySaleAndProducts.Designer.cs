@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ShopManagmentSystem.DAL;
 
@@ -11,9 +12,11 @@ using ShopManagmentSystem.DAL;
 namespace ShopManagmentSystem.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230502170804_addRefundChangeManyToManySaleAndProducts")]
+    partial class addRefundChangeManyToManySaleAndProducts
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -478,6 +481,9 @@ namespace ShopManagmentSystem.Migrations
                     b.Property<int>("ProductCategoryId")
                         .HasColumnType("int");
 
+                    b.Property<int?>("RefundId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Series")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -494,6 +500,8 @@ namespace ShopManagmentSystem.Migrations
                     b.HasIndex("ColorId");
 
                     b.HasIndex("ProductCategoryId");
+
+                    b.HasIndex("RefundId");
 
                     b.ToTable("Products");
                 });
@@ -793,6 +801,10 @@ namespace ShopManagmentSystem.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("ShopManagmentSystem.Models.Refund", null)
+                        .WithMany("Products")
+                        .HasForeignKey("RefundId");
+
                     b.Navigation("Brand");
 
                     b.Navigation("Color");
@@ -941,6 +953,8 @@ namespace ShopManagmentSystem.Migrations
 
             modelBuilder.Entity("ShopManagmentSystem.Models.Refund", b =>
                 {
+                    b.Navigation("Products");
+
                     b.Navigation("RefundProducts");
                 });
 

@@ -19,6 +19,7 @@ namespace ShopManagmentSystem.DAL
         public DbSet<Sale> Sales { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<Branch> Branches { get; set; }
+        public DbSet<Refund> Refunds { get; set; }
 
 
 

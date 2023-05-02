@@ -10,13 +10,15 @@ namespace ShopManagmentSystem.Models
         public string Series { get; set; } = null!;
         public string? Desc { get; set; }
         public int ProductCategoryId { get; set; }
-        public ProductCategory ProductCategory { get; set; }
+        public ProductCategory? ProductCategory { get; set; }
         public int ColorId { get; set; }
-        public Color Color { get; set; }
+        public Color? Color { get; set; }
         public int? BrandId { get; set; }
-        public Brand Brand { get; set; }
-        public List<ProductImage> Images { get; set; }
+        public Brand? Brand { get; set; }
+        public List<ProductImage>? Images { get; set; }
         public bool IsSold { get; set; }
         public int? BranchId { get; set; }
+        public List<SaleProducts>? SaleProducts { get; set; }
+        public List<RefundProducts>? RefundProducts { get; set; }
     }
 }

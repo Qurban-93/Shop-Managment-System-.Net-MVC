@@ -4,18 +4,27 @@
     <div class="row">
         <h1 class="text-center">Box Office</h1>
         <form method="get">
-            <div class="mb-3 col-lg-8 d-flex search_product">           
-                <div>  
-                    <input type="datetime-local" class="form-control" name="fromDate" value="@ViewBag.FromData" />
+            <div class="mb-3 col-lg-8 d-flex search_product">
+                <div class="d-flex align-items-center">
+                    <div>
+                        <span class="mr-2"> From :</span>
+                    </div>
+                    <div>
+                        <input type="date" class="form-control" name="fromDate" />
+                    </div>
                 </div>
-                <div>                
-                    <input type="datetime-local" class="form-control" name="toDate" value="@ViewBag.ToDate" />
-                    <span class="text-danger">@(ViewBag.Error != null ? ViewBag.Error : "")</span>
+                <div class="d-flex align-items-center">
+                    <div>
+                        <span class="mr-2">To :</span>
+                    </div>
+                    <div>
+                        <input type="date" class="form-control" name="toDate" />
+                        <span class="text-danger">@(ViewBag.Error != null ? ViewBag.Error : "")</span>
+                    </div>
                 </div>
-                <button type="submit" class="btn btn-primary col-lg-2">Search</button>
+                <button type="submit" class="btn btn-primary col-lg-2">Sort</button>
             </div>
         </form>
-        <span> @ViewBag.FromData : @ViewBag.ToDate  </span>
         <table class="table">
             <thead>
                 <tr>

@@ -1,0 +1,39 @@
+﻿@model Sale
+
+<div class="container">
+    <div class="row">
+        <h1 class="text-success">Sale Detail <i class="fa-solid fa-circle-info"></i></h1>
+        <ul class="sale_details_list">
+            <li>Customer : @Model.Customer.FullName</li>
+            <li>Sale Date : @Model.CreateDate.ToString("dd MMMM yyyy,hh:mm")</li>
+            <li> Total Payed : @Model.TotalPrice <i class="fa-solid fa-manat-sign"></i></li>
+            <li> Cashless Paymant : @Model.CashlessPayment <i class="fa-solid fa-manat-sign"></i></li>
+            <li> Discount : @Model.Discount <i class="fa-solid fa-manat-sign"></i></li>
+            <li>Seller Name : @Model.Employee.FullName</li>
+        </ul>
+        <h3>Products List</h3>
+        <table class="table">
+
+            <tr>
+                <th> Brand </th>
+                <th> Name </th>
+                <th> Price </th>
+                <th> Color </th>
+                <th> Category </th>
+                <th> Series </th>
+            </tr>
+            @foreach (var item in Model.SaleProducts)
+            {
+
+                <tr>
+                    <td>@item.Product.Brand.BrandName </td>
+                    <td>@item.Product.Name </td>
+                    <td>@item.Product.Price </td>
+                    <td>@item.Product.Color.ColorName </td>
+                    <td>@item.Product.ProductCategory.Name </td>
+                    <td>@item.Product.Series</td>
+                </tr>
+            }
+        </table>
+    </div>
+</div>

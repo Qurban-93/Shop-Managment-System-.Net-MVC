@@ -3,7 +3,7 @@
   margin: 0 ;
   padding: 0 ;
   box-sizing: border-box;
-  font-family: 'Inter', sans-serif;
+   font-family: 'Inter', sans-serif;
 }
 
 body{
@@ -16,6 +16,7 @@ body{
 
 .sidebar.active{
     width: 240px;
+    z-index: 99999;
 
     ~ .home_content{
         width: calc(100% - 240px);
@@ -79,6 +80,7 @@ body{
   background: #11101d;
   padding: 6px 14px !important;
   transition: all 0.5s ease;
+  z-index: 999;
   
 
   .links_name{
@@ -404,5 +406,12 @@ body{
     .date_input{
         width: 60%;
         margin-left: 5px;
+    }
+}
+.sale_details_list{
+    margin-top: 20px;
+
+    li{
+        margin: 5px 0 !important;
     }
 }

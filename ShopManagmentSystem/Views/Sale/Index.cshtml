@@ -11,11 +11,11 @@
                         <input type="text" class="form-control" name="search" placeholder="Search" value="@ViewBag.SearchValue">
                     </div>
                     <div>
-                        <input type="date" class="form-control" name="fromDate" value="@ViewBag.FromData" />
+                        <input type="date" class="form-control" name="fromDate" />
                     </div>
                     <div>
-                        <input type="date" class="form-control" name="toDate" value="@ViewBag.ToDate" />
-                        <span class="text-danger">@(ViewBag.Error != null ? ViewBag.Error:"")</span>
+                        <input type="date" class="form-control" name="toDate" />
+                        <span class="text-danger">@(ViewBag.Error != null ? ViewBag.Error : "")</span>
                     </div>
                     <button type="submit" class="btn btn-primary col-lg-2">Search</button>
                 </div>       
@@ -30,7 +30,7 @@
                         <th scope="col">Total Price</th>
                         <th scope="col">Products Count</th>
                         <th scope="col">Seller Name</th>
-                        <th scope="col">Branch</th>
+                        <th scope="col">Details</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -42,9 +42,9 @@
                             <td>@sale.Discount $</td>
                             <td>@sale.CashlessPayment $</td>
                             <td>@sale.TotalPrice $</td>                                             
-                            <td>@sale.Products?.Count eded</td>
+                            <td>@sale.SaleProducts.Count() eded</td>
                             <td>@sale.Employee?.FullName</td>
-                            <td>@sale.Branch.Name</td>                      
+                            <td><a asp-action="details" asp-route-id="@sale.Id"><i class="fa-solid fa-circle-info"></i></a></td>
                         </tr>
                     }
                 </tbody>
