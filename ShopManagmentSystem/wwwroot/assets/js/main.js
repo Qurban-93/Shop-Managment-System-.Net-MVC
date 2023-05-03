@@ -6,9 +6,6 @@ btn.onclick = function(){
   sidebar.classList.toggle("active");
 }
 
-setTimeout(() => {
-    console.log("salam")
-}, "3000");
 
 setTimeout(() => {
     if (alertSale != undefined || alertSale != null) {

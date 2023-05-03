@@ -21,6 +21,7 @@
                 <th> Color </th>
                 <th> Category </th>
                 <th> Series </th>
+                <th> Click For Return</th>
             </tr>
             @foreach (var item in Model.SaleProducts)
             {
@@ -32,6 +33,7 @@
                     <td>@item.Product.Color.ColorName </td>
                     <td>@item.Product.ProductCategory.Name </td>
                     <td>@item.Product.Series</td>
+                    <td><a class="returnBtn" data-id="@item.ProductId" data-customer="@item.Sale.CustomerId"><i class="fa-solid fa-rotate-left icon-return"></i></a></td>
                 </tr>
             }
         </table>

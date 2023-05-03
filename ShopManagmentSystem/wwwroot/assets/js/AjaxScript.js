@@ -1,9 +1,11 @@
 ﻿$(document).ready(function () {
 
     let countBasket = parseInt($(".count").html());
-    let totalPrice = parseInt($(".total_price").html());
-    let productPrice = parseInt($(".price").html());
+    let totalPrice = parseInt($(".total_price").html());   
     let itemCount = parseInt($(".item_count").html());
+
+
+
     $(".order").on("click", function (e) {
         let id = $(e.currentTarget).data('id');
         let parentElement = $(e.currentTarget).parent().parent();
@@ -21,8 +23,6 @@
         });
 
     })
-
-
 
     $(".deleteBasketItem").on("click", function (e) {
         let id = $(e.currentTarget).data('id');
@@ -56,4 +56,18 @@
 
     })
 
+    $(".returnBtn").on("click", function (e) {
+        let id = $(e.currentTarget).data('id');
+        let customerId = $(e.currentTarget).data('customer');
+
+        $.ajax({
+            method: "POST",
+            url: "/sale/orderrefund/" + id + "?customerId=" + customerId,
+            success: function (result) {
+                let icon = $(".icon-return");
+                
+                /*icon.removeClass('fa-solid fa-rotate-left').addClass('fa-solid fa-check');*/           
+            }
+        });
+    })
 });

@@ -314,6 +314,10 @@ body {
   margin-top: 8px;
 }
 
+.returnBtn {
+  cursor: pointer;
+}
+
 .search_product {
   margin: auto;
   display: flex;

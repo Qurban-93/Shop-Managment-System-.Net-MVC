@@ -368,6 +368,37 @@ public class SaleController : Controller
         if(sale == null) return NotFound();
         return View(sale);
     }
+
+    
+    public async Task<IActionResult> OrderRefund(int? id , int? customerId)
+    {
+        if (id == null || id == 0) return NotFound();
+        Product? product =  await _context.Products
+            .Include(p=>p.SaleProducts)
+            .Include(p=>p.ProductCategory)
+            .Include(p=>p.Color)
+            .Include(p=>p.Brand)         
+            .FirstOrDefaultAsync(p=>p.Id==id);
+        if (product == null) return NotFound();
+        List<RefundOrder> refundOrder = await _context.RefundOrders.ToListAsync();
+        if (refundOrder.Any(r => r.ProdId == id)) return BadRequest();
+
+        RefundOrder order = new();
+        order.Brand = product.Brand.BrandName;
+        order.Name = product.Name;
+        order.ProdId = product.Id;
+        order.Price = product.Price;
+        order.Series = product.Series;
+        order.Color = product.Color.ColorName;
+        order.BranchId = product.BranchId;
+        order.Category = product.ProductCategory.Name;
+        order.CustomerEmail = _context.Customers.FirstOrDefault(c => c.Id == customerId).Email;
+
+        _context.RefundOrders.Add(order);
+        await _context.SaveChangesAsync();
+
+        return Ok();
+    }
 }
 
 

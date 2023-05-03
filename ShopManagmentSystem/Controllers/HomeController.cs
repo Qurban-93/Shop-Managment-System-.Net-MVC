@@ -22,7 +22,7 @@ namespace ShopManagmentSystem.Controllers
 
         public async Task<IActionResult> Index(string? search)
         {   
-            if(!User.Identity.IsAuthenticated) RedirectToAction("Account", "Login");
+            if(!User.Identity.IsAuthenticated) return RedirectToAction("Login", "Account");
             AppUser user = await _userManager.FindByNameAsync(User.Identity.Name);
             if(user == null) return NotFound();
             HomeVM home = new HomeVM();

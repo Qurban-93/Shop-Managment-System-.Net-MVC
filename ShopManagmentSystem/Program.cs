@@ -23,11 +23,6 @@ builder.Services.AddIdentity<AppUser, IdentityRole>(options =>
     
 }).AddEntityFrameworkStores<AppDbContext>().AddDefaultTokenProviders();
 
-builder.Services.AddSession(options =>
-{
-    //options.IdleTimeout = TimeSpan.FromMinutes(5);
-
-});
 
 var app = builder.Build();
 
@@ -45,6 +40,10 @@ app.UseStaticFiles();
 app.UseRouting();
 
 app.UseAuthorization();
+
+app.MapControllerRoute(
+    name: "areas",
+    pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
 
 app.MapControllerRoute(
     name: "default",
