@@ -3,6 +3,7 @@
     let countBasket = parseInt($(".count").html());
     let totalPrice = parseInt($(".total_price").html());   
     let itemCount = parseInt($(".item_count").html());
+    let refundNotif = $("#alert_refund")
 
 
 
@@ -59,15 +60,34 @@
     $(".returnBtn").on("click", function (e) {
         let id = $(e.currentTarget).data('id');
         let customerId = $(e.currentTarget).data('customer');
-
+        let employeeId = $(e.currentTarget).data('employee');
+        
         $.ajax({
             method: "POST",
-            url: "/sale/orderrefund/" + id + "?customerId=" + customerId,
+            url: "/refund/order/" + id + "?customerId=" + customerId + "&employeeId=" + employeeId,
             success: function (result) {
-                let icon = $(".icon-return");
+                console.log(employeeId)
+                refundNotif.css("display", "block");
+                refundNotif.css("opacity", "1");
+                refundNotif.html(`${result}`)
+                hideAlertRefund();
+                hideAlertRefundVisibility();
                 
                 /*icon.removeClass('fa-solid fa-rotate-left').addClass('fa-solid fa-check');*/           
             }
+            
         });
     })
+
+    function hideAlertRefund() {
+        setTimeout(function () {
+            refundNotif.css("opacity", "0");
+        }, 2500);
+    }
+
+    function hideAlertRefundVisibility() {
+        setTimeout(function () {
+            refundNotif.css("display", "none");
+        }, 3000);
+    }
 });

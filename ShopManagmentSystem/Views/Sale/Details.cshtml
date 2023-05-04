@@ -2,7 +2,10 @@
 
 <div class="container">
     <div class="row">
-        <h1 class="text-success">Sale Detail <i class="fa-solid fa-circle-info"></i></h1>
+        <h1 class="text-success">Sale Details <i class="fa-solid fa-circle-info"></i></h1>
+        <div style="display:none; transition:all 0.3s ease" id="alert_refund" class="alert alert-warning" role="alert">
+                This is a warning alert—check it out!
+            </div>  
         <ul class="sale_details_list">
             <li>Customer : @Model.Customer.FullName</li>
             <li>Sale Date : @Model.CreateDate.ToString("dd MMMM yyyy,hh:mm")</li>
@@ -33,7 +36,8 @@
                     <td>@item.Product.Color.ColorName </td>
                     <td>@item.Product.ProductCategory.Name </td>
                     <td>@item.Product.Series</td>
-                    <td><a class="returnBtn" data-id="@item.ProductId" data-customer="@item.Sale.CustomerId"><i class="fa-solid fa-rotate-left icon-return"></i></a></td>
+                    <td><a class="returnBtn" data-id="@item.ProductId" data-customer="@item.Sale.CustomerId" data-employee="@Model.EmployeeId">
+                        <i class="fa-solid fa-rotate-left icon-return"></i></a></td>
                 </tr>
             }
         </table>

@@ -2,9 +2,9 @@
 
 namespace ShopManagmentSystem.Models
 {
-    public class RefundOrder
+    public class RefundOrder : BaseEntity
     {
-        public int Id { get; set; }
+       
         public int ProdId { get; set; }
         public string Name { get; set; }
         public string Brand { get; set; }
@@ -12,7 +12,9 @@ namespace ShopManagmentSystem.Models
         public string Series { get; set; }
         public double Price { get; set; }
         public string Category { get; set;}
-        public string CustomerEmail { get; set; }
+        public int CustomerId { get; set; }
+        public Customer Customer { get; set; }
+        public string EmployeeName { get; set; }
         public int? BranchId { get; set; }
 
     }
