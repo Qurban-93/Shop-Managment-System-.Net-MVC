@@ -4,7 +4,7 @@
 <div class="home_index">
     <div class="container">
         <div class="row">
-            <h1 class="text-center">Refund List</h1>
+            <h1>Refund List</h1>
             <table style="border:1px solid gray;" class="table">
                 <thead class="thead-light">
                     <tr>
@@ -27,7 +27,7 @@
                             <td>@item.Discount <i class="fa-solid fa-manat-sign"></i></td>
                             <td>@item.CashlessPayment <i class="fa-solid fa-manat-sign"></i></td>
                             <td>@item.TotalPrice <i class="fa-solid fa-manat-sign"></i></td>
-                            <td>@item.RefundProducts.Count() eded</td>
+                           @* <td>@item.RefundProducts.Count() eded</td>*@
                             <td>@item.Employee?.FullName</td>
                             <td><a asp-action="details" asp-route-id="@item.Id"><i class="fa-solid fa-circle-info"></i></a></td>
                         </tr>
@@ -36,12 +36,12 @@
             </table>
         </div>
         <div class="row">
-            <h1 class="text-center">Refund Orders List</h1>
+            <h1>Refund Orders List</h1>
             <table style="border:1px solid gray;" class="table">
                 <thead class="thead-light">
                     <tr>
                         <th scope="col">Brand</th>
-                        <th scope="col">Product Name</th>
+                        <th scope="col">Product Model</th>
                         <th scope="col">Price</th>
                         <th scope="col">Color</th>
                         <th scope="col">Category</th>

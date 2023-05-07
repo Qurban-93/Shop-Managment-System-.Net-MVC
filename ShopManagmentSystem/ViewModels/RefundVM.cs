@@ -5,8 +5,9 @@ namespace ShopManagmentSystem.ViewModels
 {
     public class RefundVM
     {
-        public List<RefundOrder>? Orders { get; set; }
-        [Required]    
+        [Required]
+        public int RefundOrderId { get; set; }
+        public RefundOrder? Order { get; set; }
         public double CashlessPayment { get; set; }
         public double Discount { get; set; }
     }

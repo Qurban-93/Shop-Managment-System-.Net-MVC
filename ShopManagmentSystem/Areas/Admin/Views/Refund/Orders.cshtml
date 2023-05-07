@@ -1,0 +1,59 @@
+﻿@model RefundVM
+
+
+<div class="container home_index">
+    @if (Model.Order != null)
+    {
+        <h1 class="text-center"> List of items to return </h1>
+        <table class="table table-dark">
+            <thead>
+                <tr>
+                    <th>Brand</th>
+                    <th>Name</th>
+                    <th>Color</th>
+                    <th>Price</th>
+                    <th>Category</th>
+                    <th>Series</th>
+                    <th>Seller</th>
+                    <th>Customer</th>                  
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>@Model.Order.Brand</td>
+                    <td>@Model.Order.Name</td>
+                    <td>@Model.Order.Color</td>
+                    <td>@Model.Order.Price</td>
+                    <td>@Model.Order.Category</td>
+                    <td>@Model.Order.Series</td>
+                    <td>@Model.Order.EmployeeName</td>
+                    <td>@Model.Order.Customer.FullName</td>               
+                </tr>
+                
+            </tbody>          
+        </table>
+        <div class="mt-2">
+            <form method="post">
+                <div class="form-group mt-2">
+                    <label class="text-info">Pay With Card</label>
+                    <input class="form-control" asp-for="CashlessPayment" type="number" placeholder="Enter the amount">
+                    <span class="text-danger" asp-validation-for="CashlessPayment"></span>
+
+                </div>
+                <div class="form-group mt-2">
+                    <label class="text-info">Discount</label>
+                    <input class="form-control" asp-for="Discount" type="number" placeholder="Enter the amount">
+                    <span class="text-danger" asp-validation-for="Discount"></span>
+                </div>
+                <input asp-for="RefundOrderId" type="hidden" value="@Model.RefundOrderId">
+                <button type="submit" class="btn btn-primary mt-2">Сonfirm</button>
+            </form>
+        </div>
+    }
+    else
+    {
+        <a asp-action="index" asp-controller="home" asp-area="Admin" style="text-align:center; text-decoration:none;">
+            <h1>Qeri qaytarmada mehsul yoxdu </h1>
+        </a>
+    }
+</div>

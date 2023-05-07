@@ -33,12 +33,12 @@
                     {
                         <tr>
                             <td>@product.Brand.BrandName</td>
-                            <td>@product.Name</td>
+                            <td>@product.ProductModel.ModelName</td>
                             <td>@product.Color.ColorName</td>
-                            <td>@product.Price $</td>
+                            <td>@product.ProductModel.ModelPrice <i class="fa-solid fa-manat-sign"></i></td>
                             <td>@product.ProductCategory.Name</td>
                             <td>@product.Series</td>
-                            <td><a data-id="@product.Id" class="order"><i class="fa-solid fa-plus"></i></a></td>
+                            <td><a data-id="@product.Id" class="order"><i class="fa-solid fa-cart-plus"></i></a></td>
                         </tr>
                     }
                 </tbody>

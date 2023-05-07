@@ -1,11 +1,9 @@
-﻿@model RefundVM
+﻿@model List<RefundOrder>
 
-
-<div class="container home_index">
-    @if (Model?.Orders?.Count > 0)
-    {
-        <h1 class="text-center"> Selected products <i class="fa-solid fa-cart-plus"></i></h1>
-        <table class="table table-dark">
+<div class="container">
+    <div class="row">
+        <h1 class="text-center"> List of items to return </h1>
+        <table class="table">
             <thead>
                 <tr>
                     <th>Brand</th>
@@ -14,61 +12,29 @@
                     <th>Price</th>
                     <th>Category</th>
                     <th>Series</th>
-                    <th>Delete</th>
+                    <th>Seller</th>
+                    <th>Customer</th>
+                    <th>Сlick to make a refund</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach (RefundOrder order in Model.Orders)
+                @foreach (RefundOrder order in Model)
                 {
                     <tr>
                         <td>@order.Brand</td>
                         <td>@order.Name</td>
                         <td>@order.Color</td>
-                        <td >@order.Price</td>
+                        <td>@order.Price</td>
                         <td>@order.Category</td>
                         <td>@order.Series</td>
-                        <td><a class="deleteBasketItem" data-id="@order.ProdId"><i class="fa-solid fa-trash"></i></a>
-
-                    </td>
-
+                        <td>@order.EmployeeName</td>
+                        <td>@order.Customer.FullName</td>
+                        <td>
+                            <a asp-action="orders" asp-route-id="@order.Id" asp-area="Admin">Issue a refund</a>
+                        </td>
                     </tr>
                 }
             </tbody>
-            <tfoot>
-                <tr>
-                    <td>Total Price :</td>
-                    <td>
-                        <span>@Model.Orders.Sum(p=>p.Price)</span> $
-                    </td>
-                    <td>Items :</td>
-                    <td><span>@(Model.Orders.Count)</span> eded</td>
-                </tr>
-            </tfoot>
         </table>
-        <div class="mt-2">
-            <form method="post">                                               
-                <div class="form-group mt-2">
-                    <label class="text-info">Pay With Card</label>
-                    <input class="form-control" asp-for="CashlessPayment" type="number" placeholder="Enter the amount">
-                    <span class="text-danger" asp-validation-for="CashlessPayment"></span>
-
-                </div>             
-                <div class="form-group mt-2">
-                    <label class="text-info">Discount</label>
-                    <input class="form-control" asp-for="Discount" type="number" placeholder="Enter the amount">
-                    <span class="text-danger" asp-validation-for="Discount"></span>
-
-                </div>
-                <button type="submit" class="btn btn-primary mt-2">Complete</button>
-            </form>
-        </div>
-
-
-    }
-    else
-    {
-        <a asp-action="index" asp-controller="home" style="text-align:center; text-decoration:none;">
-            <h1>Mehsul Elave Edilmeyib !</h1>
-        </a>
-    }
+    </div>
 </div>

@@ -4,8 +4,7 @@ namespace ShopManagmentSystem.Models
 {
     public class Product : BaseEntity
     {
-        public string Name { get; set; } = null!;
-        public double Price { get; set; }
+       
         public double CostPrice { get; set; }
         public string Series { get; set; } = null!;
         public string? Desc { get; set; }
@@ -19,6 +18,9 @@ namespace ShopManagmentSystem.Models
         public bool IsSold { get; set; }
         public int? BranchId { get; set; }
         public List<SaleProducts>? SaleProducts { get; set; }
-        public List<RefundProducts>? RefundProducts { get; set; }
+        public List<Refund>? Refunds { get; set; }
+        public int? ProductModelId { get; set; }
+        public ProductModel? ProductModel { get; set; }
+        
     }
 }

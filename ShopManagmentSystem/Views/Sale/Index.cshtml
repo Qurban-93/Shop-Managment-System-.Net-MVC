@@ -39,9 +39,9 @@
                         <tr>    
                             <td>@sale.CreateDate.ToString("dd MMMM yyyy, hh:mm:ss")</td>
                             <td>@sale.Customer?.FullName</td>
-                            <td>@sale.Discount $</td>
-                            <td>@sale.CashlessPayment $</td>
-                            <td>@sale.TotalPrice $</td>                                             
+                            <td>@sale.Discount <i class="fa-solid fa-manat-sign"></i></td>
+                            <td>@sale.CashlessPayment <i class="fa-solid fa-manat-sign"></i></td>
+                            <td>@sale.TotalPrice <i class="fa-solid fa-manat-sign"></i></td>
                             <td>@sale.SaleProducts.Count() eded</td>
                             <td>@sale.Employee?.FullName</td>
                             <td><a asp-action="details" asp-route-id="@sale.Id"><i class="fa-solid fa-circle-info"></i></a></td>

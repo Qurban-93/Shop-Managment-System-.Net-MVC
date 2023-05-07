@@ -181,6 +181,7 @@ public class SaleController : Controller
             .Include(p => p.Color)
             .Include(p => p.Brand)
             .Include(p => p.ProductCategory)
+            .Include(p=>p.ProductModel)
             .Where(p => p.BranchId == user.BranchId)
             .FirstOrDefaultAsync(p => p.Id == id);
         if (product == null) return NotFound();
@@ -194,9 +195,9 @@ public class SaleController : Controller
         }
 
         Order order = new();
-        order.Name = product.Name;
+        order.Name = product.ProductModel.ModelName;
         order.Series = product.Series;
-        order.Price = product.Price;
+        order.Price = product.ProductModel.ModelPrice;
         order.Category = product.ProductCategory.Name;
         order.Color = product.Color.ColorName;
         order.Brand = product.Brand.BrandName;
@@ -278,27 +279,27 @@ public class SaleController : Controller
         {
             prodId.Add(order.ProdId);
         }
-        List<Product> products = _context.Products.Where(p => prodId.Contains(p.Id)).ToList();
-        List<SaleProducts> saleProducts = new List<SaleProducts>();
+        List<Product> products = _context.Products.Include(p=>p.ProductModel).Where(p => prodId.Contains(p.Id)).ToList();
+        List<SaleProducts> saleProductsList = new List<SaleProducts>();
 
         foreach (Product product in products)
         {
-            SaleProducts saleProducts1 = new();
-            saleProducts1.ProductId = product.Id;
-            saleProducts.Add(saleProducts1);
+            SaleProducts saleProducts = new();
+            saleProducts.ProductId = product.Id;
+            saleProductsList.Add(saleProducts);
         }
 
         Sale newSale = new();
         newSale.CustomerId = customer.Id;
-        newSale.SaleProducts = saleProducts;
-        newSale.TotalPrice = products.Sum(p => p.Price) - saleVM.Discount;
+        newSale.SaleProducts = saleProductsList;
+        newSale.TotalPrice = products.Sum(p => p.ProductModel.ModelPrice) - saleVM.Discount;
         newSale.Discount = saleVM.Discount;
         newSale.CashlessPayment = saleVM.CashlessPayment;
-        newSale.TotalProfit = (products.Sum(p => p.Price) - saleVM.Discount) - products.Sum(p => p.CostPrice);
+        newSale.TotalProfit = (products.Sum(p => p.ProductModel.ModelPrice) - saleVM.Discount) - products.Sum(p => p.CostPrice);
         newSale.EmployeeId = saleVM.EmployeeId;
         newSale.CreateDate = DateTime.Now;
         newSale.BranchId = user.BranchId;
-        customer.TotalCost += products.Sum(p => p.Price) - saleVM.Discount;
+        customer.TotalCost += products.Sum(p => p.ProductModel.ModelPrice) - saleVM.Discount;
 
 
         foreach (var item in products)
@@ -361,6 +362,7 @@ public class SaleController : Controller
             .Include(s=>s.SaleProducts).ThenInclude(sp=>sp.Product).ThenInclude(p=>p.Brand)
             .Include(s => s.SaleProducts).ThenInclude(sp => sp.Product).ThenInclude(p => p.Color)
             .Include(s => s.SaleProducts).ThenInclude(sp => sp.Product).ThenInclude(p => p.ProductCategory)
+            .Include(s => s.SaleProducts).ThenInclude(sp => sp.Product).ThenInclude(p => p.ProductModel)
             .Include(s=>s.Branch)
             .Include(s=>s.Customer)
             .Include(s=>s.Employee)

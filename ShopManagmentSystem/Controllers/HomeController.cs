@@ -29,6 +29,7 @@ namespace ShopManagmentSystem.Controllers
             List<Product> products = new();
             var query = _appDbContext.Products
                 .Include(p => p.ProductCategory)
+                .Include(p=>p.ProductModel)
                 .Include(p => p.Brand)
                 .Include(p => p.Color)
                 .Where(p => !p.IsSold && p.BranchId == user.BranchId);
@@ -36,9 +37,9 @@ namespace ShopManagmentSystem.Controllers
             if (!string.IsNullOrWhiteSpace(search))
             {
                 products = await query.Where(p => 
-                p.Name.Contains(search.Trim().ToLower()) ||
-                p.Brand.BrandName.Contains(search.Trim().ToLower()) ||
-                p.ProductCategory.Name.Contains(search.Trim().ToLower())).ToListAsync();
+                p.ProductModel.ModelName.ToUpper().Contains(search.Trim().ToUpper()) ||
+                p.Brand.BrandName.ToUpper().Contains(search.Trim().ToUpper()) ||
+                p.ProductCategory.Name.ToUpper().Contains(search.Trim().ToUpper())).ToListAsync();
               
             }
             else
