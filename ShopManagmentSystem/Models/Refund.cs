@@ -15,6 +15,8 @@ namespace ShopManagmentSystem.Models
         public int BranchId { get; set; }
         public Branch? Branch { get; set; }
         public int ProductId { get; set; }
-        public Product Product { get; set; }
+        public Product? Product { get; set; }
+        public int? SaleId { get; set; }
+        public Sale? Sale { get; set; }
     }
 }

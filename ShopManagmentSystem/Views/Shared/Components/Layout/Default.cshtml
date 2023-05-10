@@ -60,7 +60,7 @@
             <span class="tooltip">Messages</span>
         </li>
         <li>
-            <a asp-action="boxoffice" asp-controller="sale">
+            <a asp-action="index" asp-controller="boxoffice">
                 <i class="fa-solid fa-cash-register"></i>
                 <span class="links_name">Box Office</span>
             </a>
@@ -87,6 +87,6 @@
                 </div>
             </div>
         </div>
-        <i class="bx bx-log-out" id="log_out"></i>
+        <a asp-action="logout" asp-controller="account"><i class="fa-solid fa-right-from-bracket" id="log_out"></i></a>
     </div>
 </div>

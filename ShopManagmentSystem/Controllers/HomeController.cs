@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
@@ -9,6 +10,7 @@ using System.Diagnostics;
 
 namespace ShopManagmentSystem.Controllers
 {
+    [Authorize]
     public class HomeController : Controller
     {    
         private readonly AppDbContext _appDbContext;
@@ -39,7 +41,8 @@ namespace ShopManagmentSystem.Controllers
                 products = await query.Where(p => 
                 p.ProductModel.ModelName.ToUpper().Contains(search.Trim().ToUpper()) ||
                 p.Brand.BrandName.ToUpper().Contains(search.Trim().ToUpper()) ||
-                p.ProductCategory.Name.ToUpper().Contains(search.Trim().ToUpper())).ToListAsync();
+                p.ProductCategory.Name.ToUpper().Contains(search.Trim().ToUpper()) ||
+                p.Series.Contains(search.Trim())).ToListAsync();
               
             }
             else

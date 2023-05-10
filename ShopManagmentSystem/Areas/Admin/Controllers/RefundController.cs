@@ -28,8 +28,6 @@ public class RefundController : Controller
         return View(Orders);
     }
 
-
-
     public async Task<IActionResult> Orders(int? id)
     {
         AppUser? user = await _userManager.FindByNameAsync(User.Identity.Name);
@@ -50,14 +48,13 @@ public class RefundController : Controller
         AppUser? user = await _userManager.FindByNameAsync(User.Identity.Name);
         if (refundVM == null) return NotFound();      
         RefundOrder? refundOrder = await _context.RefundOrders.FirstOrDefaultAsync(ro => ro.Id == refundVM.RefundOrderId);
-        if (refundOrder == null) return NotFound();
-        Product? product = await _context.Products.Include(p=>p.ProductModel).FirstOrDefaultAsync(p => p.Id == refundOrder.ProdId);
-        if (product == null) return NotFound();
         Customer? customer = await _context.Customers.FirstOrDefaultAsync(c=>c.Id == refundOrder.CustomerId);
-        if (customer == null) return NotFound();
+        Product? product = await _context.Products.Include(p=>p.ProductModel).FirstOrDefaultAsync(p => p.Id == refundOrder.ProdId);
+        if (refundOrder == null || customer == null || product == null) return NotFound();
         Refund refund = new();
         refund.CreateDate = DateTime.Now;
         refund.ProductId = product.Id;
+        refund.SaleId = refundOrder.SaleId;
         refund.BranchId = user.BranchId;
         refund.CustomerId = refundOrder.CustomerId;
         refund.Discount = refundVM.Discount;

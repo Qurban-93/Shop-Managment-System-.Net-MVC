@@ -37,12 +37,25 @@
                     <td>@item.Product.ProductCategory.Name </td>
                     <td>@item.Product.Series</td>
                     <td>
-                        <a class="returnBtn" data-id="@item.ProductId" data-customer="@item.Sale.CustomerId" data-employee="@Model.EmployeeId">
+                        <a class="returnBtn" data-id="@item.ProductId" data-customer="@item.Sale.CustomerId" data-employee="@Model.EmployeeId" data-saleId="@Model.Id">
                             <i class="fa-solid fa-rotate-left icon-return"></i>
                         </a>
                     </td>
                 </tr>
             }
         </table>
+        @if (Model.Refunds.Count > 0)
+        {
+            <h3 class="text-warning">Mehsullarin geri qaytarilmasi baresinde melumat :</h3>
+            <ul>
+                @foreach (Refund item in Model.Refunds)
+                {
+                    <li> Date: @item.CreateDate , Product : @item.Product.ProductModel.ModelName , Series : @item.Product.Series </li>
+                }
+            </ul>
+            
+
+
+        }
     </div>
 </div>

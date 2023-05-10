@@ -1,0 +1,74 @@
+﻿@model IEnumerable<BoxOfficeVM>
+
+<div class="container">
+    <div class="row">
+        <h1 class="text-center">Box Office</h1>
+        <form method="get">
+            <div class="mb-3 col-lg-8 d-flex search_product">
+                <div class="d-flex align-items-center">
+                    <div>
+                        <span class="mr-2"> From :</span>
+                    </div>
+                    <div>
+                        <input type="date" class="form-control fromDate" name="fromDate" value="@(ViewBag.fromDate != null ? ViewBag.fromDate.Date.ToString("yyyy-MM-dd") : "" )" />
+                    </div>
+                </div>
+                <div class="d-flex align-items-center">
+                    <div>
+                        <span class="mr-2">To :</span>
+                    </div>
+                    <div>
+                        <input type="date" class="form-control toDate" name="toDate" value="@(ViewBag.toDate != null ? ViewBag.toDate.Date.ToString("yyyy-MM-dd") : "" )" />
+                        <span class="text-danger">@(ViewBag.Error != null ? ViewBag.Error : "")</span>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary col-lg-2">Sort</button>
+            </div>
+        </form>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Date <i class="fa-regular fa-calendar"></i></th>
+                    <th scope="col">Cashless Payment <i class="fa-regular fa-credit-card"></i></th>
+                    <th scope="col">Discount <i class="fa-solid fa-percent"></i></th>
+                    <th class="text-danger" scope="col">Cashless Returns <i class="fa-regular fa-credit-card"></i></th>
+                    <th class="text-danger" scope="col">Returns <i class="fa-solid fa-rotate-left"></i></th>
+                    <th scope="col">Incoming <i class="fa-solid fa-plus"></i></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (BoxOfficeVM item in Model)
+                {
+                    <tr>
+                        <td>@item.Date.ToString("dd MMMM yyyy, hh:mm:ss")</td>
+                        <td>@item.CashlessPayment <i class="fa-solid fa-manat-sign"></i></td>
+                        <td>@item.Discount <i class="fa-solid fa-manat-sign"></i></td>
+                        <td class="text-danger">@item.CashlessReturns<i class="fa-solid fa-manat-sign"></i></td>
+                        <td class="text-danger">@item.Returns<i class="fa-solid fa-manat-sign"></i></td>
+                        <td>@item.TotalIncoming <i class="fa-solid fa-manat-sign"></i></td>
+                    </tr>
+                }
+            </tbody>
+            <tfoot>
+                <tr>                 
+                    <td> </td>
+                    <td>@(Model.Sum(s => s.CashlessPayment)) <i class="fa-solid fa-manat-sign"></i></td>
+                    <td>@(Model.Sum(s => s.Discount)) <i class="fa-solid fa-manat-sign"></i></td>
+                    <td class="text-danger">@(Model.Sum(s => s.CashlessReturns))<i class="fa-solid fa-manat-sign"></i></td>
+                    <td class="text-danger">@(Model.Sum(s => s.Returns)) <i class="fa-solid fa-manat-sign"></i></td>
+                    <td>@(Model.Sum(s => s.TotalIncoming)) <i class="fa-solid fa-manat-sign"></i></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td style="font-size:30px;"> Remains :</td>
+                    <td style="font-size:30px;">
+                        @(Model.Sum(b => b.TotalIncoming) - Model.Sum(b => b.Returns))  <i class="fa-solid fa-manat-sign"></i>
+                    </td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+</div>

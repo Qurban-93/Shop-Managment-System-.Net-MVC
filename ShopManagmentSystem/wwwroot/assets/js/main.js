@@ -2,6 +2,10 @@ let btn = document.querySelector("#btn");
 let sidebar = document.querySelector(".sidebar");
 let alertSale = document.getElementById("alert_sale");
 let alertRefund = document.getElementById("alert_refund");
+let toDate = document.querySelector(".toDate");
+let fromDate = document.querySelector(".fromDate");
+
+console.log(toDate, fromDate)
 
 btn.onclick = function(){
   sidebar.classList.toggle("active");
@@ -38,5 +42,7 @@ function HideAlertSale() {
 function Remove() {
     alertSale.style.display = "none";
 }
+
+
 
 

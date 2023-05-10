@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using ShopManagmentSystem.DAL;
 using ShopManagmentSystem.Models;
 using ShopManagmentSystem.ViewModels;
@@ -6,6 +7,7 @@ using System.Text.RegularExpressions;
 
 namespace ShopManagmentSystem.Controllers
 {
+    [Authorize]
     public class CustomerController : Controller
     {
         private readonly AppDbContext _context;

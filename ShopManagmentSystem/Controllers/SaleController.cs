@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -10,6 +11,7 @@ using ShopManagmentSystem.ViewModels;
 
 namespace ShopManagmentSystem.Controllers;
 
+[Authorize]
 public class SaleController : Controller
 {
     private readonly AppDbContext _context;
@@ -27,6 +29,9 @@ public class SaleController : Controller
         AppUser user = await _userManager.FindByNameAsync(User.Identity.Name);
 
         if (user == null) return NotFound();
+
+        ViewBag.toDate = toDate;
+        ViewBag.fromDate = fromDate;
 
         if (!string.IsNullOrWhiteSpace(search))
         {
@@ -126,16 +131,17 @@ public class SaleController : Controller
         if (fromDate != null && toDate != null)
         {
             toDate = toDate.Value.AddHours(23).AddMinutes(59).AddSeconds(59);
+            
             return View(await _context.Sales
         .Include(s => s.SaleProducts).ThenInclude(sp => sp.Product)
         .Include(s => s.Customer)
         .Include(s => s.Employee)
         .Include(s => s.Branch)
-        .Where(s => s.CreateDate > fromDate && s.CreateDate < toDate)
-        .Where(s => s.BranchId == user.BranchId)
-        .ToListAsync());
+        .Where(s => s.CreateDate > fromDate && s.CreateDate < toDate 
+        && s.BranchId == user.BranchId).ToListAsync());
         }
-
+           
+        
         return View(await _context.Sales
             .Include(s => s.SaleProducts).ThenInclude(sp => sp.Product)
             .Include(s => s.Customer)
@@ -145,7 +151,6 @@ public class SaleController : Controller
             .Where(s => s.BranchId == user.BranchId)
             .ToListAsync());
     }
-
     [HttpPost]
     public async Task<IActionResult> Delete(int? id)
     {
@@ -168,7 +173,6 @@ public class SaleController : Controller
 
         return NotFound();
     }
-
     [HttpPost]
     public async Task<IActionResult> AddProduct(int? id)
     {
@@ -209,7 +213,6 @@ public class SaleController : Controller
 
         return Ok();
     }
-
     public async Task<IActionResult> Orders()
     {
         if (!User.Identity.IsAuthenticated) return BadRequest();
@@ -222,16 +225,22 @@ public class SaleController : Controller
             .Where(e => e.BranchId == user.BranchId).ToListAsync(), "Id", "FullName");
         return View(saleVM);
     }
-
     [HttpPost]
     public async Task<IActionResult> Orders(SaleVM saleVM)
     {
         if (!User.Identity.IsAuthenticated) return BadRequest();
         AppUser user = await _userManager.FindByNameAsync(User.Identity.Name);
-        if (user == null) return NotFound();
-        List<Order> orders = await _context.Orders.Where(o=>o.BranchId == user.BranchId).ToListAsync();
+        if (user == null) return RedirectToAction("Login","Account");
         ViewBag.Sellers = new SelectList(await _context.Employees
             .Where(e => e.BranchId == user.BranchId).ToListAsync(), "Id", "FullName");
+        List<Order> orders = await _context.Orders.Where(o=>o.BranchId == user.BranchId).ToListAsync();
+        if (orders == null || orders.Count < 1) 
+        {
+            ModelState.AddModelError("Orders","Mehsul elave olunmayib !");
+            saleVM.Orders = new();
+            return View(saleVM); 
+        }
+        
         if (!ModelState.IsValid)
         {
             saleVM.Orders = orders;
@@ -313,48 +322,6 @@ public class SaleController : Controller
 
         return RedirectToAction("index", "home");
     }
-
-    public async Task<IActionResult> BoxOffice(DateTime? fromDate, DateTime? toDate)
-    {
-        if (!User.Identity.IsAuthenticated) return RedirectToAction("login", "account");
-        AppUser? user = await _userManager.FindByNameAsync(User.Identity.Name);
-        if (user == null) return BadRequest();
-        if (fromDate > toDate)
-        {
-            ViewBag.Error = "Invalid Date Time";
-
-            return View(await _context.Sales
-           .Where(s => s.CreateDate > DateTime.Today && s.BranchId == user.BranchId)
-           .ToListAsync());
-        }
-        if (fromDate != null && toDate == null)
-        {
-            return View(await _context.Sales
-        .Where(s => s.CreateDate > fromDate && s.BranchId == user.BranchId)
-        .ToListAsync());
-        }
-        if (fromDate == null && toDate != null)
-        {
-            toDate.Value.AddHours(23).AddMinutes(59).AddSeconds(59);
-
-            return View(await _context.Sales
-        .Where(s => s.CreateDate < toDate && s.BranchId == user.BranchId)
-        .ToListAsync());
-        }
-        if (fromDate != null && toDate != null)
-        {
-            toDate = toDate.Value.AddHours(23).AddMinutes(59).AddSeconds(59);
-            return View(await _context.Sales
-        .Where(s => s.CreateDate > fromDate && s.CreateDate < toDate && s.BranchId == user.BranchId)
-        .ToListAsync());
-        }
-
-
-
-        List<Sale> sales = await _context.Sales.Where(s => s.BranchId == user.BranchId).ToListAsync();
-        return View(sales);
-    }
-
     public async Task<IActionResult> Details(int? id)
     {
         if (id == null || id == 0) return NotFound();
@@ -366,6 +333,7 @@ public class SaleController : Controller
             .Include(s=>s.Branch)
             .Include(s=>s.Customer)
             .Include(s=>s.Employee)
+            .Include(s=>s.Refunds).ThenInclude(r=>r.Product).ThenInclude(p=>p.ProductModel)
             .FirstOrDefaultAsync(s=>s.Id==id);
         if(sale == null) return NotFound();
         return View(sale);

@@ -61,19 +61,26 @@
         let id = $(e.currentTarget).data('id');
         let customerId = $(e.currentTarget).data('customer');
         let employeeId = $(e.currentTarget).data('employee');
+        let saleId = $(e.currentTarget).data('saleid');
+        
         
         $.ajax({
             method: "POST",
-            url: "/refund/order/" + id + "?customerId=" + customerId + "&employeeId=" + employeeId,
+            url: "/refund/order/" + id + "?customerId=" + customerId + "&employeeId=" + employeeId + "&saleId=" + saleId,
             success: function (result) {
-                console.log(employeeId)
+                
                 refundNotif.css("display", "block");
                 refundNotif.css("opacity", "1");
                 refundNotif.html(`${result}`)
                 hideAlertRefund();
+                hideAlertRefundVisibility();                                       
+            },
+            Error: function () {
+                refundNotif.css("display", "block");
+                refundNotif.css("opacity", "1");
+                refundNotif.html(`Something went wrong !`)
+                hideAlertRefund();
                 hideAlertRefundVisibility();
-                
-                /*icon.removeClass('fa-solid fa-rotate-left').addClass('fa-solid fa-check');*/           
             }
             
         });

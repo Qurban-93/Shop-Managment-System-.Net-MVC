@@ -1,0 +1,38 @@
+﻿@model Refund
+
+<div class="container">
+    <div class="row">
+        <h1 class="text-success">Refund Details <i class="fa-solid fa-circle-info"></i></h1>
+        <div style="display:none; transition:all 0.3s ease" id="alert_refund" class="alert alert-warning" role="alert">
+            This is a warning alert—check it out!
+        </div>
+        <ul class="sale_details_list">
+            <li>Customer : @Model.Customer.FullName</li>
+            <li>Return Date : @Model.CreateDate.ToString("dd MMMM yyyy,hh:mm")</li>
+            <li> Total Payed : @Model.TotalPrice <i class="fa-solid fa-manat-sign"></i></li>
+            <li> Cashless Paymant : @Model.CashlessPayment <i class="fa-solid fa-manat-sign"></i></li>
+            <li> Discount : @Model.Discount <i class="fa-solid fa-manat-sign"></i></li>
+            <li>Seller Name : @Model.Employee.FullName</li>
+        </ul>
+        <h3>Product</h3>
+        <table class="table">
+            <tr>
+                <th> Brand </th>
+                <th> Name </th>
+                <th> Price </th>
+                <th> Color </th>
+                <th> Category </th>
+                <th> Series </th>
+                
+            </tr>
+            <tr>
+                <td>@Model.Product.Brand.BrandName </td>
+                <td>@Model.Product.ProductModel.ModelName </td>
+                <td>@Model.Product.ProductModel.ModelPrice </td>
+                <td>@Model.Product.Color.ColorName </td>
+                <td>@Model.Product.ProductCategory.Name </td>
+                <td>@Model.Product.Series</td>
+            </tr>
+        </table>
+    </div>
+</div>

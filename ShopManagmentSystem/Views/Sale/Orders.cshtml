@@ -1,23 +1,24 @@
 ﻿@model SaleVM
 
 <div class="container home_index">
-    @if (Model?.Orders?.Count > 0)
-    {
-        <h1 class="text-center"> Selected products <i class="fa-solid fa-cart-plus"></i></h1>
-        <table class="table table-dark">
-            <thead>
-                <tr>
-                    <th>Brand</th>
-                    <th>Name</th>
-                    <th>Color</th>
-                    <th>Price</th>
-                    <th>Category</th>
-                    <th>Series</th>
-                    <th>Delete</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (Order order in Model.Orders)
+    <h1 class="text-center"> Selected products <i class="fa-solid fa-cart-plus"></i></h1>
+    <span style="font-size:20px;" class="text-danger" asp-validation-for="Orders"></span>
+    <table class="table table-dark">
+        <thead>
+            <tr>
+                <th>Brand</th>
+                <th>Name</th>
+                <th>Color</th>
+                <th>Price</th>
+                <th>Category</th>
+                <th>Series</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model.Orders.Count>0)
+            {
+                foreach (Order order in Model.Orders)
                 {
                     <tr>
                         <td>@order.Brand</td>
@@ -26,59 +27,52 @@
                         <td class="price">@order.Price</td>
                         <td>@order.Category</td>
                         <td>@order.Series</td>
-                        <td><a class="deleteBasketItem" data-id="@order.ProdId"><i class="fa-solid fa-trash"></i></a>
+                        <td>
+                            <a class="deleteBasketItem" data-id="@order.ProdId"><i class="fa-solid fa-trash"></i></a>
 
-                    </td>
+                        </td>
 
                     </tr>
                 }
-            </tbody>
-            <tfoot>
-                <tr>
-                    <td>Total Price :</td>
-                    <td>
-                        <span class="total_price">@Model.Orders.Sum(p=>p.Price)</span> $
-                    </td>
-                    <td>Items :</td>
-                    <td><span class="item_count">@(Model.Orders.Count)</span> eded</td>
-                </tr>
-            </tfoot>
-        </table>
-        <div class="mt-2">
-            <form method="post">                                   
-                <div class="form-group mt-2">
-                    <label class="text-info">Select Seller</label>
-                    <select asp-for="EmployeeId" asp-items="@ViewBag.Sellers" class="form-control">                      
-                    </select>
-                    <span class="text-danger" asp-validation-for="EmployeeId"></span>
-                </div>
-                <div class="form-group mt-2">
-                    <label class="text-info">Mail or Phone Number for Customer</label>
-                    <input class="form-control" asp-for="CustomerEmailOrPhoneNumber" placeholder="example.mail.com or +994501234567">
-                    <span class="text-danger" asp-validation-for="CustomerEmailOrPhoneNumber"></span>
-                </div>
-                <div class="form-group mt-2">
-                    <label class="text-info">Pay With Card</label>
-                    <input class="form-control" asp-for="CashlessPayment" type="number" placeholder="Enter the amount">
-                    <span class="text-danger" asp-validation-for="CashlessPayment"></span>
+            }
+        </tbody>
+        <tfoot>
+            <tr>
+                <td>Total Price :</td>
+                <td>
+                    <span class="total_price">@(Model.Orders.Count > 0 ? Model.Orders.Sum(p => p.Price) : "0" )</span> $
+                </td>
+                <td>Items :</td>
+                <td><span class="item_count">@(Model.Orders.Count)</span> eded</td>
+            </tr>
+        </tfoot>
+    </table>
+    <div class="mt-2">
+        <form method="post">
+            <div class="form-group mt-2">
+                <label class="text-info">Select Seller</label>
+                <select asp-for="EmployeeId" asp-items="@ViewBag.Sellers" class="form-control">
+                </select>
+                <span class="text-danger" asp-validation-for="EmployeeId"></span>
+            </div>
+            <div class="form-group mt-2">
+                <label class="text-info">Mail or Phone Number for Customer</label>
+                <input class="form-control" asp-for="CustomerEmailOrPhoneNumber" placeholder="example.mail.com or +994501234567">
+                <span class="text-danger" asp-validation-for="CustomerEmailOrPhoneNumber"></span>
+            </div>
+            <div class="form-group mt-2">
+                <label class="text-info">Pay With Card</label>
+                <input class="form-control" asp-for="CashlessPayment" type="number" placeholder="Enter the amount">
+                <span class="text-danger" asp-validation-for="CashlessPayment"></span>
 
-                </div>             
-                <div class="form-group mt-2">
-                    <label class="text-info">Discount</label>
-                    <input class="form-control" asp-for="Discount" type="number" placeholder="Enter the amount">
-                    <span class="text-danger" asp-validation-for="Discount"></span>
+            </div>
+            <div class="form-group mt-2">
+                <label class="text-info">Discount</label>
+                <input class="form-control" asp-for="Discount" type="number" placeholder="Enter the amount">
+                <span class="text-danger" asp-validation-for="Discount"></span>
 
-                </div>
-                <button type="submit" class="btn btn-primary mt-2">Complete</button>
-            </form>
-        </div>
-
-
-    }
-    else
-    {
-        <a asp-action="index" asp-controller="home" style="text-align:center; text-decoration:none;">
-            <h1>Mehsul Elave Edilmeyib !</h1>
-        </a>
-    }
+            </div>
+            <button type="submit" class="btn btn-primary mt-2">Complete</button>
+        </form>
+    </div>
 </div>

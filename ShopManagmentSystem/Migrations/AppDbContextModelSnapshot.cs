@@ -602,6 +602,9 @@ namespace ShopManagmentSystem.Migrations
                     b.Property<int>("ProductId")
                         .HasColumnType("int");
 
+                    b.Property<int?>("SaleId")
+                        .HasColumnType("int");
+
                     b.Property<double>("TotalLoss")
                         .HasColumnType("float");
 
@@ -620,6 +623,8 @@ namespace ShopManagmentSystem.Migrations
                     b.HasIndex("EmployeeId");
 
                     b.HasIndex("ProductId");
+
+                    b.HasIndex("SaleId");
 
                     b.ToTable("Refunds");
                 });
@@ -665,6 +670,9 @@ namespace ShopManagmentSystem.Migrations
                         .HasColumnType("float");
 
                     b.Property<int>("ProdId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SaleId")
                         .HasColumnType("int");
 
                     b.Property<string>("Series")
@@ -904,6 +912,10 @@ namespace ShopManagmentSystem.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("ShopManagmentSystem.Models.Sale", "Sale")
+                        .WithMany("Refunds")
+                        .HasForeignKey("SaleId");
+
                     b.Navigation("Branch");
 
                     b.Navigation("Customer");
@@ -911,6 +923,8 @@ namespace ShopManagmentSystem.Migrations
                     b.Navigation("Employee");
 
                     b.Navigation("Product");
+
+                    b.Navigation("Sale");
                 });
 
             modelBuilder.Entity("ShopManagmentSystem.Models.RefundOrder", b =>
@@ -1015,6 +1029,8 @@ namespace ShopManagmentSystem.Migrations
 
             modelBuilder.Entity("ShopManagmentSystem.Models.Sale", b =>
                 {
+                    b.Navigation("Refunds");
+
                     b.Navigation("SaleProducts");
                 });
 #pragma warning restore 612, 618

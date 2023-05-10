@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using ShopManagmentSystem.DAL;
 using ShopManagmentSystem.Models;
+using ShopManagmentSystem.Service;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -23,6 +24,7 @@ builder.Services.AddIdentity<AppUser, IdentityRole>(options =>
     
 }).AddEntityFrameworkStores<AppDbContext>().AddDefaultTokenProviders();
 
+builder.Services.AddScoped<IBoxOfficeService, BoxOfficeService>();
 
 var app = builder.Build();
 

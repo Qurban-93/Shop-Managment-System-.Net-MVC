@@ -11,10 +11,10 @@
                         <input type="text" class="form-control" name="search" placeholder="Search" value="@ViewBag.SearchValue">
                     </div>
                     <div>
-                        <input type="date" class="form-control" name="fromDate" />
+                        <input type="date" class="form-control" name="fromDate" value="@(ViewBag.fromDate != null ? ViewBag.fromDate.Date.ToString("yyyy-MM-dd") : "" )" />
                     </div>
                     <div>
-                        <input type="date" class="form-control" name="toDate" />
+                        <input type="date" class="form-control" name="toDate" value="@(ViewBag.toDate != null ? ViewBag.toDate.Date.ToString("yyyy-MM-dd") : "" )" />
                         <span class="text-danger">@(ViewBag.Error != null ? ViewBag.Error : "")</span>
                     </div>
                     <button type="submit" class="btn btn-primary col-lg-2">Search</button>
