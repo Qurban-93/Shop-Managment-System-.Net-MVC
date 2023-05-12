@@ -1,48 +1,6 @@
-﻿@model HomeVM
-
-<div class="home_index">
-    <div class="container">
-        <div class="row">
-            <h1 class="text-center">Product List</h1>
-            <form method="get">
-                <div class="mb-3 col-lg-4 d-flex search_product">                 
-                    <input type="text" class="form-control col-3" name="search" placeholder="Search" value="@ViewBag.SearchValue">
-                    <button type="submit" class="btn btn-primary col-2">Search</button>
-                </div>       
-            </form>
-            @if (TempData["Success"] != null)
-            {
-                <div id="alert_sale" class="alert alert-success text-center" role="alert">
-                    The sale is realized!
-                </div>
-            }
-            <table class="table">
-                <thead class="thead-light">
-                    <tr>
-                        <th scope="col">Brand</th>
-                        <th scope="col">Name</th>
-                        <th scope="col">Color</th>
-                        <th scope="col">Price</th>
-                        <th scope="col">Category</th>
-                        <th scope="col">Series</th>
-                        <th scope="col">Add Order</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (Product product in Model.Products)
-                    {
-                        <tr>
-                            <td>@product.Brand.BrandName</td>
-                            <td>@product.ProductModel.ModelName</td>
-                            <td>@product.Color.ColorName</td>
-                            <td>@product.ProductModel.ModelPrice <i class="fa-solid fa-manat-sign"></i></td>
-                            <td>@product.ProductCategory.Name</td>
-                            <td>@product.Series</td>
-                            <td><a data-id="@product.Id" class="order"><i class="fa-solid fa-cart-plus"></i></a></td>
-                        </tr>
-                    }
-                </tbody>
-            </table>
-        </div>
+﻿@if (TempData["Success"] != null)
+{
+    <div id="alert_sale" class="alert alert-success text-center" role="alert">
+        The sale is realized!
     </div>
-</div>
+}

@@ -349,7 +349,7 @@ namespace ShopManagmentSystem.Migrations
                     b.Property<int>("EmployeePositionId")
                         .HasColumnType("int");
 
-                    b.Property<int>("EmployeePostionId")
+                    b.Property<int?>("EmployeePostionId")
                         .HasColumnType("int");
 
                     b.Property<string>("FullName")
@@ -382,6 +382,9 @@ namespace ShopManagmentSystem.Migrations
 
                     b.Property<DateTime>("CreateDate")
                         .HasColumnType("datetime2");
+
+                    b.Property<double?>("FixSalary")
+                        .HasColumnType("float");
 
                     b.Property<string>("PositionName")
                         .IsRequired()
@@ -503,6 +506,9 @@ namespace ShopManagmentSystem.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<double>("Bonus")
+                        .HasColumnType("float");
 
                     b.Property<DateTime>("CreateDate")
                         .HasColumnType("datetime2");
@@ -689,6 +695,43 @@ namespace ShopManagmentSystem.Migrations
                     b.ToTable("RefundOrders");
                 });
 
+            modelBuilder.Entity("ShopManagmentSystem.Models.Salary", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<double>("Bonus")
+                        .HasColumnType("float");
+
+                    b.Property<DateTime>("CreateDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("EmployeeId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("RefundId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("SaleId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("UpdateDate")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("EmployeeId");
+
+                    b.HasIndex("RefundId");
+
+                    b.HasIndex("SaleId");
+
+                    b.ToTable("Salaries");
+                });
+
             modelBuilder.Entity("ShopManagmentSystem.Models.Sale", b =>
                 {
                     b.Property<int>("Id")
@@ -828,9 +871,7 @@ namespace ShopManagmentSystem.Migrations
 
                     b.HasOne("ShopManagmentSystem.Models.EmployeePostion", "EmployeePostion")
                         .WithMany()
-                        .HasForeignKey("EmployeePostionId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("EmployeePostionId");
 
                     b.Navigation("EmployeePostion");
                 });
@@ -901,7 +942,7 @@ namespace ShopManagmentSystem.Migrations
                         .IsRequired();
 
                     b.HasOne("ShopManagmentSystem.Models.Employee", "Employee")
-                        .WithMany()
+                        .WithMany("Refunds")
                         .HasForeignKey("EmployeeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -938,6 +979,29 @@ namespace ShopManagmentSystem.Migrations
                     b.Navigation("Customer");
                 });
 
+            modelBuilder.Entity("ShopManagmentSystem.Models.Salary", b =>
+                {
+                    b.HasOne("ShopManagmentSystem.Models.Employee", "Employee")
+                        .WithMany("Salaries")
+                        .HasForeignKey("EmployeeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ShopManagmentSystem.Models.Refund", "Refund")
+                        .WithMany()
+                        .HasForeignKey("RefundId");
+
+                    b.HasOne("ShopManagmentSystem.Models.Sale", "Sale")
+                        .WithMany()
+                        .HasForeignKey("SaleId");
+
+                    b.Navigation("Employee");
+
+                    b.Navigation("Refund");
+
+                    b.Navigation("Sale");
+                });
+
             modelBuilder.Entity("ShopManagmentSystem.Models.Sale", b =>
                 {
                     b.HasOne("ShopManagmentSystem.Models.Branch", "Branch")
@@ -951,7 +1015,7 @@ namespace ShopManagmentSystem.Migrations
                         .IsRequired();
 
                     b.HasOne("ShopManagmentSystem.Models.Employee", "Employee")
-                        .WithMany()
+                        .WithMany("Sales")
                         .HasForeignKey("EmployeeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -1005,6 +1069,15 @@ namespace ShopManagmentSystem.Migrations
 
             modelBuilder.Entity("ShopManagmentSystem.Models.Customer", b =>
                 {
+                    b.Navigation("Sales");
+                });
+
+            modelBuilder.Entity("ShopManagmentSystem.Models.Employee", b =>
+                {
+                    b.Navigation("Refunds");
+
+                    b.Navigation("Salaries");
+
                     b.Navigation("Sales");
                 });
 

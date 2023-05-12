@@ -22,6 +22,7 @@ namespace ShopManagmentSystem.DAL
         public DbSet<Refund> Refunds { get; set; }
         public DbSet<RefundOrder> RefundOrders { get; set; }
         public DbSet<ProductModel> ProductModels { get; set; }
+        public DbSet<Salary> Salaries { get; set; }
 
 
 

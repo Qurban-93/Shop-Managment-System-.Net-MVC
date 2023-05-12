@@ -47,11 +47,11 @@
                     countSpan.html(`${countBasket}`)
                     total.html(`${totalPrice}`);
                 }
-                if (countBasket == 0) {
-                    let goHome = `<a asp-action="index" asp-controller="home" style="text-align:center; text-decoration:none;">
-            <h1>Mehsul Elave Edilmeyib !</h1></a>`
-                    $(".home_index").html(`${goHome}`)
-                }              
+            //    if (countBasket == 0) {
+            //        let goHome = `<a asp-action="index" asp-controller="home" style="text-align:center; text-decoration:none;">
+            //<h1>Mehsul Elave Edilmeyib !</h1></a>`
+            //        $(".home_index").html(`${goHome}`)
+            //    }              
             }
         });
 

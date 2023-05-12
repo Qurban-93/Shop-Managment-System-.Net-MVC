@@ -50,7 +50,8 @@ public class RefundController : Controller
         RefundOrder? refundOrder = await _context.RefundOrders.FirstOrDefaultAsync(ro => ro.Id == refundVM.RefundOrderId);
         Customer? customer = await _context.Customers.FirstOrDefaultAsync(c=>c.Id == refundOrder.CustomerId);
         Product? product = await _context.Products.Include(p=>p.ProductModel).FirstOrDefaultAsync(p => p.Id == refundOrder.ProdId);
-        if (refundOrder == null || customer == null || product == null) return NotFound();
+        Employee? employee = await _context.Employees.FirstOrDefaultAsync(e => e.FullName == refundOrder.EmployeeName);
+        if (refundOrder == null || customer == null || product == null || employee == null) return NotFound();
         Refund refund = new();
         refund.CreateDate = DateTime.Now;
         refund.ProductId = product.Id;
@@ -59,12 +60,17 @@ public class RefundController : Controller
         refund.CustomerId = refundOrder.CustomerId;
         refund.Discount = refundVM.Discount;
         refund.CashlessPayment = refundVM.CashlessPayment;
-        refund.EmployeeId = _context.Employees.FirstOrDefault(e=>e.FullName == refundOrder.EmployeeName).Id;
+        refund.EmployeeId = employee.Id;
         refund.TotalPrice = product.ProductModel.ModelPrice - refundVM.Discount;
         refund.TotalLoss = (product.ProductModel.ModelPrice - refundVM.Discount) - product.CostPrice;
         product.IsSold = false;
         customer.TotalCost = customer.TotalCost - refund.TotalPrice;
-
+        Salary salary = new();
+        salary.CreateDate = DateTime.Now;
+        salary.Bonus = -product.ProductCategory.Bonus;
+        salary.EmployeeId = employee.Id;
+        
+        _context.Salaries.Add(salary);
         _context.Refunds.Add(refund);
         _context.RefundOrders.Remove(refundOrder);
         await _context.SaveChangesAsync();

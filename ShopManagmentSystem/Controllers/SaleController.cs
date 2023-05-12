@@ -288,11 +288,15 @@ public class SaleController : Controller
         {
             prodId.Add(order.ProdId);
         }
-        List<Product> products = _context.Products.Include(p=>p.ProductModel).Where(p => prodId.Contains(p.Id)).ToList();
+        List<Product> products = _context.Products
+            .Include(p=>p.ProductModel).Include(p=>p.ProductCategory)
+            .Where(p => prodId.Contains(p.Id)).ToList();
         List<SaleProducts> saleProductsList = new List<SaleProducts>();
-
+        Salary salary = new();
+       
         foreach (Product product in products)
         {
+            salary.Bonus =+ product.ProductCategory.Bonus;
             SaleProducts saleProducts = new();
             saleProducts.ProductId = product.Id;
             saleProductsList.Add(saleProducts);
@@ -309,12 +313,17 @@ public class SaleController : Controller
         newSale.CreateDate = DateTime.Now;
         newSale.BranchId = user.BranchId;
         customer.TotalCost += products.Sum(p => p.ProductModel.ModelPrice) - saleVM.Discount;
+        salary.CreateDate = DateTime.Now;
+        salary.EmployeeId = saleVM.EmployeeId;
+        
+        
 
 
         foreach (var item in products)
         {
             item.IsSold = true;
         }
+        _context.Salaries.Add(salary);
         _context.Sales.Add(newSale);
         _context.Orders.RemoveRange(orders);
         await _context.SaveChangesAsync();

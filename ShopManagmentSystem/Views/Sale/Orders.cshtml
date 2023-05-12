@@ -36,8 +36,11 @@
                 }
             }
         </tbody>
-        <tfoot>
+        <tfoot>            
             <tr>
+                <td> </td>
+                <td> </td>
+                <td> </td>
                 <td>Total Price :</td>
                 <td>
                     <span class="total_price">@(Model.Orders.Count > 0 ? Model.Orders.Sum(p => p.Price) : "0" )</span> $
