@@ -5,7 +5,6 @@ let alertRefund = document.getElementById("alert_refund");
 let toDate = document.querySelector(".toDate");
 let fromDate = document.querySelector(".fromDate");
 
-console.log(toDate, fromDate)
 
 btn.onclick = function(){
   sidebar.classList.toggle("active");

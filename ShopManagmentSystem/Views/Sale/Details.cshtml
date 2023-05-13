@@ -1,4 +1,4 @@
-﻿@model Sale
+﻿@model SaleDetailsVM
 
 <div class="container">
     <div class="row">
@@ -7,12 +7,12 @@
             This is a warning alert—check it out!
         </div>
         <ul class="sale_details_list">
-            <li>Customer : @Model.Customer.FullName</li>
-            <li>Sale Date : @Model.CreateDate.ToString("dd MMMM yyyy,hh:mm")</li>
-            <li> Total Payed : @Model.TotalPrice <i class="fa-solid fa-manat-sign"></i></li>
-            <li> Cashless Paymant : @Model.CashlessPayment <i class="fa-solid fa-manat-sign"></i></li>
-            <li> Discount : @Model.Discount <i class="fa-solid fa-manat-sign"></i></li>
-            <li>Seller Name : @Model.Employee.FullName</li>
+            <li>Customer : @Model.Sale.Customer.FullName</li>
+            <li>Sale Date : @Model.Sale.CreateDate.ToString("dd MMMM yyyy,hh:mm")</li>
+            <li> Total Payed : @Model.Sale.TotalPrice <i class="fa-solid fa-manat-sign"></i></li>
+            <li> Cashless Paymant : @Model.Sale.CashlessPayment <i class="fa-solid fa-manat-sign"></i></li>
+            <li> Discount : @Model.Sale.Discount <i class="fa-solid fa-manat-sign"></i></li>
+            <li>Seller Name : @Model.Sale.Employee.FullName</li>
         </ul>
         <h3>Products List</h3>
         <table class="table">
@@ -26,7 +26,7 @@
                 <th> Series </th>
                 <th> Click For Return</th>
             </tr>
-            @foreach (var item in Model.SaleProducts)
+            @foreach (var item in Model.Sale.SaleProducts)
             {
 
                 <tr>
@@ -37,18 +37,27 @@
                     <td>@item.Product.ProductCategory.Name </td>
                     <td>@item.Product.Series</td>
                     <td>
-                        <a class="returnBtn" data-id="@item.ProductId" data-customer="@item.Sale.CustomerId" data-employee="@Model.EmployeeId" data-saleId="@Model.Id">
+                        <a class="returnBtn" data-id="@item.ProductId" data-customer="@item.Sale.CustomerId" data-employee="@Model.Sale.EmployeeId" data-saleId="@Model.Sale.Id">
                             <i class="fa-solid fa-rotate-left icon-return"></i>
                         </a>
+                     @*   @if(Model.RefundOrders.Any(p=>p.ProdId == item.ProductId)){
+                           <a class="returnBtn" data-id="@item.ProductId" data-customer="@item.Sale.CustomerId" data-employee="@Model.Sale.EmployeeId" data-saleId="@Model.Sale.Id">
+                            <span class="text-warning"> Alredy Send to Return</span>
+                        </a> 
+                        }
+                        else { <a class="returnBtn" data-id="@item.ProductId" data-customer="@item.Sale.CustomerId" data-employee="@Model.Sale.EmployeeId" data-saleId="@Model.Sale.Id">
+                            <i class="fa-solid fa-rotate-left icon-return"></i>
+                        </a> }*@
+                        
                     </td>
                 </tr>
             }
         </table>
-        @if (Model.Refunds.Count > 0)
+        @if (Model.Sale.Refunds.Count > 0)
         {
             <h3 class="text-warning">Mehsullarin geri qaytarilmasi baresinde melumat :</h3>
             <ul>
-                @foreach (Refund item in Model.Refunds)
+                @foreach (Refund item in Model.Sale.Refunds)
                 {
                     <li> Date: @item.CreateDate , Product : @item.Product.ProductModel.ModelName , Series : @item.Product.Series </li>
                 }

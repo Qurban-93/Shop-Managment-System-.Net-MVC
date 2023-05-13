@@ -29,6 +29,7 @@ namespace ShopManagmentSystem.Service
                 boxOffice.TotalIncoming = sale.TotalPrice;
                 boxOffice.CashlessPayment = sale.CashlessPayment;
                 boxOffice.Discount = sale.Discount;
+                boxOffice.Profit = sale.TotalProfit;
                 result.Add(boxOffice);
             }
 
@@ -38,6 +39,7 @@ namespace ShopManagmentSystem.Service
                 boxOffice.Date = refund.CreateDate;
                 boxOffice.Returns = refund.TotalPrice;
                 boxOffice.CashlessReturns = refund.CashlessPayment;
+                boxOffice.Profit = 0 - refund.TotalLoss;
                 result.Add(boxOffice);
             }
 
@@ -59,6 +61,7 @@ namespace ShopManagmentSystem.Service
                 boxOffice.TotalIncoming = sale.TotalPrice;
                 boxOffice.CashlessPayment = sale.CashlessPayment;
                 boxOffice.Discount = sale.Discount;
+                boxOffice.Profit = sale.TotalProfit;
                 result.Add(boxOffice);
             }
 
@@ -68,6 +71,7 @@ namespace ShopManagmentSystem.Service
                 boxOffice.Date = refund.CreateDate;
                 boxOffice.Returns = refund.TotalPrice;
                 boxOffice.CashlessReturns = refund.CashlessPayment;
+                boxOffice.Profit = 0 - refund.TotalLoss;
                 result.Add(boxOffice);
             }
 
@@ -89,6 +93,7 @@ namespace ShopManagmentSystem.Service
                 boxOffice.TotalIncoming = sale.TotalPrice;
                 boxOffice.CashlessPayment = sale.CashlessPayment;
                 boxOffice.Discount = sale.Discount;
+                boxOffice.Profit = sale.TotalProfit;
                 result.Add(boxOffice);
             }
 
@@ -98,6 +103,7 @@ namespace ShopManagmentSystem.Service
                 boxOffice.Date = refund.CreateDate;
                 boxOffice.Returns = refund.TotalPrice;
                 boxOffice.CashlessReturns = refund.CashlessPayment;
+                boxOffice.Profit = 0 - refund.TotalLoss;
                 result.Add(boxOffice);
             }
 
@@ -119,6 +125,7 @@ namespace ShopManagmentSystem.Service
                 boxOffice.TotalIncoming = sale.TotalPrice;
                 boxOffice.CashlessPayment = sale.CashlessPayment;
                 boxOffice.Discount = sale.Discount;
+                boxOffice.Profit = sale.TotalProfit;
                 result.Add(boxOffice);
             }
 
@@ -128,6 +135,7 @@ namespace ShopManagmentSystem.Service
                 boxOffice.Date = refund.CreateDate;
                 boxOffice.Returns = refund.TotalPrice;
                 boxOffice.CashlessReturns = refund.CashlessPayment;
+                boxOffice.Profit = 0 - refund.TotalLoss;
                 result.Add(boxOffice);
             }
 

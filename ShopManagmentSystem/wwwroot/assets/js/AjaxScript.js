@@ -4,10 +4,36 @@
     let totalPrice = parseInt($(".total_price").html());   
     let itemCount = parseInt($(".item_count").html());
     let refundNotif = $("#alert_refund")
+    let orderDeleteBtn = $('.order_delete_Btn');
+    let order = $(".order");
+    let deleteBasketItem = $(".deleteBasketItem");
+    let returnBtn = $(".returnBtn");
 
 
+    //$(".returnBtn").each((element, index) => {
+    //    element.on("click", function () {
+    //        console.log(element)
+    //    })
+    //})
 
-    $(".order").on("click", function (e) {
+
+    orderDeleteBtn.on("click", function (e) {
+        let id = $(e.currentTarget).data('id');
+        let parentElement = this.parentElement.parentElement;
+
+        console.log(parentElement)
+         
+        $.ajax({
+            method: "DELETE",
+            url: "Refund/OrderDelete/" + id,
+            success: function (result) {
+                parentElement.remove();              
+            }
+        });
+
+    })
+
+    order.on("click", function (e) {
         let id = $(e.currentTarget).data('id');
         let parentElement = $(e.currentTarget).parent().parent();
         let countSpan = $(".count");
@@ -25,7 +51,7 @@
 
     })
 
-    $(".deleteBasketItem").on("click", function (e) {
+    deleteBasketItem.on("click", function (e) {
         let id = $(e.currentTarget).data('id');
         let parentElement = $(e.currentTarget).parent().parent();
         let countSpan = $(".count");
@@ -57,11 +83,13 @@
 
     })
 
-    $(".returnBtn").on("click", function (e) {
+    returnBtn.on("click", function (e) {
         let id = $(e.currentTarget).data('id');
         let customerId = $(e.currentTarget).data('customer');
         let employeeId = $(e.currentTarget).data('employee');
         let saleId = $(e.currentTarget).data('saleid');
+
+        console.log($(".returnBtn"))
         
         
         $.ajax({
@@ -73,7 +101,10 @@
                 refundNotif.css("opacity", "1");
                 refundNotif.html(`${result}`)
                 hideAlertRefund();
-                hideAlertRefundVisibility();                                       
+                hideAlertRefundVisibility();
+                /*$('.returnBtn').html(`<span class="text-warning"> Alredy Send to Return</span>`)*/
+               
+                
             },
             Error: function () {
                 refundNotif.css("display", "block");
@@ -97,4 +128,6 @@
             refundNotif.css("display", "none");
         }, 3000);
     }
+
+    
 });

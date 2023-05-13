@@ -6,6 +6,10 @@
   font-family: "Inter", sans-serif;
 }
 
+a {
+  text-decoration: none !important;
+}
+
 body {
   position: relative;
   min-height: 100vh;
@@ -333,4 +337,13 @@ body {
 }
 .sale_details_list li {
   margin: 5px 0 !important;
+}
+
+.order_delete_Btn {
+  cursor: pointer;
+  color: red;
+}
+
+.issue_return {
+  color: green;
 }/*# sourceMappingURL=style.css.map */

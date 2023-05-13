@@ -49,7 +49,7 @@ public class RefundController : Controller
         if (refundVM == null) return NotFound();      
         RefundOrder? refundOrder = await _context.RefundOrders.FirstOrDefaultAsync(ro => ro.Id == refundVM.RefundOrderId);
         Customer? customer = await _context.Customers.FirstOrDefaultAsync(c=>c.Id == refundOrder.CustomerId);
-        Product? product = await _context.Products.Include(p=>p.ProductModel).FirstOrDefaultAsync(p => p.Id == refundOrder.ProdId);
+        Product? product = await _context.Products.Include(p=>p.ProductModel).Include(p=>p.ProductCategory).FirstOrDefaultAsync(p => p.Id == refundOrder.ProdId);
         Employee? employee = await _context.Employees.FirstOrDefaultAsync(e => e.FullName == refundOrder.EmployeeName);
         if (refundOrder == null || customer == null || product == null || employee == null) return NotFound();
         Refund refund = new();
@@ -67,7 +67,7 @@ public class RefundController : Controller
         customer.TotalCost = customer.TotalCost - refund.TotalPrice;
         Salary salary = new();
         salary.CreateDate = DateTime.Now;
-        salary.Bonus = -product.ProductCategory.Bonus;
+        salary.Bonus = 0 - product.ProductCategory.Bonus;
         salary.EmployeeId = employee.Id;
         
         _context.Salaries.Add(salary);
@@ -76,5 +76,16 @@ public class RefundController : Controller
         await _context.SaveChangesAsync();
 
         return RedirectToAction("Index");
+    }
+
+    [HttpDelete]
+    public async Task<IActionResult> OrderDelete(int? id)
+    {
+        if (id == null || id == 0) return NotFound();
+        RefundOrder? refundOrder = await _context.RefundOrders.FirstOrDefaultAsync(x => x.Id == id);
+        if (refundOrder == null) return NotFound();
+        _context.RefundOrders.Remove(refundOrder);
+        await _context.SaveChangesAsync();
+        return Ok();
     }
 }

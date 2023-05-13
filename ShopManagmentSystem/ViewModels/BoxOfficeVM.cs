@@ -8,6 +8,6 @@
         public double Discount { get; set; }
         public double Returns { get; set; }
         public double CashlessReturns { get; set; }
-        public double Expenses { get; set; }
+        public double Profit { get; set; }
     }
 }

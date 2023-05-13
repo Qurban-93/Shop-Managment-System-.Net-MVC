@@ -345,7 +345,12 @@ public class SaleController : Controller
             .Include(s=>s.Refunds).ThenInclude(r=>r.Product).ThenInclude(p=>p.ProductModel)
             .FirstOrDefaultAsync(s=>s.Id==id);
         if(sale == null) return NotFound();
-        return View(sale);
+        List<RefundOrder> orders = await _context.RefundOrders.ToListAsync();
+        SaleDetailsVM saleDetailsVM = new();
+        saleDetailsVM.Sale = sale;
+        saleDetailsVM.RefundOrders = orders;
+
+        return View(saleDetailsVM);
     }
 
 }

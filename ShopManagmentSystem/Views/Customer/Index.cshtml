@@ -17,8 +17,7 @@
                         <th scope="col">Full Name</th>
                         <th scope="col">Email</th>
                         <th scope="col">Total Cost</th>
-                        <th scope="col">Phone Number</th>
-                        <th scope="col">City</th>
+                        <th scope="col">Phone Number</th>                      
                         <th scope="col">Address</th>
                         <th scope="col">Details</th>
                     </tr>
@@ -27,13 +26,12 @@
                     @foreach (Customer customer in Model)
                     {
                         <tr>
-                            <td>@customer.FullName</td>
-                            <td>@customer.Email</td>
-                            <td>@customer.TotalCost</td>
-                            <td>@customer.PhoneNumber</td>
-                            <td>@customer.City</td>
-                            <td>@customer.Address</td>
-                            <td><a asp-action="details" asp-route-id="@customer.Id"><i class='bx bx-info-circle'></i></a></td>
+                            <td>@(customer.FullName == null ? "empty" : customer.FullName)</td>
+                            <td>@(customer.Email == null ? "empty" : customer.Email)</td>
+                            <td>@(customer.TotalCost == null ? "empty" : customer.TotalCost)</td>
+                            <td>@(customer.PhoneNumber == null ? "empty" : customer.PhoneNumber)</td>
+                            <td>@(customer.Address == null ? "empty" : customer.Address)</td>
+                            <td><a asp-action="details" asp-route-id="@customer.Id"><i class="fa-sharp fa-solid fa-circle-info"></i></a></td>
                         </tr>
                     }
                 </tbody>

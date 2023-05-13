@@ -27,8 +27,7 @@ namespace ShopManagmentSystem.Controllers
         {
             if (!User.Identity.IsAuthenticated) return RedirectToAction("login", "account");
             AppUser? user = await _userManager.FindByNameAsync(User.Identity.Name);
-            if (user == null) return BadRequest();
-            List<BoxOfficeVM> boxOfficeVMList = new();
+            if (user == null) return BadRequest();         
             ViewBag.fromDate = fromDate;
             ViewBag.toDate = toDate;
 

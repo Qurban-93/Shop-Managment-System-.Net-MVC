@@ -14,7 +14,8 @@
                     <th>Series</th>
                     <th>Seller</th>
                     <th>Customer</th>
-                    <th>Сlick to make a refund</th>
+                    <th>Сlick to complete</th>
+                    <th>Click for delete</th>
                 </tr>
             </thead>
             <tbody>
@@ -30,7 +31,10 @@
                         <td>@order.EmployeeName</td>
                         <td>@order.Customer.FullName</td>
                         <td>
-                            <a asp-action="orders" asp-route-id="@order.Id" asp-area="Admin">Issue a refund</a>
+                            <a class="issue_return" asp-action="orders" asp-route-id="@order.Id" asp-area="Admin">Issue a refund</a>
+                        </td>
+                        <td>
+                            <a class="order_delete_Btn" data-id="@order.Id"><i class="fa-regular fa-trash-can"></i></a>
                         </td>
                     </tr>
                 }
