@@ -7,14 +7,11 @@
     let orderDeleteBtn = $('.order_delete_Btn');
     let order = $(".order");
     let deleteBasketItem = $(".deleteBasketItem");
-    let returnBtn = $(".returnBtn");
+    let selectModel = $(".prod_model");
+    let selectBrand = $(".prod_brand");
+    let selecCategory = $(".prod_category");
 
-
-    //$(".returnBtn").each((element, index) => {
-    //    element.on("click", function () {
-    //        console.log(element)
-    //    })
-    //})
+    console.log(selectModel, selectBrand, selecCategory)
 
 
     orderDeleteBtn.on("click", function (e) {
@@ -83,51 +80,6 @@
 
     })
 
-    returnBtn.on("click", function (e) {
-        let id = $(e.currentTarget).data('id');
-        let customerId = $(e.currentTarget).data('customer');
-        let employeeId = $(e.currentTarget).data('employee');
-        let saleId = $(e.currentTarget).data('saleid');
-
-        console.log($(".returnBtn"))
-        
-        
-        $.ajax({
-            method: "POST",
-            url: "/refund/order/" + id + "?customerId=" + customerId + "&employeeId=" + employeeId + "&saleId=" + saleId,
-            success: function (result) {
-                
-                refundNotif.css("display", "block");
-                refundNotif.css("opacity", "1");
-                refundNotif.html(`${result}`)
-                hideAlertRefund();
-                hideAlertRefundVisibility();
-                /*$('.returnBtn').html(`<span class="text-warning"> Alredy Send to Return</span>`)*/
-               
-                
-            },
-            Error: function () {
-                refundNotif.css("display", "block");
-                refundNotif.css("opacity", "1");
-                refundNotif.html(`Something went wrong !`)
-                hideAlertRefund();
-                hideAlertRefundVisibility();
-            }
-            
-        });
-    })
-
-    function hideAlertRefund() {
-        setTimeout(function () {
-            refundNotif.css("opacity", "0");
-        }, 2500);
-    }
-
-    function hideAlertRefundVisibility() {
-        setTimeout(function () {
-            refundNotif.css("display", "none");
-        }, 3000);
-    }
 
     
 });

@@ -29,15 +29,25 @@ namespace ShopManagmentSystem.Areas.Admin.Controllers
             return View();
         }
 
-        public async Task<IActionResult> Salary()
+        public async Task<IActionResult> Salary(DateTime? fromdate,DateTime? toDate)
         {
-            AppUser? user = await _userManager.FindByNameAsync(User.Identity.Name);
+            AppUser user = await _userManager.FindByNameAsync(User.Identity.Name);
+            if (user == null) return NotFound();
+           List<Salary> salaryList = await _context.Salaries
+                .Include(s=>s.Sale)
+                .Include(s=>s.Employee)
+                .Include(s=>s.Refund)
+                .ToListAsync();
             List<Employee> employees = await _context.Employees
-                .Include(e=>e.Salaries)
                 .Include(e=>e.EmployeePostion)
+                .Include(e=>e.Salaries)
                 .Where(e=>e.BranchId == user.BranchId)
                 .ToListAsync();
-            return View(employees);
+
+            SalaryVM salaryVM = new SalaryVM(); 
+            salaryVM.Salaries = salaryList;
+            salaryVM.Employees = employees;
+            return View(salaryVM);
         }
 
         public async Task<IActionResult> Profit(DateTime? fromDate, DateTime? toDate)

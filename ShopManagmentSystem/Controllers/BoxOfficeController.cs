@@ -27,7 +27,8 @@ namespace ShopManagmentSystem.Controllers
         {
             if (!User.Identity.IsAuthenticated) return RedirectToAction("login", "account");
             AppUser? user = await _userManager.FindByNameAsync(User.Identity.Name);
-            if (user == null) return BadRequest();         
+            if (user == null) return BadRequest(); 
+            
             ViewBag.fromDate = fromDate;
             ViewBag.toDate = toDate;
 
@@ -51,6 +52,11 @@ namespace ShopManagmentSystem.Controllers
             {
                 toDate = toDate.Value.AddHours(23).AddMinutes(59).AddSeconds(59);
                 return View(_boxOfficeService.GetAll((DateTime)fromDate,user,(DateTime)toDate));
+            }
+            if(fromDate == null && toDate == null)
+            {
+                ViewBag.fromDate = DateTime.Today;
+                ViewBag.toDate = DateTime.Today;
             }
 
             List<BoxOfficeVM> boxOfficeVMs = _boxOfficeService.GetAll(user);

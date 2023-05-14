@@ -2,40 +2,36 @@
 
 <div class="container">
     <div class="row">
-        <h1 class="text-center"> List of items to return </h1>
+        <h1 class="text-center"> List of products to return </h1>
+         @if (TempData["Success"] != null)
+        {
+            <div style="transition:all 0.3s ease" id="alert_refund" class="alert alert-warning" role="alert">
+                Mehsul qeri qaytarildi !
+            </div>
+        }
         <table class="table">
             <thead>
                 <tr>
-                    <th>Brand</th>
-                    <th>Name</th>
-                    <th>Color</th>
-                    <th>Price</th>
-                    <th>Category</th>
-                    <th>Series</th>
-                    <th>Seller</th>
+                    <th>Date</th>
                     <th>Customer</th>
+                    <th>Seller</th>
                     <th>Сlick to complete</th>
-                    <th>Click for delete</th>
+                    <th>Click for delete</th>                   
                 </tr>
             </thead>
             <tbody>
                 @foreach (RefundOrder order in Model)
                 {
                     <tr>
-                        <td>@order.Brand</td>
-                        <td>@order.Name</td>
-                        <td>@order.Color</td>
-                        <td>@order.Price</td>
-                        <td>@order.Category</td>
-                        <td>@order.Series</td>
-                        <td>@order.EmployeeName</td>
+                        <td>@order.CreateDate</td>
                         <td>@order.Customer.FullName</td>
+                        <td>@order.EmployeeName</td>
                         <td>
                             <a class="issue_return" asp-action="orders" asp-route-id="@order.Id" asp-area="Admin">Issue a refund</a>
                         </td>
                         <td>
                             <a class="order_delete_Btn" data-id="@order.Id"><i class="fa-regular fa-trash-can"></i></a>
-                        </td>
+                        </td>                     
                     </tr>
                 }
             </tbody>

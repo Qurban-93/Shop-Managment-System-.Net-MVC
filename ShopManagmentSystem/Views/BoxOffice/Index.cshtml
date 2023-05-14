@@ -59,10 +59,6 @@
                     <td>@(Model.Sum(s => s.TotalIncoming)) <i class="fa-solid fa-manat-sign"></i></td>
                 </tr>
                 <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
                     <td style="font-size:30px;"> Remains :</td>
                     <td style="font-size:30px;">
                         @(Model.Sum(b => b.TotalIncoming) - Model.Sum(b => b.Returns))  <i class="fa-solid fa-manat-sign"></i>

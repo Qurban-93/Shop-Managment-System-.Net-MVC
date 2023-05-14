@@ -28,10 +28,13 @@
                     <td>@Model.Order.Series</td>
                     <td>@Model.Order.EmployeeName</td>
                     <td>@Model.Order.Customer.FullName</td>               
-                </tr>
-                
+                </tr>  
             </tbody>          
         </table>
+        <div class="info_refund_order">
+            <h5 class="text-warning">Qaytarma sebebi <i class="fa-solid fa-circle-info"></i></h5>
+            <p>@Model.Order.Description</p>
+        </div>
         <div class="mt-2">
             <form method="post">
                 <div class="form-group mt-2">
@@ -47,6 +50,7 @@
                 </div>
                 <input asp-for="RefundOrderId" type="hidden" value="@Model.RefundOrderId">
                 <button type="submit" class="btn btn-primary mt-2">Сonfirm</button>
+                <a asp-action="index" class="btn btn-primary mt-2">Back</a>
             </form>
         </div>
     }

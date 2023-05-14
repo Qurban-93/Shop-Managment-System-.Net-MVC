@@ -6,5 +6,6 @@ namespace ShopManagmentSystem.Models
     {
         public string BrandName { get; set; }
         public List<Product>? Products { get; set; }
+        public List<ProductModel> ProductModels { get; set; }
     }
 }

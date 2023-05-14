@@ -4,11 +4,24 @@ let alertSale = document.getElementById("alert_sale");
 let alertRefund = document.getElementById("alert_refund");
 let toDate = document.querySelector(".toDate");
 let fromDate = document.querySelector(".fromDate");
+//let selectModel = document.querySelector(".prod_model");
+//let selectBrand = document.querySelector(".prod_brand");
+//let selecCategory = document.querySelector(".prod_category");
+
+//console.log(selectModel.value, selecCategory.value, selectBrand.value)
 
 
-btn.onclick = function(){
-  sidebar.classList.toggle("active");
+
+
+
+
+
+
+btn.onclick = function () {
+    sidebar.classList.toggle("active");
 }
+
+
 
 
 setTimeout(() => {
@@ -20,27 +33,39 @@ setTimeout(() => {
 setTimeout(() => {
     if (alertSale != undefined || alertSale != null) {
         Remove();
-    }   
+    }
 }, "3000");
 
 
 
-//setTimeout(() => {
-//    alertRefund.style.display
-//}, "2000");
+if (alertRefund != null) {
+    opacityAlert();
+    hideAlert();
+}
 
-function HideAlertRefund() {
-    alertRefund.style.display = "none";
+
+
+function hideAlert() {
+    setTimeout(() => {
+        alertRefund.style.display = "none"
+    }, "2500");
+}
+
+function opacityAlert() {
+    setTimeout(() => {
+        alertRefund.style.opacity = "0"
+    }, "2000");
 }
 
 
 function HideAlertSale() {
-    alertSale.style.opacity = "0"; 
+    alertSale.style.opacity = "0";
 }
 
 function Remove() {
     alertSale.style.display = "none";
 }
+
 
 
 

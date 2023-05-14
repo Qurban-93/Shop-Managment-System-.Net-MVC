@@ -1,13 +1,10 @@
-﻿@model List<Employee>
+﻿@model SalaryVM
 
 <div class="container">
     <div class="row">
         <h1>Salary Reports</h1>
         <form method="get">
-            <div class="mb-3 col-lg-8 d-flex search_product">
-                <div>
-                    <input type="text" class="form-control" name="search" placeholder="Search" value="@ViewBag.SearchValue">
-                </div>
+            <div class="mb-3 col-lg-8 d-flex search_product">            
                 <div>
                     <input type="date" class="form-control" name="fromDate" value="@(ViewBag.fromDate != null ? ViewBag.fromDate.Date.ToString("yyyy-MM-dd") : "" )" />
                 </div>
@@ -18,9 +15,9 @@
                 <button type="submit" class="btn btn-primary col-lg-2">Search</button>
             </div>
         </form>
-        @foreach (var item in Model)
-        {
-            <h3>@item.FullName</h3>
+        @foreach (var item in Model.Employees)
+        {   
+            <h5 class="text-primary">@item.FullName</h5>
             <table class="table">
                 <thead>
                     <tr>
@@ -30,13 +27,17 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (var salary in item.Salaries)
+                    @foreach (var salary in Model.Salaries)
                     {
-                        <tr>
+                        if(salary.Employee.FullName == item.FullName)
+                        {
+                         <tr>
                             <td>@salary.CreateDate.ToString("dd MMMM yyyy , hh:mm")</td>
                             <td>@salary.Bonus</td>
                             <td><a asp-action="details" asp-route-id="@salary.Id"> Details </a></td>
                         </tr>
+                        }
+                        
                     }
                     <tr>
                         <td>Fix Salary : @item.EmployeePostion.FixSalary</td>

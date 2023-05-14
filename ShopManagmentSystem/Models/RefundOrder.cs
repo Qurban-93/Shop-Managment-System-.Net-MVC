@@ -17,6 +17,7 @@ namespace ShopManagmentSystem.Models
         public Customer Customer { get; set; }
         public string EmployeeName { get; set; }
         public int? BranchId { get; set; }
+        public string? Description { get; set; }
 
     }
 }

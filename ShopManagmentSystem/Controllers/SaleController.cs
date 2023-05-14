@@ -30,6 +30,7 @@ public class SaleController : Controller
 
         if (user == null) return NotFound();
 
+
         ViewBag.toDate = toDate;
         ViewBag.fromDate = fromDate;
 
@@ -140,15 +141,20 @@ public class SaleController : Controller
         .Where(s => s.CreateDate > fromDate && s.CreateDate < toDate 
         && s.BranchId == user.BranchId).ToListAsync());
         }
-           
-        
+        if (fromDate == null && toDate == null)
+        {
+            ViewBag.fromDate = DateTime.Today;
+            ViewBag.toDate = DateTime.Today;
+        }
+
+       
+
         return View(await _context.Sales
             .Include(s => s.SaleProducts).ThenInclude(sp => sp.Product)
             .Include(s => s.Customer)
             .Include(s => s.Employee)
             .Include(s => s.Branch)
-            .Where(s => s.CreateDate > DateTime.Today)
-            .Where(s => s.BranchId == user.BranchId)
+            .Where(s => s.CreateDate > DateTime.Today && s.BranchId == user.BranchId)        
             .ToListAsync());
     }
     [HttpPost]
@@ -246,7 +252,7 @@ public class SaleController : Controller
             saleVM.Orders = orders;
             return View(saleVM);
         }
-        if (orders.Sum(o => o.Price) < saleVM.CashlessPayment)
+        if ((orders.Sum(o => o.Price)-saleVM.Discount) < saleVM.CashlessPayment)
         {
             ModelState.AddModelError("CashlessPayment", "Nagdsiz odenis umumi meblegden cox ola bilmez !");
             saleVM.Orders = orders;
@@ -298,7 +304,7 @@ public class SaleController : Controller
         {
             salary.Bonus =+ product.ProductCategory.Bonus;
             SaleProducts saleProducts = new();
-            saleProducts.ProductId = product.Id;
+            saleProducts.ProductId = product.Id;     
             saleProductsList.Add(saleProducts);
         }
 
@@ -315,6 +321,7 @@ public class SaleController : Controller
         customer.TotalCost += products.Sum(p => p.ProductModel.ModelPrice) - saleVM.Discount;
         salary.CreateDate = DateTime.Now;
         salary.EmployeeId = saleVM.EmployeeId;
+        salary.Sale = newSale;
         
         
 

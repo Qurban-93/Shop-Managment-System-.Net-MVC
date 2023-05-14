@@ -18,16 +18,81 @@ namespace ShopManagmentSystem.Controllers
             _context = context;
             _userManager = userManager;
         }
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(DateTime? fromDate, DateTime? toDate)
         {
+            RefundHomeVM refundHomeVM = new RefundHomeVM();
             if (!User.Identity.IsAuthenticated) return RedirectToAction("Login", "Account");
             AppUser? user = await _userManager.FindByNameAsync(User.Identity.Name);
             if (user == null) return NotFound();
-            RefundHomeVM refundHomeVM = new RefundHomeVM();
+
+            ViewBag.toDate = toDate;
+            ViewBag.fromDate = fromDate;
+
+            if (fromDate > toDate)
+            {
+                ViewBag.Error = "Error Date";
+              
+                refundHomeVM.Refunds = await _context.Refunds
+                    .Include(r => r.Customer)
+                    .Include(r => r.Employee)
+                    .Where(r => r.BranchId == user.BranchId && r.CreateDate > fromDate)
+                    .ToListAsync();
+                refundHomeVM.RefundOrders = await _context.RefundOrders
+                    .Include(ro => ro.Customer)
+                    .Where(ro => ro.BranchId == user.BranchId)
+                    .ToListAsync();
+                return View(refundHomeVM);
+            }
+            if(fromDate == null && toDate != null)
+            {
+                refundHomeVM.Refunds = await _context.Refunds
+                    .Include(r => r.Customer)
+                    .Include(r => r.Employee)
+                    .Where(r => r.BranchId == user.BranchId && r.CreateDate < toDate.Value.AddHours(23))
+                    .ToListAsync();
+                refundHomeVM.RefundOrders = await _context.RefundOrders
+                    .Include(ro => ro.Customer)
+                    .Where(ro => ro.BranchId == user.BranchId)
+                    .ToListAsync();
+                return View(refundHomeVM);
+            }
+            if(fromDate != null && toDate == null)
+            {
+                refundHomeVM.Refunds = await _context.Refunds
+                .Include(r => r.Customer)
+                .Include(r => r.Employee)
+                .Where(r => r.BranchId == user.BranchId && r.CreateDate > fromDate)
+                .ToListAsync();
+                refundHomeVM.RefundOrders = await _context.RefundOrders
+                    .Include(ro => ro.Customer)
+                    .Where(ro => ro.BranchId == user.BranchId)
+                    .ToListAsync();
+                return View(refundHomeVM);
+            }
+            if(fromDate != null && toDate != null)
+            {
+                refundHomeVM.Refunds = await _context.Refunds
+               .Include(r => r.Customer)
+               .Include(r => r.Employee)
+               .Where(r => r.BranchId == user.BranchId && r.CreateDate > fromDate && r.CreateDate < toDate.Value.AddHours(23))
+               .ToListAsync();
+                refundHomeVM.RefundOrders = await _context.RefundOrders
+                    .Include(ro => ro.Customer)
+                    .Where(ro => ro.BranchId == user.BranchId)
+                    .ToListAsync();
+                return View(refundHomeVM);
+            }
+            if(fromDate == null && toDate == null)
+            {
+                ViewBag.fromDate = DateTime.Today;
+                ViewBag.toDate = DateTime.Today.AddHours(23);             
+            }
+            
+
             refundHomeVM.Refunds = await _context.Refunds
                 .Include(r => r.Customer)
                 .Include(r => r.Employee)
-                .Where(r => r.BranchId == user.BranchId)
+                .Where(r => r.BranchId == user.BranchId && r.CreateDate > DateTime.Today)
                 .ToListAsync();
             refundHomeVM.RefundOrders = await _context.RefundOrders
                 .Include(ro => ro.Customer)
@@ -35,12 +100,32 @@ namespace ShopManagmentSystem.Controllers
                 .ToListAsync();
             return View(refundHomeVM);
         }
-        public async Task<IActionResult> Order(int? id, int? customerId, int? employeeId, int? saleId)
+        [HttpGet]
+        public async Task<IActionResult> RefundOrder(int? id, int? SaleId)
+        {
+            if (id == null || id == 0 || SaleId == null || SaleId == 0) return NotFound();
+            Product? product = await _context.Products
+                .Include(p=>p.ProductModel)
+                .Include(p=>p.ProductCategory)
+                .Include(p=>p.Brand)
+                .Include(p=>p.Color)
+                .FirstOrDefaultAsync(p => p.Id == id);
+            Sale? sale = await _context.Sales
+                .Include(s=>s.Customer)
+                .Include(s=>s.Employee)
+                .FirstOrDefaultAsync(s => s.Id == SaleId);
+            if(sale == null || product == null) return NotFound();
+            RefundOrderVM refundOrderVM = new();
+            refundOrderVM.Product = product;
+            refundOrderVM.Sale = sale;
+            return View(refundOrderVM);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> RefundOrder(RefundOrderVM refundOrderVM)
         {
             AppUser? user = await _userManager.FindByNameAsync(User.Identity.Name);
-            if (user == null) return NotFound();
-            if (id == null || id == 0 || customerId == null || customerId == 0
-                || employeeId == 0 || employeeId == null || saleId == 0 || saleId == null) return NotFound();
+            if (user == null || refundOrderVM == null) return NotFound();         
             if (!User.Identity.IsAuthenticated) return NotFound();
             Product? product = await _context.Products
                 .Include(p => p.SaleProducts)
@@ -48,17 +133,27 @@ namespace ShopManagmentSystem.Controllers
                 .Include(p => p.Color)
                 .Include(p => p.Brand)
                 .Include(p => p.ProductModel)
-                .Where(p=>p.BranchId == user.BranchId)
-                .FirstOrDefaultAsync(p => p.Id == id);
-            if (product == null) return NotFound();
-            if (!product.IsSold) return Ok("Bu mehsul artiq qeri qaytarilib !");
-            Customer? customer = await _context.Customers.FirstOrDefaultAsync(c => c.Id == customerId);
-            Employee? employee = await _context.Employees.FirstOrDefaultAsync(e => e.Id == employeeId);
-            Sale? sale = await _context.Sales.FirstOrDefaultAsync(s => s.Id == saleId);
-            if (product == null || customer == null || employee == null || sale == null) return NotFound();
+                .Where(p => p.BranchId == user.BranchId)
+                .FirstOrDefaultAsync(p => p.Id == refundOrderVM.ProductId);
+            Sale? sale = await _context.Sales
+                .Include(s=>s.SaleProducts)
+                .Include(s=>s.Employee)
+                .Include(s=>s.Customer)
+                .FirstOrDefaultAsync(s => s.Id == refundOrderVM.SaleId);
+            if (product == null || !product.IsSold || sale == null) return NotFound();
             List<RefundOrder> refundOrder = await _context.RefundOrders.ToListAsync();
-            if (refundOrder.Any(r => r.ProdId == id)) return Ok("Geri qaytarma siyahisinda movcuddur !");
+            if (refundOrder.Any(r => r.ProdId == product.Id)) return NotFound();
+            bool check = false;
+            foreach (var item in sale.SaleProducts)
+            {
+                if (item.ProductId == product.Id)
+                {
+                    check = true; break;
+                }
+            }
+            if (!check) return NotFound();
 
+            
             RefundOrder order = new();
             order.CreateDate = DateTime.Now;
             order.Brand = product.Brand.BrandName;
@@ -69,15 +164,19 @@ namespace ShopManagmentSystem.Controllers
             order.Color = product.Color.ColorName;
             order.BranchId = product.BranchId;
             order.Category = product.ProductCategory.Name;
-            order.CustomerId = customer.Id;
-            order.EmployeeName = employee.FullName;
+            order.CustomerId = sale.CustomerId;
+            order.EmployeeName = sale.Employee.FullName;
             order.BranchId = user.BranchId;
             order.SaleId = sale.Id;
+            order.Description = refundOrderVM.Description;
+            
+            
 
             _context.RefundOrders.Add(order);
             await _context.SaveChangesAsync();
+            TempData["Success"] = "ok";
 
-            return Ok($"Geri qaytarma siyahisina elave edildi ! x{_context.RefundOrders.Where(o => o.BranchId == user.BranchId).Count()}");
+            return RedirectToAction("details", "sale", new {id = sale.Id});
         }
         public async Task<IActionResult> Details(int? id)
         {

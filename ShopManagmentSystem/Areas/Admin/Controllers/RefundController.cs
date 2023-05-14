@@ -63,17 +63,20 @@ public class RefundController : Controller
         refund.EmployeeId = employee.Id;
         refund.TotalPrice = product.ProductModel.ModelPrice - refundVM.Discount;
         refund.TotalLoss = (product.ProductModel.ModelPrice - refundVM.Discount) - product.CostPrice;
+        refund.Description = refundOrder.Description;
         product.IsSold = false;
         customer.TotalCost = customer.TotalCost - refund.TotalPrice;
         Salary salary = new();
         salary.CreateDate = DateTime.Now;
         salary.Bonus = 0 - product.ProductCategory.Bonus;
         salary.EmployeeId = employee.Id;
+        salary.RefundId = refund.Id;
         
-        _context.Salaries.Add(salary);
         _context.Refunds.Add(refund);
+        _context.Salaries.Add(salary);
         _context.RefundOrders.Remove(refundOrder);
         await _context.SaveChangesAsync();
+        TempData["success"] = "ok";
 
         return RedirectToAction("Index");
     }

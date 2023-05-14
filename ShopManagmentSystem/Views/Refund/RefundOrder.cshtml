@@ -1,0 +1,41 @@
+﻿@model RefundOrderVM
+
+<div class="container">
+    <div class="row">
+        <h1>Making a refund form</h1>
+        <table class="table">
+            <tr>
+                <th> Brand </th>
+                <th> Name </th>
+                <th> Price </th>
+                <th> Color </th>
+                <th> Category </th>
+                <th> Series </th>
+                <th>Seller</th>
+                <th>Customer</th>
+            </tr>
+            <tr>
+                <td>@Model.Product.Brand.BrandName</td>
+                <td>@Model.Product.ProductModel.ModelName</td>
+                <td>@Model.Product.ProductModel.ModelPrice</td>
+                <td>@Model.Product.Color.ColorName</td>
+                <td>@Model.Product.ProductCategory.Name</td>
+                <td>@Model.Product.Series</td>
+                <td>@Model.Sale.Employee.FullName</td>
+                <td>@Model.Sale.Customer.FullName</td>
+
+            </tr>
+        </table>
+       <form method="post">
+           <input asp-for=SaleId type="hidden" value="@Model.Sale.Id"/>
+            <input asp-for=SaleId type="hidden" value="@Model.Sale.Id" />
+            <input asp-for=ProductId type="hidden" value="@Model.Product.Id" />
+            <div class="form-group">
+                <label >Reason for return<span class="text-danger">*</span></label>
+                <textarea asp-for="Description" class="form-control" rows="3"></textarea>
+                <span class="text-danger" asp-validation-for="Description"></span>
+            </div>
+            <button type="submit" class="btn btn-primary mt-2">Send for confirmation</button>
+       </form>
+    </div>
+</div>

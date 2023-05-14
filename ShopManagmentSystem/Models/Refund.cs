@@ -18,5 +18,6 @@ namespace ShopManagmentSystem.Models
         public Product? Product { get; set; }
         public int? SaleId { get; set; }
         public Sale? Sale { get; set; }
+        public string? Description { get; set; }
     }
 }

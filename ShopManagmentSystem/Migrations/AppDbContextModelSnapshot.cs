@@ -561,6 +561,9 @@ namespace ShopManagmentSystem.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<int?>("BrandId")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("CreateDate")
                         .HasColumnType("datetime2");
 
@@ -571,10 +574,17 @@ namespace ShopManagmentSystem.Migrations
                     b.Property<double>("ModelPrice")
                         .HasColumnType("float");
 
+                    b.Property<int?>("ProductCategoryId")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("UpdateDate")
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("BrandId");
+
+                    b.HasIndex("ProductCategoryId");
 
                     b.ToTable("ProductModels");
                 });
@@ -598,6 +608,9 @@ namespace ShopManagmentSystem.Migrations
 
                     b.Property<int>("CustomerId")
                         .HasColumnType("int");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<double>("Discount")
                         .HasColumnType("float");
@@ -663,6 +676,9 @@ namespace ShopManagmentSystem.Migrations
 
                     b.Property<int>("CustomerId")
                         .HasColumnType("int");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("EmployeeName")
                         .IsRequired()
@@ -927,6 +943,21 @@ namespace ShopManagmentSystem.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("ShopManagmentSystem.Models.ProductModel", b =>
+                {
+                    b.HasOne("ShopManagmentSystem.Models.Brand", "Brand")
+                        .WithMany("ProductModels")
+                        .HasForeignKey("BrandId");
+
+                    b.HasOne("ShopManagmentSystem.Models.ProductCategory", "ProductCategory")
+                        .WithMany("ProductModels")
+                        .HasForeignKey("ProductCategoryId");
+
+                    b.Navigation("Brand");
+
+                    b.Navigation("ProductCategory");
+                });
+
             modelBuilder.Entity("ShopManagmentSystem.Models.Refund", b =>
                 {
                     b.HasOne("ShopManagmentSystem.Models.Branch", "Branch")
@@ -1059,6 +1090,8 @@ namespace ShopManagmentSystem.Migrations
 
             modelBuilder.Entity("ShopManagmentSystem.Models.Brand", b =>
                 {
+                    b.Navigation("ProductModels");
+
                     b.Navigation("Products");
                 });
 
@@ -1092,6 +1125,8 @@ namespace ShopManagmentSystem.Migrations
 
             modelBuilder.Entity("ShopManagmentSystem.Models.ProductCategory", b =>
                 {
+                    b.Navigation("ProductModels");
+
                     b.Navigation("Products");
                 });
 
