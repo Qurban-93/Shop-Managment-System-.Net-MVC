@@ -80,7 +80,7 @@ namespace ShopManagmentSystem.Areas.Admin.Controllers
                 return View(_boxOfficeService.GetAll((DateTime)fromDate, user, (DateTime)toDate));
             }
 
-            List<BoxOfficeVM> boxOfficeVMs = _boxOfficeService.GetAll(user);
+            List<BoxOfficeVM> boxOfficeVMs = new();
 
 
             return View(boxOfficeVMs);

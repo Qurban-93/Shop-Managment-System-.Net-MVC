@@ -398,6 +398,107 @@ namespace ShopManagmentSystem.Migrations
                     b.ToTable("EmployeePostions");
                 });
 
+            modelBuilder.Entity("ShopManagmentSystem.Models.Expenses", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<double>("Amount")
+                        .HasColumnType("float");
+
+                    b.Property<DateTime>("CreateDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Descpription")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("ExpensesCategoryId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("UpdateDate")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ExpensesCategoryId");
+
+                    b.ToTable("Expensess");
+                });
+
+            modelBuilder.Entity("ShopManagmentSystem.Models.ExpensesCategory", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("CreateDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("UpdateDate")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ExpensesCategories");
+                });
+
+            modelBuilder.Entity("ShopManagmentSystem.Models.Money", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("BranchId")
+                        .HasColumnType("int");
+
+                    b.Property<double>("CashlessPayment")
+                        .HasColumnType("float");
+
+                    b.Property<DateTime>("CreateDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<double>("Discount")
+                        .HasColumnType("float");
+
+                    b.Property<int?>("ExpensesId")
+                        .HasColumnType("int");
+
+                    b.Property<double>("Incoming")
+                        .HasColumnType("float");
+
+                    b.Property<int?>("RefundId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("SaleId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("UpdateDate")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("BranchId");
+
+                    b.HasIndex("ExpensesId");
+
+                    b.HasIndex("RefundId");
+
+                    b.HasIndex("SaleId");
+
+                    b.ToTable("Moneys");
+                });
+
             modelBuilder.Entity("ShopManagmentSystem.Models.Order", b =>
                 {
                     b.Property<int>("Id")
@@ -540,15 +641,10 @@ namespace ShopManagmentSystem.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("ProductId")
-                        .HasColumnType("int");
-
                     b.Property<DateTime>("UpdateDate")
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("ProductId");
 
                     b.ToTable("ProductImages");
                 });
@@ -892,6 +988,42 @@ namespace ShopManagmentSystem.Migrations
                     b.Navigation("EmployeePostion");
                 });
 
+            modelBuilder.Entity("ShopManagmentSystem.Models.Expenses", b =>
+                {
+                    b.HasOne("ShopManagmentSystem.Models.ExpensesCategory", null)
+                        .WithMany("Expensess")
+                        .HasForeignKey("ExpensesCategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("ShopManagmentSystem.Models.Money", b =>
+                {
+                    b.HasOne("ShopManagmentSystem.Models.Branch", null)
+                        .WithMany("Money")
+                        .HasForeignKey("BranchId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ShopManagmentSystem.Models.Expenses", "Expenses")
+                        .WithMany()
+                        .HasForeignKey("ExpensesId");
+
+                    b.HasOne("ShopManagmentSystem.Models.Refund", "Refund")
+                        .WithMany()
+                        .HasForeignKey("RefundId");
+
+                    b.HasOne("ShopManagmentSystem.Models.Sale", "Sale")
+                        .WithMany()
+                        .HasForeignKey("SaleId");
+
+                    b.Navigation("Expenses");
+
+                    b.Navigation("Refund");
+
+                    b.Navigation("Sale");
+                });
+
             modelBuilder.Entity("ShopManagmentSystem.Models.Order", b =>
                 {
                     b.HasOne("ShopManagmentSystem.Models.Branch", null)
@@ -932,15 +1064,6 @@ namespace ShopManagmentSystem.Migrations
                     b.Navigation("ProductCategory");
 
                     b.Navigation("ProductModel");
-                });
-
-            modelBuilder.Entity("ShopManagmentSystem.Models.ProductImage", b =>
-                {
-                    b.HasOne("ShopManagmentSystem.Models.Product", null)
-                        .WithMany("Images")
-                        .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("ShopManagmentSystem.Models.ProductModel", b =>
@@ -1079,6 +1202,8 @@ namespace ShopManagmentSystem.Migrations
 
             modelBuilder.Entity("ShopManagmentSystem.Models.Branch", b =>
                 {
+                    b.Navigation("Money");
+
                     b.Navigation("MyProperty");
 
                     b.Navigation("Orders");
@@ -1114,10 +1239,13 @@ namespace ShopManagmentSystem.Migrations
                     b.Navigation("Sales");
                 });
 
+            modelBuilder.Entity("ShopManagmentSystem.Models.ExpensesCategory", b =>
+                {
+                    b.Navigation("Expensess");
+                });
+
             modelBuilder.Entity("ShopManagmentSystem.Models.Product", b =>
                 {
-                    b.Navigation("Images");
-
                     b.Navigation("Refunds");
 
                     b.Navigation("SaleProducts");

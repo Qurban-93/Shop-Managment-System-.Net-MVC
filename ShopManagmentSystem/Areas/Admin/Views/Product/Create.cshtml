@@ -3,18 +3,18 @@
 <div class="container">
     <div class="row">
         <h1>Product Create Form</h1>
-        <form method="get" enctype="multipart/form-data">
+        <form method="post" enctype="multipart/form-data">
             <div class="mb-3">
                 <label class="form-label">Choose Brand</label><span class="text-danger">*</span>
-                <select asp-for="BrandId" asp-items=ViewBag.Brands class="form-select prod_brand">
+                <select asp-items=ViewBag.Brands class="form-select prod_brand">
                 </select>
-                <span class="text-danger" asp-validation-for="BrandId"></span>
+                <span class="text-danger"></span>
             </div>
             <div class="mb-3">
                 <label class="form-label">Choose Category</label><span class="text-danger">*</span>
-                <select asp-for="ProductCategoryId" asp-items=ViewBag.ProductCategories class="form-select prod_category">
+                <select asp-items=ViewBag.ProductCategories class="form-select prod_category">
                 </select>
-                <span class="text-danger" asp-validation-for="ProductCategoryId"></span>
+                <span asp-validation-for="ProductCategoryId" class="text-danger"></span>
             </div>
             <div class="mb-3">
                 <label class="form-label">Product Model</label><span class="text-danger">*</span>
@@ -30,13 +30,15 @@
             </div>
             <div class="mb-3">
                 <label class="form-label">Cost Price</label><span class="text-danger">*</span>
-                <input asp-for=CostPrice class="form-control">
+                <input type="number" asp-for=CostPrice class="form-control">
                 <span class="text-danger" asp-validation-for="CostPrice"></span>
-            </div><div class="mb-3">
+            </div>
+            <div class="mb-3">
                 <label asp-for=Series class="form-label"></label><span class="text-danger">*</span>
                 <input asp-for=Series class="form-control">
                 <span class="text-danger" asp-validation-for="Series"></span>         
             </div>
+           
             <button class="btn btn-primary" type="submit">Add Product</button>
         </form>
     </div>

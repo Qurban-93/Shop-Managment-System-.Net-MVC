@@ -9,5 +9,6 @@
         public List<Order>? Orders { get; set; }
         public List<Employee>? MyProperty { get; set; }
         public List<Sale>? Sales { get; set; }
+        public List<Money>? Money { get; set; }
     }
 }

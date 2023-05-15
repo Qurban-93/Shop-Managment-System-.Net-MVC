@@ -70,8 +70,17 @@ public class RefundController : Controller
         salary.CreateDate = DateTime.Now;
         salary.Bonus = 0 - product.ProductCategory.Bonus;
         salary.EmployeeId = employee.Id;
-        salary.RefundId = refund.Id;
+        salary.Refund = refund;
+
+        Money money = new();
+        money.CreateDate = DateTime.Now;
+        money.Incoming = 0 - refund.TotalPrice;
+        money.CashlessPayment = 0 - refund.CashlessPayment;
+        money.Discount = 0 - refundVM.Discount;
+        money.BranchId = user.BranchId;
+        money.Refund = refund;
         
+        _context.Moneys.Add(money);
         _context.Refunds.Add(refund);
         _context.Salaries.Add(salary);
         _context.RefundOrders.Remove(refundOrder);

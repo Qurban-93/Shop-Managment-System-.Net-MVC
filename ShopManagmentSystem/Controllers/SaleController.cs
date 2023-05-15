@@ -297,8 +297,11 @@ public class SaleController : Controller
         List<Product> products = _context.Products
             .Include(p=>p.ProductModel).Include(p=>p.ProductCategory)
             .Where(p => prodId.Contains(p.Id)).ToList();
+
+
         List<SaleProducts> saleProductsList = new List<SaleProducts>();
         Salary salary = new();
+        Money money = new();
        
         foreach (Product product in products)
         {
@@ -322,6 +325,12 @@ public class SaleController : Controller
         salary.CreateDate = DateTime.Now;
         salary.EmployeeId = saleVM.EmployeeId;
         salary.Sale = newSale;
+        money.CreateDate = DateTime.Now;
+        money.CashlessPayment = newSale.CashlessPayment;
+        money.Discount = newSale.Discount;
+        money.Incoming = newSale.TotalPrice;
+        money.Sale = newSale;
+        money.BranchId = user.BranchId;
         
         
 
@@ -330,6 +339,8 @@ public class SaleController : Controller
         {
             item.IsSold = true;
         }
+
+        _context.Moneys.Add(money);
         _context.Salaries.Add(salary);
         _context.Sales.Add(newSale);
         _context.Orders.RemoveRange(orders);

@@ -1,4 +1,4 @@
-﻿@model IEnumerable<BoxOfficeVM>
+﻿@model List<Money>
 
 <div class="container">
     <div class="row">
@@ -31,38 +31,42 @@
                     <th scope="col">Date <i class="fa-regular fa-calendar"></i></th>
                     <th scope="col">Cashless Payment <i class="fa-regular fa-credit-card"></i></th>
                     <th scope="col">Discount <i class="fa-solid fa-percent"></i></th>
-                    <th class="text-danger" scope="col">Cashless Returns <i class="fa-regular fa-credit-card"></i></th>
-                    <th class="text-danger" scope="col">Returns <i class="fa-solid fa-rotate-left"></i></th>
                     <th scope="col">Incoming <i class="fa-solid fa-plus"></i></th>
+                    <th scope="col">Info</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach (BoxOfficeVM item in Model)
+                @foreach (Money item in Model)
                 {
                     <tr>
-                        <td>@item.Date.ToString("dd MMMM yyyy, hh:mm:ss")</td>
-                        <td>@item.CashlessPayment <i class="fa-solid fa-manat-sign"></i></td>
-                        <td>@item.Discount <i class="fa-solid fa-manat-sign"></i></td>
-                        <td class="text-danger">@item.CashlessReturns<i class="fa-solid fa-manat-sign"></i></td>
-                        <td class="text-danger">@item.Returns<i class="fa-solid fa-manat-sign"></i></td>
-                        <td>@item.TotalIncoming <i class="fa-solid fa-manat-sign"></i></td>
+                        <td>@item.CreateDate.ToString("dd MMMM yyyy, hh:mm:ss")</td>
+                        <td class="@(item.CashlessPayment < 0 ? "text-danger" : "")">@item.CashlessPayment <i class="fa-solid fa-manat-sign"></i></td>
+                        <td class="@(item.Discount < 0 ? "text-danger" : "")">@item.Discount <i class="fa-solid fa-manat-sign"></i></td>
+                        <td class="@(item.Incoming < 0 ? "text-danger" : "")">@item.Incoming <i class="fa-solid fa-manat-sign"></i></td>
+                        <td>
+                            @if (item.Sale != null)
+                            {
+                                <a asp-action="details" asp-controller="sale" asp-route-id="@item.Sale.Id"><i class="fa-sharp fa-solid fa-circle-info"></i></a>
+                            }
+                            else if (item.Refund != null)
+                            {
+                                <a asp-action="details" asp-controller="refund" asp-route-id="@item.Refund.Id"><i class="fa-sharp fa-solid fa-circle-info"></i></a>
+
+                            }
+                            else
+                            {
+                                <a asp-action="details" asp-controller="expenses" asp-route-id="@item.Expenses.Id"><i class="fa-sharp fa-solid fa-circle-info"></i></a>
+                            }
+                        </td>
                     </tr>
                 }
             </tbody>
             <tfoot>
-                <tr>                 
-                    <td>TOTAL</td>
-                    <td>@(Model.Sum(s => s.CashlessPayment)) <i class="fa-solid fa-manat-sign"></i></td>
-                    <td>@(Model.Sum(s => s.Discount)) <i class="fa-solid fa-manat-sign"></i></td>
-                    <td class="text-danger">@(Model.Sum(s => s.CashlessReturns))<i class="fa-solid fa-manat-sign"></i></td>
-                    <td class="text-danger">@(Model.Sum(s => s.Returns)) <i class="fa-solid fa-manat-sign"></i></td>
-                    <td>@(Model.Sum(s => s.TotalIncoming)) <i class="fa-solid fa-manat-sign"></i></td>
-                </tr>
                 <tr>
-                    <td style="font-size:30px;"> Remains :</td>
-                    <td style="font-size:30px;">
-                        @(Model.Sum(b => b.TotalIncoming) - Model.Sum(b => b.Returns))  <i class="fa-solid fa-manat-sign"></i>
-                    </td>
+                    <td>TOTAL</td>
+                    <td class="@((Model.Sum(s => s.CashlessPayment))<0?"text-danger":"")">@(Model.Sum(s => s.CashlessPayment)) <i class="fa-solid fa-manat-sign"></i></td>
+                    <td class="@((Model.Sum(s => s.Discount))<0?"text-danger":"")">@(Model.Sum(s => s.Discount)) <i class="fa-solid fa-manat-sign"></i></td>
+                    <td class="@((Model.Sum(s => s.Incoming))<0?"text-danger":"")">@(Model.Sum(s => s.Incoming)) <i class="fa-solid fa-manat-sign"></i></td>
                 </tr>
             </tfoot>
         </table>

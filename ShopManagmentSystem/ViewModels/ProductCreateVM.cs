@@ -15,6 +15,6 @@ namespace ShopManagmentSystem.ViewModels
         [Required]
         public int ColorId { get; set; }      
         [Required]
-        public int? ProductModelId { get; set; }
+        public int? ProductModelId { get; set; }     
     }
 }

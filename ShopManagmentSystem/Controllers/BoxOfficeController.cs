@@ -59,9 +59,9 @@ namespace ShopManagmentSystem.Controllers
                 ViewBag.toDate = DateTime.Today;
             }
 
-            List<BoxOfficeVM> boxOfficeVMs = _boxOfficeService.GetAll(user);
             
-            return View(boxOfficeVMs);
+            
+            return View(_boxOfficeService.GetAll(user));
         }
     }
 }

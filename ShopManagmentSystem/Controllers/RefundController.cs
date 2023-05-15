@@ -128,19 +128,26 @@ namespace ShopManagmentSystem.Controllers
             if (user == null || refundOrderVM == null) return NotFound();         
             if (!User.Identity.IsAuthenticated) return NotFound();
             Product? product = await _context.Products
-                .Include(p => p.SaleProducts)
-                .Include(p => p.ProductCategory)
-                .Include(p => p.Color)
-                .Include(p => p.Brand)
-                .Include(p => p.ProductModel)
-                .Where(p => p.BranchId == user.BranchId)
-                .FirstOrDefaultAsync(p => p.Id == refundOrderVM.ProductId);
+               .Include(p => p.SaleProducts)
+               .Include(p => p.ProductCategory)
+               .Include(p => p.Color)
+               .Include(p => p.Brand)
+               .Include(p => p.ProductModel)
+               .Where(p => p.BranchId == user.BranchId)
+               .FirstOrDefaultAsync(p => p.Id == refundOrderVM.ProductId);
             Sale? sale = await _context.Sales
-                .Include(s=>s.SaleProducts)
-                .Include(s=>s.Employee)
-                .Include(s=>s.Customer)
+                .Include(s => s.SaleProducts)
+                .Include(s => s.Employee)
+                .Include(s => s.Customer)
                 .FirstOrDefaultAsync(s => s.Id == refundOrderVM.SaleId);
             if (product == null || !product.IsSold || sale == null) return NotFound();
+            if (!ModelState.IsValid)
+            {                            
+                refundOrderVM.Product = product;
+                refundOrderVM.Sale = sale;
+                return View(refundOrderVM);
+            }
+           
             List<RefundOrder> refundOrder = await _context.RefundOrders.ToListAsync();
             if (refundOrder.Any(r => r.ProdId == product.Id)) return NotFound();
             bool check = false;
