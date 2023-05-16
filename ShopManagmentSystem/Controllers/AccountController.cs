@@ -105,7 +105,7 @@ namespace ShopManagmentSystem.Controllers
 
             await _signInManager.SignInAsync(user, false);
 
-            await _userManager.AddToRoleAsync(user, "User");
+            await _userManager.AddToRoleAsync(user, "Shop");
 
             return RedirectToAction(nameof(SuccesfulRegistered));
 

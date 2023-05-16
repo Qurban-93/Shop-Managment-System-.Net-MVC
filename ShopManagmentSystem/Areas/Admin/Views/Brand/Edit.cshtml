@@ -1,0 +1,13 @@
+﻿@model BrandEditVM
+
+<div class="bg-light rounded h-100 p-4">
+    <h3 class="mb-4">Employee Create</h3>
+    <form method="post">
+        <div class="mb-3">
+            <label asp-for=BrandName class="form-label">Full Name</label>
+            <input asp-for=BrandName class="form-control">
+            <span class="text-danger" asp-validation-for="BrandName"></span>
+        </div>
+        <button type="submit" class="btn btn-primary">Add Brand</button>
+    </form>
+</div>

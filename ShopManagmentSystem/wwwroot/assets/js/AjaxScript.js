@@ -7,12 +7,39 @@
     let orderDeleteBtn = $('.order_delete_Btn');
     let order = $(".order");
     let deleteBasketItem = $(".deleteBasketItem");
-    let selectModel = $(".prod_model");
-    let selectBrand = $(".prod_brand");
-    let selecCategory = $(".prod_category");
+    let deleteBrandBtn = $(".delete_brand");
 
-    console.log(selectModel, selectBrand, selecCategory)
+    console.log(deleteBrandBtn.parent().parent())
 
+    deleteBrandBtn.on("click", function (e) {
+        let id = $(e.currentTarget).data('id');
+        let parentElement = $(e.currentTarget).parent().parent();      
+        Swal.fire({
+            title: 'Are you sure delete Brand?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    method: "DELETE",
+                    url: "Brand/Delete/" + id,
+                    success: function (result) {
+                        parentElement.remove()
+                    }
+                });
+                Swal.fire(
+                    'Deleted!',
+                    'Your file has been deleted.',
+                    'success'
+                )
+
+            }
+        })
+    })
 
     orderDeleteBtn.on("click", function (e) {
         let id = $(e.currentTarget).data('id');
