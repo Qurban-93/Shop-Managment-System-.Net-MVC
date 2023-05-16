@@ -1,8 +1,10 @@
 ﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using ShopManagmentSystem.DAL;
 using ShopManagmentSystem.Models;
-using ShopManagmentSystem.ViewModels;
+using ShopManagmentSystem.ViewModels.CustomerVMs;
 using System.Text.RegularExpressions;
 
 namespace ShopManagmentSystem.Controllers
@@ -11,10 +13,12 @@ namespace ShopManagmentSystem.Controllers
     public class CustomerController : Controller
     {
         private readonly AppDbContext _context;
+        private readonly UserManager<AppUser> _userManager;
 
-        public CustomerController(AppDbContext context)
+        public CustomerController(AppDbContext context, UserManager<AppUser> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
 
         public IActionResult Index(string search)
@@ -70,6 +74,20 @@ namespace ShopManagmentSystem.Controllers
             await _context.SaveChangesAsync();
 
             return RedirectToAction(nameof(Index));
+        }
+
+        public async Task<IActionResult> Details(int? id)
+        {
+            AppUser? user = await _userManager.FindByNameAsync(User.Identity.Name);
+            if (user == null) return BadRequest();
+            if (id == null || id == 0) return NotFound();
+            Customer? customer = await _context.Customers
+                .Include(c=>c.Sales.Where(s=>s.BranchId== user.BranchId)).ThenInclude(s=>s.SaleProducts)
+                .Include(c=>c.Refunds.Where(r=>r.BranchId == user.BranchId)).ThenInclude(r=>r.Product).ThenInclude(p=>p.ProductModel)
+                .FirstOrDefaultAsync(c=>c.Id == id);
+            if (customer == null) return NotFound();
+
+            return View(customer);
         }
     }
 }

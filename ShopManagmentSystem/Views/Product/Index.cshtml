@@ -1,4 +1,4 @@
-﻿@model HomeVM
+﻿@model List<Product>
 
 <div class="home_index">
     <div class="container">
@@ -23,7 +23,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (Product product in Model.Products)
+                    @foreach (Product product in Model)
                     {
                         <tr>
                             <td>@product.Brand.BrandName</td>

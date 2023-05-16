@@ -11,7 +11,7 @@
         }
         <ul class="sale_details_list">
             <li>Customer : @Model.Sale.Customer.FullName</li>
-            <li>Sale Date : @Model.Sale.CreateDate.ToString("dd MMMM yyyy,hh:mm")</li>
+            <li>Sale Date : @Model.Sale.CreateDate.ToLocalTime().ToString("dd MMMM yyyy , hh:mm")</li>
             <li> Total Payed : @Model.Sale.TotalPrice <i class="fa-solid fa-manat-sign"></i></li>
             <li> Cashless Paymant : @Model.Sale.CashlessPayment <i class="fa-solid fa-manat-sign"></i></li>
             <li> Discount : @Model.Sale.Discount <i class="fa-solid fa-manat-sign"></i></li>

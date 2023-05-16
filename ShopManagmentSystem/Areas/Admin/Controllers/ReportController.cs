@@ -6,6 +6,7 @@ using ShopManagmentSystem.DAL;
 using ShopManagmentSystem.Models;
 using ShopManagmentSystem.Service;
 using ShopManagmentSystem.ViewModels;
+using ShopManagmentSystem.ViewModels.SalaryVMs;
 
 namespace ShopManagmentSystem.Areas.Admin.Controllers
 {
@@ -61,29 +62,111 @@ namespace ShopManagmentSystem.Areas.Admin.Controllers
             if (fromDate > toDate)
             {
                 ViewBag.Error = "Invalid Date Time";
+                List<ProfitVM> profitVMs= new();
+                foreach (var item in _context.Sales.ToList())
+                {
+                    ProfitVM profitVM = new();
+                    profitVM.Date = DateTime.Now;
+                    profitVM.Profit = item.TotalProfit;
+                    profitVMs.Add(profitVM);
+                }
 
-                return View(_boxOfficeService.GetAll(user));
+                foreach(var item in _context.Refunds.ToList())
+                {
+                    ProfitVM profitVM = new();
+                    profitVM.Date = DateTime.Now;
+                    profitVM.Profit = 0 - item.TotalLoss;
+                    profitVMs.Add(profitVM);
+                }
+
+                return View(profitVMs.OrderBy(p=>p.Date));
             }
             if (fromDate != null && toDate == null)
             {
-                return View(_boxOfficeService.GetAll((DateTime)fromDate, user));
+                List<ProfitVM> profitVMs = new();
+                foreach (var item in _context.Sales.Where(s=>s.CreateDate > fromDate).ToList())
+                {
+                    ProfitVM profitVM = new();
+                    profitVM.Date = DateTime.Now;
+                    profitVM.Profit = item.TotalProfit;
+                    profitVMs.Add(profitVM);
+                }
+
+                foreach (var item in _context.Refunds.Where(r => r.CreateDate > fromDate).ToList())
+                {
+                    ProfitVM profitVM = new();
+                    profitVM.Date = DateTime.Now;
+                    profitVM.Profit = 0 - item.TotalLoss;
+                    profitVMs.Add(profitVM);
+                }
+                return View(profitVMs.OrderBy(p=>p.Date));
             }
             if (fromDate == null && toDate != null)
             {
-                toDate.Value.AddHours(23).AddMinutes(59).AddSeconds(59);
+                List<ProfitVM> profitVMs = new();
+                foreach (var item in _context.Sales.Where(s => s.CreateDate < toDate).ToList())
+                {
+                    ProfitVM profitVM = new();
+                    profitVM.Date = DateTime.Now;
+                    profitVM.Profit = item.TotalProfit;
+                    profitVMs.Add(profitVM);
+                }
 
-                return View(_boxOfficeService.GetAll(user, (DateTime)toDate));
+                foreach (var item in _context.Refunds.Where(r => r.CreateDate < toDate).ToList())
+                {
+                    ProfitVM profitVM = new();
+                    profitVM.Date = DateTime.Now;
+                    profitVM.Profit = 0 - item.TotalLoss;
+                    profitVMs.Add(profitVM);
+                }
+                return View(profitVMs.OrderBy(p => p.Date));
             }
             if (fromDate != null && toDate != null)
             {
                 toDate = toDate.Value.AddHours(23).AddMinutes(59).AddSeconds(59);
-                return View(_boxOfficeService.GetAll((DateTime)fromDate, user, (DateTime)toDate));
-            }
+                List<ProfitVM> profitVMs = new();
+                foreach (var item in _context.Sales.Where(s => s.CreateDate > fromDate && s.CreateDate <toDate).ToList())
+                {
+                    ProfitVM profitVM = new();
+                    profitVM.Date = DateTime.Now;
+                    profitVM.Profit = item.TotalProfit;
+                    profitVMs.Add(profitVM);
+                }
 
-            List<BoxOfficeVM> boxOfficeVMs = new();
+                foreach (var item in _context.Refunds.Where(r => r.CreateDate > fromDate && r.CreateDate < toDate).ToList())
+                {
+                    ProfitVM profitVM = new();
+                    profitVM.Date = DateTime.Now;
+                    profitVM.Profit = 0 - item.TotalLoss;
+                    profitVMs.Add(profitVM);
+                }
+                return View(profitVMs.OrderBy(p => p.Date));              
+            }        
+            if (fromDate == null && toDate == null)
+            {
+                ViewBag.fromDate = DateTime.Today;
+                ViewBag.toDate = DateTime.Today.AddHours(23);
+                List<ProfitVM> profitVMs = new();
+                List<Sale> sales = await _context.Sales.Where(s => s.CreateDate > DateTime.Today).ToListAsync();
+                List<Refund> refunds = await _context.Refunds.Where(r => r.CreateDate > DateTime.Today).ToListAsync();
+                foreach (var item in sales)
+                {
+                    ProfitVM profitVM = new();
+                    profitVM.Date = DateTime.Now;
+                    profitVM.Profit = item.TotalProfit;
+                    profitVMs.Add(profitVM);
+                }
 
-
-            return View(boxOfficeVMs);
+                foreach (var item in refunds)
+                {
+                    ProfitVM profitVM = new();
+                    profitVM.Date = DateTime.Now;
+                    profitVM.Profit = 0 - item.TotalLoss;
+                    profitVMs.Add(profitVM);
+                }
+                return View(profitVMs.OrderBy(p => p.Date));
+            }  
+            return NotFound();
         }
     }
 }

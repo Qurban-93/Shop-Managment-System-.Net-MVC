@@ -11,6 +11,7 @@ namespace ShopManagmentSystem.Models
         public string? City { get; set; }
         public double? TotalCost { get; set; }
         public List<Sale>? Sales { get; set; }
+        public List<Refund>? Refunds { get; set; }
 
     }
 }

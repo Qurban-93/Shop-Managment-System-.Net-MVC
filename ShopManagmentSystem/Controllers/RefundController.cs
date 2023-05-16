@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ShopManagmentSystem.DAL;
 using ShopManagmentSystem.Models;
-using ShopManagmentSystem.ViewModels;
+using ShopManagmentSystem.ViewModels.RefundVMs;
 
 namespace ShopManagmentSystem.Controllers
 {

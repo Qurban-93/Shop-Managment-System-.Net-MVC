@@ -1,0 +1,66 @@
+﻿@model Customer
+
+<div class="container">
+    <div class="row">
+        <h1 class="text-success mb-3">Customer Details <i class="fa-solid fa-circle-info"></i></h1>
+        <ul style="list-style:none;">
+            <li >Full Name : @Model.FullName</li>
+            <li>Phone Number : @Model.PhoneNumber</li>
+            <li>Email : @Model.Email</li>
+            <li>Adrress : @Model.Address</li>
+            <li>Total Spend : @Model.TotalCost <i class="fa-solid fa-manat-sign"></i></li>
+        </ul>
+        <h5 class="text-warning">Purchases</h5>
+        @if (Model.Sales.Count > 0)
+        {
+            <table class="table">
+                <tbody>
+                    <tr>
+                        <th>Date</th>
+                        <th>Products Count</th>
+                        <th>Discount</th>
+                        <th>Cashless Payment</th>
+                        <th>Total Spend</th>
+                    </tr>
+                    @foreach (var item in Model.Sales)
+                    {
+                        <tr>
+                            <td>@item.CreateDate.ToLocalTime().ToString("dd MMMM yyyy , hh:mm")</td>
+                            <td>@item.SaleProducts.Count</td>
+                            <td>@item.Discount <i class="fa-solid fa-manat-sign"></i></td>
+                            <td>@item.CashlessPayment <i class="fa-solid fa-manat-sign"></i></td>
+                            <td>@item.TotalPrice <i class="fa-solid fa-manat-sign"></i></td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+        else
+        {
+            <h3 class="text-warning"> There are no purchases at the moment in this branch ! <i class="fa-regular fa-face-frown"></i> </h3>
+        }
+        @if (Model.Refunds.Count > 0)
+        {
+            <h5 class="text-danger" >Returns</h5>
+            <table class="table">
+                <tbody>
+                    <tr>
+                        <th>Date</th>
+                        <th>Product Name</th>
+                        <th>Product Series</th>
+                        <th>Total Price</th>
+                    </tr>
+                    @foreach (var item in Model.Refunds)
+                    {
+                        <tr>
+                            <td>@item.CreateDate.ToString("dd MMMM yyyy , hh:mm")</td>
+                            <td>@item.Product.ProductModel.ModelName</td>
+                            <td>@item.Product.Series</td>
+                            <td>@item.TotalPrice <i class="fa-solid fa-manat-sign"></i></td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+    </div>
+</div>

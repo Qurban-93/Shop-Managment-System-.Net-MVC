@@ -5,6 +5,12 @@
     <div class="container">
         <div class="row">
             <h1 class="text-center">Sales List</h1>
+            @if (TempData["Success"] != null)
+            {
+                <div id="alert_sale" class="alert alert-success text-center" role="alert">
+                    The sale is realized!
+                </div>
+            }
             <form method="get">
                 <div class="mb-3 col-lg-8 d-flex search_product">                 
                     <div >
@@ -36,8 +42,8 @@
                 <tbody>
                     @foreach (Sale sale in Model)
                     {
-                        <tr>    
-                            <td>@sale.CreateDate.ToString("dd MMMM yyyy, hh:mm:ss")</td>
+                        <tr>
+                            <td>@sale.CreateDate.ToLocalTime().ToString("dd MMMM yyyy , hh:mm:ss")</td>
                             <td>@sale.Customer?.FullName</td>
                             <td>@sale.Discount <i class="fa-solid fa-manat-sign"></i></td>
                             <td>@sale.CashlessPayment <i class="fa-solid fa-manat-sign"></i></td>

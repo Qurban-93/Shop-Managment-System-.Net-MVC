@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using ShopManagmentSystem.DAL;
 using ShopManagmentSystem.Models;
-using ShopManagmentSystem.ViewModels;
+using ShopManagmentSystem.ViewModels.SaleVMs;
 
 namespace ShopManagmentSystem.Controllers;
 
@@ -24,7 +24,7 @@ public class SaleController : Controller
     }
     public async Task<IActionResult> Index(string search, DateTime? fromDate, DateTime? toDate)
     {
-        if (!User.Identity.IsAuthenticated) return NotFound();
+        if (!User.Identity.IsAuthenticated) return RedirectToAction("Login", "Account");
 
         AppUser user = await _userManager.FindByNameAsync(User.Identity.Name);
 
@@ -347,7 +347,7 @@ public class SaleController : Controller
         await _context.SaveChangesAsync();
         TempData["Success"] = "ok";
 
-        return RedirectToAction("index", "home");
+        return RedirectToAction("index", "sale");
     }
     public async Task<IActionResult> Details(int? id)
     {

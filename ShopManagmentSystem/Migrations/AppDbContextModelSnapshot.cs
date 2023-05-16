@@ -242,7 +242,7 @@ namespace ShopManagmentSystem.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Branches");
+                    b.ToTable("Branches", (string)null);
                 });
 
             modelBuilder.Entity("ShopManagmentSystem.Models.Brand", b =>
@@ -265,7 +265,7 @@ namespace ShopManagmentSystem.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Brands");
+                    b.ToTable("Brands", (string)null);
                 });
 
             modelBuilder.Entity("ShopManagmentSystem.Models.Color", b =>
@@ -288,7 +288,7 @@ namespace ShopManagmentSystem.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Colors");
+                    b.ToTable("Colors", (string)null);
                 });
 
             modelBuilder.Entity("ShopManagmentSystem.Models.Customer", b =>
@@ -326,7 +326,7 @@ namespace ShopManagmentSystem.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Customers");
+                    b.ToTable("Customers", (string)null);
                 });
 
             modelBuilder.Entity("ShopManagmentSystem.Models.Employee", b =>
@@ -337,8 +337,8 @@ namespace ShopManagmentSystem.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<byte>("Age")
-                        .HasColumnType("tinyint");
+                    b.Property<DateTime>("BirthDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<int?>("BranchId")
                         .HasColumnType("int");
@@ -369,7 +369,7 @@ namespace ShopManagmentSystem.Migrations
 
                     b.HasIndex("EmployeePostionId");
 
-                    b.ToTable("Employees");
+                    b.ToTable("Employees", (string)null);
                 });
 
             modelBuilder.Entity("ShopManagmentSystem.Models.EmployeePostion", b =>
@@ -395,7 +395,7 @@ namespace ShopManagmentSystem.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("EmployeePostions");
+                    b.ToTable("EmployeePostions", (string)null);
                 });
 
             modelBuilder.Entity("ShopManagmentSystem.Models.Expenses", b =>
@@ -425,7 +425,7 @@ namespace ShopManagmentSystem.Migrations
 
                     b.HasIndex("ExpensesCategoryId");
 
-                    b.ToTable("Expensess");
+                    b.ToTable("Expensess", (string)null);
                 });
 
             modelBuilder.Entity("ShopManagmentSystem.Models.ExpensesCategory", b =>
@@ -448,7 +448,7 @@ namespace ShopManagmentSystem.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("ExpensesCategories");
+                    b.ToTable("ExpensesCategories", (string)null);
                 });
 
             modelBuilder.Entity("ShopManagmentSystem.Models.Money", b =>
@@ -496,7 +496,7 @@ namespace ShopManagmentSystem.Migrations
 
                     b.HasIndex("SaleId");
 
-                    b.ToTable("Moneys");
+                    b.ToTable("Moneys", (string)null);
                 });
 
             modelBuilder.Entity("ShopManagmentSystem.Models.Order", b =>
@@ -540,7 +540,7 @@ namespace ShopManagmentSystem.Migrations
 
                     b.HasIndex("BranchId");
 
-                    b.ToTable("Orders");
+                    b.ToTable("Orders", (string)null);
                 });
 
             modelBuilder.Entity("ShopManagmentSystem.Models.Product", b =>
@@ -597,7 +597,7 @@ namespace ShopManagmentSystem.Migrations
 
                     b.HasIndex("ProductModelId");
 
-                    b.ToTable("Products");
+                    b.ToTable("Products", (string)null);
                 });
 
             modelBuilder.Entity("ShopManagmentSystem.Models.ProductCategory", b =>
@@ -623,7 +623,7 @@ namespace ShopManagmentSystem.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("ProductCategories");
+                    b.ToTable("ProductCategories", (string)null);
                 });
 
             modelBuilder.Entity("ShopManagmentSystem.Models.ProductImage", b =>
@@ -646,7 +646,7 @@ namespace ShopManagmentSystem.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("ProductImages");
+                    b.ToTable("ProductImages", (string)null);
                 });
 
             modelBuilder.Entity("ShopManagmentSystem.Models.ProductModel", b =>
@@ -682,7 +682,7 @@ namespace ShopManagmentSystem.Migrations
 
                     b.HasIndex("ProductCategoryId");
 
-                    b.ToTable("ProductModels");
+                    b.ToTable("ProductModels", (string)null);
                 });
 
             modelBuilder.Entity("ShopManagmentSystem.Models.Refund", b =>
@@ -741,7 +741,7 @@ namespace ShopManagmentSystem.Migrations
 
                     b.HasIndex("SaleId");
 
-                    b.ToTable("Refunds");
+                    b.ToTable("Refunds", (string)null);
                 });
 
             modelBuilder.Entity("ShopManagmentSystem.Models.RefundOrder", b =>
@@ -804,7 +804,7 @@ namespace ShopManagmentSystem.Migrations
 
                     b.HasIndex("CustomerId");
 
-                    b.ToTable("RefundOrders");
+                    b.ToTable("RefundOrders", (string)null);
                 });
 
             modelBuilder.Entity("ShopManagmentSystem.Models.Salary", b =>
@@ -841,7 +841,7 @@ namespace ShopManagmentSystem.Migrations
 
                     b.HasIndex("SaleId");
 
-                    b.ToTable("Salaries");
+                    b.ToTable("Salaries", (string)null);
                 });
 
             modelBuilder.Entity("ShopManagmentSystem.Models.Sale", b =>
@@ -887,7 +887,7 @@ namespace ShopManagmentSystem.Migrations
 
                     b.HasIndex("EmployeeId");
 
-                    b.ToTable("Sales");
+                    b.ToTable("Sales", (string)null);
                 });
 
             modelBuilder.Entity("ShopManagmentSystem.Models.SaleProducts", b =>
@@ -910,7 +910,7 @@ namespace ShopManagmentSystem.Migrations
 
                     b.HasIndex("SaleId");
 
-                    b.ToTable("SaleProducts");
+                    b.ToTable("SaleProducts", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -977,13 +977,15 @@ namespace ShopManagmentSystem.Migrations
 
             modelBuilder.Entity("ShopManagmentSystem.Models.Employee", b =>
                 {
-                    b.HasOne("ShopManagmentSystem.Models.Branch", null)
-                        .WithMany("MyProperty")
+                    b.HasOne("ShopManagmentSystem.Models.Branch", "Branch")
+                        .WithMany("Employee")
                         .HasForeignKey("BranchId");
 
                     b.HasOne("ShopManagmentSystem.Models.EmployeePostion", "EmployeePostion")
                         .WithMany()
                         .HasForeignKey("EmployeePostionId");
+
+                    b.Navigation("Branch");
 
                     b.Navigation("EmployeePostion");
                 });
@@ -1090,7 +1092,7 @@ namespace ShopManagmentSystem.Migrations
                         .IsRequired();
 
                     b.HasOne("ShopManagmentSystem.Models.Customer", "Customer")
-                        .WithMany()
+                        .WithMany("Refunds")
                         .HasForeignKey("CustomerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -1202,9 +1204,9 @@ namespace ShopManagmentSystem.Migrations
 
             modelBuilder.Entity("ShopManagmentSystem.Models.Branch", b =>
                 {
-                    b.Navigation("Money");
+                    b.Navigation("Employee");
 
-                    b.Navigation("MyProperty");
+                    b.Navigation("Money");
 
                     b.Navigation("Orders");
 
@@ -1227,6 +1229,8 @@ namespace ShopManagmentSystem.Migrations
 
             modelBuilder.Entity("ShopManagmentSystem.Models.Customer", b =>
                 {
+                    b.Navigation("Refunds");
+
                     b.Navigation("Sales");
                 });
 

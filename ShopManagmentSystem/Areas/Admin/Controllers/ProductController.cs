@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using ShopManagmentSystem.DAL;
 using ShopManagmentSystem.Extensions;
 using ShopManagmentSystem.Models;
-using ShopManagmentSystem.ViewModels;
+using ShopManagmentSystem.ViewModels.ProductVMs;
 
 namespace ShopManagmentSystem.Areas.Admin.Controllers
 {

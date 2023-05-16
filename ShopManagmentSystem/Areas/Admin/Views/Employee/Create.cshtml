@@ -1,0 +1,38 @@
+﻿@model EmployeeCreateVM
+
+<div class="bg-light rounded h-100 p-4">
+    <h3 class="mb-4">Employee Create</h3>
+    <form method="post" enctype="multipart/form-data">
+        <div class="mb-3">
+            <label asp-for=FullName class="form-label">Full Name</label>
+            <input asp-for=FullName class="form-control">
+            <span class="text-danger" asp-validation-for="FullName"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="BirthDate" class="form-label"></label>
+            <input type="date" asp-for="BirthDate" class=" form-control">
+            <span class="text-danger" asp-validation-for="BirthDate"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="Number" class="form-label">Phone Number</label>
+            <input asp-for="Number" class=" form-control" placeholder="Example +994123456789">
+            <span class="text-danger" asp-validation-for="Number"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="EmployeePositionId" class="form-label"></label>
+            <select asp-for="EmployeePositionId" asp-items=ViewBag.Position class="form-select">
+            </select>
+            <span class="text-danger" asp-validation-for="EmployeePositionId"></span>
+        </div>   
+        <div class="mb-3">
+            <label asp-for="BranchId" class="form-label">Select Branch</label>
+            <select asp-for="BranchId" asp-items=ViewBag.Branch class="form-select">
+            </select>
+            <span class="text-danger" asp-validation-for="BranchId"></span>
+        </div>
+        <button type="submit" class="btn btn-primary">Add Employee</button>
+    </form>
+</div>
+
+
+

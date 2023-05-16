@@ -8,7 +8,7 @@
         </div>
         <ul class="sale_details_list">
             <li>Customer : @Model.Customer.FullName</li>
-            <li>Return Date : @Model.CreateDate.ToString("dd MMMM yyyy,hh:mm")</li>
+            <li>Return Date : @Model.CreateDate.ToLocalTime().ToString("dd MMMM yyyy , hh:mm")</li>
             <li> Total Payed : @Model.TotalPrice <i class="fa-solid fa-manat-sign"></i></li>
             <li> Cashless Paymant : @Model.CashlessPayment <i class="fa-solid fa-manat-sign"></i></li>
             <li> Discount : @Model.Discount <i class="fa-solid fa-manat-sign"></i></li>

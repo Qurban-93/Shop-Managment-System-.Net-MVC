@@ -22,8 +22,7 @@ namespace ShopManagmentSystem.Controllers
         {
             if (!User.Identity.IsAuthenticated) return RedirectToAction("Login", "Account");
             AppUser user = await _userManager.FindByNameAsync(User.Identity.Name);
-            if (user == null) return NotFound();
-            HomeVM home = new HomeVM();
+            if (user == null) return NotFound();           
             List<Product> products = new();
             var query = _appDbContext.Products
                 .Include(p => p.ProductCategory)
@@ -59,12 +58,10 @@ namespace ShopManagmentSystem.Controllers
                     }
                 }
 
-            }
-
-            home.Products = products;
+            }           
             ViewBag.SearchValue = search;
 
-            return View(home);
+            return View(products);
         }
     }
 }

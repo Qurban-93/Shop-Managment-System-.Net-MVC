@@ -1,0 +1,36 @@
+﻿@model List<Employee>
+
+<div class="container">
+    <div class="row">
+        <h1 class="text-center">Employee List</h1>
+        <div class="col-lg-3"><a class="btn btn-primary" asp-action="create">Add New Employee</a></div>
+        <table class="table">
+            <tbody>
+                <tr>
+                    <th class="text-primary">Full Name</th>
+                    <th class="text-primary">Position</th>
+                    <th class="text-primary">Number</th>
+                    <th class="text-primary">Branch</th>
+                    <th class="text-primary">Fix Salary</th>
+                    <th class="text-primary">Settings</th>
+                </tr>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.FullName</td>
+                        <td>@item.EmployeePostion.PositionName</td>
+                        <td>@item.Number</td>
+                        <td>@item.Branch.Name</td>
+                        <td>@item.EmployeePostion.FixSalary  <i class="fa-solid fa-manat-sign"></i></td>
+                        <td>
+                            <a class="text-warning" style="margin-right:20px; font-size:20px;" asp-action="edit" asp-route-id="@item.Id"><i class="fa-solid fa-pen-to-square"></i></a>
+                            <a class="text-danger" style="font-size:20px;" asp-action="delete" asp-route-id="@item.Id"><i class="fa-regular fa-trash-can"></i></a>
+                        </td>
+                        
+
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
