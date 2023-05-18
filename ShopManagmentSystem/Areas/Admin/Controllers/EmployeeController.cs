@@ -26,6 +26,7 @@ namespace ShopManagmentSystem.Areas.Admin.Controllers
             List<Employee> employees = _context.Employees
                 .Include(e => e.EmployeePostion)
                 .Include(e => e.Branch)
+                .OrderBy(e=>e.BranchId)
                 .ToList();
             return View(employees);
         }
@@ -42,6 +43,11 @@ namespace ShopManagmentSystem.Areas.Admin.Controllers
             ViewBag.Position = new SelectList(_context.EmployeePostions.ToList(), "Id", "PositionName");
             ViewBag.Branch = new SelectList(_context.Branches.ToList(), "Id", "Name");
             if (!ModelState.IsValid) return View();
+            if(_context.Employees.Any(e=>e.FullName.Trim().ToLower()== createVM.FullName.Trim().ToLower()))
+            {
+                ModelState.AddModelError("FullName", "Bu adla employee movcuddur !Elave melumat daxil edin !");
+                return View();
+            }
             string pattern = @"^(\+994)(50|51|55|70|77|10|99)(\d{7})$";
             if (!Regex.IsMatch(createVM.Number, pattern))
             {
@@ -69,14 +75,52 @@ namespace ShopManagmentSystem.Areas.Admin.Controllers
 
             _context.Employees.Add(newEmployee);
             await _context.SaveChangesAsync();
+            TempData["Create"] = true;
             return RedirectToAction(nameof(Index));
         }
-
-        public IActionResult Edit(int? id)
+        public async Task<IActionResult> Edit(int? id)
         {
-            return View();
-        }
+            ViewBag.Branch = new SelectList(_context.Branches.ToList(),"Id","Name");
+            ViewBag.Position = new SelectList(_context.EmployeePostions.ToList(), "Id", "PositionName");
+            if (id == 0 || id == null) return NotFound();
+            Employee? employee = await _context.Employees.FirstOrDefaultAsync(e=>e.Id == id);
+            if (employee == null) return NotFound();
+            EmployeeEditVM editVM = new()
+            {
+                FullName = employee.FullName,
+                Number = employee.Number,
+                BirthDate = employee.BirthDate, 
+                BranchId = (int)employee.BranchId,
+                EmployeePositionId = employee.EmployeePostionId
 
+            };
+            return View(editVM);
+        }
+        [HttpPost]
+        public async Task<IActionResult> Edit(int? id,EmployeeEditVM editVM)
+        {
+            ViewBag.Branch = new SelectList(_context.Branches.ToList(), "Id", "Name");
+            ViewBag.Position = new SelectList(_context.EmployeePostions.ToList(), "Id", "PositionName");
+            if (!ModelState.IsValid) return View();
+            if(id == 0 || id == null) return NotFound(); 
+            if(_context.Employees.Any(e=>e.FullName.Trim().ToLower() == editVM.FullName.Trim().ToLower() && e.Id != id))
+            {
+                ModelState.AddModelError("FullName", "Bu adla employee movcuddur! Elave melumat daxil edin.");
+                return View();
+            }
+            Employee? employee = await _context.Employees.FirstOrDefaultAsync(e=>e.Id == id);
+            if (employee == null) return NotFound();
+            employee.UpdateDate = DateTime.Now;
+            employee.FullName= editVM.FullName;
+            employee.Number = editVM.Number;
+            employee.BirthDate = editVM.BirthDate;
+            employee.BranchId = editVM.BranchId;
+            employee.EmployeePostionId = editVM.EmployeePositionId;
+            await _context.SaveChangesAsync();
+            TempData["Edit"] = true;
+
+            return RedirectToAction(nameof(Index));
+        }
         [HttpDelete]
         public async Task<IActionResult> Delete(int? id)
         {

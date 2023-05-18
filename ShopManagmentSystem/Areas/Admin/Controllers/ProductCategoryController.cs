@@ -10,12 +10,10 @@ namespace ShopManagmentSystem.Areas.Admin.Controllers
     public class ProductCategoryController : Controller
     {
         private readonly AppDbContext _context;
-
         public ProductCategoryController(AppDbContext context)
         {
             _context = context;
         }
-
         public IActionResult Index()
         {
             return View(_context.ProductCategories.ToList());

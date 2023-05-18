@@ -3,7 +3,6 @@
     let countBasket = parseInt($(".count").html());
     let totalPrice = parseInt($(".total_price").html());
     let itemCount = parseInt($(".item_count").html());
-    let refundNotif = $("#alert_refund")
     let orderDeleteBtn = $('.order_delete_Btn');
     let order = $(".order");
     let deleteBasketItem = $(".deleteBasketItem");
@@ -11,7 +10,47 @@
     let deleteProdCategory = $(".delete_prod_category");
     let deletePosition = $(".delete_position");
     let deleteEmployee = $(".delete_employee");
+    let deleteProdModel = $(".delete_prod_model");
 
+
+    deleteProdModel.on("click", function(e){
+        let id = $(e.currentTarget).data('id');
+        let parentElement = $(e.currentTarget).parent().parent();
+        Swal.fire({
+            title: 'Are you sure delete Model?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    method: "DELETE",
+                    url: "ProductModel/Delete/" + id,
+                    success: function (result) {
+                        console.log(result)
+                        parentElement.remove()
+                        Swal.fire(
+                            'Deleted!',
+                            'Your file has been deleted.',
+                            'success'
+                        )
+                    },
+                    error: function () {
+                        Swal.fire(
+                            'Not Deleted!',
+                            'Your file has been not deleted.',
+                            'error'
+                        )
+                    }
+                });
+
+
+            }
+        })
+    });
 
     deleteEmployee.on("click", function (e) {
         let id = $(e.currentTarget).data('id');
@@ -52,8 +91,6 @@
             }
         })
     })
-
-
 
     deletePosition.on("click", function (e) {
         let id = $(e.currentTarget).data('id');

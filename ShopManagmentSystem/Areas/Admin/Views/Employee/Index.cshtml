@@ -4,7 +4,7 @@
     <div class="row">
         <h1 style="margin-bottom:20px;margin-top:20px;" class="text-primary">Employee List</h1>
         <div style="margin-bottom:20px;" class="col-lg-3"><a class="btn btn-primary" asp-action="create">Add New Employee</a></div>
-        @if (TempData["Success"] != null)
+        @if (TempData["Create"] != null)
         {
             <div style="transition:all 0.5s ease" id="alert_refund" class="alert alert-warning" role="alert">
                 Employee Elave Olundu !

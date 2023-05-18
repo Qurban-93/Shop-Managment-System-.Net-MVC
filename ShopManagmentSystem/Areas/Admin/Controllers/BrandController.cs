@@ -10,13 +10,10 @@ namespace ShopManagmentSystem.Areas.Admin.Controllers
     public class BrandController : Controller
     {
         private readonly AppDbContext _context;
-
-
         public BrandController(AppDbContext context)
         {
             _context = context;
         }
-
         public IActionResult Index()
         {
             return View(_context.Brands.ToList());

@@ -1,0 +1,36 @@
+﻿@model ProductModelEditVM
+
+
+<div class="container">
+    <div class="row">
+        <h1 class="text-primary">Product Model Update </h1>
+        <form method="post">
+            <div class="mb-3">
+                <label class="form-label text-primary">Choose Brand</label><span class="text-danger">*</span>
+                <select asp-for=BrandId asp-items=ViewBag.Brands class="form-select prod_brand">
+                </select>
+                <span asp-validation-for=BrandId class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label class="form-label text-primary">Choose Category</label><span class="text-danger">*</span>
+                <select asp-for=ProductCategoryId asp-items=ViewBag.ProductCategories class="form-select prod_category">
+                </select>
+                <span asp-validation-for="ProductCategoryId" class="text-danger"></span>
+            </div>         
+            <div class="mb-3">
+                <label class="form-label text-primary">Model Name</label><span class="text-danger">*</span>
+                <input type="text" asp-for=ModelName class="form-control">
+                <span class="text-danger" asp-validation-for="ModelName"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for=ModelPrice class="form-label text-primary">Model Price</label><span class="text-danger">*</span>
+                <input type="number" asp-for=ModelPrice class="form-control">
+                <span class="text-danger" asp-validation-for="ModelPrice"></span>
+            </div>
+
+            <button class="btn btn-primary" type="submit">Update Model</button>
+            <a class="btn btn-primary" asp-action="index">Go Back</a>
+
+        </form>
+    </div>
+</div>

@@ -15,10 +15,8 @@ namespace ShopManagmentSystem.Areas.Admin.Controllers
         }
 
         public IActionResult Index()
-        {
-            SettingsVM settingsVM = new();
-            settingsVM.Brands = _context.Brands.ToList();
-            return View(settingsVM);
+        {        
+            return View();
         }
     }
 }
