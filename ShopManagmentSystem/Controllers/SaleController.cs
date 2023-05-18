@@ -157,7 +157,7 @@ public class SaleController : Controller
             .Where(s => s.CreateDate > DateTime.Today && s.BranchId == user.BranchId)        
             .ToListAsync());
     }
-    [HttpPost]
+    [HttpDelete]
     public async Task<IActionResult> Delete(int? id)
     {
         if (!User.Identity.IsAuthenticated) return BadRequest();

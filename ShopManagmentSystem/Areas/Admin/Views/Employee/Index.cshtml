@@ -2,8 +2,20 @@
 
 <div class="container">
     <div class="row">
-        <h1 class="text-center">Employee List</h1>
-        <div class="col-lg-3"><a class="btn btn-primary" asp-action="create">Add New Employee</a></div>
+        <h1 style="margin-bottom:20px;margin-top:20px;" class="text-primary">Employee List</h1>
+        <div style="margin-bottom:20px;" class="col-lg-3"><a class="btn btn-primary" asp-action="create">Add New Employee</a></div>
+        @if (TempData["Success"] != null)
+        {
+            <div style="transition:all 0.5s ease" id="alert_refund" class="alert alert-warning" role="alert">
+                Employee Elave Olundu !
+            </div>
+        }
+        @if (TempData["Edit"] != null)
+        {
+            <div style="transition:all 0.5s ease" id="alert_refund" class="alert alert-warning" role="alert">
+                Deyisiklik qeyde alindi !
+            </div>
+        }
         <table class="table">
             <tbody>
                 <tr>
@@ -24,7 +36,7 @@
                         <td>@item.EmployeePostion.FixSalary  <i class="fa-solid fa-manat-sign"></i></td>
                         <td>
                             <a class="text-warning" style="margin-right:20px; font-size:20px;" asp-action="edit" asp-route-id="@item.Id"><i class="fa-solid fa-pen-to-square"></i></a>
-                            <a class="text-danger" style="font-size:20px;" asp-action="delete" asp-route-id="@item.Id"><i class="fa-regular fa-trash-can"></i></a>
+                            <a class="text-danger delete_employee" data-id="@item.Id" style="font-size:20px;cursor:pointer;" ><i class="fa-regular fa-trash-can"></i></a>
                         </td>
                         
 

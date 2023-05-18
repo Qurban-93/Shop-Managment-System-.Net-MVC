@@ -1,0 +1,20 @@
+﻿@model ProductCategoryEditVM
+
+<div class="bg-light rounded h-100 p-4">
+    <h3 class="mb-4 text-primary">Product Category Update</h3>
+    <form method="post">
+        <div class="mb-3">
+            <label asp-for=Name class="form-label">Full Name</label>
+            <input asp-for=Name class="form-control">
+            <span class="text-danger" asp-validation-for="Name"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for=Bonus class="form-label">Bonus </label>
+            <input asp-for=Bonus class="form-control" type="number">
+            <span class="text-danger" asp-validation-for="Bonus"></span>
+        </div>
+        <button type="submit" class="btn btn-primary">Update Category</button>
+        <a class="btn btn-primary" asp-action="index">Go Back</a>
+
+    </form>
+</div>

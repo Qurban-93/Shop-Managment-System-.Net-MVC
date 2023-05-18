@@ -76,5 +76,16 @@ namespace ShopManagmentSystem.Areas.Admin.Controllers
         {
             return View();
         }
+
+        [HttpDelete]
+        public async Task<IActionResult> Delete(int? id)
+        {
+            if (id == null || id == 0) return NotFound();
+            Employee? employee = await _context.Employees.FirstOrDefaultAsync(e=>e.Id == id);
+            if (employee == null) return NotFound();
+            _context.Employees.Remove(employee);
+            await _context.SaveChangesAsync();
+            return Ok();
+        }
     }
 }

@@ -73,7 +73,7 @@ namespace ShopManagmentSystem.Areas.Admin.Controllers
             return RedirectToAction(nameof(Index));
             
         }
-
+        [HttpDelete]
         public async Task<IActionResult> Delete(int? id)
         {
             if(id == null || id == 0) return NotFound();

@@ -37,8 +37,6 @@
             </a>
             <span class="tooltip">Products</span>
         </li>
-
-
         <li>
             <a asp-action="index" asp-controller="employee">
                 <i class="fa-solid fa-person-digging"></i>
@@ -46,11 +44,17 @@
             </a>
             <span class="tooltip">Employee</span>
         </li>
-
-
+        <li>
+            <a asp-action="index" asp-controller="dashboard">
+                <i class="fa-solid fa-wrench"></i>
+                <span class="links_name">Settings</span>
+            </a>
+            <span class="tooltip">Settings</span>
+        </li>
     </ul>
+
     <div class="profile_content">
-        <div class="profile">
+        <div style="background-color:#545454;" class="profile">
             <div class="profile_details">
                 @*<img src="/assets/img/Random.png" alt="">*@
                 <div class="name_job">
@@ -62,6 +66,6 @@
                 </div>
             </div>
         </div>
-        <i class="bx bx-log-out" id="log_out"></i>
+        <i style="background:gray;" class="fa-solid fa-right-from-bracket" id="log_out"></i>
     </div>
 </div>

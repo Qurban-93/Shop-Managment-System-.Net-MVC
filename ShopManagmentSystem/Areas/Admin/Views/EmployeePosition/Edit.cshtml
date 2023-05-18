@@ -1,0 +1,21 @@
+﻿@model EmployeePositionEditVM
+
+<div class="container">
+    <div class="bg-light rounded h-100 p-4">
+    <h1 class="mb-4 text-primary">Position Update</h1>
+    <form method="post">
+        <div class="mb-3">
+            <label asp-for=PositionName class="form-label text-primary">Position Name</label>
+            <input asp-for=PositionName class="form-control">
+            <span class="text-danger" asp-validation-for="PositionName"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for=FixSalary class="form-label text-primary">Fix Salary</label>
+            <input asp-for=FixSalary class="form-control">
+            <span class="text-danger" asp-validation-for="FixSalary"></span>
+        </div>
+        <button type="submit" class="btn btn-primary">Update Position</button>
+        <a class="btn btn-primary" asp-action="index">Go Back</a>
+    </form>
+</div>
+</div>

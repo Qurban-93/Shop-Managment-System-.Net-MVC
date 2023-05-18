@@ -2,44 +2,46 @@
 
 <div class="container">
     <div class="row">
-        <h1>Product Create Form</h1>
+        <h1 class="text-primary">Product Create Form</h1>
         <form method="post" enctype="multipart/form-data">
             <div class="mb-3">
-                <label class="form-label">Choose Brand</label><span class="text-danger">*</span>
+                <label class="form-label text-primary">Choose Brand</label><span class="text-danger">*</span>
                 <select asp-items=ViewBag.Brands class="form-select prod_brand">
                 </select>
                 <span class="text-danger"></span>
             </div>
             <div class="mb-3">
-                <label class="form-label">Choose Category</label><span class="text-danger">*</span>
+                <label class="form-label text-primary">Choose Category</label><span class="text-danger">*</span>
                 <select asp-items=ViewBag.ProductCategories class="form-select prod_category">
                 </select>
                 <span asp-validation-for="ProductCategoryId" class="text-danger"></span>
             </div>
             <div class="mb-3">
-                <label class="form-label">Product Model</label><span class="text-danger">*</span>
+                <label class="form-label text-primary">Product Model</label><span class="text-danger">*</span>
                 <select asp-for="ProductModelId" asp-items=ViewBag.ProdModel class="form-select prod_model">
                 </select>
                 <span class="text-danger" asp-validation-for="ProductModelId"></span>
             </div>
             <div class="mb-3">
-                <label class="form-label">Choose Category</label><span class="text-danger">*</span>
+                <label class="form-label text-primary">Choose Color</label><span class="text-danger">*</span>
                 <select asp-for="ColorId" asp-items=ViewBag.Color class="form-select">
                 </select>
                 <span class="text-danger" asp-validation-for="ColorId"></span>
             </div>
             <div class="mb-3">
-                <label class="form-label">Cost Price</label><span class="text-danger">*</span>
+                <label class="form-label text-primary">Cost Price</label><span class="text-danger">*</span>
                 <input type="number" asp-for=CostPrice class="form-control">
                 <span class="text-danger" asp-validation-for="CostPrice"></span>
             </div>
             <div class="mb-3">
-                <label asp-for=Series class="form-label"></label><span class="text-danger">*</span>
+                <label asp-for=Series class="form-label text-primary"></label><span class="text-danger">*</span>
                 <input asp-for=Series class="form-control">
-                <span class="text-danger" asp-validation-for="Series"></span>         
+                <span class="text-danger" asp-validation-for="Series"></span>
             </div>
-           
+
             <button class="btn btn-primary" type="submit">Add Product</button>
+            <a class="btn btn-primary" asp-action="index">Go Back</a>
+
         </form>
     </div>
 </div>

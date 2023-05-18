@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "PptXmSKThJt1TbpbzOl3zbzJy6Rb/smP1jFlxQJRCOY=",
+  "Hash": "8J9yxKt5mARiQTJOOEfnEDdfdFihK1GoJX4/KAzWuiI=",
   "Source": "ShopManagmentSystem",
   "BasePath": "_content/ShopManagmentSystem",
   "Mode": "Default",
@@ -83,6 +83,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\assets\\img\\Random.png"
+    },
+    {
+      "Identity": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\assets\\js\\Accordion.js",
+      "SourceId": "ShopManagmentSystem",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\",
+      "BasePath": "_content/ShopManagmentSystem",
+      "RelativePath": "assets/js/Accordion.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\assets\\js\\Accordion.js"
     },
     {
       "Identity": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\assets\\js\\AjaxScript.js",
