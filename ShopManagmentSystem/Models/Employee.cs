@@ -11,9 +11,9 @@ namespace ShopManagmentSystem.Models
         public int EmployeePostionId { get; set; }
         public EmployeePosition? EmployeePostion { get; set; }
         public int? BranchId { get; set; }
-        public Branch Branch { get; set; }
+        public Branch? Branch { get; set; }
         public List<Sale>? Sales { get; set; }
         public List<Refund>? Refunds { get; set; }
-        public List<Salary> Salaries { get; set; }
+        public List<Salary>? Salaries { get; set; }
     }
 }

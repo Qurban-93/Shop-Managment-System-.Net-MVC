@@ -31,12 +31,10 @@
                 <thead class="thead-light">
                     <tr>
                         <th scope="col">Date</th>
-                        <th scope="col">Customer Name</th>
-                        <th scope="col">Discount</th>
-                        <th scope="col">Cashless Payment</th>
-                        <th scope="col">Total Price</th>
-                        <th scope="col">Products Count</th>
+                        <th scope="col">Customer Name</th>                     
                         <th scope="col">Seller Name</th>
+                        <th scope="col">Products Count</th>
+                        <th scope="col">Total Price</th>
                         <th scope="col">Details</th>
                     </tr>
                 </thead>
@@ -45,12 +43,10 @@
                     {
                         <tr>
                             <td>@sale.CreateDate.ToLocalTime().ToString("dd MMMM yyyy , hh:mm:ss")</td>
-                            <td>@sale.Customer?.FullName</td>
-                            <td>@sale.Discount <i class="fa-solid fa-manat-sign"></i></td>
-                            <td>@sale.CashlessPayment <i class="fa-solid fa-manat-sign"></i></td>
-                            <td>@sale.TotalPrice <i class="fa-solid fa-manat-sign"></i></td>
-                            <td>@sale.SaleProducts.Count() eded</td>
+                            <td>@sale.Customer?.FullName</td>      
                             <td>@sale.Employee?.FullName</td>
+                            <td>@sale.SaleProducts?.Count() eded</td>
+                            <td>@sale.TotalPrice <i class="fa-solid fa-manat-sign"></i></td>
                             <td><a asp-action="details" asp-route-id="@sale.Id"><i class="fa-solid fa-circle-info"></i></a></td>
                         </tr>
                     }

@@ -179,6 +179,7 @@ namespace ShopManagmentSystem.Areas.Admin.Controllers
             product.ColorId = color.Id;
             product.CostPrice = editVM.CostPrice;
             product.Series = editVM.Series;
+            product.UpdateDate = DateTime.Now;
 
             await _context.SaveChangesAsync();
             TempData["Edit"] = true;

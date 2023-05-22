@@ -41,6 +41,7 @@ namespace ShopManagmentSystem.Areas.Admin.Controllers
             EmployeePosition employeePosition = new();
             employeePosition.FixSalary = createVM.FixSalary;
             employeePosition.PositionName = createVM.PositionName;
+            employeePosition.CreateDate = DateTime.Now;
 
             _context.EmployeePostions.Add(employeePosition);
             await _context.SaveChangesAsync();

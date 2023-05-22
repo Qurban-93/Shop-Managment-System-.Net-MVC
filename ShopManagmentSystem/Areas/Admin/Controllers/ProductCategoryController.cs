@@ -77,6 +77,7 @@ namespace ShopManagmentSystem.Areas.Admin.Controllers
             }
             existProdCategory.Name = editVM.Name;
             existProdCategory.Bonus = editVM.Bonus;
+            existProdCategory.UpdateDate = DateTime.Now;
             await _context.SaveChangesAsync();
             TempData["Edit"] = true;
 

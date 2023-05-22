@@ -61,6 +61,7 @@ namespace ShopManagmentSystem.Areas.Admin.Controllers
                 ProductCategoryId = createVM.ProductCategoryId,
                 ModelPrice = createVM.ModelPrice,
                 ModelName = createVM.ModelName.Trim().ToUpper(),
+                CreateDate = DateTime.Now,
             };
             _context.ProductModels.Add(productModel);
             await _context.SaveChangesAsync();

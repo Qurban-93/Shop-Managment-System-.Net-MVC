@@ -10,9 +10,7 @@ namespace ShopManagmentSystem.Models
         public int? SaleId { get; set; }
         public Sale? Sale { get; set; }
         public int? RefundId { get; set; }
-        public Refund? Refund { get; set; }
-        public int? ExpensesId { get; set; }
-        public Punishment? Expenses { get; set; }
+        public Refund? Refund { get; set; }       
         public int BranchId { get; set; }
 
     }

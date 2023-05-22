@@ -34,6 +34,7 @@ namespace ShopManagmentSystem.Areas.Admin.Controllers
             }
             Brand brand = new();
             brand.BrandName= brandCreateVM.BrandName;
+            brand.CreateDate = DateTime.Now;
             await _context.Brands.AddAsync(brand);
             await _context.SaveChangesAsync();
             TempData["Success"] = "ok";
@@ -67,6 +68,7 @@ namespace ShopManagmentSystem.Areas.Admin.Controllers
                 return View();
             }
             brand.BrandName = editVM.BrandName;
+            brand.UpdateDate= DateTime.Now;
             await _context.SaveChangesAsync();
             TempData["Edit"] = "ok";
             return RedirectToAction(nameof(Index));

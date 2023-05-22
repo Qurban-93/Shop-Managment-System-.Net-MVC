@@ -11,5 +11,7 @@ namespace ShopManagmentSystem.Models
         public Sale? Sale { get; set; }
         public int? RefundId { get; set; }
         public Refund? Refund { get; set; }
+        public int? PunishmentId { get; set; }
+        public Punishment? Punishment { get; set; }
     }
 }

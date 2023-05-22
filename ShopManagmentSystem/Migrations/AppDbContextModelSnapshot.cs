@@ -415,9 +415,6 @@ namespace ShopManagmentSystem.Migrations
                     b.Property<double>("Discount")
                         .HasColumnType("float");
 
-                    b.Property<int?>("ExpensesId")
-                        .HasColumnType("int");
-
                     b.Property<double>("Incoming")
                         .HasColumnType("float");
 
@@ -433,8 +430,6 @@ namespace ShopManagmentSystem.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("BranchId");
-
-                    b.HasIndex("ExpensesId");
 
                     b.HasIndex("RefundId");
 
@@ -798,6 +793,9 @@ namespace ShopManagmentSystem.Migrations
                     b.Property<int>("EmployeeId")
                         .HasColumnType("int");
 
+                    b.Property<int?>("PunishmentId")
+                        .HasColumnType("int");
+
                     b.Property<int?>("RefundId")
                         .HasColumnType("int");
 
@@ -810,6 +808,8 @@ namespace ShopManagmentSystem.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("EmployeeId");
+
+                    b.HasIndex("PunishmentId");
 
                     b.HasIndex("RefundId");
 
@@ -974,10 +974,6 @@ namespace ShopManagmentSystem.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("ShopManagmentSystem.Models.Punishment", "Expenses")
-                        .WithMany()
-                        .HasForeignKey("ExpensesId");
-
                     b.HasOne("ShopManagmentSystem.Models.Refund", "Refund")
                         .WithMany()
                         .HasForeignKey("RefundId");
@@ -985,8 +981,6 @@ namespace ShopManagmentSystem.Migrations
                     b.HasOne("ShopManagmentSystem.Models.Sale", "Sale")
                         .WithMany()
                         .HasForeignKey("SaleId");
-
-                    b.Navigation("Expenses");
 
                     b.Navigation("Refund");
 
@@ -1121,6 +1115,10 @@ namespace ShopManagmentSystem.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("ShopManagmentSystem.Models.Punishment", "Punishment")
+                        .WithMany()
+                        .HasForeignKey("PunishmentId");
+
                     b.HasOne("ShopManagmentSystem.Models.Refund", "Refund")
                         .WithMany()
                         .HasForeignKey("RefundId");
@@ -1130,6 +1128,8 @@ namespace ShopManagmentSystem.Migrations
                         .HasForeignKey("SaleId");
 
                     b.Navigation("Employee");
+
+                    b.Navigation("Punishment");
 
                     b.Navigation("Refund");
 

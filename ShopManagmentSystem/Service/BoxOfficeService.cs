@@ -17,7 +17,6 @@ namespace ShopManagmentSystem.Service
             List<Money> money =  _context.Moneys
                 .Include(m=>m.Sale)
                 .Include(m=>m.Refund)
-                .Include(m => m.Expenses)
                 .Where(s => s.CreateDate > dateFrom 
             && s.CreateDate < dateTo.AddHours(23)
             && s.BranchId == user.BranchId).ToList();           
@@ -30,7 +29,6 @@ namespace ShopManagmentSystem.Service
             List<Money> money =  _context.Moneys
                 .Include(m => m.Sale)
                 .Include(m => m.Refund)
-                .Include(m => m.Expenses)
                 .Where(s => s.CreateDate < dateTo.AddHours(23)
             && s.BranchId == user.BranchId).ToList();
            
@@ -43,7 +41,6 @@ namespace ShopManagmentSystem.Service
             List<Money> money =  _context.Moneys
                 .Include(m => m.Sale)
                 .Include(m => m.Refund)
-                .Include(m => m.Expenses)
                 .Where(s => s.CreateDate > dateFrom
             && s.BranchId == user.BranchId).ToList();
             
@@ -56,7 +53,6 @@ namespace ShopManagmentSystem.Service
             List<Money> money = _context.Moneys
                 .Include(m => m.Sale)
                 .Include(m => m.Refund)
-                .Include(m => m.Expenses)
                 .Where(s => s.CreateDate > DateTime.Today
             && s.BranchId == user.BranchId).ToList();
            

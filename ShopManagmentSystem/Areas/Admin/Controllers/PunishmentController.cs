@@ -1,17 +1,25 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using ShopManagmentSystem.DAL;
+using ShopManagmentSystem.Models;
+using ShopManagmentSystem.ViewModels;
 
 namespace ShopManagmentSystem.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize]
     public class PunishmentController : Controller
     {
         private readonly AppDbContext _context;
+        private readonly UserManager<AppUser> _userManager;
 
-        public PunishmentController(AppDbContext context)
+        public PunishmentController(AppDbContext context, UserManager<AppUser> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
 
         public async Task<IActionResult> Index(string search, DateTime? fromDate, DateTime? toDate)
@@ -91,6 +99,41 @@ namespace ShopManagmentSystem.Areas.Admin.Controllers
             return View(await _context.Punishment
                 .Include(p => p.Employee)
                 .ToListAsync());
+        }
+        public async Task<IActionResult> Create()
+        {
+            AppUser? user = await _userManager.FindByNameAsync(User.Identity.Name);
+            if (user == null) return NotFound();
+            ViewBag.Employees = new SelectList(await _context.Employees.Where(e => e.BranchId == user.BranchId).ToListAsync(), "Id", "FullName");
+            return View();
+        }
+        [HttpPost]
+        [AutoValidateAntiforgeryToken]
+        public async Task<IActionResult> Create(PunishmentCreateVM createVM)
+        {
+            AppUser? user = await _userManager.FindByNameAsync(User.Identity.Name);
+            if (user == null) return NotFound();
+            ViewBag.Employees = new SelectList(await _context.Employees.Where(e => e.BranchId == user.BranchId).ToListAsync(), "Id", "FullName");
+            if (!ModelState.IsValid) return View();
+            Punishment punishment = new()
+            {
+                Amount = createVM.Amount,
+                Descpription = createVM.Descpription,
+                EmployeeId = createVM.EmployeeId,
+                CreateDate = DateTime.Now,
+            };
+
+            Salary salary = new()
+            {
+                Bonus = 0 - createVM.Amount,
+
+            };
+
+            await _context.Punishment.AddAsync(punishment);
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction("Index");
+
         }
     }
 }
