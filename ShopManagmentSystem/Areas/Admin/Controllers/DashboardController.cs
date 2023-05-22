@@ -15,8 +15,17 @@ namespace ShopManagmentSystem.Areas.Admin.Controllers
         }
 
         public IActionResult Index()
-        {        
-            return View();
+        {
+            SettingVM settingVM = new()
+            {
+                BrandCount= _context.Brands.Count(),
+                ColorsCount= _context.Colors.Count(),
+                EmployeeCount= _context.Employees.Count(),
+                EmployeePositionCount= _context.EmployeePostions.Count(),
+                ProductModelCount= _context.ProductModels.Count(),
+                ProductsCategoryCount = _context.ProductCategories.Count(),
+            };
+            return View(settingVM);
         }
     }
 }

@@ -4,6 +4,7 @@
   padding: 0 ;
   box-sizing: border-box;
    font-family: 'Inter', sans-serif;
+// font-family: 'Bebas Neue', sans-serif;
 }
 
 a{
@@ -330,6 +331,9 @@ body{
         margin: auto;
         display: flex;
         justify-content: space-between;
+
+        
+        
         button{
             margin-left: 10px;
         }
@@ -359,12 +363,7 @@ body{
 .add_customer{
 
         margin: auto;
-            html, body {
-                display: flex;
-                justify-content: center;
-                font-family: Roboto, Arial, sans-serif;
-                font-size: 15px;
-            }
+            
             form {
                 border: 5px solid #f1f1f1;
             }
@@ -378,7 +377,7 @@ body{
 
             h1 {
                 margin-top: 20px;
-                text-align:center;    
+                
             }
 
             button:hover {
@@ -511,4 +510,26 @@ ul.accordion-list {
       }
     }
   }
+  .setting_options{
 
+    list-style: none;
+    li{
+        font-size: 15px;
+        margin-top: 15px;
+        margin-bottom: 15px;
+
+        a{
+            color: black;
+        }
+
+        i{
+            margin-left: 5px;
+            color: goldenrod;
+            font-size: 20px;
+        }
+    }
+  }
+
+  .admin_h1{
+    font-family: 'Bebas Neue', sans-serif;
+  }

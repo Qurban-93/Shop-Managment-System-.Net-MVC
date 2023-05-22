@@ -12,7 +12,7 @@ namespace ShopManagmentSystem.Models
         public int? RefundId { get; set; }
         public Refund? Refund { get; set; }
         public int? ExpensesId { get; set; }
-        public Expenses? Expenses { get; set; }
+        public Punishment? Expenses { get; set; }
         public int BranchId { get; set; }
 
     }

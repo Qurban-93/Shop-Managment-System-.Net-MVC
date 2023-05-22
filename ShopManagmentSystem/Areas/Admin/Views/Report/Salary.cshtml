@@ -3,8 +3,9 @@
 <div class="container">
     <div class="row">
         <h1>Salary Reports</h1>
+        <hr />
         <form method="get">
-            <div class="mb-3 col-lg-8 d-flex search_product">            
+            <div class="mb-3 col-lg-8 d-flex search_product">
                 <div>
                     <input type="date" class="form-control" name="fromDate" value="@(ViewBag.fromDate != null ? ViewBag.fromDate.Date.ToString("yyyy-MM-dd") : "" )" />
                 </div>
@@ -12,11 +13,11 @@
                     <input type="date" class="form-control" name="toDate" value="@(ViewBag.toDate != null ? ViewBag.toDate.Date.ToString("yyyy-MM-dd") : "" )" />
                     <span class="text-danger">@(ViewBag.Error != null ? ViewBag.Error : "")</span>
                 </div>
-                <button type="submit" class="btn btn-primary col-lg-2">Search</button>
+                <div class="col-lg-2"> <button style="width:100%;" type="submit" class="btn btn-primary col-lg-2">Search</button></div>
             </div>
         </form>
         @foreach (var item in Model.Employees)
-        {   
+        {
             <h5 class="text-primary">@item.FullName</h5>
             <table class="table">
                 <thead>
@@ -29,19 +30,29 @@
                 <tbody>
                     @foreach (var salary in Model.Salaries)
                     {
-                        if(salary.Employee.FullName == item.FullName)
+                        if (salary.Employee.FullName == item.FullName)
                         {
-                         <tr>
-                            <td>@salary.CreateDate.ToString("dd MMMM yyyy , hh:mm")</td>
-                            <td>@salary.Bonus</td>
-                            <td><a asp-action="details" asp-route-id="@salary.Id"> Details </a></td>
-                        </tr>
+                            <tr>
+                                <td>@salary.CreateDate.ToString("dd MMMM yyyy , hh:mm")</td>
+                                <td class="@(salary.Bonus < 0 ? "text-danger":"")">@salary.Bonus</td>
+                                <td>
+                                    @if (salary.SaleId != null)
+                                    {
+                                        <a asp-action="details" asp-controller="sale" asp-route-id="@salary.SaleId"><i class="fa-solid fa-circle-info"></i></a>
+                                    }
+                                    else
+                                    {
+                                        <a asp-action="details" asp-controller="refund" asp-route-id="@salary.RefundId"><i class="fa-solid fa-circle-info"></i></a>
+
+                                    }
+                                </td>
+                            </tr>
                         }
-                        
+
                     }
                     <tr>
-                        <td>fix salary : @item.EmployeePostion.FixSalary</td>
-                        <td>total : @(item.Salaries.Sum(s => s.Bonus) + item.EmployeePostion.FixSalary)</td>
+                        <td class="text-warning">Fix salary : @item.EmployeePostion.FixSalary</td>
+                        <td class="text-warning">Total : @(item.Salaries.Sum(s => s.Bonus) + item.EmployeePostion.FixSalary)</td>
                         <td></td>
                     </tr>
                 </tbody>

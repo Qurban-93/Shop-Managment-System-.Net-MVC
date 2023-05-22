@@ -395,59 +395,6 @@ namespace ShopManagmentSystem.Migrations
                     b.ToTable("EmployeePostions");
                 });
 
-            modelBuilder.Entity("ShopManagmentSystem.Models.Expenses", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<double>("Amount")
-                        .HasColumnType("float");
-
-                    b.Property<DateTime>("CreateDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Descpription")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("ExpensesCategoryId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("UpdateDate")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ExpensesCategoryId");
-
-                    b.ToTable("Expensess");
-                });
-
-            modelBuilder.Entity("ShopManagmentSystem.Models.ExpensesCategory", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<DateTime>("CreateDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("UpdateDate")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("ExpensesCategories");
-                });
-
             modelBuilder.Entity("ShopManagmentSystem.Models.Money", b =>
                 {
                     b.Property<int>("Id")
@@ -680,6 +627,36 @@ namespace ShopManagmentSystem.Migrations
                     b.HasIndex("ProductCategoryId");
 
                     b.ToTable("ProductModels");
+                });
+
+            modelBuilder.Entity("ShopManagmentSystem.Models.Punishment", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<double>("Amount")
+                        .HasColumnType("float");
+
+                    b.Property<DateTime>("CreateDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Descpription")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("EmployeeId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("UpdateDate")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("EmployeeId");
+
+                    b.ToTable("Punishment");
                 });
 
             modelBuilder.Entity("ShopManagmentSystem.Models.Refund", b =>
@@ -989,15 +966,6 @@ namespace ShopManagmentSystem.Migrations
                     b.Navigation("EmployeePostion");
                 });
 
-            modelBuilder.Entity("ShopManagmentSystem.Models.Expenses", b =>
-                {
-                    b.HasOne("ShopManagmentSystem.Models.ExpensesCategory", null)
-                        .WithMany("Expensess")
-                        .HasForeignKey("ExpensesCategoryId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("ShopManagmentSystem.Models.Money", b =>
                 {
                     b.HasOne("ShopManagmentSystem.Models.Branch", null)
@@ -1006,7 +974,7 @@ namespace ShopManagmentSystem.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("ShopManagmentSystem.Models.Expenses", "Expenses")
+                    b.HasOne("ShopManagmentSystem.Models.Punishment", "Expenses")
                         .WithMany()
                         .HasForeignKey("ExpensesId");
 
@@ -1080,6 +1048,17 @@ namespace ShopManagmentSystem.Migrations
                     b.Navigation("Brand");
 
                     b.Navigation("ProductCategory");
+                });
+
+            modelBuilder.Entity("ShopManagmentSystem.Models.Punishment", b =>
+                {
+                    b.HasOne("ShopManagmentSystem.Models.Employee", "Employee")
+                        .WithMany()
+                        .HasForeignKey("EmployeeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Employee");
                 });
 
             modelBuilder.Entity("ShopManagmentSystem.Models.Refund", b =>
@@ -1240,11 +1219,6 @@ namespace ShopManagmentSystem.Migrations
                     b.Navigation("Salaries");
 
                     b.Navigation("Sales");
-                });
-
-            modelBuilder.Entity("ShopManagmentSystem.Models.ExpensesCategory", b =>
-                {
-                    b.Navigation("Expensess");
                 });
 
             modelBuilder.Entity("ShopManagmentSystem.Models.Product", b =>

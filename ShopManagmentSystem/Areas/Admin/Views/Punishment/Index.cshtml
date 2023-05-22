@@ -1,0 +1,60 @@
+﻿@model List<Punishment>
+
+<div class="container">
+    <div class="row">
+        <h1>Punishment List</h1>
+        <hr />
+        <form method="get">
+            <div class="mb-3 col-lg-8 d-flex search_product">
+                <div>
+                    <input type="text" class="form-control" name="search" placeholder="Search" value="@ViewBag.SearchValue">
+                </div>
+                <div>
+                    <input type="date" class="form-control" name="fromDate" value="@(ViewBag.fromDate != null ? ViewBag.fromDate.Date.ToString("yyyy-MM-dd") : "" )" />
+                </div>
+                <div>
+                    <input type="date" class="form-control" name="toDate" value="@(ViewBag.toDate != null ? ViewBag.toDate.Date.ToString("yyyy-MM-dd") : "" )" />
+                    <span class="text-danger">@(ViewBag.Error != null ? ViewBag.Error : "")</span>
+                </div>
+                <button type="submit" class="btn btn-primary col-lg-2">Search</button>
+            </div>
+        </form>
+        @if (TempData["Create"] != null)
+        {
+            <div style="transition:all 0.5s ease" id="alert_refund" class="alert alert-warning" role="alert">
+                Position Elave Olundu !
+            </div>
+        }
+        @if (TempData["Edit"] != null)
+        {
+            <div style="transition:all 0.5s ease" id="alert_refund" class="alert alert-warning" role="alert">
+                Deyisiklik qeyde alindi !
+            </div>
+        }
+        <div style="margin-bottom:15px;margin-top:15px;" class="col-lg-3"><a class="btn btn-primary" asp-action="create">Add New Punishment</a></div>
+        <table class="table col-lg-9">
+            <tbody>
+                <tr>
+                    <th class="text-primary">Date</th>
+                    <th class="text-primary">Employee Name</th>
+                    <th class="text-primary">Amount</th>
+                    <th class="text-primary">Description</th>
+                    <th class="text-primary">Settings</th>
+                </tr>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.CreateDate</td>
+                        <td>@item.Employee.FullName</td>
+                        <td>@item.Amount</td>
+                        <td>@item.Descpription</td>
+                        <td>
+                            <a class="text-warning" style="margin-right:20px; font-size:20px;" asp-action="edit" asp-route-id="@item.Id"><i class="fa-solid fa-pen-to-square"></i></a>
+                            <a class="text-danger  delete_punishment" style="font-size:20px; cursor:pointer;" data-id="@item.Id"><i class="fa-regular fa-trash-can"></i></a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

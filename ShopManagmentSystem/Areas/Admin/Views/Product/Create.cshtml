@@ -3,16 +3,17 @@
 <div class="container">
     <div class="row">
         <h1 class="text-primary">Product Create Form</h1>
+        <hr />
         <form method="post" enctype="multipart/form-data">
             <div class="mb-3">
                 <label class="form-label text-primary">Choose Brand</label><span class="text-danger">*</span>
-                <select asp-items=ViewBag.Brands class="form-select prod_brand">
+                <select asp-for=BrandId asp-items=ViewBag.Brands class="form-select prod_brand">
                 </select>
                 <span class="text-danger"></span>
             </div>
             <div class="mb-3">
                 <label class="form-label text-primary">Choose Category</label><span class="text-danger">*</span>
-                <select asp-items=ViewBag.ProductCategories class="form-select prod_category">
+                <select asp-for=ProductCategoryId asp-items=ViewBag.ProductCategories class="form-select prod_category">
                 </select>
                 <span asp-validation-for="ProductCategoryId" class="text-danger"></span>
             </div>

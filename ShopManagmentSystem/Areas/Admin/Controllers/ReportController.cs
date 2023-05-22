@@ -30,24 +30,74 @@ namespace ShopManagmentSystem.Areas.Admin.Controllers
             return View();
         }
 
-        public async Task<IActionResult> Salary(DateTime? fromdate,DateTime? toDate)
+        public async Task<IActionResult> Salary(DateTime? fromDate,DateTime? toDate)
         {
             AppUser user = await _userManager.FindByNameAsync(User.Identity.Name);
             if (user == null) return NotFound();
-           List<Salary> salaryList = await _context.Salaries
-                .Include(s=>s.Sale)
-                .Include(s=>s.Employee)
-                .Include(s=>s.Refund)
-                .ToListAsync();
-            List<Employee> employees = await _context.Employees
-                .Include(e=>e.EmployeePostion)
-                .Include(e=>e.Salaries)
-                .Where(e=>e.BranchId == user.BranchId)
-                .ToListAsync();
+            ViewBag.Fromdate = fromDate;
+            ViewBag.ToDate = toDate;
+            SalaryVM salaryVM = new SalaryVM();
+           
+            salaryVM.Employees  = await _context.Employees
+                .Include(e => e.EmployeePostion)
+                .Include(e => e.Salaries)
+                .Where(e => e.BranchId == user.BranchId)
+                .ToListAsync(); ;
 
-            SalaryVM salaryVM = new SalaryVM(); 
-            salaryVM.Salaries = salaryList;
-            salaryVM.Employees = employees;
+            if (fromDate > toDate)
+            {
+                ViewBag.Error = "Invalid Date Time";
+                salaryVM.Salaries = await _context.Salaries
+               .Include(s => s.Sale)
+               .Include(s => s.Employee)
+               .Include(s => s.Refund)
+               .Where(s => s.CreateDate > DateTime.Today)
+               .ToListAsync();
+                return View(salaryVM);
+              
+            }
+            if (fromDate != null && toDate == null)
+            {
+                 salaryVM.Salaries = await _context.Salaries
+                .Include(s => s.Sale)
+                .Include(s => s.Employee)
+                .Include(s => s.Refund)
+                .Where(s=>s.CreateDate > fromDate)
+                .ToListAsync();
+              
+            }
+            if (fromDate == null && toDate != null)
+            {
+                salaryVM.Salaries = await _context.Salaries
+                .Include(s => s.Sale)
+                .Include(s => s.Employee)
+                .Include(s => s.Refund)
+                .Where(s => s.CreateDate < toDate)
+                .ToListAsync();
+             
+            }
+            if (fromDate != null && toDate != null)
+            {
+                toDate = toDate.Value.AddHours(23).AddMinutes(59).AddSeconds(59);              
+                salaryVM.Salaries = await _context.Salaries
+                .Include(s => s.Sale)
+                .Include(s => s.Employee)
+                .Include(s => s.Refund)
+                .Where(s => s.CreateDate < toDate && s.CreateDate > fromDate)
+                .ToListAsync();
+            }
+            if (fromDate == null && toDate == null)
+            {
+                ViewBag.fromDate = DateTime.Today;
+                ViewBag.toDate = DateTime.Today;
+                salaryVM.Salaries = await _context.Salaries
+               .Include(s => s.Sale)
+               .Include(s => s.Employee)
+               .Include(s => s.Refund)
+               .Where(s => s.CreateDate > DateTime.Today)
+               .ToListAsync();
+
+            }              
             return View(salaryVM);
         }
 

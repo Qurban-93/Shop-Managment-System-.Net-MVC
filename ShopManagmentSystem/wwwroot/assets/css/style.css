@@ -282,12 +282,6 @@ body {
 .add_customer {
   margin: auto;
 }
-.add_customer html, .add_customer body {
-  display: flex;
-  justify-content: center;
-  font-family: Roboto, Arial, sans-serif;
-  font-size: 15px;
-}
 .add_customer form {
   border: 5px solid #f1f1f1;
 }
@@ -300,7 +294,6 @@ body {
 }
 .add_customer h1 {
   margin-top: 20px;
-  text-align: center;
 }
 .add_customer button:hover {
   opacity: 0.8;
@@ -413,4 +406,25 @@ ul.accordion-list li div.answer p {
   line-height: 150%;
   margin: 0 0 15px 0;
   font-size: 14px;
+}
+
+.setting_options {
+  list-style: none;
+}
+.setting_options li {
+  font-size: 15px;
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+.setting_options li a {
+  color: black;
+}
+.setting_options li i {
+  margin-left: 5px;
+  color: goldenrod;
+  font-size: 20px;
+}
+
+.admin_h1 {
+  font-family: "Bebas Neue", sans-serif;
 }/*# sourceMappingURL=style.css.map */

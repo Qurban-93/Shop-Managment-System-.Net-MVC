@@ -43,6 +43,7 @@ public class RefundController : Controller
         return View(refundVM);
     }
     [HttpPost]
+    [ValidateAntiForgeryToken]
     public async Task<IActionResult> Orders(RefundVM refundVM)
     {
         AppUser? user = await _userManager.FindByNameAsync(User.Identity.Name);

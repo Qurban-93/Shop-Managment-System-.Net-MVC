@@ -23,6 +23,7 @@ namespace ShopManagmentSystem.Areas.Admin.Controllers
             return View();
         }
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(BrandCreateVM brandCreateVM)
         {
             if (!ModelState.IsValid) return View();
@@ -52,6 +53,7 @@ namespace ShopManagmentSystem.Areas.Admin.Controllers
             return View(editVM);
         }
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(BrandEditVM editVM,int? id)
         {
 

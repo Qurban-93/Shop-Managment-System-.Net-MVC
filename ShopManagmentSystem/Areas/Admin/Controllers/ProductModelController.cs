@@ -32,6 +32,7 @@ namespace ShopManagmentSystem.Areas.Admin.Controllers
             return View();
         }
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(ProductModelCreateVM createVM)
         {
 
@@ -86,6 +87,7 @@ namespace ShopManagmentSystem.Areas.Admin.Controllers
             return View(editVM);
         }
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(ProductModelEditVM editVM, int? id)
         {
             ViewBag.Brands = new SelectList(_context.Brands.ToList(), "Id", "BrandName");

@@ -1,0 +1,38 @@
+﻿@model List<Color>
+
+<div class="container">
+    <div class="row">
+        <h1 style="margin-bottom:15px;margin-top:15px;">Colors List</h1>
+        @if (TempData["Create"] != null)
+        {
+            <div style="transition:all 0.5s ease" id="alert_refund" class="alert alert-warning" role="alert">
+                Color Elave Olundu !
+            </div>
+        }
+        @if (TempData["Edit"] != null)
+        {
+            <div style="transition:all 0.5s ease" id="alert_refund" class="alert alert-warning" role="alert">
+                Deyisiklik qeyde alindi !
+            </div>
+        }
+        <div style="margin-bottom:15px;margin-top:15px;" class="col-lg-3"><a class="btn btn-primary" asp-action="create">Add New Position</a></div>
+        <table class="table col-lg-9">
+            <tbody>
+                <tr>
+                    <th class="text-primary">Color</th>
+                    <th class="text-primary">Settings</th>
+                </tr>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.ColorName</td>
+                        <td>
+                            <a class="text-warning" style="margin-right:20px; font-size:20px;" asp-action="edit" asp-route-id="@item.Id"><i class="fa-solid fa-pen-to-square"></i></a>
+                            <a class="text-danger  delete_color" style="font-size:20px; cursor:pointer;" data-id="@item.Id"><i class="fa-regular fa-trash-can"></i></a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

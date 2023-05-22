@@ -23,6 +23,7 @@ namespace ShopManagmentSystem.Areas.Admin.Controllers
             return View();
         }
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(ProductCategoryCreateVM createVM)
         {
             if(!ModelState.IsValid) return View(createVM);
@@ -62,6 +63,7 @@ namespace ShopManagmentSystem.Areas.Admin.Controllers
             return View(editVM);
         }
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int? id,ProductCategoryEditVM editVM)
         {
             if(id == null || id == 0) return NotFound();

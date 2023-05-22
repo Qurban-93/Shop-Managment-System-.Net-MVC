@@ -2,31 +2,29 @@
 
 <div class="container">
     <div class="row">
-        <div class="add_customer col-5">
+        <div class="add_customer">
             <form method="post">
-                <h1>New Customer</h1>
-                <div class="icon">
-                    <i class="fas fa-user-circle"></i>
-                </div>
+                            
                 <div class="formcontainer">
+                    <h1>New Customer</h1>
                     <div class="containerr">
                         <div>
-                            <label><strong>Full Name</strong></label>
+                            <label class="text-primary"><strong>Full Name</strong></label>
                             <input class="form-control" asp-for=FullName type="text" placeholder="Enter Full Name" required>
                             <span class="text-danger" asp-validation-for="FullName"></span>
                         </div>
                         <div>
-                            <label><strong>E-mail</strong></label>
+                            <label class="text-primary"><strong>E-mail</strong></label>
                             <input class="form-control" asp-for=Email type="text" placeholder="Enter E-mail">
                             <span class="text-danger" asp-validation-for="Email"></span>
                         </div>
                         <div>
-                            <label><strong>Phone Number</strong></label>
+                            <label class="text-primary"><strong>Phone Number</strong></label>
                             <input class="form-control" asp-for=PhoneNumber type="text" placeholder=" Example +994123456789">
                             <span class="text-danger" asp-validation-for="PhoneNumber"></span>
                         </div>
                         <div>
-                            <label><strong>Address</strong></label>
+                            <label class="text-primary"><strong>Address</strong></label>
                             <input class="form-control" asp-for=Address type="text" placeholder="Enter Address">
                             <span class="text-danger" asp-validation-for="Address"></span>
                         </div>

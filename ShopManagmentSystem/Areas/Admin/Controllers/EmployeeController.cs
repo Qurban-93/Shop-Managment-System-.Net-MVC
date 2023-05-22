@@ -38,6 +38,7 @@ namespace ShopManagmentSystem.Areas.Admin.Controllers
             return View();
         }
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(EmployeeCreateVM createVM)
         {
             ViewBag.Position = new SelectList(_context.EmployeePostions.ToList(), "Id", "PositionName");
@@ -97,6 +98,7 @@ namespace ShopManagmentSystem.Areas.Admin.Controllers
             return View(editVM);
         }
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int? id,EmployeeEditVM editVM)
         {
             ViewBag.Branch = new SelectList(_context.Branches.ToList(), "Id", "Name");

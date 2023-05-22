@@ -11,7 +11,46 @@
     let deletePosition = $(".delete_position");
     let deleteEmployee = $(".delete_employee");
     let deleteProdModel = $(".delete_prod_model");
+    let deleteColor = $(".delete_color");
 
+    deleteColor.on("click", function (e) {
+        let id = $(e.currentTarget).data('id');
+        let parentElement = $(e.currentTarget).parent().parent();
+        Swal.fire({
+            title: 'Are you sure delete Color?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    method: "DELETE",
+                    url: "Colors/Delete/" + id,
+                    success: function (result) {
+                        console.log(result)
+                        parentElement.remove()
+                        Swal.fire(
+                            `Deleted ${result.colorName} !`,
+                            'Your file has been deleted.',
+                            'success'
+                        )
+                    },
+                    error: function () {
+                        Swal.fire(
+                            'Not Deleted!',
+                            'Your file has been not deleted.',
+                            'error'
+                        )
+                    }
+                });
+
+
+            }
+        })
+    });
 
     deleteProdModel.on("click", function(e){
         let id = $(e.currentTarget).data('id');
