@@ -125,15 +125,72 @@ namespace ShopManagmentSystem.Areas.Admin.Controllers
 
             Salary salary = new()
             {
+                EmployeeId = createVM.EmployeeId,
                 Bonus = 0 - createVM.Amount,
+                Punishment= punishment,
+                CreateDate= DateTime.Now,
 
             };
 
+            await _context.Salaries.AddAsync(salary);
             await _context.Punishment.AddAsync(punishment);
             await _context.SaveChangesAsync();
 
             return RedirectToAction("Index");
 
+        }
+        public async Task<IActionResult> Edit(int? id)
+        {
+            AppUser? user = await _userManager.FindByNameAsync(User.Identity.Name);
+            ViewBag.Employees = new SelectList(await _context.Employees.Where(e => e.BranchId == user.BranchId).ToListAsync(), "Id", "FullName");
+
+            if (id == null || id == 0) return NotFound();
+            Punishment? punishment = await _context.Punishment.FindAsync(id);
+            if (punishment == null) return NotFound();
+            PunishmentEditVM editVM = new()
+            {
+                Amount = punishment.Amount,
+                Descpription = punishment.Descpription,
+                EmployeeId =punishment.EmployeeId,
+            };
+            return View(editVM);
+        }
+        public async Task<IActionResult> Edit(PunishmentEditVM editVM,int? id)
+        {
+            AppUser? user = await _userManager.FindByNameAsync(User.Identity.Name);
+            ViewBag.Employees = new SelectList(await _context.Employees.Where(e => e.BranchId == user.BranchId).ToListAsync(), "Id", "FullName");
+
+            if (!ModelState.IsValid) return NotFound();
+            if(id == 0 || id == null) return NotFound();
+            Punishment? existPunishment = await _context.Punishment.FindAsync(id);
+            if (existPunishment == null) return NotFound();
+            existPunishment.UpdateDate = DateTime.Now;
+            existPunishment.Descpription = editVM.Descpription;
+            existPunishment.Amount = editVM.Amount;
+            existPunishment.EmployeeId= editVM.EmployeeId;
+            Salary? salary = await _context.Salaries.FirstOrDefaultAsync(s => s.PunishmentId == existPunishment.Id);
+            if (salary == null) return NotFound();
+            salary.EmployeeId = existPunishment.EmployeeId;
+            salary.UpdateDate = DateTime.Now;
+            salary.Bonus = 0 - existPunishment.Amount;
+
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction(nameof(Index));
+        }
+        [HttpDelete]
+        public async Task<IActionResult> Delete(int? id)
+        {
+            if (id == null || id == 0) return NotFound();
+            Punishment? punishment = await _context.Punishment.FindAsync(id);
+            if (punishment == null) return BadRequest();
+            Salary? salary = await _context.Salaries.FirstOrDefaultAsync(s=>s.PunishmentId ==punishment.Id);
+            if (salary == null) return NotFound();
+            _context.Salaries.Remove(salary);
+            _context.Punishment.Remove(punishment);
+            await _context.SaveChangesAsync();
+
+            return Ok(punishment);
         }
     }
 }

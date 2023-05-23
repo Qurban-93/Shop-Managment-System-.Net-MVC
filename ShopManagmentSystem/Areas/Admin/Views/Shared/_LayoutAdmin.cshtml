@@ -28,12 +28,19 @@
 
     }
     <div class="home_content">
+        <div class="container">
+            <div class="clock text-primary" id="clock"></div>
+            <div class="data text-primary">@(DateTime.Now.ToString("dd MMMM yyyy"))</div>
+        </div>
         @RenderBody()
     </div>
 
 
     <script src="~/assets/js/main.js"></script>
     <script src="~/assets/js/AjaxScript.js"></script>
+    <script src="~/assets/js/Clock.js"></script>
+
+
     @RenderSection("Js",false);
    
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>

@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "8J9yxKt5mARiQTJOOEfnEDdfdFihK1GoJX4/KAzWuiI=",
+  "Hash": "SzcNSf+WJnSstexwHilj/J9bJTKLQprBbOn7hYbcV7A=",
   "Source": "ShopManagmentSystem",
   "BasePath": "_content/ShopManagmentSystem",
   "Mode": "Default",
@@ -117,6 +117,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\assets\\js\\AjaxScript.js"
+    },
+    {
+      "Identity": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\assets\\js\\Clock.js",
+      "SourceId": "ShopManagmentSystem",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\",
+      "BasePath": "_content/ShopManagmentSystem",
+      "RelativePath": "assets/js/Clock.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\assets\\js\\Clock.js"
     },
     {
       "Identity": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\assets\\js\\main.js",

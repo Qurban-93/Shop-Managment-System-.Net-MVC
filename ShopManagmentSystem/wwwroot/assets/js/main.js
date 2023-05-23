@@ -4,25 +4,11 @@ let alertSale = document.getElementById("alert_sale");
 let alertRefund = document.getElementById("alert_refund");
 let toDate = document.querySelector(".toDate");
 let fromDate = document.querySelector(".fromDate");
-//let selectModel = document.querySelector(".prod_model");
-//let selectBrand = document.querySelector(".prod_brand");
-//let selecCategory = document.querySelector(".prod_category");
-
-//console.log(selectModel.value, selecCategory.value, selectBrand.value)
-
-
-
-
-
-
 
 
 btn.onclick = function () {
     sidebar.classList.toggle("active");
 }
-
-
-
 
 setTimeout(() => {
     if (alertSale != undefined || alertSale != null) {
@@ -36,14 +22,10 @@ setTimeout(() => {
     }
 }, "3000");
 
-
-
 if (alertRefund != null) {
     opacityAlert();
     hideAlert();
 }
-
-
 
 function hideAlert() {
     setTimeout(() => {
@@ -57,7 +39,6 @@ function opacityAlert() {
     }, "2000");
 }
 
-
 function HideAlertSale() {
     alertSale.style.opacity = "0";
 }
@@ -65,6 +46,8 @@ function HideAlertSale() {
 function Remove() {
     alertSale.style.display = "none";
 }
+
+
 
 
 

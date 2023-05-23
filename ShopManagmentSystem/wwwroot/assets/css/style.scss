@@ -530,6 +530,18 @@ ul.accordion-list {
     }
   }
 
-  .admin_h1{
-    font-family: 'Bebas Neue', sans-serif;
-  }
+  .clock {
+    position: absolute;
+    right: 20px;
+    top: 0;
+    color: black;
+    font-size: 25px;
+    text-align: end;
+  
+}
+
+.data{
+    position: absolute;
+    top: 32px;
+    right: 20px;
+}
