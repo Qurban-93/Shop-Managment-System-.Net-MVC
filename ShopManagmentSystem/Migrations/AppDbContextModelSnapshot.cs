@@ -329,6 +329,39 @@ namespace ShopManagmentSystem.Migrations
                     b.ToTable("Customers");
                 });
 
+            modelBuilder.Entity("ShopManagmentSystem.Models.Displacement", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("CreateDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("DestinationBranch")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("DestinationId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("SenderBranch")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("SenderId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("UpdateDate")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Displacement");
+                });
+
             modelBuilder.Entity("ShopManagmentSystem.Models.Employee", b =>
                 {
                     b.Property<int>("Id")
@@ -508,6 +541,9 @@ namespace ShopManagmentSystem.Migrations
                     b.Property<string>("Desc")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("DisplacementId")
+                        .HasColumnType("int");
+
                     b.Property<bool>("IsSold")
                         .HasColumnType("bit");
 
@@ -531,6 +567,8 @@ namespace ShopManagmentSystem.Migrations
                     b.HasIndex("BrandId");
 
                     b.HasIndex("ColorId");
+
+                    b.HasIndex("DisplacementId");
 
                     b.HasIndex("ProductCategoryId");
 
@@ -1010,6 +1048,10 @@ namespace ShopManagmentSystem.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("ShopManagmentSystem.Models.Displacement", null)
+                        .WithMany("Products")
+                        .HasForeignKey("DisplacementId");
+
                     b.HasOne("ShopManagmentSystem.Models.ProductCategory", "ProductCategory")
                         .WithMany("Products")
                         .HasForeignKey("ProductCategoryId")
@@ -1210,6 +1252,11 @@ namespace ShopManagmentSystem.Migrations
                     b.Navigation("Refunds");
 
                     b.Navigation("Sales");
+                });
+
+            modelBuilder.Entity("ShopManagmentSystem.Models.Displacement", b =>
+                {
+                    b.Navigation("Products");
                 });
 
             modelBuilder.Entity("ShopManagmentSystem.Models.Employee", b =>

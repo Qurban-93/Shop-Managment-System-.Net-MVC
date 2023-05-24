@@ -13,7 +13,57 @@
     let deleteProdModel = $(".delete_prod_model");
     let deleteColor = $(".delete_color");
     let deletePunishment = $(".delete_punishment");
+    let addList = $(".add_move");
+    let deleteResendProd = $(".delete_resend_prod");
 
+
+    deleteResendProd.on("click", function (e) {
+        let id = $(e.currentTarget).data('id');
+        let parentElement = $(e.currentTarget).parent();
+        let body = $(".body_list");
+
+        $.ajax({
+            method: "DELETE",
+            url: "/Displacement/DeleteList/" + id,
+            success: function (result) {
+                parentElement.remove();
+                        let table = `<tr>
+                            <td>${result.productBrand}</td>
+                            <td>${result.model}</td>
+                            <td>${result.color}</td>
+                            <td>${result.category}</td>
+                            <td>${result.series}</td>
+                            <td><a style="cursor:pointer;" data-id="${result.id}" class="add_move"><i class="fa-solid fa-arrow-up-from-bracket"></i></a></td>
+                        </tr>`
+                body.append(table);
+            }
+        });
+
+
+    });
+
+
+    addList.on("click", function (e) {
+        let id = $(e.currentTarget).data('id');
+        let list = $(".displace_list");
+        let parentElement = $(e.currentTarget).parent().parent();
+
+        $.ajax({
+            method: "POST",
+            url: "/Displacement/AddToList/" + id,
+            success: function (result) {
+                let prodHtml = `
+                    <li>
+                        ${result.productBrand} ${result.model} ${result.color} ${result.series}
+                       <a style="cursor:pointer" class="delete_resend_prod" data-id="${result.id}"><i class="fa-solid fa-circle-minus text-danger"></i></a>
+                    </li>`
+                list.append(prodHtml);
+                parentElement.remove()
+                console.log($(".delete_resend_prod"))
+            }
+        });
+
+    })
 
     deletePunishment.on("click", function (e) {
         let id = $(e.currentTarget).data('id');
@@ -96,7 +146,7 @@
         })
     });
 
-    deleteProdModel.on("click", function(e){
+    deleteProdModel.on("click", function (e) {
         let id = $(e.currentTarget).data('id');
         let parentElement = $(e.currentTarget).parent().parent();
         Swal.fire({

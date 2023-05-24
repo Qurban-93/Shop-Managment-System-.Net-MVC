@@ -1,0 +1,40 @@
+﻿@model List<Displacement>
+
+<div class="home_index">
+    <div class="container">
+        <div class="row">
+            <h1 class="text-center">Displacement List</h1>
+            <hr />
+            <div class="col-lg-3"><a asp-action="create" class="btn btn-primary">New Displacement</a></div>
+            <form method="get">
+                <div class="mb-3 col-lg-4 d-flex search_product">
+                    <input type="text" class="form-control col-3" name="search" placeholder="Search" value="@ViewBag.SearchValue">
+                    <button type="submit" class="btn btn-primary col-2">Search</button>
+                </div>
+            </form>
+            <table class="table">
+                <thead class="thead-light">
+                    <tr>
+                        <th scope="col">Date</th>
+                        <th scope="col">Sender</th>
+                        <th scope="col">Destination</th>
+                        <th scope="col">Products Count</th>
+                        <th scope="col">Details</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (Displacement displacement in Model)
+                    {
+                        <tr>
+                            <td>@displacement.CreateDate</td>
+                            <td>@displacement.SenderBranch</td>
+                            <td>@displacement.DestinationBranch</td>
+                            <td>@displacement?.Products?.Count</td>
+                            <td><a asp-action="details" asp-route-id="@displacement?.Id"><i class="fa-solid fa-circle-info"></i></a></td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

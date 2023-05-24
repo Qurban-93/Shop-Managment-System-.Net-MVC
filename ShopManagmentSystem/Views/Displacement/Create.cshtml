@@ -1,0 +1,60 @@
+﻿@model DisplacementCreateVM
+
+<div class="container">
+    <div class="row">
+        <h1>Displacement Create</h1>
+        <hr />
+
+        <form method="post">
+            <div class="mb-3">
+                <label asp-for="DestinationId" class="form-label text-primary"></label>
+                <select asp-for="DestinationId" asp-items=ViewBag.Destination class="form-select">
+                </select>
+                <span class="text-danger" asp-validation-for="DestinationId"></span>
+            </div>
+            <div>
+                <ul class="displace_list">
+                    @if (ViewBag.List != null)
+                    {
+                        @foreach (ResendProductVM item in ViewBag.List)
+                        {
+                            <li>
+                                @item.ProductBrand  @item.Model  @item.Color  @item.Series
+                                <a style="cursor:pointer" class="delete_resend_prod" data-id="@item.Id"><i class="fa-solid fa-circle-minus text-danger"></i></a>
+                            </li>
+                        }
+                    }
+                </ul>
+            </div>
+            <button type="submit" class="btn btn-primary">Send Products</button>
+        </form>
+        <div class="mt-3">
+            <h5 class="text-primary">Choose Products</h5>
+            <table class="table">
+                <thead class="thead-light">
+                    <tr>
+                        <th class="text-primary" scope="col">Brand</th>
+                        <th class="text-primary" scope="col">Name</th>
+                        <th class="text-primary" scope="col">Color</th>
+                        <th class="text-primary" scope="col">Category</th>
+                        <th class="text-primary" scope="col">Series</th>
+                        <th class="text-primary" scope="col">Add to move</th>
+                    </tr>
+                </thead>
+                <tbody class="body_list">
+                    @foreach (Product product in Model.Products)
+                    {
+                        <tr>
+                            <td>@product.Brand.BrandName</td>
+                            <td>@product.ProductModel.ModelName</td>
+                            <td>@product.Color.ColorName</td>
+                            <td>@product.ProductCategory.Name</td>
+                            <td>@product.Series</td>
+                            <td><a style="cursor:pointer;" data-id="@product.Id" class="add_move"><i class="fa-solid fa-arrow-up-from-bracket"></i></a></td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
