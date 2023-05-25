@@ -8,9 +8,13 @@ using MailKit.Security;
 using ShopManagmentSystem.ViewModels.AccountVMs;
 using ShopManagmentSystem.DAL;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.EntityFrameworkCore;
 
 namespace ShopManagmentSystem.Areas.Admin.Controllers
 {
+    [Area("Admin")]
+    [Authorize]
     public class AccountController : Controller
     {
         private readonly UserManager<AppUser> _userManager;
@@ -27,9 +31,31 @@ namespace ShopManagmentSystem.Areas.Admin.Controllers
             _context = context;
         }
 
+
+        public async Task<IActionResult> Index()
+        {
+            List<AppUser> users = _userManager.Users.ToList();
+            List<Branch> branches =await _context.Branches.ToListAsync();
+            List<AccountIndexVM> accountVMs = new List<AccountIndexVM>();
+
+            foreach (var item in users)
+            {
+                AccountIndexVM indexVM = new()
+                {
+                    Id = item.Id,
+                    UserName = item.UserName,
+                    BranchName = branches.FirstOrDefault(b=>b.Id == item.BranchId).Name
+                };
+                accountVMs.Add(indexVM);
+            }
+         
+
+            return View(accountVMs);
+        }
+
         public IActionResult Register()
         {
-            ViewBag.Branches = new SelectList(_context.Branches.ToList(), "Id", "Name");
+            ViewBag.Branches = new SelectList(_context.Branches.Where(b=>b.Id != 5).ToList(), "Id", "Name");
             return View();
         }
 
@@ -39,6 +65,11 @@ namespace ShopManagmentSystem.Areas.Admin.Controllers
         {
             ViewBag.Branches = new SelectList(_context.Branches.ToList(), "Id", "Name");
             if (!ModelState.IsValid) return View(registrationVM);
+            if(await _userManager.Users.AnyAsync(u=>u.BranchId == registrationVM.BranchId))
+            {
+                ModelState.AddModelError("BranchId", "Bu Branch ucun User qeydiyyatdan kecirilib !");
+                return View(registrationVM);
+            }
             AppUser appUser = new();
             appUser.UserName = registrationVM.UserName;
             appUser.Email = registrationVM.Email;

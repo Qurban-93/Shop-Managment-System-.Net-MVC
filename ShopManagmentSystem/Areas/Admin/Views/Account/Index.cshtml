@@ -1,0 +1,27 @@
+﻿@model List<AccountIndexVM>
+
+<div class="container">
+    <div class="row">
+        <h1>Users List</h1>
+        <hr />
+        <div class="col-lg-4"><a class="btn btn-primary" asp-action="register">Add User</a></div>
+        <table class="table">
+            <tr>
+                <th class="text-primary">User Name</th>
+                <th class="text-primary">Branch Name</th>
+                <th class="text-primary">Settings</th>
+            </tr>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.UserName</td>
+                    <td>@item.BranchName</td>
+                    <td>
+                        <a style="font-size:20px;" asp-action="edit" asp-route-id="@item.Id" class="text-warning"><i class="fa-solid fa-pen-to-square"></i></a>
+                        <a class="text-danger" style="cursor:pointer; margin-left:20px; font-size:20px;" data-id="@item.Id"><i class="fa-regular fa-trash-can"></i></a>
+                    </td>                   
+                </tr>
+            }
+        </table>
+    </div>
+</div>
