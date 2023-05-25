@@ -26,6 +26,7 @@ namespace ShopManagmentSystem.DAL
         public DbSet<Punishment> Punishment { get; set; }
         public DbSet<Money> Moneys { get; set; }
         public DbSet<Displacement> Displacement { get; set; }
+        public DbSet<DisplacementProduct> DisplacementProducts { get; set; }
 
 
     }

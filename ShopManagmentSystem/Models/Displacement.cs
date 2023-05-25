@@ -9,6 +9,7 @@ namespace ShopManagmentSystem.Models
         public int DestinationId { get; set; }
         public string DestinationBranch { get; set; }
         public bool IsAcceppted { get; set; }
-        public List<Product>? Products { get; set; }
+        public List<DisplacementProduct>? DisplacementProducts { get; set; }
+
     }
 }

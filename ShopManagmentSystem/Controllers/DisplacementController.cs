@@ -24,7 +24,7 @@ namespace ShopManagmentSystem.Controllers
         public async Task<IActionResult> Index()
         {
             return View(await _context.Displacement
-                .Include(d=>d.Products)
+                .Include(d => d.DisplacementProducts).ThenInclude(dp=>dp.Product)
                 .ToListAsync());
         }
 
@@ -69,26 +69,42 @@ namespace ShopManagmentSystem.Controllers
             AppUser? user = await _userManager.FindByNameAsync(User.Identity.Name);
             if (user == null) return NotFound();
             ViewBag.Destination = new SelectList(await _context.Branches
-                .Where(b => b.Id != user.BranchId).ToListAsync(), "Id", "Name");
-            if (!ModelState.IsValid) return View();
+                .Where(b => b.Id != user.BranchId).ToListAsync(), "Id", "Name");          
             string basket = Request.Cookies["basket"];
-            if (string.IsNullOrWhiteSpace(basket)) return BadRequest();
+            if (string.IsNullOrWhiteSpace(basket)) 
+            {
+                createVM.Products = await _context.Products
+                    .Include(p=>p.Brand)
+                    .Include(p => p.Color)
+                    .Include(p => p.ProductModel)
+                    .Include(p => p.ProductCategory).ToListAsync();
+                ModelState.AddModelError("DestinationId", "Mehsul elave edilmeyib !");
+                return View(createVM);
+            }
             List<int> itemsId = JsonConvert.DeserializeObject<List<ResendProductVM>>(basket).Select(i => i.Id).ToList();
             List<Product> products = await _context.Products.Where(p => itemsId.Contains(p.Id)).ToListAsync();
             if (products.Count == 0 || products == null) return BadRequest();
+            List<DisplacementProduct> displacementProducts = new();
+            foreach (Product product in products)
+            {
+                product.BranchId = 5;
+                DisplacementProduct displacementProduct = new();
+                displacementProduct.ProductId = product.Id;
+                displacementProducts.Add(displacementProduct);
+
+            }
             Displacement displacement = new()
             {
+                IsAcceppted = false,
                 SenderId = user.BranchId,
                 SenderBranch = _context.Branches.FirstOrDefault(b => b.Id == user.BranchId).Name,
                 DestinationId = createVM.DestinationId,
                 DestinationBranch = _context.Branches.FirstOrDefault(b => b.Id == createVM.DestinationId).Name,
-                Products = products   ,
+                DisplacementProducts = displacementProducts,
                 CreateDate = DateTime.Now,
             };
-            foreach (Product product in products)
-            {
-                product.BranchId = 5;
-            }
+            
+            Request.Cookies["basket"].Remove(0);
             await _context.Displacement.AddAsync(displacement);
             await _context.SaveChangesAsync();
 
@@ -137,7 +153,7 @@ namespace ShopManagmentSystem.Controllers
             string basket = Request.Cookies["Basket"];
             if (basket == null) return NotFound();
             List<ResendProductVM> products = JsonConvert.DeserializeObject<List<ResendProductVM>>(basket);
-            ResendProductVM productVM = products.FirstOrDefault(p=>p.Id == id);
+            ResendProductVM productVM = products.FirstOrDefault(p => p.Id == id);
             if (productVM == null) return BadRequest();
             products.Remove(productVM);
             Response.Cookies.Append("Basket", JsonConvert.SerializeObject(products),
@@ -148,12 +164,44 @@ namespace ShopManagmentSystem.Controllers
 
         public async Task<IActionResult> Details(int? id)
         {
-            if(id == 0 || id == null) return BadRequest();
+            AppUser? user = await _userManager.FindByNameAsync(User.Identity.Name);
+            if (id == 0 || id == null || user == null) return BadRequest();
             Displacement? displacement = await _context.Displacement
-                .Include(d=>d.Products)
+                .Include(d => d.DisplacementProducts).ThenInclude(dp=>dp.Product).ThenInclude(p=>p.Brand)
+                .Include(d => d.DisplacementProducts).ThenInclude(dp => dp.Product).ThenInclude(p => p.Color)
+                .Include(d => d.DisplacementProducts).ThenInclude(dp => dp.Product).ThenInclude(p => p.ProductModel)
+                .Include(d => d.DisplacementProducts).ThenInclude(dp => dp.Product).ThenInclude(p => p.ProductCategory)
                 .FirstOrDefaultAsync(d => d.Id == id);
             if (displacement == null) return NotFound();
-            return View(displacement);
+            DisplacementDetailsVM detailsVM = new()
+            {
+                Displacement = displacement,
+                User = user
+            };
+            return View(detailsVM);
+        }
+
+        public async Task<IActionResult> AcceptDisplacement(int? id)
+        {
+            AppUser user = await _userManager.FindByNameAsync(User.Identity.Name);
+            if (user == null) return BadRequest();
+            if (id == null || id == 0) return BadRequest();
+            Displacement? displacement = await _context.Displacement
+                .Include(d => d.DisplacementProducts).ThenInclude(dp=>dp.Product)
+                .FirstOrDefaultAsync(d => d.Id == id);
+            if (displacement == null) return NotFound();
+            if (displacement.DestinationId != user.BranchId) return BadRequest();
+
+            foreach (var item in displacement.DisplacementProducts)
+            {
+                item.Product.BranchId = user.BranchId;
+            }
+
+            displacement.IsAcceppted = true;
+            await _context.SaveChangesAsync();
+            TempData["ok"] = true;
+
+            return RedirectToAction("Index");
         }
     }
 }

@@ -5,6 +5,12 @@
         <div class="row">
             <h1 class="text-center">Displacement List</h1>
             <hr />
+            @if (TempData["ok"] != null)
+            {
+                <div style="transition:all 0.5s ease" id="alert_refund" class="alert alert-warning" role="alert">
+                    Products are accepted !
+                </div>
+            }
             <div class="col-lg-3"><a asp-action="create" class="btn btn-primary">New Displacement</a></div>
             <form method="get">
                 <div class="mb-3 col-lg-4 d-flex search_product">
@@ -19,6 +25,7 @@
                         <th scope="col">Sender</th>
                         <th scope="col">Destination</th>
                         <th scope="col">Products Count</th>
+                        <th scope="col">Status</th>
                         <th scope="col">Details</th>
                     </tr>
                 </thead>
@@ -29,7 +36,8 @@
                             <td>@displacement.CreateDate</td>
                             <td>@displacement.SenderBranch</td>
                             <td>@displacement.DestinationBranch</td>
-                            <td>@displacement?.Products?.Count</td>
+                            <td>@displacement?.DisplacementProducts?.Count</td>
+                            <td class="@(displacement.IsAcceppted ? "text-success":"text-danger")" >@(displacement.IsAcceppted == true ?"Accepted":"Not Accepted")</td>
                             <td><a asp-action="details" asp-route-id="@displacement?.Id"><i class="fa-solid fa-circle-info"></i></a></td>
                         </tr>
                     }
