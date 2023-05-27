@@ -4,37 +4,20 @@ using ShopManagmentSystem.DAL;
 using ShopManagmentSystem.Models;
 using ShopManagmentSystem.Service;
 using Hangfire;
+using ShopManagmentSystem.Hubs;
+using ShopManagmentSystem;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddControllersWithViews();
+
+builder.Services.ShopManagerServiceRegistration();
 builder.Services.AddDbContext<AppDbContext>(options => 
 options.UseSqlServer(builder.Configuration.GetConnectionString("default")));
-
 builder.Services.AddHangfire(configuration => configuration
             .UseSimpleAssemblyNameTypeSerializer()
            .UseRecommendedSerializerSettings()
            .UseSqlServerStorage(builder.Configuration.GetConnectionString("default")));
-
-builder.Services.AddIdentity<AppUser, IdentityRole>(options =>
-{
-    options.User.RequireUniqueEmail = true;
-    options.Password.RequireLowercase = true;
-    options.Password.RequireDigit = true;
-    options.Password.RequireUppercase = true;
-    options.Password.RequiredLength = 8;
-    options.Lockout.AllowedForNewUsers = true;
-    options.Lockout.MaxFailedAccessAttempts = 3;
-    options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(20);
-    options.SignIn.RequireConfirmedAccount= true;
-    
-})
-    .AddEntityFrameworkStores<AppDbContext>()
-    .AddDefaultTokenProviders();
-
-
-builder.Services.AddScoped<IBoxOfficeService, BoxOfficeService>();
 
 var app = builder.Build();
 
@@ -50,6 +33,7 @@ else
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
+app.MapHub<ChatHub>("/chat");
 app.MapHangfireDashboard();
 app.UseAuthentication();
 app.UseRouting();

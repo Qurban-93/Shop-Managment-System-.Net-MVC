@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "SzcNSf+WJnSstexwHilj/J9bJTKLQprBbOn7hYbcV7A=",
+  "Hash": "sABF0WImdxHTAgASZ60/tzWl+P1tLknzGoS+B6A7L5g=",
   "Source": "ShopManagmentSystem",
   "BasePath": "_content/ShopManagmentSystem",
   "Mode": "Default",
@@ -117,6 +117,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\assets\\js\\AjaxScript.js"
+    },
+    {
+      "Identity": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\assets\\js\\Chat.js",
+      "SourceId": "ShopManagmentSystem",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\",
+      "BasePath": "_content/ShopManagmentSystem",
+      "RelativePath": "assets/js/Chat.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\assets\\js\\Chat.js"
     },
     {
       "Identity": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\assets\\js\\Clock.js",
