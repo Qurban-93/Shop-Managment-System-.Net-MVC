@@ -5,6 +5,10 @@
   box-sizing: border-box;
   font-family: "Inter", sans-serif;
 }
+* ul {
+  list-style: none;
+  padding: 0;
+}
 
 a {
   text-decoration: none !important;
@@ -361,7 +365,6 @@ ul.accordion-list li {
   margin: 0 auto 15px auto;
   border: 1px solid #eee;
   border-radius: 5px;
-  cursor: pointer;
 }
 ul.accordion-list li.active h3:after {
   transform: rotate(45deg);
@@ -395,17 +398,6 @@ ul.accordion-list li div.answer {
   height: auto;
   margin: 0;
   padding: 0;
-  cursor: pointer;
-}
-ul.accordion-list li div.answer p {
-  position: relative;
-  display: block;
-  font-weight: 300;
-  padding: 10px 0 0 0;
-  cursor: pointer;
-  line-height: 150%;
-  margin: 0 0 15px 0;
-  font-size: 14px;
 }
 
 .setting_options {

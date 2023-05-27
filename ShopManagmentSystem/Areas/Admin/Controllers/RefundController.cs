@@ -9,7 +9,7 @@ using ShopManagmentSystem.ViewModels.RefundVMs;
 namespace ShopManagmentSystem.Areas.Admin.Controllers;
 
 [Area("Admin")]
-//[Authorize(Roles = "Admin,SuperAdmin")]
+[Authorize]
 public class RefundController : Controller
 {
     private readonly AppDbContext _context;

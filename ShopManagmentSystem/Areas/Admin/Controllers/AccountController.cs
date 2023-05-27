@@ -247,5 +247,11 @@ namespace ShopManagmentSystem.Areas.Admin.Controllers
 
             return RedirectToAction("login","Account");
         }
+
+        public async Task<IActionResult> LogOut()
+        {
+            await _signInManager.SignOutAsync();
+            return RedirectToAction("login","account");
+        }
     }
 }

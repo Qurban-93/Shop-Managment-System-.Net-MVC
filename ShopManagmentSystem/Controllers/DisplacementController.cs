@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -10,6 +11,7 @@ using ShopManagmentSystem.ViewModels.ProductVMs;
 
 namespace ShopManagmentSystem.Controllers
 {
+    [Authorize]
     public class DisplacementController : Controller
     {
         private readonly AppDbContext _context;
@@ -64,6 +66,7 @@ namespace ShopManagmentSystem.Controllers
             return View(createVM);
         }
         [HttpPost]
+        [AutoValidateAntiforgeryToken]
         public async Task<IActionResult> Create(DisplacementCreateVM createVM)
         {
             AppUser? user = await _userManager.FindByNameAsync(User.Identity.Name);
@@ -111,6 +114,7 @@ namespace ShopManagmentSystem.Controllers
             return RedirectToAction("Index");
         }
         [HttpPost]
+        [AutoValidateAntiforgeryToken]
         public async Task<IActionResult> AddToList(int? id)
         {
             if (id == null || id == 0) return NotFound();

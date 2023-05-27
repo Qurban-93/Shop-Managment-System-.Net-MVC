@@ -42,7 +42,7 @@
                         <td>@product.Series</td>
                         <td class="@(product.IsSold == true ? "text-danger": "text-success")" >@product.IsSold</td>
                         <td>
-                            <a class="text-warning" style="margin-right:10px;" asp-action="edit" asp-route-id="@product.Id"><i style="font-size:25px;" class="fa-regular fa-pen-to-square"></i></a>
+                            <a class="text-warning" style="margin-right:20px;" asp-action="edit" asp-route-id="@product.Id"><i style="font-size:25px;" class="fa-regular fa-pen-to-square"></i></a>
                             <a class="text-danger" style="cursor:pointer;" ><i style="font-size:25px;" class="fa-regular fa-trash-can"></i></a>
                         </td>
                     </tr>

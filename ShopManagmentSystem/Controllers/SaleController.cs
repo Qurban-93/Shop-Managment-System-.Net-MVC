@@ -24,20 +24,16 @@ public class SaleController : Controller
     }
     public async Task<IActionResult> Index(string search, DateTime? fromDate, DateTime? toDate)
     {
-        if (!User.Identity.IsAuthenticated) return RedirectToAction("Login", "Account");
-
-        AppUser user = await _userManager.FindByNameAsync(User.Identity.Name);
-
-        if (user == null) return NotFound();
-
-
         ViewBag.toDate = toDate;
         ViewBag.fromDate = fromDate;
-
+        ViewBag.SearchValue = search;
+        if (!User.Identity.IsAuthenticated) return RedirectToAction("Login", "Account");
+        AppUser user = await _userManager.FindByNameAsync(User.Identity.Name);
+        if (user == null) return NotFound();
         if (!string.IsNullOrWhiteSpace(search))
         {
-            ViewBag.SearchValue = search;
-            if (fromDate < toDate)
+
+            if (fromDate > toDate)
             {
                 ViewBag.Error = "Invalid data";
                 return View(await _context.Sales
@@ -47,40 +43,39 @@ public class SaleController : Controller
                 .Include(s => s.Branch)
                 .Include(s => s.Branch)
                 .Where(s => s.Customer.FullName.Contains(search.Trim().ToLower()) &&
-                s.BranchId == user.BranchId).ToListAsync());
+                s.BranchId == user.BranchId && s.CreateDate > DateTime.Today).ToListAsync());
             }
             if (fromDate != null && toDate == null)
             {
-                ViewBag.FromDate = fromDate;
+
                 return View(await _context.Sales
             .Include(s => s.SaleProducts).ThenInclude(sp => sp.Product)
             .Include(s => s.Customer)
             .Include(s => s.Employee)
             .Include(s => s.Branch)
             .Where(s => s.Customer.FullName.Contains(search.Trim().ToLower()) &&
-            s.CreateDate > fromDate && s.BranchId == user.BranchId).ToListAsync());
+            s.CreateDate > fromDate && s.BranchId == user.BranchId && s.CreateDate > fromDate).ToListAsync());
             }
             if (fromDate == null && toDate != null)
             {
-                ViewBag.ToDate = toDate;
+
                 return View(await _context.Sales
             .Include(s => s.SaleProducts).ThenInclude(sp => sp.Product)
             .Include(s => s.Customer)
             .Include(s => s.Employee)
             .Include(s => s.Branch)
             .Where(s => s.Customer.FullName.Contains(search.Trim().ToLower()) &&
-            s.CreateDate < toDate && s.BranchId == user.BranchId).ToListAsync());
+            s.CreateDate < toDate && s.BranchId == user.BranchId && s.CreateDate < toDate).ToListAsync());
             }
             if (fromDate != null && toDate != null)
             {
-                ViewBag.FromDate = fromDate;
-                ViewBag.ToDate = toDate;
+
                 return View(await _context.Sales
             .Include(s => s.SaleProducts).ThenInclude(sp => sp.Product)
             .Include(s => s.Customer)
             .Include(s => s.Employee)
             .Where(s => s.Customer.FullName.Contains(search.Trim().ToLower())
-            && s.CreateDate > fromDate && s.CreateDate < toDate && s.BranchId == user.BranchId)
+            && s.CreateDate > fromDate && s.CreateDate < toDate.Value.AddHours(23) && s.BranchId == user.BranchId)
             .ToListAsync());
             }
             return View(await _context.Sales
@@ -90,7 +85,7 @@ public class SaleController : Controller
             .Include(s => s.Branch)
             .Include(s => s.Branch)
             .Where(s => s.Customer.FullName.Contains(search.Trim().ToLower()) &&
-            s.BranchId == user.BranchId).ToListAsync());
+            s.BranchId == user.BranchId && s.CreateDate > DateTime.Today).ToListAsync());
         }
         if (fromDate > toDate)
         {
@@ -108,38 +103,36 @@ public class SaleController : Controller
         {
 
             return View(await _context.Sales
-        .Include(s => s.SaleProducts).ThenInclude(sp => sp.Product)
-        .Include(s => s.Customer)
-        .Include(s => s.Employee)
-        .Include(s => s.Branch)
-        .Where(s => s.CreateDate > fromDate)
-        .Where(s => s.BranchId == user.BranchId)
-        .ToListAsync());
+                .Include(s => s.SaleProducts).ThenInclude(sp => sp.Product)
+                .Include(s => s.Customer)
+                .Include(s => s.Employee)
+                .Include(s => s.Branch)
+                .Where(s => s.CreateDate > fromDate)
+                .Where(s => s.BranchId == user.BranchId && s.CreateDate > fromDate)
+                .ToListAsync());
         }
         if (fromDate == null && toDate != null)
         {
             toDate = toDate.Value.AddHours(23).AddMinutes(59).AddSeconds(59);
 
             return View(await _context.Sales
-        .Include(s => s.SaleProducts).ThenInclude(sp => sp.Product)
-        .Include(s => s.Customer)
-        .Include(s => s.Employee)
-        .Include(s => s.Branch)
-        .Where(s => s.CreateDate < toDate)
-        .Where(s => s.BranchId == user.BranchId)
-        .ToListAsync());
+                .Include(s => s.SaleProducts).ThenInclude(sp => sp.Product)
+                .Include(s => s.Customer)
+                .Include(s => s.Employee)
+                .Include(s => s.Branch)
+                .Where(s => s.CreateDate < toDate && s.BranchId == user.BranchId)
+                .ToListAsync());
         }
         if (fromDate != null && toDate != null)
         {
-            toDate = toDate.Value.AddHours(23).AddMinutes(59).AddSeconds(59);
-            
             return View(await _context.Sales
-        .Include(s => s.SaleProducts).ThenInclude(sp => sp.Product)
-        .Include(s => s.Customer)
-        .Include(s => s.Employee)
-        .Include(s => s.Branch)
-        .Where(s => s.CreateDate > fromDate && s.CreateDate < toDate 
-        && s.BranchId == user.BranchId).ToListAsync());
+                    .Include(s => s.SaleProducts).ThenInclude(sp => sp.Product)
+                    .Include(s => s.Customer)
+                    .Include(s => s.Employee)
+                    .Include(s => s.Branch)
+                    .Where(s => s.CreateDate > fromDate && s.CreateDate < toDate.Value.AddHours(23)
+                    && s.BranchId == user.BranchId)
+                    .ToListAsync());
         }
         if (fromDate == null && toDate == null)
         {
@@ -147,14 +140,12 @@ public class SaleController : Controller
             ViewBag.toDate = DateTime.Today;
         }
 
-       
-
         return View(await _context.Sales
             .Include(s => s.SaleProducts).ThenInclude(sp => sp.Product)
             .Include(s => s.Customer)
             .Include(s => s.Employee)
             .Include(s => s.Branch)
-            .Where(s => s.CreateDate > DateTime.Today && s.BranchId == user.BranchId)        
+            .Where(s => s.CreateDate > DateTime.Today && s.BranchId == user.BranchId)
             .ToListAsync());
     }
     [HttpDelete]
@@ -180,6 +171,7 @@ public class SaleController : Controller
         return NotFound();
     }
     [HttpPost]
+    [AutoValidateAntiforgeryToken]
     public async Task<IActionResult> AddProduct(int? id)
     {
         if (!User.Identity.IsAuthenticated) return BadRequest();
@@ -191,7 +183,7 @@ public class SaleController : Controller
             .Include(p => p.Color)
             .Include(p => p.Brand)
             .Include(p => p.ProductCategory)
-            .Include(p=>p.ProductModel)
+            .Include(p => p.ProductModel)
             .Where(p => p.BranchId == user.BranchId)
             .FirstOrDefaultAsync(p => p.Id == id);
         if (product == null) return NotFound();
@@ -232,27 +224,28 @@ public class SaleController : Controller
         return View(saleVM);
     }
     [HttpPost]
+    [AutoValidateAntiforgeryToken]
     public async Task<IActionResult> Orders(SaleVM saleVM)
     {
         if (!User.Identity.IsAuthenticated) return BadRequest();
         AppUser user = await _userManager.FindByNameAsync(User.Identity.Name);
-        if (user == null) return RedirectToAction("Login","Account");
+        if (user == null) return RedirectToAction("Login", "Account");
         ViewBag.Sellers = new SelectList(await _context.Employees
             .Where(e => e.BranchId == user.BranchId).ToListAsync(), "Id", "FullName");
-        List<Order> orders = await _context.Orders.Where(o=>o.BranchId == user.BranchId).ToListAsync();
-        if (orders == null || orders.Count < 1) 
+        List<Order> orders = await _context.Orders.Where(o => o.BranchId == user.BranchId).ToListAsync();
+        if (orders == null || orders.Count < 1)
         {
-            ModelState.AddModelError("Orders","Mehsul elave olunmayib !");
+            ModelState.AddModelError("Orders", "Mehsul elave olunmayib !");
             saleVM.Orders = new();
-            return View(saleVM); 
+            return View(saleVM);
         }
-        
+
         if (!ModelState.IsValid)
         {
             saleVM.Orders = orders;
             return View(saleVM);
         }
-        if ((orders.Sum(o => o.Price)-saleVM.Discount) < saleVM.CashlessPayment)
+        if ((orders.Sum(o => o.Price) - saleVM.Discount) < saleVM.CashlessPayment)
         {
             ModelState.AddModelError("CashlessPayment", "Nagdsiz odenis umumi meblegden cox ola bilmez !");
             saleVM.Orders = orders;
@@ -295,19 +288,19 @@ public class SaleController : Controller
             prodId.Add(order.ProdId);
         }
         List<Product> products = _context.Products
-            .Include(p=>p.ProductModel).Include(p=>p.ProductCategory)
+            .Include(p => p.ProductModel).Include(p => p.ProductCategory)
             .Where(p => prodId.Contains(p.Id)).ToList();
 
 
         List<SaleProducts> saleProductsList = new List<SaleProducts>();
         Salary salary = new();
         Money money = new();
-       
+
         foreach (Product product in products)
         {
-            salary.Bonus =+ product.ProductCategory.Bonus;
+            salary.Bonus = +product.ProductCategory.Bonus;
             SaleProducts saleProducts = new();
-            saleProducts.ProductId = product.Id;     
+            saleProducts.ProductId = product.Id;
             saleProductsList.Add(saleProducts);
         }
 
@@ -331,8 +324,8 @@ public class SaleController : Controller
         money.Incoming = newSale.TotalPrice;
         money.Sale = newSale;
         money.BranchId = user.BranchId;
-        
-        
+
+
 
 
         foreach (var item in products)
@@ -353,16 +346,16 @@ public class SaleController : Controller
     {
         if (id == null || id == 0) return NotFound();
         Sale? sale = await _context.Sales
-            .Include(s=>s.SaleProducts).ThenInclude(sp=>sp.Product).ThenInclude(p=>p.Brand)
+            .Include(s => s.SaleProducts).ThenInclude(sp => sp.Product).ThenInclude(p => p.Brand)
             .Include(s => s.SaleProducts).ThenInclude(sp => sp.Product).ThenInclude(p => p.Color)
             .Include(s => s.SaleProducts).ThenInclude(sp => sp.Product).ThenInclude(p => p.ProductCategory)
             .Include(s => s.SaleProducts).ThenInclude(sp => sp.Product).ThenInclude(p => p.ProductModel)
-            .Include(s=>s.Branch)
-            .Include(s=>s.Customer)
-            .Include(s=>s.Employee)
-            .Include(s=>s.Refunds).ThenInclude(r=>r.Product).ThenInclude(p=>p.ProductModel)
-            .FirstOrDefaultAsync(s=>s.Id==id);
-        if(sale == null) return NotFound();
+            .Include(s => s.Branch)
+            .Include(s => s.Customer)
+            .Include(s => s.Employee)
+            .Include(s => s.Refunds).ThenInclude(r => r.Product).ThenInclude(p => p.ProductModel)
+            .FirstOrDefaultAsync(s => s.Id == id);
+        if (sale == null) return NotFound();
         List<RefundOrder> orders = await _context.RefundOrders.ToListAsync();
         SaleDetailsVM saleDetailsVM = new();
         saleDetailsVM.Sale = sale;

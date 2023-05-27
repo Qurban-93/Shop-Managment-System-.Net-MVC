@@ -2,7 +2,7 @@
 
 <div class="container">
     <div class="row">
-        <h1 class="text-warning">Refund Details <i class="fa-solid fa-circle-info"></i></h1>
+        <h1>Refund Details <i class="fa-solid fa-circle-info"></i></h1>
         <hr />
         <div style="display:none; transition:all 0.3s ease" id="alert_refund" class="alert alert-warning" role="alert">
             This is a warning alert—check it out!
@@ -14,16 +14,17 @@
             <li> Cashless Paymant : @Model.CashlessPayment <i class="fa-solid fa-manat-sign"></i></li>
             <li> Discount : @Model.Discount <i class="fa-solid fa-manat-sign"></i></li>
             <li>Seller Name : @Model.Employee.FullName</li>
+            <li>Qaytarma sebebi : @Model.Description</li>
         </ul>
         <h3>Product</h3>
         <table class="table">
             <tr>
-                <th> Brand </th>
-                <th> Name </th>
-                <th> Price </th>
-                <th> Color </th>
-                <th> Category </th>
-                <th> Series </th>
+                <th class="text-primary"> Brand </th>
+                <th class="text-primary"> Name </th>
+                <th class="text-primary"> Price </th>
+                <th class="text-primary"> Color </th>
+                <th class="text-primary"> Category </th>
+                <th class="text-primary"> Series </th>
                 
             </tr>
             <tr>
@@ -35,5 +36,6 @@
                 <td>@Model.Product.Series</td>
             </tr>
         </table>
+
     </div>
 </div>

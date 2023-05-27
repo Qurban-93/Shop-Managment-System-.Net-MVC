@@ -28,12 +28,15 @@ namespace ShopManagmentSystem.Areas.Admin.Controllers
 
         public async Task<IActionResult> Index(string search)
         {
+            AppUser user = await _userManager.FindByNameAsync(User.Identity.Name);
+            if(user == null) return NotFound();
             List<Product> products = new();
             var query = _context.Products
                 .Include(p => p.ProductCategory)
                 .Include(p => p.ProductModel)
                 .Include(p => p.Brand)
-                .Include(p => p.Color);
+                .Include(p => p.Color)
+                .Where(p=>p.BranchId == user.BranchId);
 
             if (!string.IsNullOrWhiteSpace(search))
             {

@@ -42,7 +42,6 @@
 
     });
 
-
     addList.on("click", function (e) {
         let id = $(e.currentTarget).data('id');
         let list = $(".displace_list");

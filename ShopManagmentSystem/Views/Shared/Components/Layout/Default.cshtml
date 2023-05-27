@@ -82,7 +82,12 @@
                    @if(User.Identity.IsAuthenticated)
                    {
                         <div class="name">@User.Identity.Name</div>
-                        <div class="job">@Model.Role.FirstOrDefault()</div>
+                        <div class="job">
+                            @foreach (var item in Model.Role)
+                            {
+                                <span> @item</span>
+                            }
+                        </div>
                     }
                 </div>
             </div>

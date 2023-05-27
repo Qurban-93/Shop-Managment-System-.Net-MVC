@@ -122,6 +122,7 @@ namespace ShopManagmentSystem.Controllers
         }
 
         [HttpPost]
+        [AutoValidateAntiforgeryToken]
         public async Task<IActionResult> RefundOrder(RefundOrderVM refundOrderVM)
         {
             AppUser? user = await _userManager.FindByNameAsync(User.Identity.Name);

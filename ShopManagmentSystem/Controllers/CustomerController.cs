@@ -21,13 +21,12 @@ namespace ShopManagmentSystem.Controllers
             _userManager = userManager;
         }
 
-        public IActionResult Index(string search)
+        public async Task<IActionResult> Index(string search)
         {
             if (!string.IsNullOrEmpty(search))
             {
-                return View(_context.Customers
-                    .Where(c=>c.FullName.Contains(search.Trim().ToLower()) 
-                || c.Email.Contains(search.Trim().ToLower())));
+                return View(await _context.Customers
+                    .Where(c=>c.FullName.Contains(search.Trim().ToLower()) || c.Email.Contains(search.Trim().ToLower())).ToListAsync());
             }
             return View(_context.Customers.ToList());
         }
@@ -37,6 +36,7 @@ namespace ShopManagmentSystem.Controllers
             return View();
         }
         [HttpPost]
+        [AutoValidateAntiforgeryToken]
         public async Task<IActionResult> Create(CustomerCreateVM customer)
         {
             if(!ModelState.IsValid)

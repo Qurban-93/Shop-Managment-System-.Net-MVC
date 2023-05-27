@@ -1,5 +1,8 @@
 ﻿@model SalaryVM
 
+
+
+
 <div class="container">
     <div class="row">
         <h1>Salary Reports</h1>
@@ -15,48 +18,65 @@
                 </div>
                 <div class="col-lg-2"> <button style="width:100%;" type="submit" class="btn btn-primary col-lg-2">Search</button></div>
             </div>
-        </form>
-        @foreach (var item in Model.Employees)
-        {
-            <h5 class="text-primary">@item.FullName</h5>
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>Date</th>
-                        <td>Salary</td>
-                        <td>Details</td>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var salary in Model.Salaries)
-                    {
-                        if (salary.Employee.FullName == item.FullName)
-                        {
-                            <tr>
-                                <td>@salary.CreateDate.ToString("dd MMMM yyyy , hh:mm")</td>
-                                <td class="@(salary.Bonus < 0 ? "text-danger":"")">@salary.Bonus</td>
-                                <td>
-                                    @if (salary.SaleId != null)
-                                    {
-                                        <a asp-action="details" asp-controller="sale" asp-route-id="@salary.SaleId"><i class="fa-solid fa-circle-info"></i></a>
-                                    }
-                                    else
-                                    {
-                                        <a asp-action="details" asp-controller="refund" asp-route-id="@salary.RefundId"><i class="fa-solid fa-circle-info"></i></a>
+        </form>       
+        <ul class="accordion-list">
 
-                                    }
-                                </td>
-                            </tr>
-                        }
+            @foreach (var item in Model.Employees)
+            {
 
-                    }
-                    <tr>
-                        <td class="text-warning">Fix salary : @item.EmployeePostion.FixSalary</td>
-                        <td class="text-warning">Total : @(item.Salaries.Sum(s => s.Bonus) + item.EmployeePostion.FixSalary)</td>
-                        <td></td>
-                    </tr>
-                </tbody>
-            </table>
-        }
+
+                <li>
+                    <h3 class="text-primary">@item.FullName</h3>
+                    <div class="answer">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Date</th>
+                                    <td>Salary</td>
+                                    <td>Details</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var salary in Model.Salaries)
+                                {
+                                    if (salary.Employee.FullName == item.FullName)
+                                    {
+                                        <tr>
+                                            <td>@salary.CreateDate.ToString("dd MMMM yyyy , hh:mm")</td>
+                                            <td class="@(salary.Bonus < 0 ? "text-danger":"")">@salary.Bonus</td>
+                                            <td>
+                                                @if (salary.SaleId != null)
+                                                {
+                                                    <a asp-action="details" asp-controller="sale" asp-route-id="@salary.SaleId"><i class="fa-solid fa-circle-info"></i></a>
+                                                }
+                                                else
+                                                {
+                                                    <a asp-action="details" asp-controller="refund" asp-route-id="@salary.RefundId"><i class="fa-solid fa-circle-info"></i></a>
+
+                                                }
+                                            </td>
+                                        </tr>
+                                    }
+
+                                }
+                                <tr>
+                                    <td class="text-warning">Fix salary : @item.EmployeePostion.FixSalary</td>
+                                    <td class="text-warning">Total : @(item.Salaries.Sum(s => s.Bonus) + item.EmployeePostion.FixSalary)</td>
+                                    <td></td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                    </div>
+                </li>
+
+
+            }
+        </ul>
+
     </div>
 </div>
+
+@section Css{
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/material-design-iconic-font/2.2.0/css/material-design-iconic-font.min.css">
+}
