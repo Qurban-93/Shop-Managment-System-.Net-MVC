@@ -305,3 +305,4 @@ C:\Users\Hp\Desktop\HomeTestMyself\ShopManagmentSystem\ShopManagmentSystem\bin\D
 C:\Users\Hp\Desktop\HomeTestMyself\ShopManagmentSystem\ShopManagmentSystem\bin\Debug\net7.0\System.Web.WebPages.Razor.dll
 C:\Users\Hp\Desktop\HomeTestMyself\ShopManagmentSystem\ShopManagmentSystem\bin\Debug\net7.0\System.Web.WebPages.dll
 C:\Users\Hp\Desktop\HomeTestMyself\ShopManagmentSystem\ShopManagmentSystem\bin\Debug\net7.0\Microsoft.Web.Infrastructure.dll
+C:\Users\Hp\Desktop\HomeTestMyself\ShopManagmentSystem\ShopManagmentSystem\bin\Debug\net7.0\libman.json

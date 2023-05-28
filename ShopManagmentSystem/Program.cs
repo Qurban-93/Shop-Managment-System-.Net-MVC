@@ -33,7 +33,7 @@ else
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
-app.MapHub<ChatHub>("/chat");
+
 app.MapHangfireDashboard();
 app.UseAuthentication();
 app.UseRouting();
@@ -52,5 +52,5 @@ app.MapControllerRoute(
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=sale}/{action=index}/{id?}");
-
+app.MapHub<ChatHub>("/chat");
 app.Run();

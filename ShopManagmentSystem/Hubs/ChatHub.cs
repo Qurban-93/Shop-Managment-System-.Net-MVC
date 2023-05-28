@@ -13,9 +13,13 @@ namespace ShopManagmentSystem.Hubs
             _userManager = userManager;
         }
 
-        public async Task SendMessage(string user, string message)
+        public async Task SendMessage(string id, string senderId, string sender, string message)
         {
-            await Clients.All.SendAsync("ReceiveMessage", user, message);
+            AppUser? user = await _userManager.FindByIdAsync(id);
+            if (user.ConnectionId != null)
+            {
+                Clients.Client(user.ConnectionId).SendAsync("ShowAlert", sender, message, senderId);
+            }
         }
 
         public override async Task<Task> OnConnectedAsync()

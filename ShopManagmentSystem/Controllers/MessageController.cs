@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SignalR;
+using ShopManagmentSystem.DAL;
 using ShopManagmentSystem.Hubs;
 using ShopManagmentSystem.Models;
 
@@ -10,11 +11,13 @@ namespace ShopManagmentSystem.Controllers
     {
         private readonly UserManager<AppUser> _userManager;
         private readonly IHubContext<ChatHub> _hubContext;
+        private readonly AppDbContext _context;
 
-        public MessageController(UserManager<AppUser> userManager, IHubContext<ChatHub> hubContext)
+        public MessageController(UserManager<AppUser> userManager, IHubContext<ChatHub> hubContext, AppDbContext context)
         {
             _userManager = userManager;
             _hubContext = hubContext;
+            _context = context;
         }
 
         public IActionResult Index()
@@ -29,6 +32,14 @@ namespace ShopManagmentSystem.Controllers
             if (user.ConnectionId != null)
                 _hubContext.Clients.Client(user.ConnectionId).SendAsync("ShowAlert", User.Identity.Name);
             return RedirectToAction(nameof(Index));
+        }
+
+        public async Task<IActionResult> ChatHistory(string destinationId)
+        {
+            AppUser? user = await _userManager.FindByNameAsync(User.Identity.Name);
+            if (destinationId == null || user == null) return NotFound();
+            List<Message> messages = _context.Messages.Where(m => m.DestinationId == destinationId && m.SenderId == user.Id).ToList();
+            return PartialView("__ChatHistoryPartialView",messages);
         }
     }
 }

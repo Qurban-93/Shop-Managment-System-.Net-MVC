@@ -41,6 +41,10 @@
       "PackagePath": "staticwebassets\\assets\\js\\main.js"
     },
     {
+      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\assets\\js\\signalr.js",
+      "PackagePath": "staticwebassets\\assets\\js\\signalr.js"
+    },
+    {
       "Id": "obj\\Debug\\net7.0\\staticwebassets\\msbuild.ShopManagmentSystem.Microsoft.AspNetCore.StaticWebAssets.props",
       "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
     },

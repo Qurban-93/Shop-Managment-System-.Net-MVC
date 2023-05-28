@@ -1,13 +1,128 @@
-﻿<div class="container">
+﻿@section Icon{
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+}
+
+<div class="container">
+    <div class="row clearfix mainDiv">
+        <div class="col-lg-12">
+            <div class="card chat-app">
+                <div id="plist" class="people-list">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="fa fa-search"></i></span>
+                        </div>
+                        <input type="text" class="form-control" placeholder="Search...">
+                    </div>
+                    <ul class="list-unstyled chat-list mt-2 mb-0">
+                        @foreach (AppUser item in ViewBag.Users)
+                        {
+                            <li class="clearfix">
+                                <img src="/assets/img/Random.png" alt="avatar">
+                                <div class="about">
+                                    <div class="name">@item.UserName</div>
+                                    <div class="status"> <i class="fa fa-circle @(item.ConnectionId != null ? "online" : "offline" )"></i>@(item.ConnectionId != null ? "online" : "offline") </div>
+                                </div>
+                            </li>                        
+                        }                     
+                    </ul>
+                </div>
+                <div class="chat">
+                    <div class="chat-header clearfix">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <a href="javascript:void(0);" data-toggle="modal" data-target="#view_info">
+                                    <img src="https://bootdey.com/img/Content/avatar/avatar2.png" alt="avatar">
+                                </a>
+                                <div class="chat-about">
+                                    <h6 class="m-b-0">Aiden Chavez</h6>
+                                    <small>Last seen: 2 hours ago</small>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 hidden-sm text-right">
+                                <a href="javascript:void(0);" class="btn btn-outline-secondary"><i class="fa fa-camera"></i></a>
+                                <a href="javascript:void(0);" class="btn btn-outline-primary"><i class="fa fa-image"></i></a>
+                                <a href="javascript:void(0);" class="btn btn-outline-info"><i class="fa fa-cogs"></i></a>
+                                <a href="javascript:void(0);" class="btn btn-outline-warning"><i class="fa fa-question"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="chat-history">
+                        <ul class="m-b-0">
+                            <li class="clearfix">
+                                <div class="message-data text-right">
+                                    <span class="message-data-time">10:10 AM, Today</span>
+                                    <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="avatar">
+                                </div>
+                                <div class="message other-message float-right"> Hi Aiden, how are you? How is the project coming along? </div>
+                            </li>
+                            <li class="clearfix">
+                                <div class="message-data">
+                                    <span class="message-data-time">10:12 AM, Today</span>
+                                </div>
+                                <div class="message my-message">Are we meeting today?</div>
+                            </li>
+                            <li class="clearfix">
+                                <div class="message-data">
+                                    <span class="message-data-time">10:15 AM, Today</span>
+                                </div>
+                                <div class="message my-message">Project has been already finished and I have results to show you.</div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="chat-message clearfix">
+                        <div class="input-group mb-0">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fa fa-send"></i></span>
+                            </div>
+                            <input type="text" class="form-control" placeholder="Enter text here...">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@*@{
+    if (User.Identity.IsAuthenticated)
+    {
+        <input type="hidden" id="senderUser" value="@User.Identity.Name" />
+    }
+}
+
+<div class="container">
     <div class="row">
-        <h1>Message</h1>
-        <div class="col-6">
+        <h1>Message Sent</h1>
+        <div class="col-8">
             <div class="container">
                 <div class="row p-1">
-                    <div class="col-1">User</div>
-                    <div class="col-5"><input type="text" id="userInput" /></div>
-                </div>
-                <div class="row p-1">
+                    <input id="userId" type="hidden" value="" />
+                    <span class="text-warning notice"></span>
                     <div class="col-1">Message</div>
                     <div class="col-5"><input type="text" class="w-100" id="messageInput" /></div>
                 </div>
@@ -22,18 +137,25 @@
                     </div>
                 </div>
                 <div class="row p-1">
+
                     <div class="col-6">
-                        <ul id="messagesList"></ul>
+                        <ul style="border:1px solid grey" id="messagesList">
+                            @*<li class="userName"></li>*@
+@*                        </ul>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="col-6">
+        <div class="col-4">
             <ul class="list-group">
                 @foreach (AppUser item in ViewBag.Users)
                 {
-                    <li class="list-group-item">
-                        <a asp-action="ShowAlert" asp-controller="Message" asp-route-id="@item.Id">Hello !</a>
+                    if (item.UserName == User.Identity.Name)
+                    {
+                        <input type="hidden" value="@item.Id" id="senderId" />
+                    }
+                    <li id="@item.UserName" class="list-group-item">
+                        <a name="@item.UserName" class="selectUser"><i class="fa-regular fa-message  chatIcon"></i></a>
                         <span id="@item.Id" class="@(item.ConnectionId != null ? " bg-online ":" bg-offline ")" style="display:inline-block; width:10px; height:10px; border-radius:50%;">
                         </span>
                         @item.UserName
@@ -45,10 +167,8 @@
     </div>
 </div>
 @section Scripts{
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/7.0.4/signalr.min.js"
-        integrity="sha512-ulHhwQdGlX96gNSRsakG06STFdaQBUTbCX4KqLcYI428blEsttMkg2C3n2KtiYNDwnETBHXDg9ZAtvkfMHTYOQ=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="~/assets/js/Chat.js"></script>
+    <script src="~/assets/js/signalr.js"></script>
+    <script src="~/assets/js/chat.js"></script>
     <style>
         .bg-online {
             background-color: forestgreen;
@@ -57,7 +177,10 @@
         .bg-offline {
             background-color: dimgrey;
         }
-    </style>
-}
 
+        .chatIcon {
+            cursor: pointer;
+        }
+    </style>
+}*@
 
