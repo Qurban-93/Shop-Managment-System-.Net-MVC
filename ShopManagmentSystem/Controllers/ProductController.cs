@@ -24,7 +24,7 @@ namespace ShopManagmentSystem.Controllers
         {
             if (!User.Identity.IsAuthenticated) return RedirectToAction("Login", "Account");
             AppUser user = await _userManager.FindByNameAsync(User.Identity.Name);
-            if (user == null) return NotFound();           
+            if (user == null) return NotFound();
             List<Product> products = new();
             var query = _appDbContext.Products
                 .Include(p => p.ProductCategory)
@@ -60,10 +60,37 @@ namespace ShopManagmentSystem.Controllers
                     }
                 }
 
-            }           
+            }
             ViewBag.SearchValue = search;
 
             return View(products);
+        }
+
+        public async Task<IActionResult> Search(string search)
+        {
+            List<Product> products;
+            if (string.IsNullOrWhiteSpace(search))
+            {
+                products = new();
+            }
+            else
+            {
+                products = await _appDbContext.Products
+               .Include(p => p.Brand)
+               .Include(p => p.ProductModel)
+               .Include(p => p.Color)
+               .Where(p => !p.IsSold && (p.ProductModel.ModelName.ToLower().Trim().Contains(search.ToLower().Trim()) ||
+               p.Brand.BrandName.ToLower().Trim().Contains(search.ToLower().Trim())))
+               .ToListAsync();
+            }
+            List<Branch> branches = await _appDbContext.Branches.Where(b => b.Id != 5).ToListAsync();
+            SearchVM searchVM = new()
+            {
+                Products = products,
+                Branches = branches
+            };
+            ViewBag.SearchValue = search;
+            return View(searchVM);
         }
     }
 }

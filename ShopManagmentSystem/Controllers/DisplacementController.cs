@@ -7,7 +7,6 @@ using Newtonsoft.Json;
 using ShopManagmentSystem.DAL;
 using ShopManagmentSystem.Models;
 using ShopManagmentSystem.ViewModels;
-using ShopManagmentSystem.ViewModels.ProductVMs;
 
 namespace ShopManagmentSystem.Controllers
 {
@@ -26,41 +25,71 @@ namespace ShopManagmentSystem.Controllers
         public async Task<IActionResult> Index()
         {
             return View(await _context.Displacement
-                .Include(d => d.DisplacementProducts).ThenInclude(dp=>dp.Product)
+                .Include(d => d.DisplacementProducts).ThenInclude(dp => dp.Product)
                 .ToListAsync());
         }
 
-        public async Task<IActionResult> Create()
+        public async Task<IActionResult> Create(string search)
         {
             AppUser? user = await _userManager.FindByNameAsync(User.Identity.Name);
             if (user == null) return NotFound();
             ViewBag.Destination = new SelectList(await _context.Branches
-                .Where(b => b.Id != user.BranchId).ToListAsync(), "Id", "Name");
+                .Where(b => b.Id != user.BranchId && b.Id != 5).ToListAsync(), "Id", "Name");
             DisplacementCreateVM createVM;
             string basket = Request.Cookies["Basket"];
             if (basket == null)
             {
-                createVM = new()
+                createVM = new();
+                if (string.IsNullOrWhiteSpace(search))
                 {
-                    Products = await _context.Products
-                .Include(p => p.Color)
-                .Include(p => p.ProductModel)
-                .Include(p => p.ProductCategory)
-                .Include(p => p.Brand)
-                .Where(p => !p.IsSold && p.BranchId == user.BranchId)
-                .ToListAsync(),
-                };
+                    createVM.Products = await _context.Products
+                    .Include(p => p.Color)
+                    .Include(p => p.ProductModel)
+                    .Include(p => p.ProductCategory)
+                    .Include(p => p.Brand)
+                    .Where(p => !p.IsSold && p.BranchId == user.BranchId)
+                    .ToListAsync();
+                }
+                else
+                {
+                    createVM.Products = await _context.Products
+                    .Include(p => p.Color)
+                    .Include(p => p.ProductModel)
+                    .Include(p => p.ProductCategory)
+                    .Include(p => p.Brand)
+                    .Where(p => !p.IsSold && p.BranchId == user.BranchId)
+                    .Where(p=>p.ProductModel.ModelName.Trim().ToLower().Contains(search.Trim().ToLower()) || 
+                    p.Brand.BrandName.Trim().ToLower().Contains(search.Trim().ToLower()))
+                    .ToListAsync();
+                }
             }
             else
             {
                 createVM = new();
                 List<int> itemsId = JsonConvert.DeserializeObject<List<ResendProductVM>>(basket).Select(i => i.Id).ToList();
-                createVM.Products = await _context.Products
-                    .Include(p => p.Color)
-                    .Include(p => p.ProductModel)
-                    .Include(p => p.ProductCategory)
-                    .Include(p => p.Brand)
-                    .Where(p => !itemsId.Contains(p.Id) && p.BranchId == user.BranchId).ToListAsync();
+                if (string.IsNullOrWhiteSpace(search))
+                {
+                    
+                    createVM.Products = await _context.Products
+                        .Include(p => p.Color)
+                        .Include(p => p.ProductModel)
+                        .Include(p => p.ProductCategory)
+                        .Include(p => p.Brand)
+                        .Where(p => !itemsId.Contains(p.Id) && p.BranchId == user.BranchId).ToListAsync();
+                        
+                }
+                else
+                {
+                    createVM.Products = await _context.Products
+                       .Include(p => p.Color)
+                       .Include(p => p.ProductModel)
+                       .Include(p => p.ProductCategory)
+                       .Include(p => p.Brand)
+                       .Where(p => !itemsId.Contains(p.Id) && p.BranchId == user.BranchId)
+                       .Where(p => p.ProductModel.ModelName.Trim().ToLower().Contains(search.Trim().ToLower()) ||
+                        p.Brand.BrandName.Trim().ToLower().Contains(search.Trim().ToLower()))
+                       .ToListAsync();
+                }
                 ViewBag.List = JsonConvert.DeserializeObject<List<ResendProductVM>>(basket);
             }
             return View(createVM);
@@ -72,12 +101,12 @@ namespace ShopManagmentSystem.Controllers
             AppUser? user = await _userManager.FindByNameAsync(User.Identity.Name);
             if (user == null) return NotFound();
             ViewBag.Destination = new SelectList(await _context.Branches
-                .Where(b => b.Id != user.BranchId).ToListAsync(), "Id", "Name");          
+                .Where(b => b.Id != user.BranchId).ToListAsync(), "Id", "Name");
             string basket = Request.Cookies["basket"];
-            if (string.IsNullOrWhiteSpace(basket)) 
+            if (string.IsNullOrWhiteSpace(basket))
             {
                 createVM.Products = await _context.Products
-                    .Include(p=>p.Brand)
+                    .Include(p => p.Brand)
                     .Include(p => p.Color)
                     .Include(p => p.ProductModel)
                     .Include(p => p.ProductCategory).ToListAsync();
@@ -106,7 +135,7 @@ namespace ShopManagmentSystem.Controllers
                 DisplacementProducts = displacementProducts,
                 CreateDate = DateTime.Now,
             };
-            
+
             Request.Cookies["basket"].Remove(0);
             await _context.Displacement.AddAsync(displacement);
             await _context.SaveChangesAsync();
@@ -114,7 +143,6 @@ namespace ShopManagmentSystem.Controllers
             return RedirectToAction("Index");
         }
         [HttpPost]
-        [AutoValidateAntiforgeryToken]
         public async Task<IActionResult> AddToList(int? id)
         {
             if (id == null || id == 0) return NotFound();
@@ -171,7 +199,7 @@ namespace ShopManagmentSystem.Controllers
             AppUser? user = await _userManager.FindByNameAsync(User.Identity.Name);
             if (id == 0 || id == null || user == null) return BadRequest();
             Displacement? displacement = await _context.Displacement
-                .Include(d => d.DisplacementProducts).ThenInclude(dp=>dp.Product).ThenInclude(p=>p.Brand)
+                .Include(d => d.DisplacementProducts).ThenInclude(dp => dp.Product).ThenInclude(p => p.Brand)
                 .Include(d => d.DisplacementProducts).ThenInclude(dp => dp.Product).ThenInclude(p => p.Color)
                 .Include(d => d.DisplacementProducts).ThenInclude(dp => dp.Product).ThenInclude(p => p.ProductModel)
                 .Include(d => d.DisplacementProducts).ThenInclude(dp => dp.Product).ThenInclude(p => p.ProductCategory)
@@ -191,7 +219,7 @@ namespace ShopManagmentSystem.Controllers
             if (user == null) return BadRequest();
             if (id == null || id == 0) return BadRequest();
             Displacement? displacement = await _context.Displacement
-                .Include(d => d.DisplacementProducts).ThenInclude(dp=>dp.Product)
+                .Include(d => d.DisplacementProducts).ThenInclude(dp => dp.Product)
                 .FirstOrDefaultAsync(d => d.Id == id);
             if (displacement == null) return NotFound();
             if (displacement.DestinationId != user.BranchId) return BadRequest();

@@ -2,7 +2,7 @@
 
 <div class="container">
     <div class="row">
-        <h1>Profit Report</h1>
+        <h1 style="margin-top:50px;">Profit Report</h1>
         <hr />
         <form method="get">
             <div class="mb-3 col-lg-8 d-flex search_product">
@@ -29,18 +29,18 @@
         <table class="table">
             <tbody>
                 <tr>
-                    <th>Date</th>
-                    <th>Amount</th>
+                    <th class="text-primary">Date</th>
+                    <th class="text-primary">Amount</th>
                 </tr>
                 @foreach (var item in Model)
                 {
                     <tr>
-                        <th>@item.Date</th>
+                        <th>@item.Date.ToLocalTime().ToString("dd MMMM yyyy, hh:mm")</th>
                         <th class="@(item.Profit < 0 ? "text-danger":"")">@item.Profit</th>
                     </tr>
                 }
                 <tr>
-                    <td>TOTAL</td>
+                    <td class="text-primary">TOTAL</td>
                     <td>@Model.Sum(p=>p.Profit)</td>
                 </tr>
             </tbody>

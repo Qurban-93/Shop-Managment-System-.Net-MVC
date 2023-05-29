@@ -4,10 +4,15 @@
     <div class="row">
         <h1>Displacement Create</h1>
         <hr />
-
+        <form method="get">
+            <div class="mb-3 col-lg-4 d-flex search_product">
+                <input type="text" class="form-control col-3" name="search" placeholder="Search" value="@ViewBag.SearchValue">
+                <button type="submit" class="btn btn-primary col-2">Search</button>
+            </div>
+        </form>
         <form method="post">
             <div class="mb-3">
-                <label asp-for="DestinationId" class="form-label text-primary"></label>
+                <label asp-for="DestinationId" class="form-label text-primary">Choose Detination Branch </label>
                 <select asp-for="DestinationId" asp-items=ViewBag.Destination class="form-select">
                 </select>
                 <span class="text-danger" asp-validation-for="DestinationId"></span>

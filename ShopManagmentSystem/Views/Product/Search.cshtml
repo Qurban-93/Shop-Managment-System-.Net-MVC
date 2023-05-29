@@ -1,0 +1,45 @@
+﻿@model SearchVM
+
+<div class="container">
+    <div class="row">
+        <h1 style="margin-top:50px;" class="text-center">Search</h1>
+        <hr />
+        <form method="get">
+            <div class="mb-3 col-lg-6 d-flex search_product">
+                <div class="col-7"><input type="text" class="form-control" name="search" placeholder="Search" value="@ViewBag.SearchValue"></div>
+                <div class="col-4"><button type="submit" class="btn btn-primary">Search</button></div>
+            </div>
+        </form>
+        <table class="table">
+            <tbody>
+                <tr>
+                    <th class="text-primary">Product</th>
+                    @foreach (var item in Model.Branches)
+                    {
+                        <th class="text-primary">@item.Name</th>
+                    }
+                </tr>
+
+                @if(Model.Products.Count>0){
+                    @foreach (var item in Model.Products)
+                    {
+                        <tr>
+                            <td>@item.Brand.BrandName @item.ProductModel.ModelName @item.Color.ColorName @item.Series</td>
+                            @foreach (var branch in Model.Branches)
+                            {
+                                if (branch.Id == item.BranchId)
+                                {
+                                    <td>1</td>
+                                }
+                                else
+                                {
+                                    <td>-</td>
+                                }
+                            }
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

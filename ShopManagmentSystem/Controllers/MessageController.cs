@@ -38,8 +38,9 @@ namespace ShopManagmentSystem.Controllers
         {
             AppUser? user = await _userManager.FindByNameAsync(User.Identity.Name);
             if (destinationId == null || user == null) return NotFound();
-            List<Message> messages = _context.Messages.Where(m => m.DestinationId == destinationId && m.SenderId == user.Id).ToList();
-            return PartialView("__ChatHistoryPartialView",messages);
+            List<Message> messages = _context.Messages.Where(m => (m.DestinationId == destinationId && m.SenderId == user.Id) ||
+            (m.DestinationId == user.Id && m.SenderId == destinationId)).ToList();
+            return PartialView("_ChatHistoryPartialView",messages);
         }
     }
 }

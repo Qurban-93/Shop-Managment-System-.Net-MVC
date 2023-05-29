@@ -388,11 +388,11 @@
         let id = $(e.currentTarget).data('id');
         let parentElement = $(e.currentTarget).parent().parent();
         let countSpan = $(".count");
-
+        console.log("ok")
 
         $.ajax({
             method: "POST",
-            url: "Sale/AddProduct/" + id,
+            url: "/Sale/AddProduct/" + id,
             success: function (result) {
                 parentElement.remove();
                 countBasket++;

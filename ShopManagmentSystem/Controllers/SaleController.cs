@@ -170,8 +170,7 @@ public class SaleController : Controller
 
         return NotFound();
     }
-    [HttpPost]
-    [AutoValidateAntiforgeryToken]
+    [HttpPost] 
     public async Task<IActionResult> AddProduct(int? id)
     {
         if (!User.Identity.IsAuthenticated) return BadRequest();

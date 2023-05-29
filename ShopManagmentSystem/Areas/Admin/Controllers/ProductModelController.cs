@@ -18,11 +18,19 @@ namespace ShopManagmentSystem.Areas.Admin.Controllers
             _context = context;
         }
 
-        public IActionResult Index()
+        public IActionResult Index(string search)
         {
+            if (!string.IsNullOrWhiteSpace(search))
+            {
+                return View(_context.ProductModels
+                .Include(p => p.ProductCategory)
+                .Include(p => p.Brand)
+                .Where(p=>p.ModelName.Trim().ToLower().Contains(search.ToLower().Trim()))
+                .OrderBy(p => p.Brand.BrandName).ToList());
+            }
             return View(_context.ProductModels
                 .Include(p => p.ProductCategory)
-                .Include(p => p.Brand).ToList());
+                .Include(p => p.Brand).OrderBy(p=>p.Brand.BrandName).ToList());
         }
 
         public IActionResult Create()

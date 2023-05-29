@@ -27,31 +27,36 @@ namespace ShopManagmentSystem.Controllers
         {
             if (!User.Identity.IsAuthenticated) return RedirectToAction("login", "account");
             AppUser? user = await _userManager.FindByNameAsync(User.Identity.Name);
-            if (user == null) return BadRequest(); 
-            
+            if (user == null) return BadRequest();
+            MoneyVM money = new();
+            money.Money = await _context.Moneys.Where(m=>m.BranchId == user.BranchId).ToListAsync();
+
             ViewBag.fromDate = fromDate;
             ViewBag.toDate = toDate;
 
             if (fromDate > toDate)
             {
                 ViewBag.Error = "Invalid Date Time";
-
-                return View(_boxOfficeService.GetAll(user));
+                money.FilterMoney = _boxOfficeService.GetAll(user);
+                return View(money);
             }
             if (fromDate != null && toDate == null)
             {
-                return View(_boxOfficeService.GetAll((DateTime)fromDate,user));
+                money.FilterMoney = _boxOfficeService.GetAll((DateTime)fromDate, user);
+                return View(money);
             }
             if (fromDate == null && toDate != null)
             {
                 toDate.Value.AddHours(23).AddMinutes(59).AddSeconds(59);
+                money.FilterMoney = _boxOfficeService.GetAll(user, (DateTime)toDate);
 
-                return View(_boxOfficeService.GetAll(user,(DateTime)toDate));
+                return View(money);
             }
             if (fromDate != null && toDate != null)
             {
                 toDate = toDate.Value.AddHours(23).AddMinutes(59).AddSeconds(59);
-                return View(_boxOfficeService.GetAll((DateTime)fromDate,user,(DateTime)toDate));
+                money.FilterMoney = _boxOfficeService.GetAll((DateTime)fromDate, user, (DateTime)toDate);
+                return View(money);
             }
             if(fromDate == null && toDate == null)
             {
@@ -59,9 +64,9 @@ namespace ShopManagmentSystem.Controllers
                 ViewBag.toDate = DateTime.Today;
             }
 
-            
-            
-            return View(_boxOfficeService.GetAll(user));
+            money.FilterMoney = _boxOfficeService.GetAll(user);
+
+            return View(money);
         }
     }
 }

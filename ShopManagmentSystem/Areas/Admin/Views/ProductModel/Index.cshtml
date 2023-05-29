@@ -4,6 +4,12 @@
 <div class="container">
     <div class="row">
         <h1 style="margin-bottom:15px;margin-top:15px;">Product Model List</h1>
+        <form method="get">
+            <div class="mb-3 col-lg-4 d-flex search_product">
+                <input type="text" class="form-control col-3" name="search" placeholder="Search" value="@ViewBag.SearchValue">
+                <button type="submit" class="btn btn-primary col-2">Search</button>
+            </div>
+        </form>
         <hr />
         @if (TempData["Create"] != null)
         {
