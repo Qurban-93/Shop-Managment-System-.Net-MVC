@@ -20,7 +20,7 @@
                                 <img src="/assets/img/Random.png" alt="avatar">
                                 <div class="about">
                                     <div class="name">@item.UserName</div>
-                                    <div class="status"> <i class="fa fa-circle @(item.ConnectionId != null ? "online" : "offline" )"></i>@(item.ConnectionId != null ? "online" : "offline") </div>
+                                    <div class="status"> <i id="@item.Id" class="fa fa-circle @(item.ConnectionId != null ? "online" : "offline" )"></i>@(item.ConnectionId != null ? "online" : "offline") </div>
                                 </div>
                             </li>                        
                         }                     
@@ -82,6 +82,11 @@
         </div>
     </div>
 </div>
+
+@section Scripts{
+    <script src="~/assets/js/Chat.js"></script>
+}
+
 
 
 

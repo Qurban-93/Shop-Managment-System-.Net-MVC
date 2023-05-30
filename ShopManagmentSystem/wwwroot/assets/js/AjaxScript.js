@@ -15,7 +15,49 @@
     let deletePunishment = $(".delete_punishment");
     let addList = $(".add_move");
     let deleteResendProd = $(".delete_resend_prod");
+    let deleteBranch = $(".delete_branch");
 
+    deleteBranch.on("click", function (e) {
+        let id = $(e.currentTarget).data('id');
+        let parentElement = $(e.currentTarget).parent().parent();
+
+        Swal.fire({
+            title: 'Are you sure delete ?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    method: "DELETE",
+                    url: "Branch/Delete/" + id,
+                    success: function (result) {
+                        console.log(result)
+                        parentElement.remove()
+                        Swal.fire(
+                            `${result} Deleted !`,
+                            'Your file has been deleted.',
+                            'success'
+                        )
+                    },
+                    error: function (result) {
+                        Swal.fire(
+                            'Not Deleted!',
+                            'Your file has been not deleted.',
+                            'error'
+                        )
+                        console.log(result)
+                    }
+                });
+
+
+            }
+        })
+
+    })
 
     deleteResendProd.on("click", function (e) {
         let id = $(e.currentTarget).data('id');

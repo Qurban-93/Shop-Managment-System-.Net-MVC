@@ -4,8 +4,10 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
+using ShopManagmentSystem.BackgroundService;
 using ShopManagmentSystem.DAL;
 using ShopManagmentSystem.Models;
+using ShopManagmentSystem.Service;
 using ShopManagmentSystem.ViewModels;
 
 namespace ShopManagmentSystem.Controllers
@@ -15,11 +17,16 @@ namespace ShopManagmentSystem.Controllers
     {
         private readonly AppDbContext _context;
         private readonly UserManager<AppUser> _userManager;
+        private readonly IDisplacementService _displacementService;
 
-        public DisplacementController(AppDbContext context, UserManager<AppUser> userManager)
+
+
+        public DisplacementController(AppDbContext context, UserManager<AppUser> userManager, 
+            IDisplacementService displacementService)
         {
             _context = context;
             _userManager = userManager;
+            _displacementService = displacementService;
         }
 
         public async Task<IActionResult> Index()
@@ -98,6 +105,7 @@ namespace ShopManagmentSystem.Controllers
         [AutoValidateAntiforgeryToken]
         public async Task<IActionResult> Create(DisplacementCreateVM createVM)
         {
+            
             AppUser? user = await _userManager.FindByNameAsync(User.Identity.Name);
             if (user == null) return NotFound();
             ViewBag.Destination = new SelectList(await _context.Branches
@@ -136,9 +144,12 @@ namespace ShopManagmentSystem.Controllers
                 CreateDate = DateTime.Now,
             };
 
+            _displacementService.ScheduleDisplacement(displacement);
             Request.Cookies["basket"].Remove(0);
             await _context.Displacement.AddAsync(displacement);
             await _context.SaveChangesAsync();
+            
+            
 
             return RedirectToAction("Index");
         }

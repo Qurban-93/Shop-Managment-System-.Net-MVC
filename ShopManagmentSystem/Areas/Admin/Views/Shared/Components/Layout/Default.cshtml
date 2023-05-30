@@ -38,61 +38,72 @@
             <span class="tooltip">Products</span>
         </li>
         <li>
-            <a asp-action="index" asp-controller="employee">
-                <i class="fa-solid fa-person-digging"></i>
-                <span class="links_name">Employees</span>
-            </a>
-            <span class="tooltip">Employee</span>
-        </li>
-        <li>
-            <a asp-action="index" asp-controller="employeeposition">
-                <i class="fa-solid fa-user-astronaut"></i>
-                <span class="links_name">Employee Positions</span>
-            </a>
-            <span class="tooltip">Employee Positions</span>
-        </li>
-        <li>
-            <a asp-action="index" asp-controller="brand">
-                <i class="fa-regular fa-star"></i>
-                <span class="links_name">Brands</span>
-            </a>
-            <span class="tooltip">Brands</span>
-        </li>
-        <li>
-            <a asp-action="index" asp-controller="colors">
-                <i class="fa-solid fa-palette"></i>
-                <span class="links_name">Colors</span>
-            </a>
-            <span class="tooltip">Colors</span>
-        </li>      
-        <li>
-            <a asp-action="index" asp-controller="productcategory">
-                <i class="fa-solid fa-layer-group"></i>
-                <span class="links_name">Category</span>
-            </a>
-            <span class="tooltip">Category</span>
-        </li>
-        <li>
-            <a asp-action="index" asp-controller="productmodel">
-                <i class="fa-regular fa-square-plus"></i>
-                <span class="links_name">Models</span>
-            </a>
-            <span class="tooltip">Models</span>
-        </li>
-        <li>
             <a asp-action="index" asp-controller="punishment">
                 <i class="fa-solid fa-skull-crossbones"></i>
                 <span class="links_name">Punishment</span>
             </a>
             <span class="tooltip">Punishment</span>
         </li>
-        <li>
-            <a asp-action="index" asp-controller="account">
-                <i class="fa-solid fa-user-plus"></i>
-                <span class="links_name">Add User</span>
-            </a>
-            <span class="tooltip">Add User</span>
-        </li>
+        @if (User.IsInRole("SuperAdmin"))
+        {
+            <li>
+                <a asp-action="index" asp-controller="employee">
+                    <i class="fa-solid fa-person-digging"></i>
+                    <span class="links_name">Employees</span>
+                </a>
+                <span class="tooltip">Employee</span>
+            </li>
+            <li>
+                <a asp-action="index" asp-controller="employeeposition">
+                    <i class="fa-solid fa-user-astronaut"></i>
+                    <span class="links_name">Employee Positions</span>
+                </a>
+                <span class="tooltip">Employee Positions</span>
+            </li>
+            <li>
+                <a asp-action="index" asp-controller="brand">
+                    <i class="fa-regular fa-star"></i>
+                    <span class="links_name">Brands</span>
+                </a>
+                <span class="tooltip">Brands</span>
+            </li>
+            <li>
+                <a asp-action="index" asp-controller="colors">
+                    <i class="fa-solid fa-palette"></i>
+                    <span class="links_name">Colors</span>
+                </a>
+                <span class="tooltip">Colors</span>
+            </li>
+            <li>
+                <a asp-action="index" asp-controller="productcategory">
+                    <i class="fa-solid fa-layer-group"></i>
+                    <span class="links_name">Category</span>
+                </a>
+                <span class="tooltip">Category</span>
+            </li>
+            <li>
+                <a asp-action="index" asp-controller="productmodel">
+                    <i class="fa-regular fa-square-plus"></i>
+                    <span class="links_name">Models</span>
+                </a>
+                <span class="tooltip">Models</span>
+            </li>
+            <li>
+                <a asp-action="index" asp-controller="account">
+                    <i class="fa-solid fa-user-plus"></i>
+                    <span class="links_name">Add User</span>
+                </a>
+                <span class="tooltip">Add User</span>
+            </li>
+            <li>
+                <a asp-action="index" asp-controller="branch">
+                    <i class="fa-solid fa-code-branch"></i>
+                    <span class="links_name">Branches</span>
+                </a>
+                <span class="tooltip">Branches</span>
+            </li>
+        }
+       
     </ul>
 
     <div class="profile_content">

@@ -13,16 +13,16 @@ connection.on("ReceiveMessage", function (user, message) {
 
 connection.on("Online", function (userId) {
 
-    document.getElementById(userId).classList.remove("bg-offline");
-    document.getElementById(userId).classList.add("bg-online");
+    document.getElementById(userId).classList.remove("offline");
+    document.getElementById(userId).classList.add("online");
 
 });
 
 
 connection.on("Offline", function (userId) {
 
-    document.getElementById(userId).classList.remove("bg-online");
-    document.getElementById(userId).classList.add("bg-offline");
+    document.getElementById(userId).classList.remove("online");
+    document.getElementById(userId).classList.add("offline");
 
 });
 

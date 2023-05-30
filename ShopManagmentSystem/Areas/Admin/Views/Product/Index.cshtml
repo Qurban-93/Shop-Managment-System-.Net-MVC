@@ -11,12 +11,12 @@
         <h1>Products List</h1>
         <hr />
         <div class="col-lg-3"><a asp-action="create" class="btn btn-primary"> Add Product</a></div>
-        <form method="get">
+        @*<form method="get">
             <div class="mb-3 col-lg-4 d-flex search_product">
                 <input type="text" class="form-control" name="search" placeholder="Search" value="@ViewBag.SearchValue">
                 <button type="submit" class="btn btn-primary">Search</button>
             </div>
-        </form>
+        </form>*@
         <table class="table">
             <thead class="thead-light">
                 <tr>
@@ -51,3 +51,15 @@
         </table>
     </div>
 </div>
+@section Scripts{
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"> </script>
+
+        <script src="https://cdn.datatables.net/1.13.1/js/dataTables.bootstrap5.min.js"> </script>
+        <script>
+            $(document).ready(function () {
+                var dataTable = $('.table').DataTable();
+            });
+
+        </script>
+}

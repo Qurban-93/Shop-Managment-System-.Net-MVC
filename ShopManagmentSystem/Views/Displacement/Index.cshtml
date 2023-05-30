@@ -32,7 +32,7 @@
                 <tbody>
                     @foreach (Displacement displacement in Model)
                     {
-                        <tr>
+                        <tr id="@displacement.Id">
                             <td>@displacement.CreateDate</td>
                             <td>@displacement.SenderBranch</td>
                             <td>@displacement.DestinationBranch</td>
@@ -46,3 +46,6 @@
         </div>
     </div>
 </div>
+@section Scripts{
+    <script src="~/assets/js/UpdateHub.js"></script>
+}

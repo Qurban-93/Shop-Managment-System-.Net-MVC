@@ -5,12 +5,13 @@
         <div class="row">
             <h1 class="text-center">Product List</h1>
             <hr />
-            <form method="get">
-                <div class="mb-3 col-lg-4 d-flex search_product">
-                    <input type="text" class="form-control col-3" name="search" placeholder="Search" value="@ViewBag.SearchValue">
-                    <button type="submit" class="btn btn-primary col-2">Search</button>
-                </div>
-            </form>         
+            
+            @* <form method="get">
+            <div class="mb-3 col-lg-4 d-flex search_product">
+            <input type="text" class="form-control col-3" name="search" placeholder="Search" value="@ViewBag.SearchValue">
+            <button type="submit" class="btn btn-primary col-2">Search</button>
+            </div>
+            </form>*@
             <table class="table">
                 <thead class="thead-light">
                     <tr>
@@ -41,3 +42,18 @@
         </div>
     </div>
 </div>
+
+@section Scripts{
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"> </script>
+
+    <script src="https://cdn.datatables.net/1.13.1/js/dataTables.bootstrap5.min.js"> </script>
+    <script>
+        $(document).ready(function () {
+            var dataTable = $('.table').DataTable();
+        });
+
+    </script>
+}
+
+

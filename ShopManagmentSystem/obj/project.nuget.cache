@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "mX74rc1402+qmDpiHFkiwWvURVeEOVy0UewOm16hQsOGmZa//GcIiP8BxM8KNIxcIrrC6kjXdoiX1YnjQKjdYg==",
+  "dgSpecHash": "NRCOq1oJDeVpedjK4KiSQimP32s1vcMwLa5Bwrt+QK35lRz+6JRexcNPDZY9pbWuVJFWlJaASRpCyXLl9NOg3A==",
   "success": true,
   "projectFilePath": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\ShopManagmentSystem.csproj",
   "expectedPackageFiles": [
@@ -13,6 +13,8 @@
     "C:\\Users\\Hp\\.nuget\\packages\\hangfire.netcore\\1.8.2\\hangfire.netcore.1.8.2.nupkg.sha512",
     "C:\\Users\\Hp\\.nuget\\packages\\hangfire.sqlserver\\1.8.2\\hangfire.sqlserver.1.8.2.nupkg.sha512",
     "C:\\Users\\Hp\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
+    "C:\\Users\\Hp\\.nuget\\packages\\jquery\\1.7.0\\jquery.1.7.0.nupkg.sha512",
+    "C:\\Users\\Hp\\.nuget\\packages\\jquery.datatables\\1.10.15\\jquery.datatables.1.10.15.nupkg.sha512",
     "C:\\Users\\Hp\\.nuget\\packages\\mailkit\\4.0.0\\mailkit.4.0.0.nupkg.sha512",
     "C:\\Users\\Hp\\.nuget\\packages\\microsoft.aspnet.mvc\\5.2.9\\microsoft.aspnet.mvc.5.2.9.nupkg.sha512",
     "C:\\Users\\Hp\\.nuget\\packages\\microsoft.aspnet.razor\\3.2.9\\microsoft.aspnet.razor.3.2.9.nupkg.sha512",

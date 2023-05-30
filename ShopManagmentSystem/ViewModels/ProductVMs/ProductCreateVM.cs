@@ -7,9 +7,7 @@ namespace ShopManagmentSystem.ViewModels.ProductVMs
         [Required]
         public double CostPrice { get; set; }
         [Required]
-        public string Series { get; set; } = null!;
-        [Required]
-        public int ProductCategoryId { get; set; }
+        public string Series { get; set; } = null!;     
         [Required]
         public int? BrandId { get; set; }
         [Required]

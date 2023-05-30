@@ -10,6 +10,7 @@ using ShopManagmentSystem.DAL;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
+using ShopManagmentSystem.ViewModels;
 
 namespace ShopManagmentSystem.Areas.Admin.Controllers
 {
@@ -252,6 +253,25 @@ namespace ShopManagmentSystem.Areas.Admin.Controllers
         {
             await _signInManager.SignOutAsync();
             return RedirectToAction("login","account");
+        }
+
+        public async Task<IActionResult> Edit(string id)
+        {
+            if (id == null) return NotFound();
+            AppUser user = await _userManager.FindByIdAsync(id);
+            if (user == null) return NotFound();
+            List<IdentityRole> roles = _roleManager.Roles.ToList();
+            var userRoles = _userManager.GetRolesAsync(user).Result;
+            Branch? branch = await _context.Branches.FirstOrDefaultAsync(x => x.Id == user.BranchId);
+            AccountEditVM editVM = new()
+            {
+                User= user,
+                Roles=roles,
+                UserRoles = userRoles,
+                Branch = branch
+            };
+           
+            return View(editVM);
         }
     }
 }

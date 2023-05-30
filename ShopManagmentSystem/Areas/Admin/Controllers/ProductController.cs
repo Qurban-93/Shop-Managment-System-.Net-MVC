@@ -57,8 +57,7 @@ namespace ShopManagmentSystem.Areas.Admin.Controllers
         [HttpGet]
         public IActionResult Create()
         {
-            ViewBag.Brands = new SelectList(_context.Brands.ToList(), "Id", "BrandName");
-            ViewBag.ProductCategories = new SelectList(_context.ProductCategories.ToList(), "Id", "Name");
+            ViewBag.Brands = new SelectList(_context.Brands.ToList(), "Id", "BrandName");         
             ViewBag.Color = new SelectList(_context.Colors.ToList(), "Id", "ColorName");
             ViewBag.ProdModel = new SelectList(_context.ProductModels.ToList(), "Id", "ModelName");
 
@@ -69,8 +68,7 @@ namespace ShopManagmentSystem.Areas.Admin.Controllers
         public async Task<IActionResult> Create(ProductCreateVM productCreateVM)
         {
             AppUser? user = await _userManager.FindByNameAsync(User.Identity.Name);
-            ViewBag.Brands = new SelectList(_context.Brands.ToList(), "Id", "BrandName");
-            ViewBag.ProductCategories = new SelectList(_context.ProductCategories.ToList(), "Id", "Name");
+            ViewBag.Brands = new SelectList(_context.Brands.ToList(), "Id", "BrandName");            
             ViewBag.Color = new SelectList(_context.Colors.ToList(), "Id", "ColorName");
             ViewBag.ProdModel = new SelectList(_context.ProductModels.ToList(), "Id", "ModelName");
             if (!ModelState.IsValid) return View();
@@ -80,11 +78,10 @@ namespace ShopManagmentSystem.Areas.Admin.Controllers
                 return View();
             }
             Brand? brand = await _context.Brands.Include(b => b.ProductModels).FirstOrDefaultAsync(b => b.Id == productCreateVM.BrandId);
-            ProductCategory? productCategory = await _context.ProductCategories.Include(pc => pc.ProductModels).FirstOrDefaultAsync(pc => pc.Id == productCreateVM.ProductCategoryId);
             ProductModel? productModel = await _context.ProductModels.FirstOrDefaultAsync(pm => pm.Id == productCreateVM.ProductModelId);
             Color? color = await _context.Colors.FirstOrDefaultAsync(c => c.Id == productCreateVM.ColorId);
-            if (productModel == null || brand == null || productCategory == null || color == null) return NotFound();
-            if (!brand.ProductModels.Any(pm => pm.Id == productModel.Id) || !productCategory.ProductModels.Any(pm => pm.Id == productModel.Id))
+            if (productModel == null || brand == null  || color == null) return NotFound();
+            if (!brand.ProductModels.Any(pm => pm.Id == productModel.Id))
             {
                 ModelState.AddModelError("ProductModelId", "Qeyd etdiyiniz model categoriya ve ya brende aid deil !");
                 return View();
@@ -102,7 +99,7 @@ namespace ShopManagmentSystem.Areas.Admin.Controllers
 
             Product product = new();            
             product.ProductModelId = productCreateVM.ProductModelId;
-            product.ProductCategoryId = productCreateVM.ProductCategoryId;
+            product.ProductCategoryId = (int)productModel.ProductCategoryId;
             product.ColorId = productCreateVM.ColorId;
             product.BrandId = productCreateVM.BrandId;
             product.BranchId = user.BranchId;

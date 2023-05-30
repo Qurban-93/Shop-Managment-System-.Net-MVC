@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "gYDIJEFOYwl1JolNCeFyaQacapmmdCR+CMtvtLNL4k4=",
+  "Hash": "Q62y8pu45fOR04jEeuVibejCXI3byH/VO0Kah3eVz4s=",
   "Source": "ShopManagmentSystem",
   "BasePath": "_content/ShopManagmentSystem",
   "Mode": "Default",
@@ -185,6 +185,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\assets\\js\\signalr.js"
+    },
+    {
+      "Identity": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\assets\\js\\UpdateHub.js",
+      "SourceId": "ShopManagmentSystem",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\",
+      "BasePath": "_content/ShopManagmentSystem",
+      "RelativePath": "assets/js/UpdateHub.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\assets\\js\\UpdateHub.js"
     },
     {
       "Identity": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\Template\\Verify.html",

@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using ShopManagmentSystem.BackgroundService;
 using ShopManagmentSystem.DAL;
 using ShopManagmentSystem.Models;
 using ShopManagmentSystem.Service;
@@ -23,7 +24,9 @@ namespace ShopManagmentSystem
                 options.SignIn.RequireConfirmedAccount = true;
 
             }).AddEntityFrameworkStores<AppDbContext>().AddDefaultTokenProviders();
-            service.AddScoped<IBoxOfficeService, BoxOfficeService>();
+            service.AddScoped<IDisplacementService, DisplacementService>();
+            service.AddScoped<IDeleteDisplacementService, DeleteDisplacementService>();
+            service.AddScoped<IBoxOfficeService, BoxOfficeService>();          
             service.AddSignalR();
 
         }
