@@ -13,21 +13,13 @@ namespace ShopManagmentSystem.Hubs
             _userManager = userManager;
         }
 
-        public async Task SendMessage(string id, string senderId, string sender, string message)
-        {
-            AppUser? user = await _userManager.FindByIdAsync(id);
-            if (user.ConnectionId != null)
-            {
-                Clients.Client(user.ConnectionId).SendAsync("ShowAlert", sender, message, senderId);
-            }
-        }
-
         public override async Task<Task> OnConnectedAsync()
         {
             if (Context.User.Identity.IsAuthenticated)
             {
                 AppUser? user = _userManager.FindByNameAsync(Context.User.Identity.Name).Result;
                 user.ConnectionId = Context.ConnectionId;
+                user.LastSeen = "online";
                 var result = _userManager.UpdateAsync(user).Result;
                 await Clients.All.SendAsync("Online", user.Id);
             }
@@ -40,6 +32,7 @@ namespace ShopManagmentSystem.Hubs
             {
                 AppUser? user = _userManager.FindByNameAsync(Context.User.Identity.Name).Result;
                 user.ConnectionId = null;
+                user.LastSeen = DateTime.Now.ToString("dd MMMM yyyy , hh:mm");
                 var result = _userManager.UpdateAsync(user).Result;
                 await Clients.All.SendAsync("Offline", user.Id);
             }

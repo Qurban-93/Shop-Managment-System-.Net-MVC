@@ -7,6 +7,7 @@ namespace ShopManagmentSystem.Models
         public int BranchId { get; set; }
         public Branch Branch { get; set; }
         public string? ConnectionId { get; set; }
+        public string LastSeen { get; set; }
 
     }
 }

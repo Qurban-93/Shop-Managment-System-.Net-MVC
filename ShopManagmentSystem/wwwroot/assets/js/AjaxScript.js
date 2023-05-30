@@ -16,6 +16,26 @@
     let addList = $(".add_move");
     let deleteResendProd = $(".delete_resend_prod");
     let deleteBranch = $(".delete_branch");
+    let chatHistory = $(".chat-history");
+    let userChat = $(".select_user");
+
+    userChat.on("click", function (e) {
+        let id = $(e.currentTarget).data('id');
+        let name = $(e.currentTarget).data('name');
+        let lastSeen = $(e.currentTarget).data('last');
+
+        $.ajax({
+            method: "POST",
+            url: "/Message/ChatHistory/" + id,
+            success: function (result) {
+                chatHistory.empty();
+                chatHistory.append(result);
+                $("#user_name").html(name);
+                $("#user_last_seen").html(lastSeen)
+            }
+        });
+        
+    })
 
     deleteBranch.on("click", function (e) {
         let id = $(e.currentTarget).data('id');

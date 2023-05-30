@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.SignalR;
 using ShopManagmentSystem.DAL;
 using ShopManagmentSystem.Hubs;
 using ShopManagmentSystem.Models;
+using ShopManagmentSystem.ViewModels;
 
 namespace ShopManagmentSystem.Controllers
 {
@@ -26,21 +27,19 @@ namespace ShopManagmentSystem.Controllers
             return View();
         }
 
-        public async Task<IActionResult> ShowAlert(string id)
-        {
-            AppUser? user = await _userManager.FindByIdAsync(id);
-            if (user.ConnectionId != null)
-                _hubContext.Clients.Client(user.ConnectionId).SendAsync("ShowAlert", User.Identity.Name);
-            return RedirectToAction(nameof(Index));
-        }
-
-        public async Task<IActionResult> ChatHistory(string destinationId)
+        [HttpPost]
+        public async Task<IActionResult> ChatHistory(string Id)
         {
             AppUser? user = await _userManager.FindByNameAsync(User.Identity.Name);
-            if (destinationId == null || user == null) return NotFound();
-            List<Message> messages = _context.Messages.Where(m => (m.DestinationId == destinationId && m.SenderId == user.Id) ||
-            (m.DestinationId == user.Id && m.SenderId == destinationId)).ToList();
-            return PartialView("_ChatHistoryPartialView",messages);
+            if (Id == null || user == null) return NotFound();
+            List<Message> messages = _context.Messages.Where(m => (m.DestinationId == Id && m.SenderId == user.Id) ||
+            (m.DestinationId == user.Id && m.SenderId == Id)).ToList();
+            MessageVM messageVM = new()
+            {
+                Messages= messages,
+                User = user,
+            };
+            return PartialView("_ChatHistoryPartialView",messageVM);
         }
     }
 }
