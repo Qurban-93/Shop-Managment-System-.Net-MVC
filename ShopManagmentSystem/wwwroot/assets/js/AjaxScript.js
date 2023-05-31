@@ -31,6 +31,7 @@
                 chatHistory.empty();
                 chatHistory.append(result);
                 $("#user_name").html(name);
+                $("#user_name").attr('data-id', id);
                 $("#user_last_seen").html(lastSeen)
             }
         });

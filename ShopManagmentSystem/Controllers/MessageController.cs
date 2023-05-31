@@ -23,7 +23,8 @@ namespace ShopManagmentSystem.Controllers
 
         public IActionResult Index()
         {
-            ViewBag.Users = _userManager.Users.ToList();
+            
+            ViewBag.Users = _userManager.Users.Where(u=>u.UserName != User.Identity.Name).ToList();
             return View();
         }
 

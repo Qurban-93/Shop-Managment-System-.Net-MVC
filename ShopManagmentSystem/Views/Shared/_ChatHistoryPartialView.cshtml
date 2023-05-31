@@ -1,7 +1,7 @@
 ﻿@model MessageVM
 
-
-<ul class="m-b-0">
+<input id="sender_id" type="hidden" value="@Model.User.Id" />
+<ul class="m-b-0 chat_list">
     @foreach (var item in Model.Messages)
     {
         <li class="clearfix">
