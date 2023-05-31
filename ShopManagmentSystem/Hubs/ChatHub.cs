@@ -46,30 +46,27 @@ namespace ShopManagmentSystem.Hubs
 
         public async Task SendMessage(string message, string senderUserId, string destinationUserId)
         {
-
+            Message newMessage = new();
             AppUser? destinationUser = await _userManager.FindByIdAsync(destinationUserId);
             AppUser? senderUser = await _userManager.FindByIdAsync(senderUserId);
-            if(destinationUser != null && destinationUser.ConnectionId != null)
-            {              
-               
-              await Clients.Client(destinationUser.ConnectionId).SendAsync("ShowMessage", senderUserId, message, destinationUserId);
-                
-            }
-                
-            if (!string.IsNullOrWhiteSpace(message) && destinationUser != null && senderUser != null)
+            if (destinationUser != null && destinationUser.ConnectionId != null)
             {
-                Message newMessage = new()
-                {
-                    SenderId = senderUserId,
-                    DestinationId = destinationUserId,
-                    CreateDate = DateTime.Now,
-                };
+                
+                await Clients.Client(destinationUser.ConnectionId).SendAsync("ShowMessage", senderUserId, message, destinationUserId);
+                newMessage.IsRead = true;
+            }
+
+            if (!string.IsNullOrWhiteSpace(message) && destinationUser != null && senderUser != null &&
+                destinationUser != null && senderUser != null)
+            {
+                newMessage.SenderId = senderUserId;
+                newMessage.DestinationId = destinationUserId;
+                newMessage.Content = message;
+                newMessage.CreateDate = DateTime.Now;
 
                 _context.Messages.Add(newMessage);
                 await _context.SaveChangesAsync();
             }
-
-            
         }
     }
 }

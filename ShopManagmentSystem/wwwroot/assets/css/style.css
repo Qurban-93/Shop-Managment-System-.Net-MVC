@@ -604,6 +604,7 @@ ul.accordion-list li div.answer {
 
 .chat .chat-message {
   padding: 20px;
+  display: none;
 }
 
 .online,
