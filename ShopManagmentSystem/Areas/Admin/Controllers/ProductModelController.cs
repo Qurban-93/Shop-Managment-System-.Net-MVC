@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http.HttpResults;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -9,6 +10,7 @@ using ShopManagmentSystem.ViewModels.ProductModelVMs;
 namespace ShopManagmentSystem.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize]
     public class ProductModelController : Controller
     {
         private readonly AppDbContext _context;

@@ -29,10 +29,10 @@ namespace ShopManagmentSystem.ViewComponents
                 layoutVM.CountOrder = count;
                 layoutVM.Role =await _userManager.GetRolesAsync(user);
                 layoutVM.MessageCount = await _appDbContext.Messages.Where(m=>m.IsRead == false && m.DestinationId == user.Id).CountAsync();
+                layoutVM.UserId= user.Id;
                 return View(layoutVM);
             }  
-            layoutVM.CountOrder = 0;
-
+            
             return View(layoutVM);
         }
     }

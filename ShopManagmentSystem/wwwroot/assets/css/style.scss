@@ -633,13 +633,23 @@ ul.accordion-list {
         border-bottom: 2px solid #f4f7f6;
         display: none;
         img {
-            float: left;
+            
             border-radius: 40px;
             width: 40px
         }
         .chat-about {
-            float: left;
-            padding-left: 10px
+            align-items: start;
+            padding-left: 10px;
+            #user_last_seen{
+               display: flex;
+               justify-content: start;
+               color:#464746;
+            }
+            
+            h6{
+                display: flex;
+                justify-content: start;
+            }
         }
     }
     .chat-history {
@@ -813,5 +823,13 @@ ul.accordion-list {
     .chat-app .chat-history {
         height: calc(100vh - 350px);
         overflow-x: auto
+    }
+}
+
+.admin_list{
+
+    li{
+        padding: 10px 0;
+        font-size: 20px;
     }
 }

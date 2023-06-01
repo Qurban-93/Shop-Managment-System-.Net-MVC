@@ -36,7 +36,8 @@ connection.on("Online", function (userId) {
     document.getElementById(userId).classList.add("online");
     document.getElementById(userId).nextElementSibling.innerHTML = "online";
     if (document.getElementById("user_name").innerHTML != "Choose User") {
-        document.getElementById("user_last_seen").innerHTML = "Online"       
+        document.getElementById("user_last_seen").innerHTML = "Online";
+        document.getElementById("user_last_seen").style.color = "#86c541";
     }
 
 });
@@ -56,6 +57,7 @@ connection.on("Offline", function (userId) {
 
 
     document.getElementById("user_last_seen").innerHTML = fullDate;
+    document.getElementById("user_last_seen").style.color = "#464746";
 
 });
 
@@ -87,11 +89,21 @@ document.getElementById("send_btn").addEventListener("click", function (e) {
     let chatList = document.querySelector(".chat_list");
     chatList.innerHTML += myMessage
     document.getElementById("message_content").value = "";
+    DeleteIcon();
+    
+    
 })
+
+function DeleteIcon() {
+    var icon = document.querySelector(".fa-solid fa-envelope");
+    console.log(icon)
+    if (icon != undefined || icon != null) { icon.remove() }
+}
 
 connection.on("ShowMessage", function (senderUserId, message, destinationUserId) {
     
     let UserId = document.getElementById("user_name").getAttribute("data-id");
+    
     if (UserId != null && senderUserId == UserId) {
 
         var d = new Date();
@@ -109,8 +121,22 @@ connection.on("ShowMessage", function (senderUserId, message, destinationUserId)
 
         let chatList = document.querySelector(".chat_list");
         chatList.innerHTML += myMessage
+        return;
     }
+    let name = document.querySelectorAll(".name");
+        name.forEach((key, value, element) => {          
+
+            if (key.parentElement.parentElement.getAttribute("data-id") == senderUserId) {
+                key.innerHTML += `<i class="fa-solid fa-envelope text-danger"></i>`;
+            }
+            
+
+        })
+    
+
 })
+
+
 
 
 

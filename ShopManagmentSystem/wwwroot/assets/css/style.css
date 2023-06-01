@@ -505,13 +505,21 @@ ul.accordion-list li div.answer {
   display: none;
 }
 .chat .chat-header img {
-  float: left;
   border-radius: 40px;
   width: 40px;
 }
 .chat .chat-header .chat-about {
-  float: left;
+  align-items: start;
   padding-left: 10px;
+}
+.chat .chat-header .chat-about #user_last_seen {
+  display: flex;
+  justify-content: start;
+  color: #464746;
+}
+.chat .chat-header .chat-about h6 {
+  display: flex;
+  justify-content: start;
 }
 .chat .chat-history {
   padding: 20px;
@@ -666,4 +674,8 @@ ul.accordion-list li div.answer {
     height: calc(100vh - 350px);
     overflow-x: auto;
   }
+}
+.admin_list li {
+  padding: 10px 0;
+  font-size: 20px;
 }/*# sourceMappingURL=style.css.map */

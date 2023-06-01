@@ -47,7 +47,7 @@
         <li>
             <a asp-action="orders" asp-controller="sale">
                 <i class="fa-solid fa-basket-shopping"></i>
-                <span class="count">@Model.CountOrder</span>
+                <span id="@Model." class="count">@Model.CountOrder</span>
                 <span class="links_name">Orders</span>
             </a>
             <span class="tooltip">Order</span>
@@ -55,7 +55,7 @@
         <li>
             <a asp-action="index" asp-controller="message">
                 <i class="fa-regular fa-message"></i>
-                <span class="countMessage">@Model.MessageCount</span>
+                <span class="countMessage @Model.UserId">@Model.MessageCount</span>
                 <span class="links_name">Messages</span>
             </a>
             <span class="tooltip">Messages</span>

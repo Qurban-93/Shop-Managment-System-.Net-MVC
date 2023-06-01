@@ -36,12 +36,12 @@
             success: function (result) {
                 chatHistory.empty();
                 chatHistory.append(result);
-                console.log(skip, count)
-                if (count < skip) {
+                console.log(typeof (skip), "skip", skip, typeof (count), "count", count)
+                var numSkip = parseInt(skip);
+                var numCount = parseInt(count);
+                if (numCount < numSkip) {
                     $("#load_more").remove();
-                }
-                var numSkip;
-                numSkip = parseInt(skip);
+                }                           
                 numSkip += 10;
                 skip = numSkip;
             }
@@ -51,7 +51,8 @@
     userChat.on("click", function (e) {
         let id = $(e.currentTarget).data('id');
         let name = $(e.currentTarget).data('name');
-        let lastSeen = $(e.currentTarget).data('last');            
+        let lastSeen = $(e.currentTarget).data('last'); 
+        let newMessageIcon = $(".new_message");
         userChat.each(function (index, item) {
             $(item).removeClass("active");
         })
@@ -69,7 +70,9 @@
                 $("#user_last_seen").html(lastSeen);
                 $(".chat-message").css("display", "block");
                 $(".chat-header").css("display", "block");
-
+                if (newMessageIcon != undefined || newMessageIcon != null) {
+                    newMessageIcon.remove();
+                }
                 
             }
         });        

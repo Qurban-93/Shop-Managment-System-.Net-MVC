@@ -7,5 +7,6 @@ namespace ShopManagmentSystem.ViewModels
         public int CountOrder { get; set; }
         public IList<string> Role { get; set; }
         public int MessageCount { get; set; }
+        public string UserId { get; set; }
     }
 }

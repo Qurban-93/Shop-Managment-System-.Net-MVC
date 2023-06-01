@@ -17,11 +17,18 @@
         </form>
         </li>*@
         <li>
-            <a asp-action="index" asp-controller="report">
-                <i class="fa-solid fa-landmark"></i>
-                <span class="links_name">Reports</span>
+            <a asp-action="salary" asp-controller="report">
+                <i class="fa-solid fa-sack-dollar"></i>
+                <span class="links_name">Salary Info</span>
             </a>
-            <span class="tooltip">Reports</span>
+            <span class="tooltip">Salary</span>
+        </li>
+        <li>
+            <a asp-action="profit" asp-controller="report">
+                <i class="fa-solid fa-chart-line"></i>
+                <span class="links_name">Profit Info</span>
+            </a>
+            <span class="tooltip">Profit</span>
         </li>
         <li>
             <a asp-action="index" asp-controller="refund">
@@ -47,60 +54,11 @@
         @if (User.IsInRole("SuperAdmin"))
         {
             <li>
-                <a asp-action="index" asp-controller="employee">
-                    <i class="fa-solid fa-person-digging"></i>
-                    <span class="links_name">Employees</span>
+                <a asp-action="superadmin" asp-controller="dashboard">
+                    <i class="fa-solid fa-wrench"></i>
+                    <span class="links_name">Super Admin</span>
                 </a>
-                <span class="tooltip">Employee</span>
-            </li>
-            <li>
-                <a asp-action="index" asp-controller="employeeposition">
-                    <i class="fa-solid fa-user-astronaut"></i>
-                    <span class="links_name">Employee Positions</span>
-                </a>
-                <span class="tooltip">Employee Positions</span>
-            </li>
-            <li>
-                <a asp-action="index" asp-controller="brand">
-                    <i class="fa-regular fa-star"></i>
-                    <span class="links_name">Brands</span>
-                </a>
-                <span class="tooltip">Brands</span>
-            </li>
-            <li>
-                <a asp-action="index" asp-controller="colors">
-                    <i class="fa-solid fa-palette"></i>
-                    <span class="links_name">Colors</span>
-                </a>
-                <span class="tooltip">Colors</span>
-            </li>
-            <li>
-                <a asp-action="index" asp-controller="productcategory">
-                    <i class="fa-solid fa-layer-group"></i>
-                    <span class="links_name">Category</span>
-                </a>
-                <span class="tooltip">Category</span>
-            </li>
-            <li>
-                <a asp-action="index" asp-controller="productmodel">
-                    <i class="fa-regular fa-square-plus"></i>
-                    <span class="links_name">Models</span>
-                </a>
-                <span class="tooltip">Models</span>
-            </li>
-            <li>
-                <a asp-action="index" asp-controller="account">
-                    <i class="fa-solid fa-user-plus"></i>
-                    <span class="links_name">Add User</span>
-                </a>
-                <span class="tooltip">Add User</span>
-            </li>
-            <li>
-                <a asp-action="index" asp-controller="branch">
-                    <i class="fa-solid fa-code-branch"></i>
-                    <span class="links_name">Branches</span>
-                </a>
-                <span class="tooltip">Branches</span>
+                <span class="tooltip">Punishment</span>
             </li>
         }
        

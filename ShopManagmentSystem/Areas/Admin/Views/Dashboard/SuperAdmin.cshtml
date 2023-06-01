@@ -1,0 +1,68 @@
+﻿@model SettingVM
+
+<div class="container">
+    <div class="row">
+        <h1 class="text-primary">Super Admin  <i class="fa-solid fa-wrench"></i></h1>
+        <hr />
+        <div>
+            <ul class="admin_list">
+                <li>
+                    <a asp-action="index" asp-controller="employee">
+                        <i class="fa-solid fa-person-digging"></i>
+                        <span >Employees (@Model.EmployeeCount)</span>
+                    </a>
+                    
+                </li>
+                <li>
+                    <a asp-action="index" asp-controller="employeeposition">
+                        <i class="fa-solid fa-user-astronaut"></i>
+                        <span>Employee Positions (@Model.EmployeePositionCount)</span>
+                    </a>
+                   
+                </li>
+                <li>
+                    <a asp-action="index" asp-controller="brand">
+                        <i class="fa-regular fa-star"></i>
+                        <span>Brands (@Model.BrandCount)</span>
+                    </a>
+                    
+                </li>
+                <li>
+                    <a asp-action="index" asp-controller="colors">
+                        <i class="fa-solid fa-palette"></i>
+                        <span>Colors (@Model.ColorsCount)</span>
+                    </a>
+                    
+                </li>
+                <li>
+                    <a asp-action="index" asp-controller="productcategory">
+                        <i class="fa-solid fa-layer-group"></i>
+                        <span>Category (@Model.ProductsCategoryCount)</span>
+                    </a>
+                    
+                </li>
+                <li>
+                    <a asp-action="index" asp-controller="productmodel">
+                        <i class="fa-regular fa-square-plus"></i>
+                        <span>Models (@Model.ProductModelCount)</span>
+                    </a>
+                   
+                </li>
+                <li>
+                    <a asp-action="index" asp-controller="account">
+                        <i class="fa-solid fa-user-plus"></i>
+                        <span>Add User (@Model.UserCount)</span>
+                    </a>
+                    
+                </li>
+                <li>
+                    <a asp-action="index" asp-controller="branch">
+                        <i class="fa-solid fa-code-branch"></i>
+                        <span>Branches (@Model.BranchCount)</span>
+                    </a>
+                    
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
