@@ -63,7 +63,10 @@ document.getElementById("send_btn").addEventListener("click", function (e) {
     let message = document.getElementById("message_content").value;
     let destinationUserId = document.getElementById("user_name").getAttribute("data-id");
     let senderUserId = document.getElementById("sender_id").value;
-    console.log("dest", destinationUserId, "sender", senderUserId)
+    if (message.trim().length == 0) {
+        alert("Bosh Olmaz !");
+        return;
+    }
     connection.invoke("SendMessage", message, senderUserId, destinationUserId).catch(function (err) {
         return console.error(err.toString());
     }); 
@@ -74,7 +77,7 @@ document.getElementById("send_btn").addEventListener("click", function (e) {
     var year = d.getFullYear().toString();
     var fullDate = day + " " + month + " " + year + " , " + formatAMPM(d)
 
-    let myMessage = `<li class="clearfix">
+    let myMessage = `<li class="clearfix text-start">
             <div class="message-data text-end">
                 <span class="message-data-time">${fullDate}</span>
             </div>
@@ -97,7 +100,7 @@ connection.on("ShowMessage", function (senderUserId, message, destinationUserId)
         var year = d.getFullYear().toString();
         var fullDate = day + " " + month + " " + year + " , " + formatAMPM(d)
 
-        let myMessage = `<li class="clearfix">
+        let myMessage = `<li class="clearfix text-start">
             <div class="message-data">
                 <span class="message-data-time">${fullDate}</span>
             </div>

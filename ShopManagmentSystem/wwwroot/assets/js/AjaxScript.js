@@ -17,16 +17,50 @@
     let deleteResendProd = $(".delete_resend_prod");
     let deleteBranch = $(".delete_branch");
     let chatHistory = $(".chat-history");
-    let userChat = $(".select_user");
+    let userChat = $(".select_user");    
+    var skip;
+
+
+    $('body').on('click', '#load_more', function () {
+    
+        if (skip == undefined || skip == null) {
+            skip = $("#skip").val();
+        }       
+        var id = $("#user_name").attr('data-id');
+        var count = $("#message_count").val();
+        
+        $.ajax({
+            method: "POST",
+            data: { Id: id , Skip: skip },
+            url: "/Message/ChatHistory/",
+            success: function (result) {
+                chatHistory.empty();
+                chatHistory.append(result);
+                console.log(skip, count)
+                if (count < skip) {
+                    $("#load_more").remove();
+                }
+                var numSkip;
+                numSkip = parseInt(skip);
+                numSkip += 10;
+                skip = numSkip;
+            }
+        });               
+    });
 
     userChat.on("click", function (e) {
         let id = $(e.currentTarget).data('id');
         let name = $(e.currentTarget).data('name');
-        let lastSeen = $(e.currentTarget).data('last');
+        let lastSeen = $(e.currentTarget).data('last');            
+        userChat.each(function (index, item) {
+            $(item).removeClass("active");
+        })
+        $(this).addClass("active");
 
         $.ajax({
             method: "POST",
-            url: "/Message/ChatHistory/" + id,
+            data: { Id: id },
+            url: "/Message/ChatHistory/" ,
             success: function (result) {
                 chatHistory.empty();
                 chatHistory.append(result);
@@ -34,9 +68,11 @@
                 $("#user_name").attr('data-id', id);
                 $("#user_last_seen").html(lastSeen);
                 $(".chat-message").css("display", "block");
+                $(".chat-header").css("display", "block");
+
+                
             }
-        });
-        
+        });        
     })
 
     deleteBranch.on("click", function (e) {

@@ -6,5 +6,7 @@ namespace ShopManagmentSystem.ViewModels
     {
         public List<Message> Messages { get; set; }
         public AppUser User { get; set; }
+        public int CountSkip { get; set; }
+        public List<int> UnreadIds { get; set; }
     }
 }

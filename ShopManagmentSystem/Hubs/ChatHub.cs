@@ -55,6 +55,10 @@ namespace ShopManagmentSystem.Hubs
                 await Clients.Client(destinationUser.ConnectionId).SendAsync("ShowMessage", senderUserId, message, destinationUserId);
                 newMessage.IsRead = true;
             }
+            else
+            {
+                await Clients.Client(destinationUser.ConnectionId).SendAsync("NewMessage", senderUserId, destinationUserId);
+            }
 
             if (!string.IsNullOrWhiteSpace(message) && destinationUser != null && senderUser != null &&
                 destinationUser != null && senderUser != null)

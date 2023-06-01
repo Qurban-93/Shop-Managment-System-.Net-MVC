@@ -1,15 +1,33 @@
 ﻿@model MessageVM
 
 <input id="sender_id" type="hidden" value="@Model.User.Id" />
+<input type="hidden" id="skip" value="20" />
+<input type="hidden" id="message_count" value="@Model.CountSkip" />
+<div class="text-center"><a id="load_more" class="btn btn-link">Load More</a></div>
 <ul class="m-b-0 chat_list">
     @foreach (var item in Model.Messages)
     {
-        <li class="clearfix">
-            <div class="message-data @(item.SenderId != Model.User.Id ? "":"text-end")">
-                <span class="message-data-time">@item.CreateDate.ToString("dd MMMM yyyy , hh:mm")</span>
-            </div>
-            <div class="@(item.SenderId != Model.User.Id ? "message my-message":"message other-message float-right")"> @item.Content </div>
-        </li>
+        
+        if(Model.UnreadIds.Any(x=>x == item.Id) && item.DestinationId == Model.User.Id)
+        {
+            <li class="clearfix @(item.SenderId != Model.User.Id ? "text-start":"")">
+                <div class="message-data @(item.SenderId != Model.User.Id ? "":"text-end")">
+                    <span class="message-data-time">@item.CreateDate.ToString("dd MMMM yyyy , hh:mm")</span>
+                </div>
+                <div class="@(item.SenderId != Model.User.Id ? "message my-message":"message other-message float-right")"><i style="font-size:10px;" class="fa-solid fa-circle text-danger"></i> @item.Content </div>
+            </li>
+        }
+        else
+        {
+            <li class="clearfix @(item.SenderId != Model.User.Id ? "text-start":"")">
+                <div class="message-data @(item.SenderId != Model.User.Id ? "":"text-end")">
+                    <span class="message-data-time">@item.CreateDate.ToString("dd MMMM yyyy , hh:mm")</span>
+                </div>
+                <div class="@(item.SenderId != Model.User.Id ? "message my-message":"message other-message float-right")"> @item.Content </div>
+            </li>
+        }
+       
+        
     }
 </ul>
 
