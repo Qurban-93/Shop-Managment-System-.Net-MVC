@@ -87,9 +87,15 @@ document.getElementById("send_btn").addEventListener("click", function (e) {
         </li>`
 
     let chatList = document.querySelector(".chat_list");
-    chatList.innerHTML += myMessage
+    chatList.innerHTML += myMessage;
     document.getElementById("message_content").value = "";
     DeleteIcon();
+    let chatHistory = document.querySelector(".chat-history");
+
+    chatHistory.scrollTo({
+        top: chatHistory.scrollHeight,
+        behavior: "smooth",
+    });
     
     
 })
@@ -120,7 +126,13 @@ connection.on("ShowMessage", function (senderUserId, message, destinationUserId)
         </li>`
 
         let chatList = document.querySelector(".chat_list");
-        chatList.innerHTML += myMessage
+        chatList.innerHTML += myMessage;
+        let chatHistory = document.querySelector(".chat-history");
+
+        chatHistory.scrollTo({
+            top: chatHistory.scrollHeight,
+            behavior: "smooth",
+        });
         return;
     }
     let name = document.querySelectorAll(".name");
@@ -130,7 +142,6 @@ connection.on("ShowMessage", function (senderUserId, message, destinationUserId)
                 key.innerHTML += `<i class="fa-solid fa-envelope text-danger"></i>`;
             }
             
-
         })
     
 

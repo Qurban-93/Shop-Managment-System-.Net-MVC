@@ -17,21 +17,21 @@
     let deleteResendProd = $(".delete_resend_prod");
     let deleteBranch = $(".delete_branch");
     let chatHistory = $(".chat-history");
-    let userChat = $(".select_user");    
+    let userChat = $(".select_user");
     var skip;
 
 
     $('body').on('click', '#load_more', function () {
-    
+
         if (skip == undefined || skip == null) {
             skip = $("#skip").val();
-        }       
+        }
         var id = $("#user_name").attr('data-id');
         var count = $("#message_count").val();
-        
+
         $.ajax({
             method: "POST",
-            data: { Id: id , Skip: skip },
+            data: { Id: id, Skip: skip },
             url: "/Message/ChatHistory/",
             success: function (result) {
                 chatHistory.empty();
@@ -41,17 +41,17 @@
                 var numCount = parseInt(count);
                 if (numCount < numSkip) {
                     $("#load_more").remove();
-                }                           
+                }
                 numSkip += 10;
                 skip = numSkip;
             }
-        });               
+        });
     });
 
     userChat.on("click", function (e) {
         let id = $(e.currentTarget).data('id');
         let name = $(e.currentTarget).data('name');
-        let lastSeen = $(e.currentTarget).data('last'); 
+        let lastSeen = $(e.currentTarget).data('last');
         let newMessageIcon = $(".new_message");
         userChat.each(function (index, item) {
             $(item).removeClass("active");
@@ -61,7 +61,7 @@
         $.ajax({
             method: "POST",
             data: { Id: id },
-            url: "/Message/ChatHistory/" ,
+            url: "/Message/ChatHistory/",
             success: function (result) {
                 chatHistory.empty();
                 chatHistory.append(result);
@@ -73,9 +73,12 @@
                 if (newMessageIcon != undefined || newMessageIcon != null) {
                     newMessageIcon.remove();
                 }
-                
-            }
-        });        
+                var test = chatHistory.prop('scrollHeight');
+                chatHistory.scrollTop(test);
+            }             
+        });
+
+
     })
 
     deleteBranch.on("click", function (e) {
@@ -130,7 +133,7 @@
             url: "/Displacement/DeleteList/" + id,
             success: function (result) {
                 parentElement.remove();
-                        let table = `<tr>
+                let table = `<tr>
                             <td>${result.productBrand}</td>
                             <td>${result.model}</td>
                             <td>${result.color}</td>
