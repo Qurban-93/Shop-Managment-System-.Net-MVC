@@ -28,6 +28,7 @@ namespace ShopManagmentSystem.DAL
         public DbSet<Displacement> Displacement { get; set; }
         public DbSet<DisplacementProduct> DisplacementProducts { get; set; }
         public DbSet<Message> Messages { get; set; }
+        public DbSet<Memory> Memories{ get; set; }
 
 
     }

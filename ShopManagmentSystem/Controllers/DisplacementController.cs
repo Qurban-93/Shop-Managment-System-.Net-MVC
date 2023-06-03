@@ -21,7 +21,7 @@ namespace ShopManagmentSystem.Controllers
 
 
 
-        public DisplacementController(AppDbContext context, UserManager<AppUser> userManager, 
+        public DisplacementController(AppDbContext context, UserManager<AppUser> userManager,
             IDisplacementService displacementService)
         {
             _context = context;
@@ -47,56 +47,28 @@ namespace ShopManagmentSystem.Controllers
             if (basket == null)
             {
                 createVM = new();
-                if (string.IsNullOrWhiteSpace(search))
-                {
-                    createVM.Products = await _context.Products
+                createVM.Products = await _context.Products
                     .Include(p => p.Color)
-                    .Include(p => p.ProductModel)
-                    .Include(p => p.ProductCategory)
-                    .Include(p => p.Brand)
-                    .Where(p => !p.IsSold && p.BranchId == user.BranchId)
-                    .ToListAsync();
-                }
-                else
-                {
-                    createVM.Products = await _context.Products
-                    .Include(p => p.Color)
-                    .Include(p => p.ProductModel)
-                    .Include(p => p.ProductCategory)
-                    .Include(p => p.Brand)
-                    .Where(p => !p.IsSold && p.BranchId == user.BranchId)
-                    .Where(p=>p.ProductModel.ModelName.Trim().ToLower().Contains(search.Trim().ToLower()) || 
-                    p.Brand.BrandName.Trim().ToLower().Contains(search.Trim().ToLower()))
-                    .ToListAsync();
-                }
+                        .Include(p => p.ProductModel)
+                        .Include(p => p.ProductCategory)
+                        .Include(p => p.Brand)
+                        .Where(p => !p.IsSold && p.BranchId == user.BranchId)
+                        .ToListAsync();
+
             }
             else
             {
                 createVM = new();
                 List<int> itemsId = JsonConvert.DeserializeObject<List<ResendProductVM>>(basket).Select(i => i.Id).ToList();
-                if (string.IsNullOrWhiteSpace(search))
-                {
-                    
-                    createVM.Products = await _context.Products
-                        .Include(p => p.Color)
-                        .Include(p => p.ProductModel)
-                        .Include(p => p.ProductCategory)
-                        .Include(p => p.Brand)
-                        .Where(p => !itemsId.Contains(p.Id) && p.BranchId == user.BranchId).ToListAsync();
-                        
-                }
-                else
-                {
-                    createVM.Products = await _context.Products
-                       .Include(p => p.Color)
-                       .Include(p => p.ProductModel)
-                       .Include(p => p.ProductCategory)
-                       .Include(p => p.Brand)
-                       .Where(p => !itemsId.Contains(p.Id) && p.BranchId == user.BranchId)
-                       .Where(p => p.ProductModel.ModelName.Trim().ToLower().Contains(search.Trim().ToLower()) ||
-                        p.Brand.BrandName.Trim().ToLower().Contains(search.Trim().ToLower()))
-                       .ToListAsync();
-                }
+
+
+                createVM.Products = await _context.Products
+                    .Include(p => p.Color)
+                    .Include(p => p.ProductModel)
+                    .Include(p => p.ProductCategory)
+                    .Include(p => p.Brand)
+                    .Where(p => !itemsId.Contains(p.Id) && p.BranchId == user.BranchId && !p.IsSold).ToListAsync();
+
                 ViewBag.List = JsonConvert.DeserializeObject<List<ResendProductVM>>(basket);
             }
             return View(createVM);
@@ -105,7 +77,7 @@ namespace ShopManagmentSystem.Controllers
         [AutoValidateAntiforgeryToken]
         public async Task<IActionResult> Create(DisplacementCreateVM createVM)
         {
-            
+
             AppUser? user = await _userManager.FindByNameAsync(User.Identity.Name);
             if (user == null) return NotFound();
             ViewBag.Destination = new SelectList(await _context.Branches
@@ -148,8 +120,8 @@ namespace ShopManagmentSystem.Controllers
             Request.Cookies["basket"].Remove(0);
             await _context.Displacement.AddAsync(displacement);
             await _context.SaveChangesAsync();
-            
-            
+
+
 
             return RedirectToAction("Index");
         }

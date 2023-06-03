@@ -20,6 +20,8 @@ namespace ShopManagmentSystem.Models
         public List<DisplacementProduct>? DisplacementProducts { get; set; }
         public int? ProductModelId { get; set; }
         public ProductModel? ProductModel { get; set; }
-        
+        public int? MemoryId { get; set; }
+        public Memory? Memory { get; set; }
+
     }
 }

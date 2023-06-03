@@ -10,6 +10,7 @@
                 <th> Name </th>
                 <th> Price </th>
                 <th> Color </th>
+                <th> Memory </th>
                 <th> Category </th>
                 <th> Series </th>
                 <th>Seller</th>
@@ -20,6 +21,7 @@
                 <td>@Model.Product.ProductModel.ModelName</td>
                 <td>@Model.Product.ProductModel.ModelPrice</td>
                 <td>@Model.Product.Color.ColorName</td>
+                <td>@Model.Product.Memory.MemoryCapacity</td>
                 <td>@Model.Product.ProductCategory.Name</td>
                 <td>@Model.Product.Series</td>
                 <td>@Model.Sale.Employee.FullName</td>
@@ -27,16 +29,16 @@
 
             </tr>
         </table>
-       <form method="post">
-           <input asp-for=SaleId type="hidden" value="@Model.Sale.Id"/>
+        <form method="post">
+            <input asp-for=SaleId type="hidden" value="@Model.Sale.Id" />
             <input asp-for=SaleId type="hidden" value="@Model.Sale.Id" />
             <input asp-for=ProductId type="hidden" value="@Model.Product.Id" />
             <div class="form-group">
-                <label >Reason for return<span class="text-danger">*</span></label>
+                <label>Reason for return<span class="text-danger">*</span></label>
                 <textarea asp-for="Description" class="form-control" rows="3"></textarea>
                 <span class="text-danger" asp-validation-for="Description"></span>
             </div>
             <button type="submit" class="btn btn-primary mt-2">Send for confirmation</button>
-       </form>
+        </form>
     </div>
 </div>

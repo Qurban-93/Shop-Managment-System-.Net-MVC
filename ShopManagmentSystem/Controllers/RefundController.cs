@@ -109,6 +109,7 @@ namespace ShopManagmentSystem.Controllers
                 .Include(p=>p.ProductCategory)
                 .Include(p=>p.Brand)
                 .Include(p=>p.Color)
+                .Include(p=>p.Memory)
                 .FirstOrDefaultAsync(p => p.Id == id);
             Sale? sale = await _context.Sales
                 .Include(s=>s.Customer)
@@ -134,6 +135,7 @@ namespace ShopManagmentSystem.Controllers
                .Include(p => p.Color)
                .Include(p => p.Brand)
                .Include(p => p.ProductModel)
+               .Include(p=>p.Memory)
                .Where(p => p.BranchId == user.BranchId)
                .FirstOrDefaultAsync(p => p.Id == refundOrderVM.ProductId);
             Sale? sale = await _context.Sales
@@ -195,6 +197,7 @@ namespace ShopManagmentSystem.Controllers
                 .Include(r => r.Product).ThenInclude(p => p.ProductModel)
                 .Include(r => r.Product).ThenInclude(p => p.Color)
                 .Include(r => r.Product).ThenInclude(p => p.ProductCategory)
+                .Include(r => r.Product).ThenInclude(p => p.Memory)
                 .Include(r => r.Employee)
                 .FirstOrDefaultAsync(r => r.Id == id);
             if (refund == null) return NotFound();

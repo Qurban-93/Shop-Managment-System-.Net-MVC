@@ -9,11 +9,13 @@ namespace ShopManagmentSystem.Hubs
     {
         private readonly UserManager<AppUser> _userManager;
         private readonly AppDbContext _context;
+        private readonly IHubContext<UpdateHub> _updateHub;
 
-        public ChatHub(UserManager<AppUser> userManager, AppDbContext context)
+        public ChatHub(UserManager<AppUser> userManager, AppDbContext context, IHubContext<UpdateHub> updateHub)
         {
             _userManager = userManager;
             _context = context;
+            _updateHub = updateHub;
         }
 
         public override async Task<Task> OnConnectedAsync()
@@ -54,6 +56,10 @@ namespace ShopManagmentSystem.Hubs
                 
                 await Clients.Client(destinationUser.ConnectionId).SendAsync("ShowMessage", senderUserId, message, destinationUserId);
                 newMessage.IsRead = true;
+            }
+            else
+            {
+                _updateHub.Clients.All.SendAsync("NewMessageCount",destinationUserId);
             }         
 
             if (!string.IsNullOrWhiteSpace(message) && destinationUser != null && senderUser != null &&

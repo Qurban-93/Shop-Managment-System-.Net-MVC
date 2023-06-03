@@ -14,10 +14,11 @@
     let deleteColor = $(".delete_color");
     let deletePunishment = $(".delete_punishment");
     let addList = $(".add_move");
-    let deleteResendProd = $(".delete_resend_prod");
+    let deleteResendProd = $(".displace_list");
     let deleteBranch = $(".delete_branch");
     let chatHistory = $(".chat-history");
     let userChat = $(".select_user");
+    var newMessageCount = $(".new_message").html();
     var skip;
 
 
@@ -73,6 +74,13 @@
                 if (newMessageIcon != undefined || newMessageIcon != null) {
                     newMessageIcon.remove();
                 }
+
+                var countMessage = $(".countMessage").html();            
+                var numCountMessage = parseInt(countMessage);
+                var numNewMessageCount = parseInt(newMessageCount);
+                var totalCountMessage = numCountMessage - numNewMessageCount;
+                $(".countMessage").html(totalCountMessage);
+
                 var test = chatHistory.prop('scrollHeight');
                 chatHistory.scrollTop(test);
             }             
@@ -123,7 +131,7 @@
 
     })
 
-    deleteResendProd.on("click", function (e) {
+    deleteResendProd.on("click",".delete_resend_prod", function (e) {
         let id = $(e.currentTarget).data('id');
         let parentElement = $(e.currentTarget).parent();
         let body = $(".body_list");

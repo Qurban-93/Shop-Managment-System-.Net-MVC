@@ -1,7 +1,7 @@
 ﻿@model SaleVM
 
 <div class="container home_index">
-    <h1 class="text-center"> Selected products <i class="fa-solid fa-cart-plus"></i></h1>
+    <h1 class="text-center"> Sale Products Form <i class="fa-solid fa-cart-plus"></i></h1>
     <hr />
     <span style="font-size:20px;" class="text-danger" asp-validation-for="Orders"></span>
     <table class="table table-dark">
@@ -10,6 +10,7 @@
                 <th>Brand</th>
                 <th>Name</th>
                 <th>Color</th>
+                <th>Memory</th>
                 <th>Price</th>
                 <th>Category</th>
                 <th>Series</th>
@@ -25,6 +26,7 @@
                         <td>@order.Brand</td>
                         <td>@order.Name</td>
                         <td>@order.Color</td>
+                        <td>@order.Memory</td>
                         <td class="price">@order.Price</td>
                         <td>@order.Category</td>
                         <td>@order.Series</td>

@@ -17,12 +17,13 @@
                             <li class="clearfix select_user" data-id="@item.Id" data-name="@item.UserName" data-last="@item.LastSeen">
                                 <img src="/assets/img/Random.png" alt="avatar">
                                 <div class="about">
-                                    <div class="name">@item.UserName
-                                        @if(Model.NewMessages.Any(m=>m.SenderId == item.Id)){
+                                    <div class="name">
+                                        @item.UserName
+                                        @if (Model.NewMessages.Any(m => m.SenderId == item.Id))
+                                        {
                                             <span class="new_message text-danger">
-                                                <i class="fa-solid fa-envelope text-danger"></i>
-                                                @(Model.NewMessages.Where(m=>!m.IsRead&&m.SenderId == item.Id).Count())
-                                                </span>
+                                                @(Model.NewMessages.Where(m => !m.IsRead && m.SenderId == item.Id).Count())
+                                            </span>
                                         }
                                     </div>
                                     <div class="status"> <i id="@item.Id" class="fa fa-circle @(item.IsOnline == true ? "online" : "offline" )"></i><span>@(item.IsOnline == true ? "online" : "offline")</span> </div>
@@ -38,12 +39,12 @@
                         <div class="chat-header clearfix">
                             <div class="row">
                                 <div class="col-lg-12 row">
-                                   <div class="col-lg-1">
+                                    <div class="col-lg-1">
                                         <a href="javascript:void(0);" data-toggle="modal" data-target="#view_info">
                                             <img src="/assets/img/Random.png" alt="avatar">
                                         </a>
-                                   </div>
-                                   <div class="chat-about col-lg-3">
+                                    </div>
+                                    <div class="chat-about col-lg-3">
                                         <h6 class="m-b-0" id="user_name">Choose User</h6>
                                         <small id="user_last_seen">Status</small>
                                     </div>

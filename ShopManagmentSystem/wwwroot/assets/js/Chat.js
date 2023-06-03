@@ -101,8 +101,7 @@ document.getElementById("send_btn").addEventListener("click", function (e) {
 })
 
 function DeleteIcon() {
-    var icon = document.querySelector(".fa-solid fa-envelope");
-    console.log(icon)
+    var icon = document.querySelector(".fa-solid fa-envelope"); 
     if (icon != undefined || icon != null) { icon.remove() }
 }
 

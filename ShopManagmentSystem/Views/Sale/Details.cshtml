@@ -26,6 +26,7 @@
                 <th class="text-primary"> Name </th>
                 <th class="text-primary"> Price </th>
                 <th class="text-primary"> Color </th>
+                <th class="text-primary"> Memory </th>
                 <th class="text-primary"> Category </th>
                 <th class="text-primary"> Series </th>
                 <th class="text-primary"> Click For Return</th>
@@ -38,22 +39,24 @@
                     <td>@item.Product.ProductModel.ModelName </td>
                     <td>@item.Product.ProductModel.ModelPrice </td>
                     <td>@item.Product.Color.ColorName </td>
+                    <td>@item.Product.Memory.MemoryCapacity </td>
                     <td>@item.Product.ProductCategory.Name </td>
                     <td>@item.Product.Series</td>
                     <td>
                         @if (Model.RefundOrders.Any(r => r.ProdId == item.ProductId))
                         {
                             <span class="text-warning"> Meshsul qeri qaytarışa göndərilib </span>
-                        }else if (!item.Product.IsSold)
+                        }
+                        else if (!item.Product.IsSold)
                         {
                             <span class="text-warning"> Məhsul qeri qaytarılıb </span>
                         }
                         else
                         {
-                        <a class="returnBtn" asp-action="RefundOrder" asp-controller="refund" asp-route-id="@item.ProductId"
+                            <a class="returnBtn" asp-action="RefundOrder" asp-controller="refund" asp-route-id="@item.ProductId"
                        asp-route-saleId="@Model.Sale.Id">
-                            Create Return  <i class="fa-solid fa-rotate-left icon-return"></i>
-                        </a>
+                                Create Return  <i class="fa-solid fa-rotate-left icon-return"></i>
+                            </a>
                         }
                     </td>
                 </tr>
@@ -66,7 +69,8 @@
                 <ul>
                     @foreach (Refund item in Model.Sale.Refunds)
                     {
-                        <li class="mb-3"> Date: @item.CreateDate , Product : @item.Product.ProductModel.ModelName , Series : @item.Product.Series
+                        <li class="mb-3">
+                            Date: @item.CreateDate , Product : @item.Product.ProductModel.ModelName , Series : @item.Product.Series
                             <a asp-action="details" asp-controller="refund" asp-route-id="@item.Id"> More : <i class="fa-solid fa-circle-info"></i></a>
                         </li>
                     }

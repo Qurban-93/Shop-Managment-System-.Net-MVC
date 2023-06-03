@@ -16,7 +16,7 @@ namespace ShopManagmentSystem.BackgroundService
 
         public string ScheduleDisplacement(Displacement displacement)
         {
-            return BackgroundJob.Schedule(() => _deleteService.DeleteDisplacement(displacement), displacement.CreateDate.AddSeconds(5));
+            return BackgroundJob.Schedule(() => _deleteService.DeleteDisplacement(displacement), displacement.CreateDate.AddSeconds(20));
         }
 
 

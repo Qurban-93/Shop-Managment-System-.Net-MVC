@@ -10,3 +10,12 @@ connection.on("DeleteDisplacement", function (id) {
     deleteElement.remove();     
    
 })
+
+connection.on("NewMessageCount", function (destinationUserId) {
+    let countIcon = document.querySelector(`.${destinationUserId}`);
+    let numCount = Number(countIcon.innerHTML);
+    numCount++;
+    console.log(numCount)
+    countIcon.innerHTML = numCount;
+
+})
