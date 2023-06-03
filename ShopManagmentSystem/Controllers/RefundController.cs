@@ -31,7 +31,7 @@ namespace ShopManagmentSystem.Controllers
             if (fromDate > toDate)
             {
                 ViewBag.Error = "Error Date";
-              
+
                 refundHomeVM.Refunds = await _context.Refunds
                     .Include(r => r.Customer)
                     .Include(r => r.Employee)
@@ -43,7 +43,7 @@ namespace ShopManagmentSystem.Controllers
                     .ToListAsync();
                 return View(refundHomeVM);
             }
-            if(fromDate == null && toDate != null)
+            if (fromDate == null && toDate != null)
             {
                 refundHomeVM.Refunds = await _context.Refunds
                     .Include(r => r.Customer)
@@ -56,7 +56,7 @@ namespace ShopManagmentSystem.Controllers
                     .ToListAsync();
                 return View(refundHomeVM);
             }
-            if(fromDate != null && toDate == null)
+            if (fromDate != null && toDate == null)
             {
                 refundHomeVM.Refunds = await _context.Refunds
                 .Include(r => r.Customer)
@@ -69,7 +69,7 @@ namespace ShopManagmentSystem.Controllers
                     .ToListAsync();
                 return View(refundHomeVM);
             }
-            if(fromDate != null && toDate != null)
+            if (fromDate != null && toDate != null)
             {
                 refundHomeVM.Refunds = await _context.Refunds
                .Include(r => r.Customer)
@@ -82,12 +82,12 @@ namespace ShopManagmentSystem.Controllers
                     .ToListAsync();
                 return View(refundHomeVM);
             }
-            if(fromDate == null && toDate == null)
+            if (fromDate == null && toDate == null)
             {
                 ViewBag.fromDate = DateTime.Today;
-                ViewBag.toDate = DateTime.Today.AddHours(23);             
+                ViewBag.toDate = DateTime.Today.AddHours(23);
             }
-            
+
 
             refundHomeVM.Refunds = await _context.Refunds
                 .Include(r => r.Customer)
@@ -105,17 +105,17 @@ namespace ShopManagmentSystem.Controllers
         {
             if (id == null || id == 0 || SaleId == null || SaleId == 0) return NotFound();
             Product? product = await _context.Products
-                .Include(p=>p.ProductModel)
-                .Include(p=>p.ProductCategory)
-                .Include(p=>p.Brand)
-                .Include(p=>p.Color)
-                .Include(p=>p.Memory)
+                .Include(p => p.ProductModel)
+                .Include(p => p.ProductCategory)
+                .Include(p => p.Brand)
+                .Include(p => p.Color)
+                .Include(p => p.Memory)
                 .FirstOrDefaultAsync(p => p.Id == id);
             Sale? sale = await _context.Sales
-                .Include(s=>s.Customer)
-                .Include(s=>s.Employee)
+                .Include(s => s.Customer)
+                .Include(s => s.Employee)
                 .FirstOrDefaultAsync(s => s.Id == SaleId);
-            if(sale == null || product == null) return NotFound();
+            if (sale == null || product == null) return NotFound();
             RefundOrderVM refundOrderVM = new();
             refundOrderVM.Product = product;
             refundOrderVM.Sale = sale;
@@ -127,7 +127,7 @@ namespace ShopManagmentSystem.Controllers
         public async Task<IActionResult> RefundOrder(RefundOrderVM refundOrderVM)
         {
             AppUser? user = await _userManager.FindByNameAsync(User.Identity.Name);
-            if (user == null || refundOrderVM == null) return NotFound();         
+            if (user == null || refundOrderVM == null) return NotFound();
             if (!User.Identity.IsAuthenticated) return NotFound();
             Product? product = await _context.Products
                .Include(p => p.SaleProducts)
@@ -135,7 +135,7 @@ namespace ShopManagmentSystem.Controllers
                .Include(p => p.Color)
                .Include(p => p.Brand)
                .Include(p => p.ProductModel)
-               .Include(p=>p.Memory)
+               .Include(p => p.Memory)
                .Where(p => p.BranchId == user.BranchId)
                .FirstOrDefaultAsync(p => p.Id == refundOrderVM.ProductId);
             Sale? sale = await _context.Sales
@@ -145,12 +145,12 @@ namespace ShopManagmentSystem.Controllers
                 .FirstOrDefaultAsync(s => s.Id == refundOrderVM.SaleId);
             if (product == null || !product.IsSold || sale == null) return NotFound();
             if (!ModelState.IsValid)
-            {                            
+            {
                 refundOrderVM.Product = product;
                 refundOrderVM.Sale = sale;
                 return View(refundOrderVM);
             }
-           
+
             List<RefundOrder> refundOrder = await _context.RefundOrders.ToListAsync();
             if (refundOrder.Any(r => r.ProdId == product.Id)) return NotFound();
             bool check = false;
@@ -163,7 +163,7 @@ namespace ShopManagmentSystem.Controllers
             }
             if (!check) return NotFound();
 
-            
+
             RefundOrder order = new();
             order.CreateDate = DateTime.Now;
             order.Brand = product.Brand.BrandName;
@@ -179,18 +179,19 @@ namespace ShopManagmentSystem.Controllers
             order.BranchId = user.BranchId;
             order.SaleId = sale.Id;
             order.Description = refundOrderVM.Description;
-            
-            
+
+
 
             _context.RefundOrders.Add(order);
             await _context.SaveChangesAsync();
             TempData["Success"] = "ok";
 
-            return RedirectToAction("details", "sale", new {id = sale.Id});
+            return RedirectToAction("details", "sale", new { id = sale.Id });
         }
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null || id == 0) return NotFound();
+
             Refund? refund = await _context.Refunds
                 .Include(r => r.Customer)
                 .Include(r => r.Product).ThenInclude(p => p.Brand)

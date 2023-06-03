@@ -1,11 +1,9 @@
 ﻿@model SalaryVM
 
 
-
-
 <div class="container">
     <div class="row">
-        <h1 style="margin-top:50px;">Salary Reports</h1>
+        <h1>Salary Reports </h1>
         <hr />
         <form method="get">
             <div class="mb-3 col-lg-8 d-flex search_product">
@@ -49,7 +47,7 @@
                                                 {
                                                     <a asp-action="details" asp-controller="sale" asp-route-id="@salary.SaleId"><i class="fa-solid fa-circle-info"></i></a>
                                                 }
-                                                else
+                                                else if(salary.RefundId != null)
                                                 {
                                                     <a asp-action="details" asp-controller="refund" asp-route-id="@salary.RefundId"><i class="fa-solid fa-circle-info"></i></a>
 
@@ -61,7 +59,7 @@
                                 }
                                 <tr>
                                     <td class="text-warning">Fix salary : @item.EmployeePostion.FixSalary</td>
-                                    <td class="text-warning">Total : @(item.Salaries.Sum(s => s.Bonus) + item.EmployeePostion.FixSalary)</td>
+                                    <td class="text-warning">Total : @(Model.Salaries.Where(s=>s.EmployeeId == item.Id).Sum(s => s.Bonus) + item.EmployeePostion.FixSalary)</td>
                                     <td></td>
                                 </tr>
                             </tbody>

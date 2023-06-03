@@ -34,11 +34,12 @@ connection.on("Online", function (userId) {
 
     document.getElementById(userId).classList.remove("offline");
     document.getElementById(userId).classList.add("online");
-    document.getElementById(userId).nextElementSibling.innerHTML = "online";
-    if (document.getElementById("user_name").innerHTML != "Choose User") {
+    if (document.getElementById("user_last_seen").previousElementSibling.getAttribute("data-id") == userId) {
         document.getElementById("user_last_seen").innerHTML = "Online";
-        document.getElementById("user_last_seen").style.color = "#86c541";
     }
+    document.getElementById(userId).nextElementSibling.innerHTML = "online";  
+    document.getElementById(userId).parentElement.parentElement.parentElement.setAttribute("data-last", "Online");
+    
 
 });
 
@@ -55,10 +56,13 @@ connection.on("Offline", function (userId) {
     var year = d.getFullYear().toString();
     var fullDate = day + " " + month + " " + year + " , " + formatAMPM(d)
 
-
-    document.getElementById("user_last_seen").innerHTML = fullDate;
-    document.getElementById("user_last_seen").style.color = "#464746";
-
+    document.getElementById(userId).parentElement.parentElement.parentElement.setAttribute("data-last", fullDate);
+    
+    if (document.getElementById("user_last_seen").previousElementSibling.getAttribute("data-id") == userId) {
+        document.getElementById("user_last_seen").innerHTML = fullDate;
+    }
+    
+    
 });
 
 document.getElementById("send_btn").addEventListener("click", function (e) {

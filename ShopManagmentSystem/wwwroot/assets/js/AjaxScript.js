@@ -18,7 +18,6 @@
     let deleteBranch = $(".delete_branch");
     let chatHistory = $(".chat-history");
     let userChat = $(".select_user");
-    var newMessageCount = $(".new_message").html();
     var skip;
 
 
@@ -53,7 +52,7 @@
         let id = $(e.currentTarget).data('id');
         let name = $(e.currentTarget).data('name');
         let lastSeen = $(e.currentTarget).data('last');
-        let newMessageIcon = $(".new_message");
+        let newMessageCount = $(".new_message").html();
         userChat.each(function (index, item) {
             $(item).removeClass("active");
         })
@@ -71,16 +70,23 @@
                 $("#user_last_seen").html(lastSeen);
                 $(".chat-message").css("display", "block");
                 $(".chat-header").css("display", "block");
-                if (newMessageIcon != undefined || newMessageIcon != null) {
-                    newMessageIcon.remove();
+           
+
+                if (newMessageCount != undefined) {
+                    var countMessage = $(".countMessage").html();
+                    var numCountMessage = parseInt(countMessage);
+                    var numNewMessageCount = parseInt(newMessageCount);
+                    var totalCountMessage = numCountMessage - numNewMessageCount;
+                    if (totalCountMessage >= 0) {
+                        $(".countMessage").html(totalCountMessage);
+                    }
+                    
+                    $(".new_message").remove();
                 }
+               
+                
 
-                var countMessage = $(".countMessage").html();            
-                var numCountMessage = parseInt(countMessage);
-                var numNewMessageCount = parseInt(newMessageCount);
-                var totalCountMessage = numCountMessage - numNewMessageCount;
-                $(".countMessage").html(totalCountMessage);
-
+                
                 var test = chatHistory.prop('scrollHeight');
                 chatHistory.scrollTop(test);
             }             

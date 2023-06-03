@@ -7,14 +7,14 @@ namespace ShopManagmentSystem.ViewModels.ProductVMs
         [Required]
         public double CostPrice { get; set; }
         [Required]
-        public string Series { get; set; }
-        [Required]
-        public int ProductCategoryId { get; set; }
+        public string Series { get; set; }     
         [Required]
         public int? BrandId { get; set; }
         [Required]
         public int ColorId { get; set; }
         [Required]
         public int? ProductModelId { get; set; }
+        [Required]
+        public int? MemoryId { get; set; }
     }
 }

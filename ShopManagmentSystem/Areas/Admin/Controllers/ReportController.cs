@@ -64,7 +64,7 @@ namespace ShopManagmentSystem.Areas.Admin.Controllers
                 .Include(s => s.Refund)
                 .Where(s=>s.CreateDate > fromDate)
                 .ToListAsync();
-              
+                return View(salaryVM);
             }
             if (fromDate == null && toDate != null)
             {
@@ -74,7 +74,7 @@ namespace ShopManagmentSystem.Areas.Admin.Controllers
                 .Include(s => s.Refund)
                 .Where(s => s.CreateDate < toDate)
                 .ToListAsync();
-             
+                return View(salaryVM);
             }
             if (fromDate != null && toDate != null)
             {
@@ -85,6 +85,7 @@ namespace ShopManagmentSystem.Areas.Admin.Controllers
                 .Include(s => s.Refund)
                 .Where(s => s.CreateDate < toDate && s.CreateDate > fromDate)
                 .ToListAsync();
+                return View(salaryVM);
             }
             if (fromDate == null && toDate == null)
             {

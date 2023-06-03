@@ -2,27 +2,29 @@
 
 <div class="container">
     <div class="row">
-        @if (TempData["Create"] != null)
+       
+        <h1>Products List</h1>
+        <hr />
+         @if (TempData["Create"] != null)
         {
             <div style="transition:all 0.5s ease" id="alert_refund" class="alert alert-warning" role="alert">
                 Product Elave Olundu !
             </div>
         }
-        <h1>Products List</h1>
-        <hr />
-        <div class="col-lg-3"><a asp-action="create" class="btn btn-primary"> Add Product</a></div>
-        @*<form method="get">
-            <div class="mb-3 col-lg-4 d-flex search_product">
-                <input type="text" class="form-control" name="search" placeholder="Search" value="@ViewBag.SearchValue">
-                <button type="submit" class="btn btn-primary">Search</button>
+         @if (TempData["Edit"] != null)
+        {
+            <div style="transition:all 0.5s ease" id="alert_refund" class="alert alert-warning" role="alert">
+                Update qeyde alindi !
             </div>
-        </form>*@
+        }
+        <div style="margin-bottom:15px;" class="col-lg-3"><a asp-action="create" class="btn btn-primary"> Add Product</a></div>
         <table class="table">
             <thead class="thead-light">
                 <tr>
                     <th class="text-primary" scope="col">Brand</th>
                     <th class="text-primary" scope="col">Name</th>
                     <th class="text-primary" scope="col">Color</th>
+                    <th class="text-primary" scope="col">Memory</th>
                     <th class="text-primary" scope="col">Price</th>
                     <th class="text-primary" scope="col">Category</th>
                     <th class="text-primary" scope="col">Series</th>
@@ -37,6 +39,7 @@
                         <td>@product.Brand.BrandName</td>
                         <td>@product.ProductModel.ModelName</td>
                         <td>@product.Color.ColorName</td>
+                        <td>@product.Memory.MemoryCapacity</td>
                         <td>@product.ProductModel.ModelPrice <i class="fa-solid fa-manat-sign"></i></td>
                         <td>@product.ProductCategory.Name</td>
                         <td>@product.Series</td>

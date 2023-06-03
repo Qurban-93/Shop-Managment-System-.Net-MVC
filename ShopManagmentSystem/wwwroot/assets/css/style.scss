@@ -780,6 +780,10 @@ ul.accordion-list {
     height: 0
 }
 
+.dataTables_filter{
+    text-align: end;
+}
+
 @media only screen and (max-width: 767px) {
     .chat-app .people-list {
         height: 100%;
