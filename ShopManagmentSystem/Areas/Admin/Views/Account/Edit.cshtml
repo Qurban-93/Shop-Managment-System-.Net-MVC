@@ -1,2 +1,51 @@
 ﻿@model AccountEditVM
 
+<div class="container">
+    <div class="row">
+        <h1>User Role Update Form</h1>
+        <hr />
+        <table class="table">
+            <tr>
+                <th class="text-primary">User Name</th>
+                <th class="text-primary">User Branch</th>
+                <th class="text-primary">User Roles</th>
+            </tr>
+            <tr>
+                <td>@Model.User.UserName</td>
+                <td>@Model.Branch.Name</td>
+                <td>
+
+                    <form method="post">
+                        @foreach (var role in Model.Roles)
+                        {
+                            if (Model.UserRoles.Any(r => r == role.Name))
+                            {
+                                <div class="col-6 row">
+                                    <div class="col-6">
+                                        <span>@role</span>
+                                    </div>
+                                    <div class="col-6">
+                                        <input type="checkbox" checked value="@role" name="role" />
+                                    </div>
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="col-6 row">
+                                    <div class="col-6">
+                                        <span>@role</span>
+                                    </div>
+                                    <div class="col-6">
+                                        <input type="checkbox" value="@role" name="role"/>
+                                    </div>
+                                </div>
+                            }
+                        }
+                        <button class="btn btn-primary">Change Role</button>
+                    </form>
+
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>

@@ -31,7 +31,6 @@ namespace ShopManagmentSystem.Controllers
                 .Include(p => p.ProductModel)
                 .Include(p => p.Brand)
                 .Include(p => p.Color)
-                .Include(p=>p.Memory)
                 .Where(p => !p.IsSold && p.BranchId == user.BranchId);
 
             if (!string.IsNullOrWhiteSpace(search))
@@ -80,7 +79,6 @@ namespace ShopManagmentSystem.Controllers
                .Include(p => p.Brand)
                .Include(p => p.ProductModel)
                .Include(p => p.Color)
-               .Include(p=>p.Memory)
                .Where(p => !p.IsSold && (p.ProductModel.ModelName.ToLower().Trim().Contains(search.ToLower().Trim()) ||
                p.Brand.BrandName.ToLower().Trim().Contains(search.ToLower().Trim())))
                .ToListAsync();

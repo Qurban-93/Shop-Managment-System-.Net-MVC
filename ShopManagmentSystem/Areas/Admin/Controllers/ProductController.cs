@@ -1,18 +1,16 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using ShopManagmentSystem.DAL;
-using ShopManagmentSystem.Extensions;
 using ShopManagmentSystem.Models;
 using ShopManagmentSystem.ViewModels.ProductVMs;
 
 namespace ShopManagmentSystem.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    [Authorize]
+    [Authorize(Roles = "Admin")]
     public class ProductController : Controller
     {
         private readonly AppDbContext _context;
@@ -36,7 +34,6 @@ namespace ShopManagmentSystem.Areas.Admin.Controllers
                 .Include(p => p.ProductModel)
                 .Include(p => p.Brand)
                 .Include(p => p.Color)
-                .Include(p=>p.Memory)
                 .Where(p=>p.BranchId == user.BranchId).ToListAsync();
                 
             return View(products);
@@ -47,7 +44,7 @@ namespace ShopManagmentSystem.Areas.Admin.Controllers
             ViewBag.Brands = new SelectList(_context.Brands.ToList(), "Id", "BrandName");         
             ViewBag.Color = new SelectList(_context.Colors.ToList(), "Id", "ColorName");
             ViewBag.ProdModel = new SelectList(_context.ProductModels.ToList(), "Id", "ModelName");
-            ViewBag.Memory = new SelectList(_context.Memories.ToList(), "Id", "MemoryCapacity");
+           
 
             return View();
         }
@@ -59,7 +56,6 @@ namespace ShopManagmentSystem.Areas.Admin.Controllers
             ViewBag.Brands = new SelectList(_context.Brands.ToList(), "Id", "BrandName");            
             ViewBag.Color = new SelectList(_context.Colors.ToList(), "Id", "ColorName");
             ViewBag.ProdModel = new SelectList(_context.ProductModels.ToList(), "Id", "ModelName");
-            ViewBag.Memory = new SelectList(_context.Memories.ToList(), "Id", "MemoryCapacity");
             if (!ModelState.IsValid) return View();
             if (_context.Products.Any(p => p.Series == productCreateVM.Series))
             {
@@ -69,8 +65,7 @@ namespace ShopManagmentSystem.Areas.Admin.Controllers
             Brand? brand = await _context.Brands.Include(b => b.ProductModels).FirstOrDefaultAsync(b => b.Id == productCreateVM.BrandId);
             ProductModel? productModel = await _context.ProductModels.FirstOrDefaultAsync(pm => pm.Id == productCreateVM.ProductModelId);
             Color? color = await _context.Colors.FirstOrDefaultAsync(c => c.Id == productCreateVM.ColorId);
-            Memory memory = await _context.Memories.FirstOrDefaultAsync(m=>m.Id == productCreateVM.MemoryId);
-            if (productModel == null || brand == null  || color == null || memory == null) return NotFound();
+            if (productModel == null || brand == null  || color == null) return NotFound();
             if (!brand.ProductModels.Any(pm => pm.Id == productModel.Id))
             {
                 ModelState.AddModelError("ProductModelId", "Qeyd etdiyiniz model secdiyiniz Brende aid deil !");
@@ -97,7 +92,6 @@ namespace ShopManagmentSystem.Areas.Admin.Controllers
             product.CreateDate = DateTime.Now;
             product.Series = productCreateVM.Series;
             product.IsSold = false;
-            product.MemoryId = productCreateVM.MemoryId;
 
             _context.Products.Add(product);
             await _context.SaveChangesAsync();
@@ -108,7 +102,6 @@ namespace ShopManagmentSystem.Areas.Admin.Controllers
         public async Task<IActionResult> Edit(int? id)
         {
             ViewBag.Brands = new SelectList(_context.Brands.ToList(), "Id", "BrandName");
-            ViewBag.Memory = new SelectList(_context.Memories.ToList(), "Id", "MemoryCapacity");
             ViewBag.Color = new SelectList(_context.Colors.ToList(), "Id", "ColorName");
             ViewBag.ProdModel = new SelectList(_context.ProductModels.ToList(), "Id", "ModelName");
             if (id == null || id == 0) return NotFound();
@@ -121,7 +114,6 @@ namespace ShopManagmentSystem.Areas.Admin.Controllers
                 ColorId = product.ColorId,              
                 ProductModelId = product.ProductModelId,
                 Series = product.Series,
-                MemoryId = product.MemoryId,
             };
 
             return View(editVM);
@@ -131,7 +123,6 @@ namespace ShopManagmentSystem.Areas.Admin.Controllers
         public async Task<IActionResult> Edit(int? id ,ProductEditVM editVM)
         {
             ViewBag.Brands = new SelectList(_context.Brands.ToList(), "Id", "BrandName");
-            ViewBag.Memory = new SelectList(_context.Memories.ToList(), "Id", "MemoryCapacity");
             ViewBag.Color = new SelectList(_context.Colors.ToList(), "Id", "ColorName");
             ViewBag.ProdModel = new SelectList(_context.ProductModels.ToList(), "Id", "ModelName");
             if (!ModelState.IsValid) return View();
@@ -145,9 +136,8 @@ namespace ShopManagmentSystem.Areas.Admin.Controllers
             }
             Brand? brand = await _context.Brands.Include(b => b.ProductModels).FirstOrDefaultAsync(b => b.Id == editVM.BrandId);
             ProductModel? productModel = await _context.ProductModels.FirstOrDefaultAsync(pm => pm.Id == editVM.ProductModelId);
-            Color? color = await _context.Colors.FirstOrDefaultAsync(c => c.Id == editVM.ColorId);
-            Memory? memory = await _context.Memories.FirstOrDefaultAsync( m =>m.Id == editVM.MemoryId);
-            if (productModel == null || brand == null || color == null || memory == null) return NotFound();
+            Color? color = await _context.Colors.FirstOrDefaultAsync(c => c.Id == editVM.ColorId);           
+            if (productModel == null || brand == null || color == null) return NotFound();
             if (!brand.ProductModels.Any(pm => pm.Id == productModel.Id))
             {
                 ModelState.AddModelError("ProductModelId", "Qeyd etdiyiniz model secidiyinz brende aid deil !");
@@ -171,12 +161,25 @@ namespace ShopManagmentSystem.Areas.Admin.Controllers
             product.CostPrice = editVM.CostPrice;
             product.Series = editVM.Series;
             product.UpdateDate = DateTime.Now;
-            product.ProductCategoryId = (int)productModel.ProductCategoryId;
-            product.MemoryId = editVM.MemoryId;
+            product.ProductCategoryId = (int)productModel.ProductCategoryId;       
 
             await _context.SaveChangesAsync();
             TempData["Edit"] = true;
             return RedirectToAction("Index");
         }
+        [HttpDelete]
+        public async Task<IActionResult> Delete(int? id)
+        {
+            if (id == null || id == 0) return BadRequest();
+            Product? product = await _context.Products.Include(p=>p.SaleProducts).FirstOrDefaultAsync(x => x.Id == id);
+            if (product == null) return NotFound();
+            if (product.SaleProducts.Count > 0) return BadRequest("Relation");
+
+            _context.Products.Remove(product);
+            await _context.SaveChangesAsync();
+            return Ok();
+        }
+
+
     }
 }

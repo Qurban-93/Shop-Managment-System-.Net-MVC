@@ -2,16 +2,16 @@
 
 <div class="container">
     <div class="row">
-       
+
         <h1>Products List</h1>
         <hr />
-         @if (TempData["Create"] != null)
+        @if (TempData["Create"] != null)
         {
             <div style="transition:all 0.5s ease" id="alert_refund" class="alert alert-warning" role="alert">
                 Product Elave Olundu !
             </div>
         }
-         @if (TempData["Edit"] != null)
+        @if (TempData["Edit"] != null)
         {
             <div style="transition:all 0.5s ease" id="alert_refund" class="alert alert-warning" role="alert">
                 Update qeyde alindi !
@@ -23,8 +23,7 @@
                 <tr>
                     <th class="text-primary" scope="col">Brand</th>
                     <th class="text-primary" scope="col">Name</th>
-                    <th class="text-primary" scope="col">Color</th>
-                    <th class="text-primary" scope="col">Memory</th>
+                    <th class="text-primary" scope="col">Color</th>                   
                     <th class="text-primary" scope="col">Price</th>
                     <th class="text-primary" scope="col">Category</th>
                     <th class="text-primary" scope="col">Series</th>
@@ -39,15 +38,16 @@
                         <td>@product.Brand.BrandName</td>
                         <td>@product.ProductModel.ModelName</td>
                         <td>@product.Color.ColorName</td>
-                        <td>@product.Memory.MemoryCapacity</td>
                         <td>@product.ProductModel.ModelPrice <i class="fa-solid fa-manat-sign"></i></td>
                         <td>@product.ProductCategory.Name</td>
                         <td>@product.Series</td>
-                        <td class="@(product.IsSold == true ? "text-danger": "text-success")" >@product.IsSold</td>
+                        <td class="@(product.IsSold == true ? "text-danger": "text-success")">@product.IsSold</td>
+
                         <td>
                             <a class="text-warning" style="margin-right:20px;" asp-action="edit" asp-route-id="@product.Id"><i style="font-size:25px;" class="fa-regular fa-pen-to-square"></i></a>
-                            <a class="text-danger" style="cursor:pointer;" ><i style="font-size:25px;" class="fa-regular fa-trash-can"></i></a>
+                            <a class="text-danger delete-product" style="cursor:pointer;" data-id="@product.Id"><i style="font-size:25px;" class="fa-regular fa-trash-can"></i></a>
                         </td>
+
                     </tr>
                 }
             </tbody>
@@ -55,14 +55,14 @@
     </div>
 </div>
 @section Scripts{
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-        <script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"> </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"> </script>
 
-        <script src="https://cdn.datatables.net/1.13.1/js/dataTables.bootstrap5.min.js"> </script>
-        <script>
-            $(document).ready(function () {
-                var dataTable = $('.table').DataTable();
-            });
+    <script src="https://cdn.datatables.net/1.13.1/js/dataTables.bootstrap5.min.js"> </script>
+    <script>
+        $(document).ready(function () {
+            var dataTable = $('.table').DataTable();
+        });
 
-        </script>
+    </script>
 }

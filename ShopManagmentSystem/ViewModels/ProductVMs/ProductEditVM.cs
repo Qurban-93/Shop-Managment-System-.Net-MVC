@@ -14,7 +14,6 @@ namespace ShopManagmentSystem.ViewModels.ProductVMs
         public int ColorId { get; set; }
         [Required]
         public int? ProductModelId { get; set; }
-        [Required]
-        public int? MemoryId { get; set; }
+       
     }
 }

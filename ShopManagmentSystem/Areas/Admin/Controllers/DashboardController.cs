@@ -9,7 +9,7 @@ using System.Data;
 namespace ShopManagmentSystem.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    [Authorize]
+    [Authorize(Roles = "Admin")]
     public class DashboardController : Controller
     {
         private readonly AppDbContext _context;
@@ -26,7 +26,7 @@ namespace ShopManagmentSystem.Areas.Admin.Controllers
             return View();
         }
 
-        //[Authorize(Roles = "SuperAdmin")]  
+        [Authorize(Roles = "SuperAdmin")]  
         public IActionResult SuperAdmin()
         {
             SettingVM settingVM = new()

@@ -470,28 +470,6 @@ namespace ShopManagmentSystem.Migrations
                     b.ToTable("EmployeePostions");
                 });
 
-            modelBuilder.Entity("ShopManagmentSystem.Models.Memory", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<DateTime>("CreateDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("MemoryCapacity")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("UpdateDate")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Memories");
-                });
-
             modelBuilder.Entity("ShopManagmentSystem.Models.Message", b =>
                 {
                     b.Property<int>("Id")
@@ -592,10 +570,6 @@ namespace ShopManagmentSystem.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Memory")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -646,9 +620,6 @@ namespace ShopManagmentSystem.Migrations
                     b.Property<bool>("IsSold")
                         .HasColumnType("bit");
 
-                    b.Property<int?>("MemoryId")
-                        .HasColumnType("int");
-
                     b.Property<int>("ProductCategoryId")
                         .HasColumnType("int");
 
@@ -669,8 +640,6 @@ namespace ShopManagmentSystem.Migrations
                     b.HasIndex("BrandId");
 
                     b.HasIndex("ColorId");
-
-                    b.HasIndex("MemoryId");
 
                     b.HasIndex("ProductCategoryId");
 
@@ -887,9 +856,6 @@ namespace ShopManagmentSystem.Migrations
 
                     b.Property<string>("EmployeeName")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Memory")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
@@ -1172,10 +1138,6 @@ namespace ShopManagmentSystem.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("ShopManagmentSystem.Models.Memory", "Memory")
-                        .WithMany("Products")
-                        .HasForeignKey("MemoryId");
-
                     b.HasOne("ShopManagmentSystem.Models.ProductCategory", "ProductCategory")
                         .WithMany("Products")
                         .HasForeignKey("ProductCategoryId")
@@ -1189,8 +1151,6 @@ namespace ShopManagmentSystem.Migrations
                     b.Navigation("Brand");
 
                     b.Navigation("Color");
-
-                    b.Navigation("Memory");
 
                     b.Navigation("ProductCategory");
 
@@ -1392,11 +1352,6 @@ namespace ShopManagmentSystem.Migrations
                     b.Navigation("Salaries");
 
                     b.Navigation("Sales");
-                });
-
-            modelBuilder.Entity("ShopManagmentSystem.Models.Memory", b =>
-                {
-                    b.Navigation("Products");
                 });
 
             modelBuilder.Entity("ShopManagmentSystem.Models.Product", b =>

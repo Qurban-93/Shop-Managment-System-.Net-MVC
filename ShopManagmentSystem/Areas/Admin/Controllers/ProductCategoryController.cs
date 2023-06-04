@@ -8,7 +8,7 @@ using ShopManagmentSystem.ViewModels.ProductCategoryVMs;
 namespace ShopManagmentSystem.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    [Authorize]
+    [Authorize(Roles = "SuperAdmin")]
     public class ProductCategoryController : Controller
     {
         private readonly AppDbContext _context;

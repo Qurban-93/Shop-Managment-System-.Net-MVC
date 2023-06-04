@@ -18,8 +18,95 @@
     let deleteBranch = $(".delete_branch");
     let chatHistory = $(".chat-history");
     let userChat = $(".select_user");
+    let deleteProduct = $(".delete-product");
+    let deleteUser = $(".delete-user");
     var skip;
 
+
+
+
+    deleteUser.on("click", function (e) {
+        let id = $(e.currentTarget).data("id");
+        let parentElement = $(e.currentTarget).parent().parent();
+
+        Swal.fire({
+            title: 'Are you sure delete ?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    method: "DELETE",
+                    url: "Account/Delete/" + id,
+                    success: function (result) {
+                        
+                        parentElement.remove()
+                        Swal.fire(
+                            `${result} Deleted !`,
+                            'Your file has been deleted.',
+                            'success'
+                        )
+                    },
+                    error: function (result) {
+                        Swal.fire(
+                            'Not Deleted!',
+                            'Your file has been not deleted.',
+                            'error'
+                        )
+                        
+                    }
+                });
+
+
+            }
+        })
+
+    })
+
+    deleteProduct.on("click", function (e) {
+        let id = $(e.currentTarget).data('id');
+        let parentElement = $(e.currentTarget).parent().parent();
+
+        Swal.fire({
+            title: 'Are you sure delete ?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    method: "DELETE",
+                    url: "Product/Delete/" + id,
+                    success: function (result) {
+                        console.log(result)
+                        parentElement.remove()
+                        Swal.fire(
+                            `${result} Deleted !`,
+                            'Your file has been deleted.',
+                            'success'
+                        )
+                    },
+                    error: function (result) {
+                        Swal.fire(
+                            'Not Deleted!',
+                            'Your file has been not deleted.',
+                            'error'
+                        )
+                        console.log(result)
+                    }
+                });
+
+
+            }
+        })
+    })
 
     $('body').on('click', '#load_more', function () {
 
@@ -67,10 +154,10 @@
                 chatHistory.append(result);
                 $("#user_name").html(name);
                 $("#user_name").attr('data-id', id);
-                $("#user_last_seen").html(lastSeen);
+                $("#user_last_seen").html(lastSeen);               
                 $(".chat-message").css("display", "block");
                 $(".chat-header").css("display", "block");
-           
+                console.log(lastSeen)
 
                 if (newMessageCount != undefined) {
                     var countMessage = $(".countMessage").html();

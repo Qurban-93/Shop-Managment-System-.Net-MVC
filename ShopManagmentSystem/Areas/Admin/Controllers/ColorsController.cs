@@ -14,7 +14,7 @@ using ShopManagmentSystem.ViewModels;
 namespace ShopManagmentSystem.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    [Authorize]
+    [Authorize(Roles = "SuperAdmin")]
     public class ColorsController : Controller
     {
         private readonly AppDbContext _context;

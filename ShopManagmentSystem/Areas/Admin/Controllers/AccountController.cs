@@ -11,11 +11,12 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
 using ShopManagmentSystem.ViewModels;
+using System.Data;
 
 namespace ShopManagmentSystem.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    [Authorize]
+    [Authorize(Roles = "SuperAdmin")]
     public class AccountController : Controller
     {
         private readonly UserManager<AppUser> _userManager;
@@ -31,12 +32,10 @@ namespace ShopManagmentSystem.Areas.Admin.Controllers
             _roleManager = roleManager;
             _context = context;
         }
-
-
         public async Task<IActionResult> Index()
         {
             List<AppUser> users = _userManager.Users.ToList();
-            List<Branch> branches =await _context.Branches.ToListAsync();
+            List<Branch> branches = await _context.Branches.ToListAsync();
             List<AccountIndexVM> accountVMs = new List<AccountIndexVM>();
 
             foreach (var item in users)
@@ -45,28 +44,26 @@ namespace ShopManagmentSystem.Areas.Admin.Controllers
                 {
                     Id = item.Id,
                     UserName = item.UserName,
-                    BranchName = branches.FirstOrDefault(b=>b.Id == item.BranchId).Name
+                    BranchName = branches.FirstOrDefault(b => b.Id == item.BranchId).Name
                 };
                 accountVMs.Add(indexVM);
             }
-         
+
 
             return View(accountVMs);
         }
-
         public IActionResult Register()
         {
-            ViewBag.Branches = new SelectList(_context.Branches.Where(b=>b.Id != 5).ToList(), "Id", "Name");
+            ViewBag.Branches = new SelectList(_context.Branches.Where(b => b.Id != 5).ToList(), "Id", "Name");
             return View();
         }
-
         [HttpPost]
         [AutoValidateAntiforgeryToken]
         public async Task<IActionResult> Register(RegistrationVM registrationVM)
         {
             ViewBag.Branches = new SelectList(_context.Branches.ToList(), "Id", "Name");
             if (!ModelState.IsValid) return View(registrationVM);
-            if(await _userManager.Users.AnyAsync(u=>u.BranchId == registrationVM.BranchId))
+            if (await _userManager.Users.AnyAsync(u => u.BranchId == registrationVM.BranchId))
             {
                 ModelState.AddModelError("BranchId", "Bu Branch ucun User qeydiyyatdan kecirilib !");
                 return View(registrationVM);
@@ -75,6 +72,7 @@ namespace ShopManagmentSystem.Areas.Admin.Controllers
             appUser.UserName = registrationVM.UserName;
             appUser.Email = registrationVM.Email;
             appUser.BranchId = registrationVM.BranchId;
+            appUser.LastSeen = DateTime.Now.ToString();
             IdentityResult result = await _userManager.CreateAsync(appUser, registrationVM.Password);
 
             if (!result.Succeeded)
@@ -122,7 +120,6 @@ namespace ShopManagmentSystem.Areas.Admin.Controllers
             return RedirectToAction(nameof(VerifyEmail));
 
         }
-
         public async Task<IActionResult> ConfirmEmail(string userId, string token)
         {
             if (userId == null || token == null) return NotFound();
@@ -133,31 +130,25 @@ namespace ShopManagmentSystem.Areas.Admin.Controllers
 
 
             await _userManager.ConfirmEmailAsync(user, token);
-
-            await _signInManager.SignInAsync(user, false);
-
+          
             await _userManager.AddToRoleAsync(user, "Shop");
+            TempData["Create"] = true;
 
-            return RedirectToAction(nameof(SuccesfulRegistered));
+            return RedirectToAction(nameof(Index));
 
         }
-
-
         public IActionResult VerifyEmail()
         {
             return View();
         }
-
         public IActionResult SuccesfulRegistered()
         {
             return View();
         }
-
         public IActionResult ForgotPassword()
         {
             return View();
         }
-
         [HttpPost]
         public async Task<IActionResult> ForgotPassword(ForgotPasswordVM forgotPassword)
         {
@@ -206,7 +197,6 @@ namespace ShopManagmentSystem.Areas.Admin.Controllers
 
             return RedirectToAction(nameof(VerifyEmail));
         }
-
         [HttpGet]
         public async Task<IActionResult> ResetPassword(string userId, string token)
         {
@@ -226,7 +216,6 @@ namespace ShopManagmentSystem.Areas.Admin.Controllers
 
             return View(resetPasswordVM);
         }
-
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> ResetPassword(ResetPasswordVM resetPassword)
@@ -246,15 +235,13 @@ namespace ShopManagmentSystem.Areas.Admin.Controllers
             await _userManager.ResetPasswordAsync(exsistUser, resetPassword.Token, resetPassword.Password);
             await _userManager.UpdateSecurityStampAsync(exsistUser);
 
-            return RedirectToAction("login","Account");
+            return RedirectToAction("login", "Account");
         }
-
         public async Task<IActionResult> LogOut()
         {
             await _signInManager.SignOutAsync();
-            return RedirectToAction("login","account");
+            return RedirectToAction("login", "account");
         }
-
         public async Task<IActionResult> Edit(string id)
         {
             if (id == null) return NotFound();
@@ -263,15 +250,39 @@ namespace ShopManagmentSystem.Areas.Admin.Controllers
             List<IdentityRole> roles = _roleManager.Roles.ToList();
             var userRoles = _userManager.GetRolesAsync(user).Result;
             Branch? branch = await _context.Branches.FirstOrDefaultAsync(x => x.Id == user.BranchId);
-            AccountEditVM editVM = new()
-            {
-                User= user,
-                Roles=roles,
-                UserRoles = userRoles,
-                Branch = branch
-            };
-           
+            AccountEditVM editVM = new();
+            editVM.User = user;
+            editVM.Roles = roles;
+            editVM.UserRoles = userRoles;
+
+            if (branch != null)
+            {          
+                editVM.Branch = branch;
+            }         
             return View(editVM);
+        }
+        [HttpPost]
+        public async Task<IActionResult> Edit(string id,List<string> role)
+        {
+           if (string.IsNullOrEmpty(id) || role == null) return NotFound();
+            AppUser? user = await _userManager.FindByIdAsync(id);
+            if(user == null) return NotFound();
+            var roles = _roleManager.Roles.ToList();         
+            await _userManager.RemoveFromRolesAsync(user, await _userManager.GetRolesAsync(user));
+            await _userManager.AddToRolesAsync(user, role);     
+            TempData["Edit"] = true;
+
+            return RedirectToAction(nameof(Index));
+        }
+        [HttpDelete]
+        public async Task<IActionResult> Delete(string id)
+        {
+            if (string.IsNullOrEmpty(id)) return NotFound();
+            AppUser? user = await _userManager.FindByIdAsync(id);
+            if (user == null) return NotFound();
+            await _userManager.DeleteAsync(user);
+            string name = user.UserName;
+            return Ok(name);
         }
     }
 }

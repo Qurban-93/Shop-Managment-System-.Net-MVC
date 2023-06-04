@@ -23,13 +23,7 @@
                 <select asp-for="ColorId" asp-items=ViewBag.Color class="form-select">
                 </select>
                 <span class="text-danger" asp-validation-for="ColorId"></span>
-            </div>
-            <div class="mb-3">
-                <label class="form-label text-primary">Choose Memory</label><span class="text-danger">*</span>
-                <select asp-for="MemoryId" asp-items=ViewBag.Memory class="form-select">
-                </select>
-                <span class="text-danger" asp-validation-for="MemoryId"></span>
-            </div>
+            </div>       
             <div class="mb-3">
                 <label class="form-label text-primary">Cost Price</label><span class="text-danger">*</span>
                 <input type="number" asp-for=CostPrice class="form-control">

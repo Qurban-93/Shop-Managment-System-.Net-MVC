@@ -4,6 +4,18 @@
     <div class="row">
         <h1>Users List</h1>
         <hr />
+        @if (TempData["Edit"] != null)
+        {
+            <div style="transition:all 0.5s ease" id="alert_refund" class="alert alert-warning" role="alert">
+                Yenilenme qeyde alindi !
+            </div>
+        }
+        @if (TempData["Create"] != null)
+        {
+            <div style="transition:all 0.5s ease" id="alert_refund" class="alert alert-warning" role="alert">
+                User elave edildi !
+            </div>
+        }
         <div class="col-lg-4"><a class="btn btn-primary" asp-action="register">Add User</a></div>
         <table class="table">
             <tr>
@@ -18,7 +30,7 @@
                     <td>@item.BranchName</td>
                     <td>
                         <a style="font-size:20px;" asp-action="edit" asp-route-id="@item.Id" class="text-warning"><i class="fa-solid fa-pen-to-square"></i></a>
-                        <a class="text-danger" style="cursor:pointer; margin-left:20px; font-size:20px;" data-id="@item.Id"><i class="fa-regular fa-trash-can"></i></a>
+                        <a class="text-danger delete-user" style="cursor:pointer; margin-left:20px; font-size:20px;" data-id="@item.Id"><i class="fa-regular fa-trash-can"></i></a>
                     </td>                   
                 </tr>
             }

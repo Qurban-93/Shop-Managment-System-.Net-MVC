@@ -8,7 +8,7 @@ using ShopManagmentSystem.ViewModels.BrandVMs;
 namespace ShopManagmentSystem.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    [Authorize]
+    [Authorize(Roles = "SuperAdmin")]
     public class BrandController : Controller
     {
         private readonly AppDbContext _context;

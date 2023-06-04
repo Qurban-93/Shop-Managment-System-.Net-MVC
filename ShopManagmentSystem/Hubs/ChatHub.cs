@@ -59,7 +59,7 @@ namespace ShopManagmentSystem.Hubs
             }
             else
             {
-                _updateHub.Clients.All.SendAsync("NewMessageCount",destinationUserId);
+               await _updateHub.Clients.All.SendAsync("NewMessageCount",destinationUserId);
             }         
 
             if (!string.IsNullOrWhiteSpace(message) && destinationUser != null && senderUser != null &&

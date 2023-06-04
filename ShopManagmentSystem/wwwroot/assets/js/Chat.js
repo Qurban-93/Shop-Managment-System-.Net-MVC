@@ -59,7 +59,7 @@ connection.on("Offline", function (userId) {
     document.getElementById(userId).parentElement.parentElement.parentElement.setAttribute("data-last", fullDate);
     
     if (document.getElementById("user_last_seen").previousElementSibling.getAttribute("data-id") == userId) {
-        document.getElementById("user_last_seen").innerHTML = fullDate;
+        document.getElementById("user_last_seen").innerHTML = fullDate;      
     }
     
     

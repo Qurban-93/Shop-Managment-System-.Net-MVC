@@ -11,7 +11,7 @@ using System.Text.RegularExpressions;
 namespace ShopManagmentSystem.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    [Authorize]
+    [Authorize(Roles = "SuperAdmin")]
     public class EmployeeController : Controller
     {
         private readonly AppDbContext _context;

@@ -8,7 +8,7 @@ using ShopManagmentSystem.ViewModels.EmployeeVMs;
 namespace ShopManagmentSystem.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    [Authorize]
+    [Authorize(Roles = "SuperAdmin")]
     public class EmployeePositionController : Controller
     {
         private readonly AppDbContext _context;

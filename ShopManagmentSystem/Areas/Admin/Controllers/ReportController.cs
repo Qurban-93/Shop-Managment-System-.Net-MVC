@@ -11,7 +11,7 @@ using ShopManagmentSystem.ViewModels.SalaryVMs;
 namespace ShopManagmentSystem.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    [Authorize]
+    [Authorize(Roles = "Admin")]
     public class ReportController : Controller
     {
         private readonly AppDbContext _context;

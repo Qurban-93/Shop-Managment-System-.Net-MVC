@@ -24,7 +24,7 @@
                     @foreach (var item in Model.Products)
                     {
                         <tr>
-                            <td>@item.Brand.BrandName @item.ProductModel.ModelName @(item.Memory != null? item.Memory.MemoryCapacity : "") @item.Color.ColorName @item.Series</td>
+                            <td>@item.Brand.BrandName @item.ProductModel.ModelName @item.Color.ColorName @item.Series</td>
                             @foreach (var branch in Model.Branches)
                             {
                                 if (branch.Id == item.BranchId)

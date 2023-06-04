@@ -349,7 +349,6 @@ public class SaleController : Controller
             .Include(s => s.SaleProducts).ThenInclude(sp => sp.Product).ThenInclude(p => p.Color)
             .Include(s => s.SaleProducts).ThenInclude(sp => sp.Product).ThenInclude(p => p.ProductCategory)
             .Include(s => s.SaleProducts).ThenInclude(sp => sp.Product).ThenInclude(p => p.ProductModel)
-            .Include(s => s.SaleProducts).ThenInclude(sp => sp.Product).ThenInclude(p => p.Memory)
             .Include(s => s.Branch)
             .Include(s => s.Customer)
             .Include(s => s.Employee)
