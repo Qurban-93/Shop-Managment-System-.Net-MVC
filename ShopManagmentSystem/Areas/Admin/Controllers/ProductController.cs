@@ -180,6 +180,14 @@ namespace ShopManagmentSystem.Areas.Admin.Controllers
             return Ok();
         }
 
+        public async Task<IActionResult> GetModels(int? id)
+        {
+            if (id == null || id == 0) return NotFound();
+            Brand? brand = await _context.Brands.Include(b => b.ProductModels).FirstOrDefaultAsync(x => x.Id == id);
+            if (brand == null) return NotFound();
+            var options = new SelectList(brand.ProductModels, "Id", "ModelName");
+            return Ok(options);
+        }
 
     }
 }

@@ -89,7 +89,9 @@ namespace ShopManagmentSystem.Controllers
                     .Include(p => p.Brand)
                     .Include(p => p.Color)
                     .Include(p => p.ProductModel)
-                    .Include(p => p.ProductCategory).ToListAsync();
+                    .Include(p => p.ProductCategory)
+                    .Where(p=>p.BranchId== user.BranchId && !p.IsSold)
+                    .ToListAsync();
                 ModelState.AddModelError("DestinationId", "Mehsul elave edilmeyib !");
                 return View(createVM);
             }

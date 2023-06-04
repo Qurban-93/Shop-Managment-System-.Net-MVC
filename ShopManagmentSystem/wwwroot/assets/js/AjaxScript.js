@@ -20,9 +20,34 @@
     let userChat = $(".select_user");
     let deleteProduct = $(".delete-product");
     let deleteUser = $(".delete-user");
+    let prodBrandInput = $(".prod-brand");
     var skip;
 
 
+    prodBrandInput.change( function (e) {
+        let id = $(e.currentTarget).val();
+        let modelsSelect = $(".prod-model");
+        $.ajax({
+            method: "GET",
+            url: "GetModels/" + id,
+            success: function (result) {
+                console.log(result, modelsSelect)
+
+                modelsSelect.find('option').remove()
+
+                $.each(result, function (key, value) {
+                  
+                    $('.prod-model')
+                        .append($("<option></option>")
+                            .attr("value", value.value)
+                            .text(value.text));
+                });
+                
+            },
+            error: function (result) { }
+        });
+
+    })
 
 
     deleteUser.on("click", function (e) {
