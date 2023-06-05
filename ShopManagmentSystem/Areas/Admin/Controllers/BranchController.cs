@@ -20,7 +20,7 @@ namespace ShopManagmentSystem.Areas.Admin.Controllers
 
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Branches.Where(b=>b.Id != 5).
+            return View(await _context.Branches.Where(b=>b.Id != 5 && !b.IsDeleted).
                 ToListAsync());
         }
         public IActionResult Create()
@@ -46,7 +46,7 @@ namespace ShopManagmentSystem.Areas.Admin.Controllers
         public async Task<IActionResult> Edit(int? id)
         {
             if(id == null || id == 0) return NotFound();
-            Branch? branch = await _context.Branches.FirstOrDefaultAsync(b=>b.Id == id);
+            Branch? branch = await _context.Branches.FirstOrDefaultAsync(b=>b.Id == id && !b.IsDeleted);
             if(branch == null) return NotFound();
             BranchVM branchVM = new() { Name = branch.Name };
             return View(branchVM);
@@ -56,7 +56,7 @@ namespace ShopManagmentSystem.Areas.Admin.Controllers
         public async Task<IActionResult> Edit(int? id, BranchVM branchVM)
         {
             if (!ModelState.IsValid || id == null || id == 0) return NotFound();
-            Branch? branch = await _context.Branches.FirstOrDefaultAsync(a=>a.Id == id);
+            Branch? branch = await _context.Branches.FirstOrDefaultAsync(a=>a.Id == id && !a.IsDeleted);
             if(branch == null) return NotFound();
             if(await _context.Branches.AnyAsync(b=>b.Name.Trim().ToLower() == branch.Name.Trim().ToLower() && b.Id != id))
             {
@@ -73,9 +73,8 @@ namespace ShopManagmentSystem.Areas.Admin.Controllers
             if(id == null || id == 0)  return NotFound(); 
             Branch? existBranc = await _context.Branches.FirstOrDefaultAsync(b=>b.Id == id);
             if(existBranc == null) return NotFound();
-            _context.Branches.Remove(existBranc);
+            existBranc.IsDeleted = true;
             await _context.SaveChangesAsync();
-
             return Ok(existBranc.Name);
         }
     }

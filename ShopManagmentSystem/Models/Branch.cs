@@ -10,5 +10,6 @@
         public List<Employee>? Employee { get; set; }
         public List<Sale>? Sales { get; set; }
         public List<Money>? Money { get; set; }
+        public bool IsDeleted { get; set; }
     }
 }

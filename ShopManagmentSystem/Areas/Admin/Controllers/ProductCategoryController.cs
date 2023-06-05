@@ -18,7 +18,7 @@ namespace ShopManagmentSystem.Areas.Admin.Controllers
         }
         public IActionResult Index()
         {
-            return View(_context.ProductCategories.ToList());
+            return View(_context.ProductCategories.Where(pc => !pc.IsDeleted).ToList());
         }
         public IActionResult Create()
         {
@@ -28,10 +28,10 @@ namespace ShopManagmentSystem.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(ProductCategoryCreateVM createVM)
         {
-            if(!ModelState.IsValid) return View(createVM);
-            if(_context.ProductCategories.Any(pc=>pc.Name == createVM.Name)) 
+            if (!ModelState.IsValid) return View(createVM);
+            if (_context.ProductCategories.Any(pc => pc.Name == createVM.Name))
             {
-                ModelState.AddModelError("Name","Bu adli categoriya movcuddur !");
+                ModelState.AddModelError("Name", "Bu adli categoriya movcuddur !");
                 return View();
             }
             ProductCategory productCategory = new();
@@ -43,19 +43,10 @@ namespace ShopManagmentSystem.Areas.Admin.Controllers
             return RedirectToAction(nameof(Index));
         }
         [HttpDelete]
-        public async Task<IActionResult> Delete(int? id)
-        {
-            if (id == null || id == 0) return NotFound();
-            ProductCategory? productCategory = await _context.ProductCategories.FirstOrDefaultAsync(pc=>pc.Id == id);
-            if (productCategory == null) return NotFound();
-            _context.ProductCategories.Remove(productCategory);
-            await _context.SaveChangesAsync();
-            return Ok(productCategory.Name);
-        }
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || id == 0) return NotFound();
-            ProductCategory? productCategory = await _context.ProductCategories.FirstOrDefaultAsync(pc=>pc.Id==id);
+            ProductCategory? productCategory = await _context.ProductCategories.FirstOrDefaultAsync(pc => pc.Id == id && !pc.IsDeleted);
             if (productCategory == null) return NotFound();
             ProductCategoryEditVM editVM = new()
             {
@@ -66,13 +57,13 @@ namespace ShopManagmentSystem.Areas.Admin.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int? id,ProductCategoryEditVM editVM)
+        public async Task<IActionResult> Edit(int? id, ProductCategoryEditVM editVM)
         {
-            if(id == null || id == 0) return NotFound();
-            if(!ModelState.IsValid) return View(editVM);
-            ProductCategory? existProdCategory = await _context.ProductCategories.FirstOrDefaultAsync(pc=>pc.Id==id);
+            if (id == null || id == 0) return NotFound();
+            if (!ModelState.IsValid) return View(editVM);
+            ProductCategory? existProdCategory = await _context.ProductCategories.FirstOrDefaultAsync(pc => pc.Id == id && !pc.IsDeleted);
             if (existProdCategory == null) return NotFound();
-            if(_context.ProductCategories.Any(pc=>pc.Id != id && pc.Name == editVM.Name))
+            if (_context.ProductCategories.Any(pc => pc.Id != id && pc.Name == editVM.Name))
             {
                 ModelState.AddModelError("Name", "Bu adli Product Categoriya var !");
                 return View(editVM);
@@ -84,6 +75,16 @@ namespace ShopManagmentSystem.Areas.Admin.Controllers
             TempData["Edit"] = true;
 
             return RedirectToAction(nameof(Index));
+        }
+
+        public async Task<IActionResult> Delete(int? id)
+        {
+            if (id == null || id == 0) return NotFound();
+            ProductCategory? productCategory = await _context.ProductCategories.FirstOrDefaultAsync(c => c.Id == id && !c.IsDeleted);
+            if (productCategory == null) return NotFound();
+            productCategory.IsDeleted= true;
+            await _context.SaveChangesAsync();
+            return Ok();
         }
     }
 }

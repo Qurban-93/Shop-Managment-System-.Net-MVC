@@ -27,18 +27,18 @@ namespace ShopManagmentSystem.Areas.Admin.Controllers
                 return View(_context.ProductModels
                 .Include(p => p.ProductCategory)
                 .Include(p => p.Brand)
-                .Where(p=>p.ModelName.Trim().ToLower().Contains(search.ToLower().Trim()))
+                .Where(p=>p.ModelName.Trim().ToLower().Contains(search.ToLower().Trim()) && !p.IsDeleted)
                 .OrderBy(p => p.Brand.BrandName).ToList());
             }
             return View(_context.ProductModels
                 .Include(p => p.ProductCategory)
-                .Include(p => p.Brand).OrderBy(p=>p.Brand.BrandName).ToList());
+                .Include(p => p.Brand).OrderBy(p=>p.Brand.BrandName).Where(pm=>!pm.IsDeleted).ToList());
         }
 
         public IActionResult Create()
         {
-            ViewBag.Brands = new SelectList(_context.Brands.ToList(), "Id", "BrandName");
-            ViewBag.ProductCategories = new SelectList(_context.ProductCategories.ToList(), "Id", "Name");
+            ViewBag.Brands = new SelectList(_context.Brands.Where(b=>!b.IsDeleted).ToList(), "Id", "BrandName");
+            ViewBag.ProductCategories = new SelectList(_context.ProductCategories.Where(pc=>!pc.IsDeleted).ToList(), "Id", "Name");
             return View();
         }
         [HttpPost]
@@ -46,8 +46,8 @@ namespace ShopManagmentSystem.Areas.Admin.Controllers
         public async Task<IActionResult> Create(ProductModelCreateVM createVM)
         {
 
-            ViewBag.Brands = new SelectList(_context.Brands.ToList(), "Id", "BrandName");
-            ViewBag.ProductCategories = new SelectList(_context.ProductCategories.ToList(), "Id", "Name");
+            ViewBag.Brands = new SelectList(_context.Brands.Where(b => !b.IsDeleted).ToList(), "Id", "BrandName");
+            ViewBag.ProductCategories = new SelectList(_context.ProductCategories.Where(pc => !pc.IsDeleted).ToList(), "Id", "Name");
             if (!ModelState.IsValid) return View();
             if (await _context.Brands.FirstOrDefaultAsync(b => b.Id == createVM.BrandId) == null)
             {
@@ -83,10 +83,10 @@ namespace ShopManagmentSystem.Areas.Admin.Controllers
 
         public async Task<IActionResult> Edit(int? id)
         {
-            ViewBag.Brands = new SelectList(_context.Brands.ToList(), "Id", "BrandName");
-            ViewBag.ProductCategories = new SelectList(_context.ProductCategories.ToList(), "Id", "Name");
+            ViewBag.Brands = new SelectList(_context.Brands.Where(b => !b.IsDeleted).ToList(), "Id", "BrandName");
+            ViewBag.ProductCategories = new SelectList(_context.ProductCategories.Where(pc => !pc.IsDeleted).ToList(), "Id", "Name");
             if (id == null || id == 0) return View();
-            ProductModel? productModel = await _context.ProductModels.FirstOrDefaultAsync(p => p.Id == id);
+            ProductModel? productModel = await _context.ProductModels.FirstOrDefaultAsync(p => p.Id == id && !p.IsDeleted);
             if (productModel == null) return View();
             ProductModelEditVM editVM = new()
             {
@@ -101,8 +101,8 @@ namespace ShopManagmentSystem.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(ProductModelEditVM editVM, int? id)
         {
-            ViewBag.Brands = new SelectList(_context.Brands.ToList(), "Id", "BrandName");
-            ViewBag.ProductCategories = new SelectList(_context.ProductCategories.ToList(), "Id", "Name");
+            ViewBag.Brands = new SelectList(_context.Brands.Where(b => !b.IsDeleted).ToList(), "Id", "BrandName");
+            ViewBag.ProductCategories = new SelectList(_context.ProductCategories.Where(pc => !pc.IsDeleted).ToList(), "Id", "Name");
             if (!ModelState.IsValid) return View();
             if (await _context.Brands.FirstOrDefaultAsync(b => b.Id == editVM.BrandId) == null)
             {
@@ -120,7 +120,7 @@ namespace ShopManagmentSystem.Areas.Admin.Controllers
                 return View();
             }
             if (id == null || id == 0) return NotFound();
-            ProductModel? productModel = await _context.ProductModels.FirstOrDefaultAsync(pm => pm.Id == id);
+            ProductModel? productModel = await _context.ProductModels.FirstOrDefaultAsync(pm => pm.Id == id && !pm.IsDeleted);
             if (productModel == null) return NotFound();
             productModel.UpdateDate = DateTime.Now;
             productModel.ModelPrice = editVM.ModelPrice;
@@ -139,7 +139,7 @@ namespace ShopManagmentSystem.Areas.Admin.Controllers
             if(id == 0 || id == null) return NotFound();
             ProductModel? productModel = await _context.ProductModels.FirstOrDefaultAsync(p=>p.Id== id);
             if (productModel == null) return NotFound();
-            _context.ProductModels.Remove(productModel);
+            productModel.IsDeleted= true;
             await _context.SaveChangesAsync();
 
             return Ok();

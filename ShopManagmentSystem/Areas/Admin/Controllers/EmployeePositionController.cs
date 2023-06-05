@@ -19,7 +19,7 @@ namespace ShopManagmentSystem.Areas.Admin.Controllers
         }
         public IActionResult Index()
         {
-            return View(_context.EmployeePostions.ToList());
+            return View(_context.EmployeePostions.Where(ep => !ep.IsDeleted).ToList());
         }
         public IActionResult Create()
         {
@@ -54,7 +54,7 @@ namespace ShopManagmentSystem.Areas.Admin.Controllers
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == 0 || id == null) return NotFound();
-            EmployeePosition? employeePosition = await _context.EmployeePostions.FirstOrDefaultAsync(ep => ep.Id == id);
+            EmployeePosition? employeePosition = await _context.EmployeePostions.FirstOrDefaultAsync(ep => ep.Id == id && !ep.IsDeleted);
             if (employeePosition == null) return NotFound();
             EmployeePositionEditVM editVM = new()
             {
@@ -65,20 +65,20 @@ namespace ShopManagmentSystem.Areas.Admin.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int? id,EmployeePositionEditVM editVM)
+        public async Task<IActionResult> Edit(int? id, EmployeePositionEditVM editVM)
         {
-            if(id == null || id == 0) return NotFound();
-            if(!ModelState.IsValid) return View();
-            if(_context.EmployeePostions.Any(ep=>ep.PositionName.Trim().ToLower()==editVM.PositionName.Trim().ToLower() && ep.Id != id))
+            if (id == null || id == 0) return NotFound();
+            if (!ModelState.IsValid) return View();
+            if (_context.EmployeePostions.Any(ep => ep.PositionName.Trim().ToLower() == editVM.PositionName.Trim().ToLower() && ep.Id != id))
             {
-                ModelState.AddModelError("PositionName","Bu adli position movcuddur!");
+                ModelState.AddModelError("PositionName", "Bu adli position movcuddur!");
                 return View();
             }
-            EmployeePosition? employeePosition = await _context.EmployeePostions.FirstOrDefaultAsync(ep=>ep.Id== id);
+            EmployeePosition? employeePosition = await _context.EmployeePostions.FirstOrDefaultAsync(ep => ep.Id == id && !ep.IsDeleted);
             if (employeePosition == null) return NotFound();
             employeePosition.UpdateDate = DateTime.Now;
             employeePosition.PositionName = editVM.PositionName;
-            employeePosition.FixSalary= editVM.FixSalary;
+            employeePosition.FixSalary = editVM.FixSalary;
             await _context.SaveChangesAsync();
             TempData["Edit"] = true;
             return RedirectToAction(nameof(Index));
@@ -87,10 +87,10 @@ namespace ShopManagmentSystem.Areas.Admin.Controllers
         [HttpDelete]
         public async Task<IActionResult> Delete(int? id)
         {
-            if(id == 0 || id == null) return NotFound();
-            EmployeePosition? existEmployeePosition = await _context.EmployeePostions.FirstOrDefaultAsync(ep=>ep.Id== id);
-            if(existEmployeePosition == null) return NotFound();
-            _context.EmployeePostions.Remove(existEmployeePosition);
+            if (id == 0 || id == null) return NotFound();
+            EmployeePosition? existEmployeePosition = await _context.EmployeePostions.FirstOrDefaultAsync(ep => ep.Id == id && !ep.IsDeleted);
+            if (existEmployeePosition == null) return NotFound();
+            existEmployeePosition.IsDeleted = true;
             await _context.SaveChangesAsync();
             return Ok();
         }

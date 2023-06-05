@@ -21,34 +21,59 @@
     let deleteProduct = $(".delete-product");
     let deleteUser = $(".delete-user");
     let prodBrandInput = $(".prod-brand");
+    let prodBrandInputEdit = $(".prod-brand-edit");
     var skip;
 
 
-    prodBrandInput.change( function (e) {
+
+    prodBrandInputEdit.change(function (e) {
         let id = $(e.currentTarget).val();
-        let modelsSelect = $(".prod-model");
+        let modelsSelect = $(".prod-model-edit");
         $.ajax({
             method: "GET",
-            url: "GetModels/" + id,
+            url: "/Admin/Product/GetModels/" + id,
             success: function (result) {
-                console.log(result, modelsSelect)
+
 
                 modelsSelect.find('option').remove()
 
                 $.each(result, function (key, value) {
-                  
-                    $('.prod-model')
+
+                    $('.prod-model-edit')
                         .append($("<option></option>")
                             .attr("value", value.value)
                             .text(value.text));
                 });
-                
+
             },
             error: function (result) { }
         });
 
     })
 
+    prodBrandInput.change(function (e) {
+        let id = $(e.currentTarget).val();
+        let modelsSelect = $(".prod-model");
+        $.ajax({
+            method: "GET",
+            url: "GetModels/" + id,
+            success: function (result) {
+
+                modelsSelect.find('option').remove()
+
+                $.each(result, function (key, value) {
+
+                    $('.prod-model')
+                        .append($("<option></option>")
+                            .attr("value", value.value)
+                            .text(value.text));
+                });
+
+            },
+            error: function (result) { }
+        });
+
+    })
 
     deleteUser.on("click", function (e) {
         let id = $(e.currentTarget).data("id");
@@ -68,7 +93,7 @@
                     method: "DELETE",
                     url: "Account/Delete/" + id,
                     success: function (result) {
-                        
+
                         parentElement.remove()
                         Swal.fire(
                             `${result} Deleted !`,
@@ -82,7 +107,7 @@
                             'Your file has been not deleted.',
                             'error'
                         )
-                        
+
                     }
                 });
 
@@ -179,7 +204,7 @@
                 chatHistory.append(result);
                 $("#user_name").html(name);
                 $("#user_name").attr('data-id', id);
-                $("#user_last_seen").html(lastSeen);               
+                $("#user_last_seen").html(lastSeen);
                 $(".chat-message").css("display", "block");
                 $(".chat-header").css("display", "block");
                 console.log(lastSeen)
@@ -192,16 +217,16 @@
                     if (totalCountMessage >= 0) {
                         $(".countMessage").html(totalCountMessage);
                     }
-                    
+
                     $(".new_message").remove();
                 }
-               
-                
 
-                
+
+
+
                 var test = chatHistory.prop('scrollHeight');
                 chatHistory.scrollTop(test);
-            }             
+            }
         });
 
 
@@ -249,7 +274,7 @@
 
     })
 
-    deleteResendProd.on("click",".delete_resend_prod", function (e) {
+    deleteResendProd.on("click", ".delete_resend_prod", function (e) {
         let id = $(e.currentTarget).data('id');
         let parentElement = $(e.currentTarget).parent();
         let body = $(".body_list");

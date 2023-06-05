@@ -11,6 +11,7 @@ namespace ShopManagmentSystem.Models
         public string ModelName { get; set; } = null!;
         public double ModelPrice { get; set; }     
         public List<Product>? Products { get; set; }
+        public bool IsDeleted { get; set; }
 
     }
 }

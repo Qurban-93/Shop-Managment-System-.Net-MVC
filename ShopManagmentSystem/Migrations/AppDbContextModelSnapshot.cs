@@ -246,6 +246,9 @@ namespace ShopManagmentSystem.Migrations
                     b.Property<int?>("AppUserId")
                         .HasColumnType("int");
 
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -270,6 +273,9 @@ namespace ShopManagmentSystem.Migrations
                     b.Property<DateTime>("CreateDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
                     b.Property<DateTime>("UpdateDate")
                         .HasColumnType("datetime2");
 
@@ -292,6 +298,9 @@ namespace ShopManagmentSystem.Migrations
 
                     b.Property<DateTime>("CreateDate")
                         .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
 
                     b.Property<DateTime>("UpdateDate")
                         .HasColumnType("datetime2");
@@ -324,6 +333,9 @@ namespace ShopManagmentSystem.Migrations
                     b.Property<string>("FullName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
 
                     b.Property<string>("PhoneNumber")
                         .HasColumnType("nvarchar(max)");
@@ -358,6 +370,9 @@ namespace ShopManagmentSystem.Migrations
                         .HasColumnType("int");
 
                     b.Property<bool>("IsAcceppted")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
                     b.Property<string>("SenderBranch")
@@ -428,6 +443,9 @@ namespace ShopManagmentSystem.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
                     b.Property<string>("Number")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -457,6 +475,9 @@ namespace ShopManagmentSystem.Migrations
 
                     b.Property<double?>("FixSalary")
                         .HasColumnType("float");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
 
                     b.Property<string>("PositionName")
                         .IsRequired()
@@ -617,6 +638,9 @@ namespace ShopManagmentSystem.Migrations
                     b.Property<string>("Desc")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
                     b.Property<bool>("IsSold")
                         .HasColumnType("bit");
 
@@ -661,6 +685,9 @@ namespace ShopManagmentSystem.Migrations
 
                     b.Property<DateTime>("CreateDate")
                         .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -710,6 +737,9 @@ namespace ShopManagmentSystem.Migrations
 
                     b.Property<DateTime>("CreateDate")
                         .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
 
                     b.Property<string>("ModelName")
                         .IsRequired()

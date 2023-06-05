@@ -18,7 +18,7 @@ namespace ShopManagmentSystem.Areas.Admin.Controllers
         }
         public IActionResult Index()
         {
-            return View(_context.Brands.ToList());
+            return View(_context.Brands.Where(b=>!b.IsDeleted).ToList());
         }
         public IActionResult Create()
         {
@@ -45,7 +45,7 @@ namespace ShopManagmentSystem.Areas.Admin.Controllers
         public async Task<IActionResult> Edit(int? id)
         {
             if(id == null || id == 0) return NotFound();
-            Brand? brand = await _context.Brands.FirstOrDefaultAsync(b =>b.Id == id);
+            Brand? brand = await _context.Brands.FirstOrDefaultAsync(b =>b.Id == id && !b.IsDeleted);
             if(brand == null) return NotFound();
             BrandEditVM editVM = new()
             {
@@ -62,7 +62,7 @@ namespace ShopManagmentSystem.Areas.Admin.Controllers
 
             if(!ModelState.IsValid) return View();
             if(id == null || id == 0) { return View(); }
-            Brand brand = await _context.Brands.FirstOrDefaultAsync(b=>b.Id == id);
+            Brand brand = await _context.Brands.FirstOrDefaultAsync(b=>b.Id == id && !b.IsDeleted);
             if(brand == null) return NotFound();
             if(_context.Brands.Any(b=>b.BrandName == editVM.BrandName && b.Id != id))
             {
@@ -80,9 +80,9 @@ namespace ShopManagmentSystem.Areas.Admin.Controllers
         public async Task<IActionResult> Delete(int? id)
         {
             if(id == null || id == 0) return NotFound();
-            Brand? brand =await _context.Brands.FirstOrDefaultAsync(b=>b.Id == id);
+            Brand? brand =await _context.Brands.FirstOrDefaultAsync(b=>b.Id == id && !b.IsDeleted);
             if(brand == null) return NotFound();
-            _context.Brands.Remove(brand);
+            brand.IsDeleted= true;
             await _context.SaveChangesAsync();
             return Ok();
 

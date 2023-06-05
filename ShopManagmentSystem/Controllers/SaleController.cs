@@ -219,7 +219,7 @@ public class SaleController : Controller
         SaleVM saleVM = new SaleVM();
         saleVM.Orders = orders;
         ViewBag.Sellers = new SelectList(await _context.Employees
-            .Where(e => e.BranchId == user.BranchId).ToListAsync(), "Id", "FullName");
+            .Where(e => e.BranchId == user.BranchId && !e.IsDeleted).ToListAsync(), "Id", "FullName");
         return View(saleVM);
     }
     [HttpPost]
@@ -230,7 +230,7 @@ public class SaleController : Controller
         AppUser user = await _userManager.FindByNameAsync(User.Identity.Name);
         if (user == null) return RedirectToAction("Login", "Account");
         ViewBag.Sellers = new SelectList(await _context.Employees
-            .Where(e => e.BranchId == user.BranchId).ToListAsync(), "Id", "FullName");
+            .Where(e => e.BranchId == user.BranchId && !e.IsDeleted).ToListAsync(), "Id", "FullName");
         List<Order> orders = await _context.Orders.Where(o => o.BranchId == user.BranchId).ToListAsync();
         if (orders == null || orders.Count < 1)
         {

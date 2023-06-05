@@ -15,5 +15,6 @@ namespace ShopManagmentSystem.Models
         public List<Sale>? Sales { get; set; }
         public List<Refund>? Refunds { get; set; }
         public List<Salary>? Salaries { get; set; }
+        public bool IsDeleted { get; set; }
     }
 }

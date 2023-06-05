@@ -12,6 +12,7 @@ namespace ShopManagmentSystem.Models
         public double? TotalCost { get; set; }
         public List<Sale>? Sales { get; set; }
         public List<Refund>? Refunds { get; set; }
+        public bool IsDeleted { get; set; }
 
     }
 }

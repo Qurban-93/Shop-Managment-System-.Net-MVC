@@ -6,5 +6,6 @@ namespace ShopManagmentSystem.Models
     {
         public string PositionName { get; set; }
         public double? FixSalary { get; set; }
+        public bool IsDeleted { get; set; }
     }
 }

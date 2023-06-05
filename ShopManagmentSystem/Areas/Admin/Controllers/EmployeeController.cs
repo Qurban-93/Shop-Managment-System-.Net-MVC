@@ -29,22 +29,23 @@ namespace ShopManagmentSystem.Areas.Admin.Controllers
                 .Include(e => e.EmployeePostion)
                 .Include(e => e.Branch)
                 .OrderBy(e=>e.BranchId)
+                .Where(e=> !e.IsDeleted)
                 .ToList();
             return View(employees);
         }
         [HttpGet]
         public IActionResult Create()
         {
-            ViewBag.Position = new SelectList(_context.EmployeePostions.ToList(), "Id", "PositionName");
-            ViewBag.Branch = new SelectList(_context.Branches.ToList(), "Id", "Name");
+            ViewBag.Position = new SelectList(_context.EmployeePostions.Where(ep=>!ep.IsDeleted).ToList(), "Id", "PositionName");
+            ViewBag.Branch = new SelectList(_context.Branches.Where(b=>!b.IsDeleted).ToList(), "Id", "Name");
             return View();
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(EmployeeCreateVM createVM)
         {
-            ViewBag.Position = new SelectList(_context.EmployeePostions.ToList(), "Id", "PositionName");
-            ViewBag.Branch = new SelectList(_context.Branches.ToList(), "Id", "Name");
+            ViewBag.Position = new SelectList(_context.EmployeePostions.Where(ep => !ep.IsDeleted).ToList(), "Id", "PositionName");
+            ViewBag.Branch = new SelectList(_context.Branches.Where(b => !b.IsDeleted).ToList(), "Id", "Name");
             if (!ModelState.IsValid) return View();
             if(_context.Employees.Any(e=>e.FullName.Trim().ToLower()== createVM.FullName.Trim().ToLower()))
             {
@@ -83,10 +84,10 @@ namespace ShopManagmentSystem.Areas.Admin.Controllers
         }
         public async Task<IActionResult> Edit(int? id)
         {
-            ViewBag.Branch = new SelectList(_context.Branches.ToList(),"Id","Name");
-            ViewBag.Position = new SelectList(_context.EmployeePostions.ToList(), "Id", "PositionName");
+            ViewBag.Position = new SelectList(_context.EmployeePostions.Where(ep => !ep.IsDeleted).ToList(), "Id", "PositionName");
+            ViewBag.Branch = new SelectList(_context.Branches.Where(b => !b.IsDeleted).ToList(), "Id", "Name");
             if (id == 0 || id == null) return NotFound();
-            Employee? employee = await _context.Employees.FirstOrDefaultAsync(e=>e.Id == id);
+            Employee? employee = await _context.Employees.FirstOrDefaultAsync(e=>e.Id == id && !e.IsDeleted);
             if (employee == null) return NotFound();
             EmployeeEditVM editVM = new()
             {
@@ -103,8 +104,8 @@ namespace ShopManagmentSystem.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int? id,EmployeeEditVM editVM)
         {
-            ViewBag.Branch = new SelectList(_context.Branches.ToList(), "Id", "Name");
-            ViewBag.Position = new SelectList(_context.EmployeePostions.ToList(), "Id", "PositionName");
+            ViewBag.Position = new SelectList(_context.EmployeePostions.Where(ep => !ep.IsDeleted).ToList(), "Id", "PositionName");
+            ViewBag.Branch = new SelectList(_context.Branches.Where(b => !b.IsDeleted).ToList(), "Id", "Name");
             if (!ModelState.IsValid) return View();
             if(id == 0 || id == null) return NotFound(); 
             if(_context.Employees.Any(e=>e.FullName.Trim().ToLower() == editVM.FullName.Trim().ToLower() && e.Id != id))
@@ -112,7 +113,7 @@ namespace ShopManagmentSystem.Areas.Admin.Controllers
                 ModelState.AddModelError("FullName", "Bu adla employee movcuddur! Elave melumat daxil edin.");
                 return View();
             }
-            Employee? employee = await _context.Employees.FirstOrDefaultAsync(e=>e.Id == id);
+            Employee? employee = await _context.Employees.FirstOrDefaultAsync(e=>e.Id == id && !e.IsDeleted);
             if (employee == null) return NotFound();
             employee.UpdateDate = DateTime.Now;
             employee.FullName= editVM.FullName;
@@ -129,9 +130,9 @@ namespace ShopManagmentSystem.Areas.Admin.Controllers
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || id == 0) return NotFound();
-            Employee? employee = await _context.Employees.FirstOrDefaultAsync(e=>e.Id == id);
+            Employee? employee = await _context.Employees.FirstOrDefaultAsync(e=>e.Id == id && !e.IsDeleted);
             if (employee == null) return NotFound();
-            _context.Employees.Remove(employee);
+            employee.IsDeleted= true;
             await _context.SaveChangesAsync();
             return Ok();
         }

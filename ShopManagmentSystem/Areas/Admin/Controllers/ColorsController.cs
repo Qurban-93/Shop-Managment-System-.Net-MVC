@@ -24,7 +24,7 @@ namespace ShopManagmentSystem.Areas.Admin.Controllers
             _context = context;
         }
 
-        public async Task<IActionResult> Index() { return View(await _context.Colors.ToListAsync()); }
+        public async Task<IActionResult> Index() { return View(await _context.Colors.Where(c=>!c.IsDeleted).ToListAsync()); }
         public IActionResult Create() { return View(); }      
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -53,7 +53,7 @@ namespace ShopManagmentSystem.Areas.Admin.Controllers
         {
             if (id == null || id == 0) return NotFound();
          
-            Color? color = await _context.Colors.FindAsync(id);
+            Color? color = await _context.Colors.FirstOrDefaultAsync(c=>c.Id == id && !c.IsDeleted);
             if (color == null) return NotFound();
             ColorVM existcolor = new()
             {
@@ -67,7 +67,7 @@ namespace ShopManagmentSystem.Areas.Admin.Controllers
         public async Task<IActionResult> Edit(int? id,ColorVM color)
         {
             if (id == null || id == 0) return NotFound();
-            Color? existcolor = await _context.Colors.FindAsync(id);
+            Color? existcolor = await _context.Colors.FirstOrDefaultAsync(c => c.Id == id && !c.IsDeleted);
             if (existcolor == null) return NotFound();
             if (!ModelState.IsValid) return View();
             if (await _context.Colors.AnyAsync(c => c.ColorName.Trim().ToLower() == color.ColorName.Trim().ToLower() && c.Id != id))
@@ -88,10 +88,10 @@ namespace ShopManagmentSystem.Areas.Admin.Controllers
         {
             if (id == null || id == 0) return NotFound();
              Color? color = await _context.Colors
-                .FirstOrDefaultAsync(m => m.Id == id);
+                .FirstOrDefaultAsync(c => c.Id == id && !c.IsDeleted);
             if (color == null) return NotFound();
-            if (color.Products.Count > 0) return BadRequest("Color Have Products");
-            _context.Colors.Remove(color);
+            
+            color.IsDeleted= true;
             await _context.SaveChangesAsync();
 
             return Ok(color);

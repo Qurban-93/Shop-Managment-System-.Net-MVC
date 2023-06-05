@@ -8,5 +8,6 @@ namespace ShopManagmentSystem.Models
         
         public string ColorName { get; set; } = null!;
         public List<Product> Products { get; set; }
+        public bool IsDeleted { get; set; }
     }
 }

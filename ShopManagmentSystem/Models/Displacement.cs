@@ -10,6 +10,6 @@ namespace ShopManagmentSystem.Models
         public string DestinationBranch { get; set; }
         public bool IsAcceppted { get; set; }
         public List<DisplacementProduct>? DisplacementProducts { get; set; }
-
+        public bool IsDeleted { get; set; }
     }
 }

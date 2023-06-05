@@ -34,17 +34,17 @@ namespace ShopManagmentSystem.Areas.Admin.Controllers
                 .Include(p => p.ProductModel)
                 .Include(p => p.Brand)
                 .Include(p => p.Color)
-                .Where(p=>p.BranchId == user.BranchId).ToListAsync();
+                .Where(p=>p.BranchId == user.BranchId && !p.IsDeleted).ToListAsync();
                 
             return View(products);
         } 
         [HttpGet]
         public IActionResult Create()
         {
-            ViewBag.Brands = new SelectList(_context.Brands.ToList(), "Id", "BrandName");         
-            ViewBag.Color = new SelectList(_context.Colors.ToList(), "Id", "ColorName");
-            ViewBag.ProdModel = new SelectList(_context.ProductModels.ToList(), "Id", "ModelName");
-           
+            ViewBag.Brands = new SelectList(_context.Brands.Where(b=>!b.IsDeleted).ToList(), "Id", "BrandName");         
+            ViewBag.Color = new SelectList(_context.Colors.Where(c => !c.IsDeleted).ToList(), "Id", "ColorName");
+            ViewBag.ProdModel = new SelectList(_context.ProductModels.Where(pm => !pm.IsDeleted).ToList(), "Id", "ModelName");
+
 
             return View();
         }
@@ -53,9 +53,9 @@ namespace ShopManagmentSystem.Areas.Admin.Controllers
         public async Task<IActionResult> Create(ProductCreateVM productCreateVM)
         {
             AppUser? user = await _userManager.FindByNameAsync(User.Identity.Name);
-            ViewBag.Brands = new SelectList(_context.Brands.ToList(), "Id", "BrandName");            
-            ViewBag.Color = new SelectList(_context.Colors.ToList(), "Id", "ColorName");
-            ViewBag.ProdModel = new SelectList(_context.ProductModels.ToList(), "Id", "ModelName");
+            ViewBag.Brands = new SelectList(_context.Brands.Where(b => !b.IsDeleted).ToList(), "Id", "BrandName");
+            ViewBag.Color = new SelectList(_context.Colors.Where(c => !c.IsDeleted).ToList(), "Id", "ColorName");
+            ViewBag.ProdModel = new SelectList(_context.ProductModels.Where(pm=>pm.BrandId == productCreateVM.BrandId && !pm.IsDeleted).ToList(), "Id", "ModelName");
             if (!ModelState.IsValid) return View();
             if (_context.Products.Any(p => p.Series == productCreateVM.Series))
             {
@@ -69,6 +69,7 @@ namespace ShopManagmentSystem.Areas.Admin.Controllers
             if (!brand.ProductModels.Any(pm => pm.Id == productModel.Id))
             {
                 ModelState.AddModelError("ProductModelId", "Qeyd etdiyiniz model secdiyiniz Brende aid deil !");
+                
                 return View();
             }
             if (productCreateVM.CostPrice > productModel.ModelPrice)
@@ -101,12 +102,13 @@ namespace ShopManagmentSystem.Areas.Admin.Controllers
         }
         public async Task<IActionResult> Edit(int? id)
         {
-            ViewBag.Brands = new SelectList(_context.Brands.ToList(), "Id", "BrandName");
-            ViewBag.Color = new SelectList(_context.Colors.ToList(), "Id", "ColorName");
-            ViewBag.ProdModel = new SelectList(_context.ProductModels.ToList(), "Id", "ModelName");
+            ViewBag.Brands = new SelectList(_context.Brands.Where(b => !b.IsDeleted).ToList(), "Id", "BrandName");
+            ViewBag.Color = new SelectList(_context.Colors.Where(c => !c.IsDeleted).ToList(), "Id", "ColorName");
+
             if (id == null || id == 0) return NotFound();
             Product? product = await _context.Products.FirstOrDefaultAsync(x => x.Id == id);
             if (product == null) return NotFound();
+            ViewBag.ProdModel = new SelectList(_context.ProductModels.Where(pm=>pm.BrandId == product.BrandId && !pm.IsDeleted ).ToList(), "Id", "ModelName");
             ProductEditVM editVM = new()
             {
                 CostPrice = product.CostPrice,
@@ -122,14 +124,15 @@ namespace ShopManagmentSystem.Areas.Admin.Controllers
         [AutoValidateAntiforgeryToken]
         public async Task<IActionResult> Edit(int? id ,ProductEditVM editVM)
         {
-            ViewBag.Brands = new SelectList(_context.Brands.ToList(), "Id", "BrandName");
-            ViewBag.Color = new SelectList(_context.Colors.ToList(), "Id", "ColorName");
-            ViewBag.ProdModel = new SelectList(_context.ProductModels.ToList(), "Id", "ModelName");
+            ViewBag.Brands = new SelectList(_context.Brands.Where(b => !b.IsDeleted).ToList(), "Id", "BrandName");
+            ViewBag.Color = new SelectList(_context.Colors.Where(c => !c.IsDeleted).ToList(), "Id", "ColorName");
+
             if (!ModelState.IsValid) return View();
             if(id == 0 || id == null ) return NotFound();
             Product product = await _context.Products.FirstAsync(x => x.Id == id);
             if (product == null ) return NotFound();
-            if(await _context.Products.AnyAsync(p=>p.Series == editVM.Series && p.Id != id))
+            ViewBag.ProdModel = new SelectList(_context.ProductModels.Where(pm => pm.BrandId == product.BrandId && !pm.IsDeleted).ToList(), "Id", "ModelName");
+            if (await _context.Products.AnyAsync(p=>p.Series == editVM.Series && p.Id != id))
             {
                 ModelState.AddModelError("Series", "Bu seriya movcuddur !");
                 return View();
@@ -175,7 +178,7 @@ namespace ShopManagmentSystem.Areas.Admin.Controllers
             if (product == null) return NotFound();
             if (product.SaleProducts.Count > 0) return BadRequest("Relation");
 
-            _context.Products.Remove(product);
+            product.IsDeleted = true;
             await _context.SaveChangesAsync();
             return Ok();
         }
@@ -183,7 +186,7 @@ namespace ShopManagmentSystem.Areas.Admin.Controllers
         public async Task<IActionResult> GetModels(int? id)
         {
             if (id == null || id == 0) return NotFound();
-            Brand? brand = await _context.Brands.Include(b => b.ProductModels).FirstOrDefaultAsync(x => x.Id == id);
+            Brand? brand = await _context.Brands.Include(b => b.ProductModels.Where(pm=>!pm.IsDeleted)).FirstOrDefaultAsync(x => x.Id == id);
             if (brand == null) return NotFound();
             var options = new SelectList(brand.ProductModels, "Id", "ModelName");
             return Ok(options);

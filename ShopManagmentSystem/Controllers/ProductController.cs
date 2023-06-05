@@ -31,7 +31,7 @@ namespace ShopManagmentSystem.Controllers
                 .Include(p => p.ProductModel)
                 .Include(p => p.Brand)
                 .Include(p => p.Color)
-                .Where(p => !p.IsSold && p.BranchId == user.BranchId);
+                .Where(p => !p.IsSold && p.BranchId == user.BranchId && !p.IsDeleted);
 
             if (!string.IsNullOrWhiteSpace(search))
             {
@@ -80,10 +80,10 @@ namespace ShopManagmentSystem.Controllers
                .Include(p => p.ProductModel)
                .Include(p => p.Color)
                .Where(p => !p.IsSold && (p.ProductModel.ModelName.ToLower().Trim().Contains(search.ToLower().Trim()) ||
-               p.Brand.BrandName.ToLower().Trim().Contains(search.ToLower().Trim())))
+               p.Brand.BrandName.ToLower().Trim().Contains(search.ToLower().Trim())) && !p.IsDeleted)
                .ToListAsync();
             }
-            List<Branch> branches = await _appDbContext.Branches.Where(b => b.Id != 5).ToListAsync();
+            List<Branch> branches = await _appDbContext.Branches.Where(b => b.Id != 5 && !b.IsDeleted).ToListAsync();
             SearchVM searchVM = new()
             {
                 Products = products,
