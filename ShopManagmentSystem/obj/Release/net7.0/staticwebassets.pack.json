@@ -1,0 +1,81 @@
+{
+  "Files": [
+    {
+      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\Template\\Verify.html",
+      "PackagePath": "staticwebassets\\Template\\Verify.html"
+    },
+    {
+      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\assets\\css\\style.css",
+      "PackagePath": "staticwebassets\\assets\\css\\style.css"
+    },
+    {
+      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\assets\\css\\style.css.map",
+      "PackagePath": "staticwebassets\\assets\\css\\style.css.map"
+    },
+    {
+      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\assets\\css\\style.scss",
+      "PackagePath": "staticwebassets\\assets\\css\\style.scss"
+    },
+    {
+      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\assets\\img\\Random.png",
+      "PackagePath": "staticwebassets\\assets\\img\\Random.png"
+    },
+    {
+      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\assets\\js\\Accordion.js",
+      "PackagePath": "staticwebassets\\assets\\js\\Accordion.js"
+    },
+    {
+      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\assets\\js\\AjaxScript.js",
+      "PackagePath": "staticwebassets\\assets\\js\\AjaxScript.js"
+    },
+    {
+      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\assets\\js\\Chat.js",
+      "PackagePath": "staticwebassets\\assets\\js\\Chat.js"
+    },
+    {
+      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\assets\\js\\Clock.js",
+      "PackagePath": "staticwebassets\\assets\\js\\Clock.js"
+    },
+    {
+      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\assets\\js\\UpdateHub.js",
+      "PackagePath": "staticwebassets\\assets\\js\\UpdateHub.js"
+    },
+    {
+      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\assets\\js\\main.js",
+      "PackagePath": "staticwebassets\\assets\\js\\main.js"
+    },
+    {
+      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\assets\\js\\signalr.js",
+      "PackagePath": "staticwebassets\\assets\\js\\signalr.js"
+    },
+    {
+      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\assets\\mp3\\Notification - Notification.mp3",
+      "PackagePath": "staticwebassets\\assets\\mp3\\Notification - Notification.mp3"
+    },
+    {
+      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\assets\\mp3\\Whatsapp Message - Sent Sound.mp3",
+      "PackagePath": "staticwebassets\\assets\\mp3\\Whatsapp Message - Sent Sound.mp3"
+    },
+    {
+      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\assets\\mp3\\Whatsapp Original Sound Message.mp3",
+      "PackagePath": "staticwebassets\\assets\\mp3\\Whatsapp Original Sound Message.mp3"
+    },
+    {
+      "Id": "obj\\Release\\net7.0\\staticwebassets\\msbuild.ShopManagmentSystem.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Release\\net7.0\\staticwebassets\\msbuild.build.ShopManagmentSystem.props",
+      "PackagePath": "build\\ShopManagmentSystem.props"
+    },
+    {
+      "Id": "obj\\Release\\net7.0\\staticwebassets\\msbuild.buildMultiTargeting.ShopManagmentSystem.props",
+      "PackagePath": "buildMultiTargeting\\ShopManagmentSystem.props"
+    },
+    {
+      "Id": "obj\\Release\\net7.0\\staticwebassets\\msbuild.buildTransitive.ShopManagmentSystem.props",
+      "PackagePath": "buildTransitive\\ShopManagmentSystem.props"
+    }
+  ],
+  "ElementsToRemove": []
+}

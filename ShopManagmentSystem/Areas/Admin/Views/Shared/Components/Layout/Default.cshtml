@@ -72,11 +72,16 @@
                     @if (User.Identity.IsAuthenticated)
                     {
                         <div class="name">@User.Identity.Name</div>
-                        <div class="job">@Model.Role.FirstOrDefault()</div>
+                        <div class="job">
+                            @foreach (var item in Model.Role)
+                            {
+                                <span>@item </span>
+                            }
+                        </div>
                     }
                 </div>
             </div>
         </div>
-        <a asp-action="logout" asp-controller="account"> <i style="background:gray;" class="fa-solid fa-right-from-bracket" id="log_out"></i></a>
+        <a asp-action="logout" asp-controller="account" asp-area="default"><i style="background:gray;" class="fa-solid fa-right-from-bracket" id="log_out"></i></a>
     </div>
 </div>

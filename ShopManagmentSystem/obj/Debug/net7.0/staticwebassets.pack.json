@@ -49,6 +49,18 @@
       "PackagePath": "staticwebassets\\assets\\js\\signalr.js"
     },
     {
+      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\assets\\mp3\\Notification - Notification.mp3",
+      "PackagePath": "staticwebassets\\assets\\mp3\\Notification - Notification.mp3"
+    },
+    {
+      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\assets\\mp3\\Whatsapp Message - Sent Sound.mp3",
+      "PackagePath": "staticwebassets\\assets\\mp3\\Whatsapp Message - Sent Sound.mp3"
+    },
+    {
+      "Id": "C:\\Users\\Hp\\Desktop\\HomeTestMyself\\ShopManagmentSystem\\ShopManagmentSystem\\wwwroot\\assets\\mp3\\Whatsapp Original Sound Message.mp3",
+      "PackagePath": "staticwebassets\\assets\\mp3\\Whatsapp Original Sound Message.mp3"
+    },
+    {
       "Id": "obj\\Debug\\net7.0\\staticwebassets\\msbuild.ShopManagmentSystem.Microsoft.AspNetCore.StaticWebAssets.props",
       "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
     },

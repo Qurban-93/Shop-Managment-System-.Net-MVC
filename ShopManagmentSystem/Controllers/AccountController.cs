@@ -30,13 +30,11 @@ namespace ShopManagmentSystem.Controllers
             await _signInManager.SignOutAsync();
             return RedirectToAction("login");
         }
-
         [HttpGet]
         public IActionResult Login()
         {
             return View();
         }
-
         [HttpPost]
         [AutoValidateAntiforgeryToken]
         public async Task<IActionResult> Login(LoginVM loginVM, string? ReturnUrl)
