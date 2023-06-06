@@ -547,6 +547,7 @@ ul.accordion-list li div.answer {
 .chat .chat-history .message-data-time {
   color: #434651;
   padding-left: 6px;
+  font-size: 13px;
 }
 .chat .chat-history .message {
   color: #444;

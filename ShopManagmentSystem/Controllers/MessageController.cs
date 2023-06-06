@@ -43,6 +43,8 @@ namespace ShopManagmentSystem.Controllers
         {
             if (skip == 0) { skip = 10; }
             AppUser? user = await _userManager.FindByNameAsync(User.Identity.Name);
+            AppUser? secondUSer = await _userManager.FindByIdAsync(Id);
+            if (secondUSer == null || user == null) return BadRequest();
             if (Id == null || user == null) return NotFound();
             int countSkip = _context.Messages.Where(m => (m.DestinationId == Id && m.SenderId == user.Id) ||
             (m.DestinationId == user.Id && m.SenderId == Id)).Count();
@@ -69,8 +71,11 @@ namespace ShopManagmentSystem.Controllers
                 Messages = messages,
                 User = user,
                 CountSkip = countSkip,
-                UnreadIds = ids
+                UnreadIds = ids,
+                LastSeen = secondUSer.LastSeen,
             };
+
+            
             return PartialView("_ChatHistoryPartialView", messageVM);
         }
     }

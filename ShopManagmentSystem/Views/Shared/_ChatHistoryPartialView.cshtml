@@ -1,5 +1,5 @@
 ﻿@model MessageVM
-
+<input id="last-seen-input" value="@Model.LastSeen"/>
 <input id="sender_id" type="hidden" value="@Model.User.Id" />
 <input type="hidden" id="skip" value="20" />
 <input type="hidden" id="message_count" value="@Model.CountSkip" />

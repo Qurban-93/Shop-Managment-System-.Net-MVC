@@ -8,5 +8,6 @@ namespace ShopManagmentSystem.ViewModels
         public AppUser User { get; set; }
         public int CountSkip { get; set; }
         public List<int> UnreadIds { get; set; }
+        public string LastSeen { get; set; }
     }
 }
