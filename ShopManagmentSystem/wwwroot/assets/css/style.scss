@@ -785,6 +785,18 @@ ul.accordion-list {
     text-align: end;
 }
 
+.password-input{
+    position: relative;
+
+    .watch-password{
+        position: absolute;
+        top: 18px;
+        right: 20px;
+        font-size: 20px;
+        cursor: pointer;
+    }
+}
+
 @media only screen and (max-width: 767px) {
     .chat-app .people-list {
         height: 100%;

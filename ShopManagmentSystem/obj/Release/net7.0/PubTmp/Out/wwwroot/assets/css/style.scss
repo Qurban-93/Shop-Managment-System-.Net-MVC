@@ -684,6 +684,7 @@ ul.accordion-list {
         .message-data-time {
             color: #434651;
             padding-left: 6px;
+            font-size: 13px;
         }
 
         .message {
@@ -782,6 +783,18 @@ ul.accordion-list {
 
 .dataTables_filter{
     text-align: end;
+}
+
+.password-input{
+    position: relative;
+
+    .watch-password{
+        position: absolute;
+        top: 18px;
+        right: 20px;
+        font-size: 20px;
+        cursor: pointer;
+    }
 }
 
 @media only screen and (max-width: 767px) {

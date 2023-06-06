@@ -16,6 +16,13 @@ connection.on("NewMessageCount", function (destinationUserId) {
     } 
 })
 
+connection.on("DeleteDisplacement", function (id) {
+    let element = document.getElementById(id);
+    if (element != undefined || element != null) {
+        element.remove();
+    }
+})
+
 
 function playSound() {
     document.getElementById("notification").play();

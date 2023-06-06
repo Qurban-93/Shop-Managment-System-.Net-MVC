@@ -223,9 +223,8 @@
                     $(".new_message").remove();
                 }
 
-
-
-
+                console.log(".name");
+               
                 var test = chatHistory.prop('scrollHeight');
                 chatHistory.scrollTop(test);
             }

@@ -34,17 +34,26 @@ namespace ShopManagmentSystem.Areas.Admin.Controllers
                 ModelState.AddModelError("Name", "Bu adli categoriya movcuddur !");
                 return View();
             }
+            if (createVM.SeriesUniqueRequired && createVM.SeriesMaxMinLength == null)
+            {
+                ModelState.AddModelError("SeriesMaxMinLength", "Bosh olmaz !");
+                return View();
+            }
             ProductCategory productCategory = new();
             productCategory.Name = createVM.Name;
             productCategory.Bonus = createVM.Bonus;
             productCategory.CreateDate = DateTime.Now;
+            productCategory.SeriesMaxLength = createVM.SeriesMaxMinLength;
+            productCategory.SeriesUniqueRequired = createVM.SeriesUniqueRequired;
             _context.ProductCategories.Add(productCategory);
             await _context.SaveChangesAsync();
+            TempData["Create"] = true;
             return RedirectToAction(nameof(Index));
         }
-        [HttpDelete]
+       
         public async Task<IActionResult> Edit(int? id)
         {
+           
             if (id == null || id == 0) return NotFound();
             ProductCategory? productCategory = await _context.ProductCategories.FirstOrDefaultAsync(pc => pc.Id == id && !pc.IsDeleted);
             if (productCategory == null) return NotFound();
@@ -68,9 +77,16 @@ namespace ShopManagmentSystem.Areas.Admin.Controllers
                 ModelState.AddModelError("Name", "Bu adli Product Categoriya var !");
                 return View(editVM);
             }
+            if(editVM.SeriesUniqueRequired && editVM.SeriesMaxMinLength == null)
+            {
+                ModelState.AddModelError("SeriesMaxMinLength", "Bosh olmaz !");
+                return View(editVM);
+            }
             existProdCategory.Name = editVM.Name;
             existProdCategory.Bonus = editVM.Bonus;
             existProdCategory.UpdateDate = DateTime.Now;
+            existProdCategory.SeriesMaxLength = editVM.SeriesMaxMinLength;
+            existProdCategory.SeriesUniqueRequired = editVM.SeriesUniqueRequired;
             await _context.SaveChangesAsync();
             TempData["Edit"] = true;
 

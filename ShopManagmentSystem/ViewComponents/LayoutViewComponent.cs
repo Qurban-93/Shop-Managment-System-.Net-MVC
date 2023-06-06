@@ -28,7 +28,7 @@ namespace ShopManagmentSystem.ViewComponents
                 int count = await _appDbContext.Orders.Where(o => o.BranchId == user.BranchId).CountAsync();
                 layoutVM.CountOrder = count;
                 layoutVM.Role =await _userManager.GetRolesAsync(user);
-                layoutVM.MessageCount = await _appDbContext.Messages.Where(m=>m.IsRead == false && m.DestinationId == user.Id).CountAsync();
+                layoutVM.MessageCount = await _appDbContext.Messages.Where(m=>!m.IsRead && m.DestinationId == user.Id).CountAsync();
                 layoutVM.UserId= user.Id;
                 return View(layoutVM);
             }  

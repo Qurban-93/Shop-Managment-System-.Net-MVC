@@ -22,6 +22,8 @@
                 <tr>
                     <th class="text-primary">Category Name</th>
                     <th class="text-primary"> Bonus </th>
+                    <th class="text-primary"> Series Length Max and Min</th>
+                    <th class="text-primary"> Series Unique Required</th>
                     <th class="text-primary">Settings</th>
                 </tr>
                 @foreach (var item in Model)
@@ -29,6 +31,8 @@
                     <tr>
                         <td>@item.Name</td>
                         <td>@item.Bonus</td>
+                        <td>@item.SeriesMaxLength</td>
+                        <td>@item.SeriesUniqueRequired</td>
                         <td>
                             <a class="text-warning" style="margin-right:20px; font-size:20px;" asp-action="edit" asp-route-id="@item.Id"><i class="fa-solid fa-pen-to-square"></i></a>
                             <a class="text-danger  delete_prod_category" style="font-size:20px; cursor:pointer;" data-id="@item.Id"><i class="fa-regular fa-trash-can"></i></a>

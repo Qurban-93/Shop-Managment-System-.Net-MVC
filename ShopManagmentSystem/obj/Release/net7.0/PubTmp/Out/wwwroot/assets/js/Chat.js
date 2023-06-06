@@ -36,14 +36,12 @@ connection.on("Online", function (userId) {
         document.getElementById(userId).classList.remove("offline");
         document.getElementById(userId).classList.add("online");
     }
-
-    console.log(document.getElementById(userId).classList)
+   
     if (document.getElementById("user_last_seen").previousElementSibling.getAttribute("data-id") == userId) {
         document.getElementById("user_last_seen").innerHTML = "Online";
     }
     if (document.getElementById(userId).nextElementSibling.innerHTML == "offline") {
-        document.getElementById(userId).nextElementSibling.innerHTML = "online";
-        document.getElementById(userId).parentElement.parentElement.parentElement.setAttribute("data-last", "Online");
+        document.getElementById(userId).nextElementSibling.innerHTML = "online";      
     }
     
 
@@ -61,8 +59,7 @@ connection.on("Offline", function (userId) {
     var month = months[d.getMonth().toString()];
     var year = d.getFullYear().toString();
     var fullDate = day + " " + month + " " + year + " , " + formatAMPM(d)
-
-    document.getElementById(userId).parentElement.parentElement.parentElement.setAttribute("data-last", fullDate);
+   
     
     if (document.getElementById("user_last_seen").previousElementSibling.getAttribute("data-id") == userId) {
         document.getElementById("user_last_seen").innerHTML = fullDate;      
@@ -117,8 +114,6 @@ function DeleteIcon() {
 }
 
 connection.on("ShowMessage", function (senderUserId, message, destinationUserId) {
-
-    console.log("niye iwledi bu")
     
     let UserId = document.getElementById("user_name").getAttribute("data-id");
     
@@ -151,8 +146,14 @@ connection.on("ShowMessage", function (senderUserId, message, destinationUserId)
     let name = document.querySelectorAll(".name");
         name.forEach((key, value, element) => {          
 
+            
             if (key.parentElement.parentElement.getAttribute("data-id") == senderUserId) {
-                key.innerHTML += `<i class="fa-solid fa-envelope text-danger"></i>`;
+
+                
+                if (key.innerHTML.length < 100) {
+                    console.log(key.innerHTML.length)
+                    key.innerHTML += `<i class="fa-solid fa-envelope text-danger"></i>`;
+                }
             }
             
         })

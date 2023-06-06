@@ -21,8 +21,9 @@
                                         @item.UserName
                                         @if (Model.NewMessages.Any(m => m.SenderId == item.Id))
                                         {
-                                            <span class="new_message text-danger">
-                                                @(Model.NewMessages.Where(m => !m.IsRead && m.SenderId == item.Id).Count())
+
+                                            <span class="new_message badge bg-secondary">
+                                                @(Model.NewMessages.Where(m => !m.IsRead && m.SenderId == item.Id).Count())+
                                             </span>
                                         }
                                     </div>

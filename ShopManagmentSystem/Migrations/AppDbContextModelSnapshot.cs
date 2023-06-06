@@ -651,7 +651,6 @@ namespace ShopManagmentSystem.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Series")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("UpdateDate")
@@ -692,6 +691,12 @@ namespace ShopManagmentSystem.Migrations
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<byte?>("SeriesMaxLength")
+                        .HasColumnType("tinyint");
+
+                    b.Property<bool>("SeriesUniqueRequired")
+                        .HasColumnType("bit");
 
                     b.Property<DateTime>("UpdateDate")
                         .HasColumnType("datetime2");

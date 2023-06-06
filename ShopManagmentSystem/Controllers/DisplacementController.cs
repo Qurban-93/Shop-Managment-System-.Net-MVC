@@ -119,7 +119,7 @@ namespace ShopManagmentSystem.Controllers
             };
 
             _displacementService.ScheduleDisplacement(displacement);
-            Request.Cookies["basket"].Remove(0);
+            Request.Cookies["basket"].Remove(0,100);
             await _context.Displacement.AddAsync(displacement);
             await _context.SaveChangesAsync();
 

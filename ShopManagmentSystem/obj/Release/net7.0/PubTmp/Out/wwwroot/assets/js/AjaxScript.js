@@ -188,8 +188,8 @@
     userChat.on("click", function (e) {
         let id = $(e.currentTarget).data('id');
         let name = $(e.currentTarget).data('name');
-        let lastSeen = $(e.currentTarget).data('last');
         let newMessageCount = $(".new_message").html();
+        
         userChat.each(function (index, item) {
             $(item).removeClass("active");
         })
@@ -200,14 +200,16 @@
             data: { Id: id },
             url: "/Message/ChatHistory/",
             success: function (result) {
+               $("#last-seen-input").val()
                 chatHistory.empty();
                 chatHistory.append(result);
+                console.log($("#last-seen-input").val())
                 $("#user_name").html(name);
                 $("#user_name").attr('data-id', id);
-                $("#user_last_seen").html(lastSeen);
+                $("#user_last_seen").html($("#last-seen-input").val());
                 $(".chat-message").css("display", "block");
                 $(".chat-header").css("display", "block");
-                console.log(lastSeen)
+               
 
                 if (newMessageCount != undefined) {
                     var countMessage = $(".countMessage").html();
@@ -221,9 +223,8 @@
                     $(".new_message").remove();
                 }
 
-
-
-
+                console.log(".name");
+               
                 var test = chatHistory.prop('scrollHeight');
                 chatHistory.scrollTop(test);
             }

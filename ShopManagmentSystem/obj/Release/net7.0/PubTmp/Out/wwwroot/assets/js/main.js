@@ -4,6 +4,9 @@ let alertSale = document.getElementById("alert_sale");
 let alertRefund = document.getElementById("alert_refund");
 let toDate = document.querySelector(".toDate");
 let fromDate = document.querySelector(".fromDate");
+let showPassword = document.querySelector(".watch-password");
+
+
 
 
 btn.onclick = function () {

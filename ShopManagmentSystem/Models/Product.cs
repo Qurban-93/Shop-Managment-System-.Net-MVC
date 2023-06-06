@@ -5,7 +5,7 @@ namespace ShopManagmentSystem.Models
     public class Product : BaseEntity
     {      
         public double CostPrice { get; set; }
-        public string Series { get; set; } = null!;
+        public string? Series { get; set; }
         public string? Desc { get; set; }
         public int ProductCategoryId { get; set; }
         public ProductCategory? ProductCategory { get; set; }

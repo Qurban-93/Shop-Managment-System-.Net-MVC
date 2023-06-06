@@ -5,8 +5,7 @@ namespace ShopManagmentSystem.ViewModels.ProductVMs
     public class ProductCreateVM
     {
         [Required]
-        public double CostPrice { get; set; }
-        [Required]
+        public double CostPrice { get; set; }     
         public string Series { get; set; } = null!;     
         [Required]
         public int? BrandId { get; set; }

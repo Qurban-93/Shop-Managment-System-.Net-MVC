@@ -114,8 +114,6 @@ function DeleteIcon() {
 }
 
 connection.on("ShowMessage", function (senderUserId, message, destinationUserId) {
-
-    console.log("niye iwledi bu")
     
     let UserId = document.getElementById("user_name").getAttribute("data-id");
     
@@ -148,8 +146,14 @@ connection.on("ShowMessage", function (senderUserId, message, destinationUserId)
     let name = document.querySelectorAll(".name");
         name.forEach((key, value, element) => {          
 
+            
             if (key.parentElement.parentElement.getAttribute("data-id") == senderUserId) {
-                key.innerHTML += `<i class="fa-solid fa-envelope text-danger"></i>`;
+
+                
+                if (key.innerHTML.length < 100) {
+                    console.log(key.innerHTML.length)
+                    key.innerHTML += `<i class="fa-solid fa-envelope text-danger"></i>`;
+                }
             }
             
         })

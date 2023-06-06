@@ -8,6 +8,8 @@ namespace ShopManagmentSystem.Models
         public string Name { get; set; } = null!;
         public List<Product>? Products { get; set; }
         public double Bonus { get; set; }
+        public bool SeriesUniqueRequired { get; set; }
+        public byte? SeriesMaxLength { get; set; }
         public bool IsDeleted { get; set; }
 
     }

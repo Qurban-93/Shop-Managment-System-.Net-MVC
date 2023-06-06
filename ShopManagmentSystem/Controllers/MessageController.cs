@@ -24,13 +24,15 @@ namespace ShopManagmentSystem.Controllers
             _context = context;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
+            AppUser userMe = await _userManager.FindByNameAsync(User.Identity.Name);
+            if (userMe == null) return BadRequest();
             
             MessageIndexVM indexVM = new()
             {
                 Users = _userManager.Users.Where(u => u.UserName != User.Identity.Name).ToList(),
-                NewMessages = _context.Messages.Where(m=>!m.IsRead).ToList(),
+                NewMessages = _context.Messages.Where(m=>!m.IsRead && m.DestinationId == userMe.Id).ToList(),
               
             };
 
