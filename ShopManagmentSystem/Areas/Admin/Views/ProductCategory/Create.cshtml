@@ -15,17 +15,17 @@
                 <input asp-for=Bonus class="form-control" type="number">
                 <span class="text-danger" asp-validation-for="Bonus"></span>
             </div>
-            <div class="mb-3">
-                <label asp-for=SeriesMaxMinLength class="form-label text-primary"> Series Max and Min Length </label>
-                <input asp-for=SeriesMaxMinLength class="form-control" type="number">
-                <span class="text-danger" asp-validation-for="SeriesMaxMinLength"></span>
-            </div>
             <div class="form-check mb-3">
                 <input asp-for=SeriesUniqueRequired class="form-check-input" type="checkbox">
                 <label class="form-check-label text-primary" asp-for="SeriesUniqueRequired">
                     Series Unique and Required
                 </label>
                 <span class="text-danger" asp-validation-for="SeriesUniqueRequired"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for=SeriesMaxMinLength class="form-label text-primary"> Series Max and Min Length </label>
+                <input asp-for=SeriesMaxMinLength class="form-control" id="series-length" type="number" disabled>
+                <span class="text-danger" asp-validation-for="SeriesMaxMinLength"></span>
             </div>
             <button type="submit" class="btn btn-primary">Add Category</button>
             <a class="btn btn-primary" asp-action="index">Go Back</a>

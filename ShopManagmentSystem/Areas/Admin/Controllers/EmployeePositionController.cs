@@ -30,7 +30,7 @@ namespace ShopManagmentSystem.Areas.Admin.Controllers
         public async Task<IActionResult> Create(EmployeePositionCreateVM createVM)
         {
             if (!ModelState.IsValid) return View(createVM);
-            if (_context.EmployeePostions.Any(ep => ep.PositionName.Trim().ToLower() == createVM.PositionName.Trim().ToLower()))
+            if (_context.EmployeePostions.Any(ep => ep.PositionName.Trim().ToLower() == createVM.PositionName.Trim().ToLower() && !ep.IsDeleted))
             {
                 ModelState.AddModelError("PositionName", "Bu adli Position movcuddur !");
                 return View();
@@ -69,7 +69,7 @@ namespace ShopManagmentSystem.Areas.Admin.Controllers
         {
             if (id == null || id == 0) return NotFound();
             if (!ModelState.IsValid) return View();
-            if (_context.EmployeePostions.Any(ep => ep.PositionName.Trim().ToLower() == editVM.PositionName.Trim().ToLower() && ep.Id != id))
+            if (_context.EmployeePostions.Any(ep => ep.PositionName.Trim().ToLower() == editVM.PositionName.Trim().ToLower() && ep.Id != id && !ep.IsDeleted))
             {
                 ModelState.AddModelError("PositionName", "Bu adli position movcuddur!");
                 return View();

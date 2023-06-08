@@ -28,16 +28,16 @@ namespace ShopManagmentSystem.Areas.Admin.Controllers
             List<Employee> employees = _context.Employees
                 .Include(e => e.EmployeePostion)
                 .Include(e => e.Branch)
-                .OrderBy(e=>e.BranchId)
-                .Where(e=> !e.IsDeleted)
+                .OrderBy(e => e.BranchId)
+                .Where(e => !e.IsDeleted)
                 .ToList();
             return View(employees);
         }
         [HttpGet]
         public IActionResult Create()
         {
-            ViewBag.Position = new SelectList(_context.EmployeePostions.Where(ep=>!ep.IsDeleted).ToList(), "Id", "PositionName");
-            ViewBag.Branch = new SelectList(_context.Branches.Where(b=>!b.IsDeleted).ToList(), "Id", "Name");
+            ViewBag.Position = new SelectList(_context.EmployeePostions.Where(ep => !ep.IsDeleted).ToList(), "Id", "PositionName");
+            ViewBag.Branch = new SelectList(_context.Branches.Where(b => !b.IsDeleted).ToList(), "Id", "Name");
             return View();
         }
         [HttpPost]
@@ -47,7 +47,7 @@ namespace ShopManagmentSystem.Areas.Admin.Controllers
             ViewBag.Position = new SelectList(_context.EmployeePostions.Where(ep => !ep.IsDeleted).ToList(), "Id", "PositionName");
             ViewBag.Branch = new SelectList(_context.Branches.Where(b => !b.IsDeleted).ToList(), "Id", "Name");
             if (!ModelState.IsValid) return View();
-            if(_context.Employees.Any(e=>e.FullName.Trim().ToLower()== createVM.FullName.Trim().ToLower()))
+            if (_context.Employees.Any(e => e.FullName.Trim().ToLower() == createVM.FullName.Trim().ToLower() && !e.IsDeleted))
             {
                 ModelState.AddModelError("FullName", "Bu adla employee movcuddur !Elave melumat daxil edin !");
                 return View();
@@ -58,12 +58,12 @@ namespace ShopManagmentSystem.Areas.Admin.Controllers
                 ModelState.AddModelError("Number", "Daxil etdiyiniz nomre duzgun formatda deil !");
                 return View(createVM);
             }
-            if(_context.Employees.Any(e=>e.Number == createVM.Number))
+            if (_context.Employees.Any(e => e.Number == createVM.Number))
             {
-                ModelState.AddModelError("Number","Bu nomre artiq bazada var !");
+                ModelState.AddModelError("Number", "Bu nomre artiq bazada var !");
                 return View(createVM);
             }
-            if(createVM.BirthDate > DateTime.Now)
+            if (createVM.BirthDate > DateTime.Now)
             {
                 ModelState.AddModelError("BirthDate", "Duzgun tarix secilmiyib !");
                 return View(createVM);
@@ -71,7 +71,7 @@ namespace ShopManagmentSystem.Areas.Admin.Controllers
 
             Employee newEmployee = new();
             newEmployee.Number = createVM.Number;
-            newEmployee.BirthDate= createVM.BirthDate;
+            newEmployee.BirthDate = createVM.BirthDate;
             newEmployee.CreateDate = DateTime.Now;
             newEmployee.BranchId = createVM.BranchId;
             newEmployee.EmployeePostionId = createVM.EmployeePositionId;
@@ -87,13 +87,13 @@ namespace ShopManagmentSystem.Areas.Admin.Controllers
             ViewBag.Position = new SelectList(_context.EmployeePostions.Where(ep => !ep.IsDeleted).ToList(), "Id", "PositionName");
             ViewBag.Branch = new SelectList(_context.Branches.Where(b => !b.IsDeleted).ToList(), "Id", "Name");
             if (id == 0 || id == null) return NotFound();
-            Employee? employee = await _context.Employees.FirstOrDefaultAsync(e=>e.Id == id && !e.IsDeleted);
+            Employee? employee = await _context.Employees.FirstOrDefaultAsync(e => e.Id == id && !e.IsDeleted);
             if (employee == null) return NotFound();
             EmployeeEditVM editVM = new()
             {
                 FullName = employee.FullName,
                 Number = employee.Number,
-                BirthDate = employee.BirthDate, 
+                BirthDate = employee.BirthDate,
                 BranchId = (int)employee.BranchId,
                 EmployeePositionId = employee.EmployeePostionId
 
@@ -102,21 +102,21 @@ namespace ShopManagmentSystem.Areas.Admin.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int? id,EmployeeEditVM editVM)
+        public async Task<IActionResult> Edit(int? id, EmployeeEditVM editVM)
         {
             ViewBag.Position = new SelectList(_context.EmployeePostions.Where(ep => !ep.IsDeleted).ToList(), "Id", "PositionName");
             ViewBag.Branch = new SelectList(_context.Branches.Where(b => !b.IsDeleted).ToList(), "Id", "Name");
             if (!ModelState.IsValid) return View();
-            if(id == 0 || id == null) return NotFound(); 
-            if(_context.Employees.Any(e=>e.FullName.Trim().ToLower() == editVM.FullName.Trim().ToLower() && e.Id != id))
+            if (id == 0 || id == null) return NotFound();
+            if (_context.Employees.Any(e => e.FullName.Trim().ToLower() == editVM.FullName.Trim().ToLower() && e.Id != id && !e.IsDeleted))
             {
                 ModelState.AddModelError("FullName", "Bu adla employee movcuddur! Elave melumat daxil edin.");
                 return View();
             }
-            Employee? employee = await _context.Employees.FirstOrDefaultAsync(e=>e.Id == id && !e.IsDeleted);
+            Employee? employee = await _context.Employees.FirstOrDefaultAsync(e => e.Id == id && !e.IsDeleted);
             if (employee == null) return NotFound();
             employee.UpdateDate = DateTime.Now;
-            employee.FullName= editVM.FullName;
+            employee.FullName = editVM.FullName;
             employee.Number = editVM.Number;
             employee.BirthDate = editVM.BirthDate;
             employee.BranchId = editVM.BranchId;
@@ -130,9 +130,9 @@ namespace ShopManagmentSystem.Areas.Admin.Controllers
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || id == 0) return NotFound();
-            Employee? employee = await _context.Employees.FirstOrDefaultAsync(e=>e.Id == id && !e.IsDeleted);
+            Employee? employee = await _context.Employees.FirstOrDefaultAsync(e => e.Id == id && !e.IsDeleted);
             if (employee == null) return NotFound();
-            employee.IsDeleted= true;
+            employee.IsDeleted = true;
             await _context.SaveChangesAsync();
             return Ok();
         }

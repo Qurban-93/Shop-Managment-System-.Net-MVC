@@ -60,7 +60,7 @@ namespace ShopManagmentSystem.Areas.Admin.Controllers
                 return View();
             }
             if(await _context.ProductModels.AnyAsync(pm => pm.ModelName.Trim().ToLower() == createVM.ModelName.Trim().ToLower() && 
-            pm.BrandId == createVM.BrandId))
+            pm.BrandId == createVM.BrandId && !pm.IsDeleted))
             {
                 ModelState.AddModelError("ModelName", "Bu adla model movcuddur !");
                 return View();
@@ -114,7 +114,8 @@ namespace ShopManagmentSystem.Areas.Admin.Controllers
                 ModelState.AddModelError("ProductCategoryId", "Category options error !");
                 return View();
             }
-            if (_context.ProductModels.Any(pm => pm.ModelName.Trim().ToLower() == editVM.ModelName.Trim().ToLower() && pm.Id != id))
+            if (_context.ProductModels.Any(pm => pm.ModelName.Trim().ToLower() == editVM.ModelName.Trim().ToLower() && pm.Id != id 
+            && !pm.IsDeleted && pm.BrandId == editVM.BrandId))
             {
                 ModelState.AddModelError("ModelName", "Bu adla model movcuddur !");
                 return View();
@@ -124,7 +125,7 @@ namespace ShopManagmentSystem.Areas.Admin.Controllers
             if (productModel == null) return NotFound();
             productModel.UpdateDate = DateTime.Now;
             productModel.ModelPrice = editVM.ModelPrice;
-            productModel.ModelName = editVM.ModelName;
+            productModel.ModelName = editVM.ModelName.Trim().ToUpper();
             productModel.BrandId = editVM.BrandId;
             productModel.ProductCategoryId = editVM.ProductCategoryId;
 

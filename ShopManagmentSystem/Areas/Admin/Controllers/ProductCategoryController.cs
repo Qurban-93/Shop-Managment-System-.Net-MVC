@@ -43,7 +43,12 @@ namespace ShopManagmentSystem.Areas.Admin.Controllers
             productCategory.Name = createVM.Name;
             productCategory.Bonus = createVM.Bonus;
             productCategory.CreateDate = DateTime.Now;
-            productCategory.SeriesMaxLength = createVM.SeriesMaxMinLength;
+            if(!createVM.SeriesUniqueRequired) 
+            { 
+                productCategory.SeriesMaxLength = null; 
+            }
+            else { productCategory.SeriesMaxLength = createVM.SeriesMaxMinLength; }
+            
             productCategory.SeriesUniqueRequired = createVM.SeriesUniqueRequired;
             _context.ProductCategories.Add(productCategory);
             await _context.SaveChangesAsync();
@@ -72,7 +77,7 @@ namespace ShopManagmentSystem.Areas.Admin.Controllers
             if (!ModelState.IsValid) return View(editVM);
             ProductCategory? existProdCategory = await _context.ProductCategories.FirstOrDefaultAsync(pc => pc.Id == id && !pc.IsDeleted);
             if (existProdCategory == null) return NotFound();
-            if (_context.ProductCategories.Any(pc => pc.Id != id && pc.Name == editVM.Name))
+            if (_context.ProductCategories.Any(pc => pc.Id != id && pc.Name == editVM.Name && !pc.IsDeleted))
             {
                 ModelState.AddModelError("Name", "Bu adli Product Categoriya var !");
                 return View(editVM);

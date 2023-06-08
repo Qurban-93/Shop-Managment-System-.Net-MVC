@@ -32,7 +32,7 @@ namespace ShopManagmentSystem.Areas.Admin.Controllers
         public async Task<IActionResult> Create(BranchVM branchVM)
         {
             if(!ModelState.IsValid) return View(branchVM);
-            if(await _context.Branches.AnyAsync(b=>b.Name.ToLower().Trim()==branchVM.Name.ToLower().Trim())) 
+            if(await _context.Branches.AnyAsync(b=>b.Name.ToLower().Trim()==branchVM.Name.ToLower().Trim() && !b.IsDeleted)) 
             {
                 ModelState.AddModelError("Name", "Bu adla Branch movcuddur !");
                 return View(branchVM);
@@ -58,7 +58,7 @@ namespace ShopManagmentSystem.Areas.Admin.Controllers
             if (!ModelState.IsValid || id == null || id == 0) return NotFound();
             Branch? branch = await _context.Branches.FirstOrDefaultAsync(a=>a.Id == id && !a.IsDeleted);
             if(branch == null) return NotFound();
-            if(await _context.Branches.AnyAsync(b=>b.Name.Trim().ToLower() == branch.Name.Trim().ToLower() && b.Id != id))
+            if(await _context.Branches.AnyAsync(b=>b.Name.Trim().ToLower() == branch.Name.Trim().ToLower() && b.Id != id && !b.IsDeleted))
             {
                 ModelState.AddModelError("Name", "Bu adla Branch movcuddur !");
                 return View(branchVM);

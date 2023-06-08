@@ -258,9 +258,6 @@ body {
 .home_index #alert_sale {
   transition: all 0.8s ease;
 }
-.home_index thead {
-  background-color: gray;
-}
 .home_index h1 {
   margin-top: 20px;
   margin-bottom: 20px;

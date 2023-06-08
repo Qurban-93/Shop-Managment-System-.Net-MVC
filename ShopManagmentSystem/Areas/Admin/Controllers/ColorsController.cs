@@ -31,7 +31,7 @@ namespace ShopManagmentSystem.Areas.Admin.Controllers
         public async Task<IActionResult> Create(ColorVM color)
         {
             if (!ModelState.IsValid) return View();
-            if (await _context.Colors.AnyAsync(c => c.ColorName.Trim().ToLower() == color.ColorName.Trim().ToLower()))
+            if (await _context.Colors.AnyAsync(c => c.ColorName.Trim().ToLower() == color.ColorName.Trim().ToLower() && !c.IsDeleted))
             {
                 ModelState.AddModelError("ColorName", "Bu adla color movcuddur !");
                 return View();
@@ -70,7 +70,7 @@ namespace ShopManagmentSystem.Areas.Admin.Controllers
             Color? existcolor = await _context.Colors.FirstOrDefaultAsync(c => c.Id == id && !c.IsDeleted);
             if (existcolor == null) return NotFound();
             if (!ModelState.IsValid) return View();
-            if (await _context.Colors.AnyAsync(c => c.ColorName.Trim().ToLower() == color.ColorName.Trim().ToLower() && c.Id != id))
+            if (await _context.Colors.AnyAsync(c => c.ColorName.Trim().ToLower() == color.ColorName.Trim().ToLower() && c.Id != id && !c.IsDeleted))
             {
                 ModelState.AddModelError("ColorName", "Bu adla color movcuddur !");
                 return View();

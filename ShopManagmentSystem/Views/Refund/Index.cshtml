@@ -18,33 +18,37 @@
                     <button type="submit" class="btn btn-primary col-lg-2">Search</button>
                 </div>
             </form>
-            <table style="border:1px solid gray;" class="table">
-                <thead class="thead-light">
-                    <tr>
-                        <th scope="col">Date</th>
-                        <th scope="col">Customer Name</th>
-                        <th scope="col">Discount</th>
-                        <th scope="col">Cashless Payment</th>
-                        <th scope="col">Total Price</th>
-                        <th scope="col">Seller Name</th>
-                        <th scope="col">Details</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (Refund item in Model.Refunds)
-                    {
+            @if (Model.Refunds.Count>0)
+            {
+                <h3>Confirmed Refunds</h3>
+                <table class="table">
+                    <thead>
                         <tr>
-                            <td>@item.CreateDate.ToString("dd MMMM yyyy, hh:mm:ss")</td>
-                            <td>@item.Customer?.FullName</td>
-                            <td>@item.Discount <i class="fa-solid fa-manat-sign"></i></td>
-                            <td>@item.CashlessPayment <i class="fa-solid fa-manat-sign"></i></td>
-                            <td>@item.TotalPrice <i class="fa-solid fa-manat-sign"></i></td>
-                            <td>@item.Employee?.FullName</td>
-                            <td><a asp-action="details" asp-route-id="@item.Id"><i class="fa-solid fa-circle-info"></i></a></td>
+                            <th scope="col">Date</th>
+                            <th scope="col">Customer Name</th>
+                            <th scope="col">Discount</th>
+                            <th scope="col">Cashless Payment</th>
+                            <th scope="col">Total Price</th>
+                            <th scope="col">Seller Name</th>
+                            <th scope="col">Details</th>
                         </tr>
-                    }
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                        @foreach (Refund item in Model.Refunds)
+                        {
+                            <tr>
+                                <td>@item.CreateDate.ToString("dd MMMM yyyy, hh:mm:ss")</td>
+                                <td>@item.Customer?.FullName</td>
+                                <td>@item.Discount <i class="fa-solid fa-manat-sign"></i></td>
+                                <td>@item.CashlessPayment <i class="fa-solid fa-manat-sign"></i></td>
+                                <td>@item.TotalPrice <i class="fa-solid fa-manat-sign"></i></td>
+                                <td>@item.Employee?.FullName</td>
+                                <td><a asp-action="details" asp-route-id="@item.Id"><i class="fa-solid fa-circle-info"></i></a></td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            }
         </div>
         <div class="row">
             
@@ -54,8 +58,9 @@
             }
             else
             {
-                <table style="border:1px solid gray;" class="table">
-                    <thead class="thead-light">
+                <h3>Unconfirmed Refunds</h3>
+                <table class="table">
+                    <thead>
                         <tr>
                             <th scope="col">Brand</th>
                             <th scope="col">Product Model</th>
@@ -64,8 +69,7 @@
                             <th scope="col">Category</th>
                             <th scope="col">Series</th>
                             <th scope="col">Seller</th>
-                            <th scope="col">Customer</th>
-                            <th scope="col">Status</th>
+                            <th scope="col">Customer</th>                            
                         </tr>
                     </thead>
                     <tbody>
@@ -80,7 +84,6 @@
                                 <td>@item.Series</td>
                                 <td>@item.EmployeeName</td>
                                 <td>@item.Customer.FullName</td>
-                                <td>Wait...<i style="color:red;" class="fa-solid fa-mug-hot"></i></td>
                             </tr>
                         }
                     </tbody>

@@ -29,7 +29,7 @@ namespace ShopManagmentSystem.Areas.Admin.Controllers
         public async Task<IActionResult> Create(BrandCreateVM brandCreateVM)
         {
             if (!ModelState.IsValid) return View();
-            if(_context.Brands.Any(b=>b.BrandName == brandCreateVM.BrandName))
+            if(_context.Brands.Any(b=>b.BrandName == brandCreateVM.BrandName && !b.IsDeleted))
             {
                 ModelState.AddModelError("BrandName", "Bu adli Brand artiq movcuddur!");
                 return View();
