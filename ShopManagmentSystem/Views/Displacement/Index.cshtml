@@ -32,12 +32,20 @@
                 <tbody>
                     @foreach (Displacement displacement in Model)
                     {
-                        <tr id="@displacement.Id">
-                            <td>@displacement.CreateDate</td>
+                        <tr>
+                            <td>@displacement.CreateDate.ToString("dd MMMM yyyy , hh:mm")</td>
                             <td>@displacement.SenderBranch</td>
-                            <td>@displacement.DestinationBranch</td>
+                            <td>@displacement.DestinationBranch</td>                           
                             <td>@displacement?.DisplacementProducts?.Count</td>
-                            <td class="@(displacement.IsAcceppted ? "text-success":"text-danger")" >@(displacement.IsAcceppted == true ?"Accepted":"Not Accepted")</td>
+                            @if (!displacement.IsDeleted)
+                            {
+                                <td id="@displacement.Id" class= "@(displacement.IsAcceppted ? "text-success":"text-danger")">@(displacement.IsAcceppted == true ? "Accepted" : "Not Accepted")</td>
+
+                            }
+                            else
+                            {
+                                <td class="text-danger">Deleted <i class="fa-regular fa-circle-xmark"></i> </td>
+                            }
                             <td><a asp-action="details" asp-route-id="@displacement?.Id"><i class="fa-solid fa-circle-info"></i></a></td>
                         </tr>
                     }

@@ -10,6 +10,10 @@
             <li>Send Date : @Model.Displacement.CreateDate.ToString("dd MMMM yyyy hh:mm")</li>
             <li>Sender : @Model.Displacement.SenderBranch</li>
             <li>Destination : @Model.Displacement.DestinationBranch</li>
+            @if (Model.Displacement.IsDeleted)
+            {
+                <li class="text-danger"> Delete Info : @Model.Displacement.DeleteInfo</li>
+            }
         </ul>
         <table class="table">
             <tbody>
@@ -18,7 +22,7 @@
                     <th class="text-primary">Brand</th>
                     <th class="text-primary">Model</th>
                     <th class="text-primary">Color</th>
-                    <th class="text-primary">Category</th> 
+                    <th class="text-primary">Category</th>
                     <th class="text-primary">Series</th>
                 </tr>
                 @foreach (var item in Model.Displacement.DisplacementProducts)
@@ -36,11 +40,11 @@
             </tbody>
         </table>
         <div>
-            @if(Model.Displacement.DestinationId == Model.User.BranchId && Model.Displacement.IsAcceppted == false)
+            @if(Model.Displacement.DestinationId == Model.User.BranchId && !Model.Displacement.IsAcceppted && !Model.Displacement.IsAcceppted)
             {
                 <a asp-action="AcceptDisplacement" asp-route-id="@Model.Displacement.Id" style="margin-right:10px;" class="btn btn-primary">Accept</a>
             }
-            <a asp-action="index" class="btn btn-primary"> Go Back</a>
+            <a asp-action="index" class="btn btn-primary">Go Back</a>
         </div>
     </div>
 </div>

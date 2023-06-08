@@ -1,5 +1,4 @@
 ﻿using Hangfire;
-using ShopManagmentSystem.DAL;
 using ShopManagmentSystem.Models;
 using ShopManagmentSystem.Service;
 
@@ -16,9 +15,8 @@ namespace ShopManagmentSystem.BackgroundService
 
         public string ScheduleDisplacement(Displacement displacement)
         {
-            return BackgroundJob.Schedule(() => _deleteService.DeleteDisplacement(displacement), displacement.CreateDate.AddSeconds(20));
+            return BackgroundJob.Schedule(() => _deleteService.DeleteDisplacement(displacement), displacement.CreateDate.AddSeconds(60));
         }
-
 
     }
 }

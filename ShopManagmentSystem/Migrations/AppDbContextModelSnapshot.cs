@@ -362,6 +362,10 @@ namespace ShopManagmentSystem.Migrations
                     b.Property<DateTime>("CreateDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("DeleteInfo")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("DestinationBranch")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");

@@ -24,13 +24,15 @@ namespace ShopManagmentSystem.Service
                 .Include(ed=>ed.DisplacementProducts)
                 .FirstOrDefault(d=>d.CreateDate== displacement.CreateDate);
             if (existDisplacement == null) return;
+            if(existDisplacement.IsAcceppted) return;
             foreach (var item in existDisplacement.DisplacementProducts)
             {
                 _context.Products.FirstOrDefault(p => p.Id == item.ProductId).BranchId = existDisplacement.SenderId;
             }
             int id = existDisplacement.Id;
-            _context.Displacement.Remove(existDisplacement);
-            _context.SaveChanges();
+            existDisplacement.IsDeleted = true;
+            existDisplacement.DeleteInfo = "Time limit";
+            _context.SaveChangesAsync();
             _hubContext.Clients.All.SendAsync("DeleteDisplacement",id);
         }
     }

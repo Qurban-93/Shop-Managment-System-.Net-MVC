@@ -2,10 +2,12 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.SignalR;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using ShopManagmentSystem.BackgroundService;
 using ShopManagmentSystem.DAL;
+using ShopManagmentSystem.Hubs;
 using ShopManagmentSystem.Models;
 using ShopManagmentSystem.Service;
 using ShopManagmentSystem.ViewModels;
@@ -18,15 +20,17 @@ namespace ShopManagmentSystem.Controllers
         private readonly AppDbContext _context;
         private readonly UserManager<AppUser> _userManager;
         private readonly IDisplacementService _displacementService;
+        private readonly IHubContext<UpdateHub> _updateHub;
 
 
 
         public DisplacementController(AppDbContext context, UserManager<AppUser> userManager,
-            IDisplacementService displacementService)
+            IDisplacementService displacementService, IHubContext<UpdateHub> updateHub)
         {
             _context = context;
             _userManager = userManager;
             _displacementService = displacementService;
+            _updateHub = updateHub;
         }
 
         public async Task<IActionResult> Index()
@@ -116,13 +120,14 @@ namespace ShopManagmentSystem.Controllers
                 DestinationBranch = _context.Branches.FirstOrDefault(b => b.Id == createVM.DestinationId).Name,
                 DisplacementProducts = displacementProducts,
                 CreateDate = DateTime.Now,
+                DeleteInfo = "Empty",
             };
 
             _displacementService.ScheduleDisplacement(displacement);
-            Request.Cookies["basket"].Remove(0,100);
+            
             await _context.Displacement.AddAsync(displacement);
             await _context.SaveChangesAsync();
-
+            Response.Cookies.Delete("Basket");
 
 
             return RedirectToAction("Index");
@@ -217,6 +222,8 @@ namespace ShopManagmentSystem.Controllers
             displacement.IsAcceppted = true;
             await _context.SaveChangesAsync();
             TempData["ok"] = true;
+            await _updateHub.Clients.All.SendAsync("AcceptDisplacement",displacement.Id);
+            
 
             return RedirectToAction("Index");
         }
