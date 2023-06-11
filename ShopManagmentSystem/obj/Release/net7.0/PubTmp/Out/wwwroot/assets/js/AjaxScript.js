@@ -22,9 +22,20 @@
     let deleteUser = $(".delete-user");
     let prodBrandInput = $(".prod-brand");
     let prodBrandInputEdit = $(".prod-brand-edit");
+    let checkboxInput = $(".form-check-input");
     var skip;
 
-
+    
+    checkboxInput.change(function(e){
+        let seriesInput = $("#series-length");
+        if (seriesInput.prop("disabled")) {          
+            $("#series-length").prop("disabled",false)
+        } else {
+            $("#series-length").prop("disabled", true)          
+            $("#series-length").val("");
+        }
+        
+    })
 
     prodBrandInputEdit.change(function (e) {
         let id = $(e.currentTarget).val();

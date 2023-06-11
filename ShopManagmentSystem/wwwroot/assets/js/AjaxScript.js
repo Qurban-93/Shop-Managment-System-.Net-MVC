@@ -23,8 +23,49 @@
     let prodBrandInput = $(".prod-brand");
     let prodBrandInputEdit = $(".prod-brand-edit");
     let checkboxInput = $(".form-check-input");
+    let deleteDisplacement = $(".delete-displacement");
     var skip;
 
+
+    deleteDisplacement.on("click", function (e) {
+        let id = $(e.currentTarget).data('id');
+
+        Swal.fire({
+            title: 'Are you sure delete ?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    method: "DELETE",
+                    url: "/Displacement/Delete/" + id,
+                    success: function (result) { 
+                        window.location.href = '/displacement/';
+                        Swal.fire(
+                            ` Deleted !`,
+                            'Your file has been deleted.',
+                            'success'
+                        )
+                        
+                    },
+                    error: function (result) {
+                        Swal.fire(
+                            'Not Deleted!',
+                            'Your file has been not deleted.',
+                            'error'
+                        )
+                        
+                    }
+                });
+
+
+            }
+        })
+    })
     
     checkboxInput.change(function(e){
         let seriesInput = $("#series-length");
@@ -214,7 +255,7 @@
                $("#last-seen-input").val()
                 chatHistory.empty();
                 chatHistory.append(result);
-                console.log($("#last-seen-input").val())
+               
                 $("#user_name").html(name);
                 $("#user_name").attr('data-id', id);
                 $("#user_last_seen").html($("#last-seen-input").val());
@@ -234,7 +275,9 @@
                     $(".new_message").remove();
                 }
 
-                console.log(".name");
+                console.log($(".fa-solid fa-envelope"))
+
+               
                
                 var test = chatHistory.prop('scrollHeight');
                 chatHistory.scrollTop(test);

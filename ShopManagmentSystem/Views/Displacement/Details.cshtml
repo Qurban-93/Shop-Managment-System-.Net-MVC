@@ -40,9 +40,13 @@
             </tbody>
         </table>
         <div>
-            @if(Model.Displacement.DestinationId == Model.User.BranchId && !Model.Displacement.IsAcceppted && !Model.Displacement.IsAcceppted)
+            @if (Model.Displacement.DestinationId == Model.User.BranchId && !Model.Displacement.IsAcceppted && !Model.Displacement.IsDeleted)
             {
                 <a asp-action="AcceptDisplacement" asp-route-id="@Model.Displacement.Id" style="margin-right:10px;" class="btn btn-primary">Accept</a>
+            }
+            @if(Model.Displacement.SenderId == Model.User.BranchId && !Model.Displacement.IsAcceppted && !Model.Displacement.IsDeleted){
+                <a data-id="@Model.Displacement.Id" style="margin-right:10px;cursor:pointer;" class="btn btn-danger delete-displacement">Delete</a>
+
             }
             <a asp-action="index" class="btn btn-primary">Go Back</a>
         </div>

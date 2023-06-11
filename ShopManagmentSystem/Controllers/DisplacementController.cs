@@ -227,5 +227,17 @@ namespace ShopManagmentSystem.Controllers
 
             return RedirectToAction("Index");
         }
+
+        public async Task<IActionResult> Delete(int? id)
+        {
+            if (id == null || id == 0) return BadRequest(); 
+            Displacement? displacement = await _context.Displacement.FirstOrDefaultAsync(d => d.Id == id);
+            if (displacement == null) return NotFound();
+            displacement.IsDeleted = true;
+            displacement.DeleteInfo = $"Deleted {displacement.SenderBranch}";
+            await _context.SaveChangesAsync();
+            await _updateHub.Clients.All.SendAsync("DeleteDisplacement", id);
+            return Ok();
+        }
     }
 }

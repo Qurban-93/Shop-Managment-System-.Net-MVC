@@ -23,7 +23,7 @@ function formatAMPM(Date) {
     var minutes = Date.getMinutes();
     var ampm = hours >= 12 ? 'pm' : 'am';
     hours = hours % 12;
-    hours = hours ? hours : 12; // the hour '0' should be '12'
+    hours = hours ? hours : 12; 
     minutes = minutes < 10 ? '0' + minutes : minutes;
     var strTime = hours + ':' + minutes + ' ' + ampm;
     return strTime;
@@ -142,21 +142,22 @@ connection.on("ShowMessage", function (senderUserId, message, destinationUserId)
         });
         playSound();
         return;
-    }
-    let name = document.querySelectorAll(".name");
-        name.forEach((key, value, element) => {          
+    } else {
 
-            
+        let name = document.querySelectorAll(".name");
+        name.forEach((key, value, element) => {
+
+
             if (key.parentElement.parentElement.getAttribute("data-id") == senderUserId) {
 
-                
-                if (key.innerHTML.length < 100) {
-                    console.log(key.innerHTML.length)
+                if (key.innerHTML.length < 100) {                 
                     key.innerHTML += `<i class="fa-solid fa-envelope text-danger"></i>`;
                 }
             }
-            
+
         })
+    }
+   
 })
 
 function playSound() {
