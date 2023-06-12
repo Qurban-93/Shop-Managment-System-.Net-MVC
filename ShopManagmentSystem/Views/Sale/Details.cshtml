@@ -68,7 +68,7 @@
                     @foreach (Refund item in Model.Sale.Refunds)
                     {
                         <li class="mb-3">
-                            Date: @item.CreateDate , Product : @item.Product.ProductModel.ModelName , Series : @item.Product.Series
+                            Date: @item.CreateDate.ToString("dd MMMM yyyy,hh:mm") , Product : @item.Product.ProductModel.ModelName , Series : @item.Product.Series
                             <a asp-action="details" asp-controller="refund" asp-route-id="@item.Id"> More : <i class="fa-solid fa-circle-info"></i></a>
                         </li>
                     }

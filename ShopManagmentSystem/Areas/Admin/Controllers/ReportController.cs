@@ -114,7 +114,7 @@ namespace ShopManagmentSystem.Areas.Admin.Controllers
             {
                 ViewBag.Error = "Invalid Date Time";
                 List<ProfitVM> profitVMs= new();
-                foreach (var item in _context.Sales.ToList())
+                foreach (var item in _context.Sales.Where(s=>s.BranchId == user.BranchId).ToList())
                 {
                     ProfitVM profitVM = new();
                     profitVM.Date = DateTime.Now;
@@ -122,7 +122,7 @@ namespace ShopManagmentSystem.Areas.Admin.Controllers
                     profitVMs.Add(profitVM);
                 }
 
-                foreach(var item in _context.Refunds.ToList())
+                foreach(var item in _context.Refunds.Where(s => s.BranchId == user.BranchId).ToList())
                 {
                     ProfitVM profitVM = new();
                     profitVM.Date = DateTime.Now;
@@ -135,7 +135,7 @@ namespace ShopManagmentSystem.Areas.Admin.Controllers
             if (fromDate != null && toDate == null)
             {
                 List<ProfitVM> profitVMs = new();
-                foreach (var item in _context.Sales.Where(s=>s.CreateDate > fromDate).ToList())
+                foreach (var item in _context.Sales.Where(s=>s.CreateDate > fromDate && s.BranchId == user.BranchId).ToList())
                 {
                     ProfitVM profitVM = new();
                     profitVM.Date = DateTime.Now;
@@ -143,7 +143,7 @@ namespace ShopManagmentSystem.Areas.Admin.Controllers
                     profitVMs.Add(profitVM);
                 }
 
-                foreach (var item in _context.Refunds.Where(r => r.CreateDate > fromDate).ToList())
+                foreach (var item in _context.Refunds.Where(r => r.CreateDate > fromDate && r.BranchId == user.BranchId).ToList())
                 {
                     ProfitVM profitVM = new();
                     profitVM.Date = DateTime.Now;
@@ -155,7 +155,7 @@ namespace ShopManagmentSystem.Areas.Admin.Controllers
             if (fromDate == null && toDate != null)
             {
                 List<ProfitVM> profitVMs = new();
-                foreach (var item in _context.Sales.Where(s => s.CreateDate < toDate).ToList())
+                foreach (var item in _context.Sales.Where(s => s.CreateDate < toDate && s.BranchId == user.BranchId).ToList())
                 {
                     ProfitVM profitVM = new();
                     profitVM.Date = DateTime.Now;
@@ -163,7 +163,7 @@ namespace ShopManagmentSystem.Areas.Admin.Controllers
                     profitVMs.Add(profitVM);
                 }
 
-                foreach (var item in _context.Refunds.Where(r => r.CreateDate < toDate).ToList())
+                foreach (var item in _context.Refunds.Where(r => r.CreateDate < toDate && r.BranchId == user.BranchId).ToList())
                 {
                     ProfitVM profitVM = new();
                     profitVM.Date = DateTime.Now;
@@ -176,7 +176,7 @@ namespace ShopManagmentSystem.Areas.Admin.Controllers
             {
                 toDate = toDate.Value.AddHours(23).AddMinutes(59).AddSeconds(59);
                 List<ProfitVM> profitVMs = new();
-                foreach (var item in _context.Sales.Where(s => s.CreateDate > fromDate && s.CreateDate <toDate).ToList())
+                foreach (var item in _context.Sales.Where(s => s.CreateDate > fromDate && s.CreateDate <toDate && s.BranchId == user.BranchId).ToList())
                 {
                     ProfitVM profitVM = new();
                     profitVM.Date = DateTime.Now;
@@ -184,7 +184,7 @@ namespace ShopManagmentSystem.Areas.Admin.Controllers
                     profitVMs.Add(profitVM);
                 }
 
-                foreach (var item in _context.Refunds.Where(r => r.CreateDate > fromDate && r.CreateDate < toDate).ToList())
+                foreach (var item in _context.Refunds.Where(r => r.CreateDate > fromDate && r.CreateDate < toDate && r.BranchId == user.BranchId).ToList())
                 {
                     ProfitVM profitVM = new();
                     profitVM.Date = DateTime.Now;
@@ -198,8 +198,8 @@ namespace ShopManagmentSystem.Areas.Admin.Controllers
                 ViewBag.fromDate = DateTime.Today;
                 ViewBag.toDate = DateTime.Today.AddHours(23);
                 List<ProfitVM> profitVMs = new();
-                List<Sale> sales = await _context.Sales.Where(s => s.CreateDate > DateTime.Today).ToListAsync();
-                List<Refund> refunds = await _context.Refunds.Where(r => r.CreateDate > DateTime.Today).ToListAsync();
+                List<Sale> sales = await _context.Sales.Where(s => s.CreateDate > DateTime.Today && s.BranchId == user.BranchId).ToListAsync();
+                List<Refund> refunds = await _context.Refunds.Where(r => r.CreateDate > DateTime.Today && r.BranchId == user.BranchId).ToListAsync();
                 foreach (var item in sales)
                 {
                     ProfitVM profitVM = new();

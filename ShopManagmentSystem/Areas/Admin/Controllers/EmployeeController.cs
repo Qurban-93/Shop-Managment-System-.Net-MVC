@@ -37,7 +37,7 @@ namespace ShopManagmentSystem.Areas.Admin.Controllers
         public IActionResult Create()
         {
             ViewBag.Position = new SelectList(_context.EmployeePostions.Where(ep => !ep.IsDeleted).ToList(), "Id", "PositionName");
-            ViewBag.Branch = new SelectList(_context.Branches.Where(b => !b.IsDeleted).ToList(), "Id", "Name");
+            ViewBag.Branch = new SelectList(_context.Branches.Where(b => !b.IsDeleted && b.Id != 5).ToList(), "Id", "Name");
             return View();
         }
         [HttpPost]
@@ -45,7 +45,7 @@ namespace ShopManagmentSystem.Areas.Admin.Controllers
         public async Task<IActionResult> Create(EmployeeCreateVM createVM)
         {
             ViewBag.Position = new SelectList(_context.EmployeePostions.Where(ep => !ep.IsDeleted).ToList(), "Id", "PositionName");
-            ViewBag.Branch = new SelectList(_context.Branches.Where(b => !b.IsDeleted).ToList(), "Id", "Name");
+            ViewBag.Branch = new SelectList(_context.Branches.Where(b => !b.IsDeleted && b.Id != 5).ToList(), "Id", "Name");
             if (!ModelState.IsValid) return View();
             if (_context.Employees.Any(e => e.FullName.Trim().ToLower() == createVM.FullName.Trim().ToLower() && !e.IsDeleted))
             {
@@ -85,7 +85,7 @@ namespace ShopManagmentSystem.Areas.Admin.Controllers
         public async Task<IActionResult> Edit(int? id)
         {
             ViewBag.Position = new SelectList(_context.EmployeePostions.Where(ep => !ep.IsDeleted).ToList(), "Id", "PositionName");
-            ViewBag.Branch = new SelectList(_context.Branches.Where(b => !b.IsDeleted).ToList(), "Id", "Name");
+            ViewBag.Branch = new SelectList(_context.Branches.Where(b => !b.IsDeleted && b.Id != 5 ).ToList(), "Id", "Name");
             if (id == 0 || id == null) return NotFound();
             Employee? employee = await _context.Employees.FirstOrDefaultAsync(e => e.Id == id && !e.IsDeleted);
             if (employee == null) return NotFound();
@@ -105,7 +105,7 @@ namespace ShopManagmentSystem.Areas.Admin.Controllers
         public async Task<IActionResult> Edit(int? id, EmployeeEditVM editVM)
         {
             ViewBag.Position = new SelectList(_context.EmployeePostions.Where(ep => !ep.IsDeleted).ToList(), "Id", "PositionName");
-            ViewBag.Branch = new SelectList(_context.Branches.Where(b => !b.IsDeleted).ToList(), "Id", "Name");
+            ViewBag.Branch = new SelectList(_context.Branches.Where(b => !b.IsDeleted && b.Id != 5).ToList(), "Id", "Name");
             if (!ModelState.IsValid) return View();
             if (id == 0 || id == null) return NotFound();
             if (_context.Employees.Any(e => e.FullName.Trim().ToLower() == editVM.FullName.Trim().ToLower() && e.Id != id && !e.IsDeleted))

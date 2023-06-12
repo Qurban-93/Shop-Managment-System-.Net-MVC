@@ -45,11 +45,11 @@
                                             <td>
                                                 @if (salary.SaleId != null)
                                                 {
-                                                    <a asp-action="details" asp-controller="sale" asp-route-id="@salary.SaleId"><i class="fa-solid fa-circle-info"></i></a>
+                                                    <a asp-action="details" asp-controller="sale" asp-area="default" asp-route-id="@salary.SaleId"><i class="fa-solid fa-circle-info"></i></a>
                                                 }
                                                 else if(salary.RefundId != null)
                                                 {
-                                                    <a asp-action="details" asp-controller="refund" asp-route-id="@salary.RefundId"><i class="fa-solid fa-circle-info"></i></a>
+                                                    <a asp-action="details" asp-controller="refund" asp-area="default" asp-route-id="@salary.RefundId"><i class="fa-solid fa-circle-info"></i></a>
 
                                                 }
                                             </td>

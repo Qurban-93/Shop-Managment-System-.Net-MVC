@@ -94,7 +94,7 @@ namespace ShopManagmentSystem.Controllers
                     .Include(p => p.Color)
                     .Include(p => p.ProductModel)
                     .Include(p => p.ProductCategory)
-                    .Where(p=>p.BranchId== user.BranchId && !p.IsSold)
+                    .Where(p => p.BranchId == user.BranchId && !p.IsSold)
                     .ToListAsync();
                 ModelState.AddModelError("DestinationId", "Mehsul elave edilmeyib !");
                 return View(createVM);
@@ -124,7 +124,7 @@ namespace ShopManagmentSystem.Controllers
             };
 
             _displacementService.ScheduleDisplacement(displacement);
-            
+
             await _context.Displacement.AddAsync(displacement);
             await _context.SaveChangesAsync();
             Response.Cookies.Delete("Basket");
@@ -213,7 +213,7 @@ namespace ShopManagmentSystem.Controllers
                 .FirstOrDefaultAsync(d => d.Id == id);
             if (displacement == null) return NotFound();
             if (displacement.DestinationId != user.BranchId) return BadRequest();
-
+            if (displacement.IsDeleted) return NotFound();
             foreach (var item in displacement.DisplacementProducts)
             {
                 item.Product.BranchId = user.BranchId;
@@ -222,17 +222,26 @@ namespace ShopManagmentSystem.Controllers
             displacement.IsAcceppted = true;
             await _context.SaveChangesAsync();
             TempData["ok"] = true;
-            await _updateHub.Clients.All.SendAsync("AcceptDisplacement",displacement.Id);
-            
+            await _updateHub.Clients.All.SendAsync("AcceptDisplacement", displacement.Id);
+
 
             return RedirectToAction("Index");
         }
 
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null || id == 0) return BadRequest(); 
-            Displacement? displacement = await _context.Displacement.FirstOrDefaultAsync(d => d.Id == id);
-            if (displacement == null) return NotFound();
+            if (id == null || id == 0) return BadRequest();
+            Displacement? displacement = await _context.Displacement
+                .Include(d => d.DisplacementProducts)
+                .ThenInclude(dp => dp.Product)
+                .FirstOrDefaultAsync(d => d.Id == id);
+            if (displacement == null || displacement.IsAcceppted) return NotFound();
+
+            foreach (var item in displacement.DisplacementProducts)
+            {
+                item.Product.BranchId = displacement.SenderId;
+            }
+
             displacement.IsDeleted = true;
             displacement.DeleteInfo = $"Deleted {displacement.SenderBranch}";
             await _context.SaveChangesAsync();

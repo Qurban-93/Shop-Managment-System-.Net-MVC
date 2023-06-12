@@ -48,11 +48,11 @@ namespace ShopManagmentSystem.Controllers
             AppUser? secondUSer = await _userManager.FindByIdAsync(Id);
             if (secondUSer == null || user == null) return BadRequest();
             if (Id == null || user == null) return NotFound();
-            int countSkip = _context.Messages.Where(m => (m.DestinationId == Id && m.SenderId == user.Id) ||
+            int allMessagesCount = _context.Messages.Where(m => (m.DestinationId == Id && m.SenderId == user.Id) ||
             (m.DestinationId == user.Id && m.SenderId == Id)).Count();
-            if (countSkip < skip) { skip = countSkip; }
+            if (allMessagesCount < skip) { skip = allMessagesCount; }
             List<Message> messages = _context.Messages.Where(m => (m.DestinationId == Id && m.SenderId == user.Id) ||
-            (m.DestinationId == user.Id && m.SenderId == Id)).Skip(countSkip - skip).ToList();
+            (m.DestinationId == user.Id && m.SenderId == Id)).Skip(allMessagesCount - skip).ToList();
             List<int> ids = new();
             foreach (var message in messages)
             {
@@ -72,7 +72,7 @@ namespace ShopManagmentSystem.Controllers
             {
                 Messages = messages,
                 User = user,
-                CountSkip = countSkip,
+                AllMessagesCount = allMessagesCount,
                 UnreadIds = ids,
                 LastSeen = secondUSer.LastSeen,
             };
