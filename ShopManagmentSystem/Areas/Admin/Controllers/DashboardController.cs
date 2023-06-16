@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using ShopManagmentSystem.DAL;
 using ShopManagmentSystem.Models;
 using ShopManagmentSystem.ViewModels;
@@ -14,6 +15,7 @@ namespace ShopManagmentSystem.Areas.Admin.Controllers
     {
         private readonly AppDbContext _context;
         private readonly UserManager<AppUser> _userManager;
+        
 
         public DashboardController(AppDbContext context, UserManager<AppUser> userManager)
         {
@@ -21,12 +23,27 @@ namespace ShopManagmentSystem.Areas.Admin.Controllers
             _userManager = userManager;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            AppUser user = await _userManager.FindByNameAsync(User.Identity.Name);
+            var profitAmount = _context.Sales.Where(s=>s.CreateDate > DateTime.Today).Sum(s=>s.TotalProfit);
+            var saleAmount = _context.Sales.Where(s => s.CreateDate > DateTime.Today).Sum(s => s.TotalPrice);
+            var productAmount = _context.Sales.Where(s => s.CreateDate > DateTime.Today).Include(s=>s.SaleProducts).ToList();
+            var refundsAmount = _context.Refunds.Where(s => s.CreateDate > DateTime.Today).Sum(s => s.TotalPrice);
+            var salaryAmount = _context.Salaries.Where(s => s.CreateDate > DateTime.Today && s.Employee.BranchId == user.BranchId).Sum(s => s.Bonus);
+            AdminIndexVM indexVM = new()
+            {
+                ProductAmount = productAmount.Sum(e=>e.SaleProducts.Count()),
+                SalaryAmount = salaryAmount,
+                SaleAmount = saleAmount,
+                RefundsAmount = refundsAmount,
+                ProfitAmount = profitAmount,
+            };
+            
+            return View(indexVM);
         }
 
-        [Authorize(Roles = "SuperAdmin")]  
+        [Authorize(Roles = "MainAdmin")]  
         public IActionResult SuperAdmin()
         {
             SettingVM settingVM = new()

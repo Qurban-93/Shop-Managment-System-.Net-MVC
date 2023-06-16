@@ -21,9 +21,9 @@ function formatAMPM(Date) {
     
     var hours = Date.getHours();
     var minutes = Date.getMinutes();
-    var ampm = hours >= 12 ? 'pm' : 'am';
+    var ampm = hours >= 12 ? 'PM' : 'AM';
     hours = hours % 12;
-    hours = hours ? hours : 12; // the hour '0' should be '12'
+    hours = hours ? hours : 12; 
     minutes = minutes < 10 ? '0' + minutes : minutes;
     var strTime = hours + ':' + minutes + ' ' + ampm;
     return strTime;
@@ -123,7 +123,7 @@ connection.on("ShowMessage", function (senderUserId, message, destinationUserId)
         var day = d.getDate().toString();
         var month = months[d.getMonth().toString()];
         var year = d.getFullYear().toString();
-        var fullDate = day + " " + month + " " + year + " , " + formatAMPM(d)
+        var fullDate = day + " " + month + " " + year + " , " + formatAMPM(d).toUpperCase()
 
         let myMessage = `<li class="clearfix text-start">
             <div class="message-data">
@@ -142,21 +142,22 @@ connection.on("ShowMessage", function (senderUserId, message, destinationUserId)
         });
         playSound();
         return;
-    }
-    let name = document.querySelectorAll(".name");
-        name.forEach((key, value, element) => {          
+    } else {
 
-            
+        let name = document.querySelectorAll(".name");
+        name.forEach((key, value, element) => {
+
+
             if (key.parentElement.parentElement.getAttribute("data-id") == senderUserId) {
 
-                
-                if (key.innerHTML.length < 100) {
-                    console.log(key.innerHTML.length)
+                if (key.innerHTML.length < 100) {                 
                     key.innerHTML += `<i class="fa-solid fa-envelope text-danger"></i>`;
                 }
             }
-            
+
         })
+    }
+   
 })
 
 function playSound() {

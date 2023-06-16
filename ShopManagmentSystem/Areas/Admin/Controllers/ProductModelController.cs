@@ -10,7 +10,7 @@ using ShopManagmentSystem.ViewModels.ProductModelVMs;
 namespace ShopManagmentSystem.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    [Authorize(Roles = "SuperAdmin")]
+    [Authorize(Roles = "MainAdmin")]
     public class ProductModelController : Controller
     {
         private readonly AppDbContext _context;

@@ -7,10 +7,26 @@ let fromDate = document.querySelector(".fromDate");
 let showPassword = document.querySelector(".watch-password");
 
 
+if (showPassword != undefined) {
+    showPassword.addEventListener("click", function (e) {
+        console.log(this.firstChild.getAttribute("class"))
+        if (document.getElementById("Password").getAttribute("type") == "password") {
+            this.firstChild.classList.remove;
+            this.firstChild.setAttribute("class", "fa-solid fa-eye-slash")               
+            document.getElementById("Password").setAttribute("type", "text")
+        } else {
+            document.getElementById("Password").setAttribute("type", "password")
+            this.firstChild.classList.remove;
+            this.firstChild.setAttribute("class", "fa-solid fa-eye")     
+        }
+    })
+}
 
 
-btn.onclick = function () {
-    sidebar.classList.toggle("active");
+if (btn != undefined) {
+    btn.onclick = function () {
+        sidebar.classList.toggle("active");
+    }
 }
 
 setTimeout(() => {

@@ -26,6 +26,27 @@
     let deleteDisplacement = $(".delete-displacement");
     var skip;
 
+    function DisableSeriesInput(result) {
+        if (result) {
+            $(".series-input").prop("disabled", false)           
+        } else {
+            $(".series-input").prop("disabled", true)
+        } 
+    }
+
+
+    $(".prod-model").change(function (e) {
+        let id = $(".prod-model").val();
+        $.ajax({
+            method: "GET",
+            url: "GetUniqueSeries/" + id,
+            success: function (result) {
+
+                DisableSeriesInput(result);
+            },
+            error: function (result) { }
+        });
+    })
 
     deleteDisplacement.on("click", function (e) {
         let id = $(e.currentTarget).data('id');
@@ -119,6 +140,18 @@
                         .append($("<option></option>")
                             .attr("value", value.value)
                             .text(value.text));
+                });
+
+                let modelId = result[0].value;
+
+                $.ajax({
+                    method: "GET",
+                    url: "GetUniqueSeries/" + modelId,
+                    success: function (result) {
+
+                        DisableSeriesInput(result);
+                    },
+                    error: function (result) { }
                 });
 
             },

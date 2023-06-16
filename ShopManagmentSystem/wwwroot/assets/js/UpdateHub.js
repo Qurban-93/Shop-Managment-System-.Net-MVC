@@ -23,7 +23,6 @@ connection.on("DeleteDisplacement", function (id) {
     }
 })
 
-
 connection.on("AcceptDisplacement", function (id) {
     let element = document.getElementById(id);
     if (element != undefined || element != null) {
@@ -32,6 +31,7 @@ connection.on("AcceptDisplacement", function (id) {
         element.classList.add("text-success");
     }
 })
+
 
 function playSound() {
     document.getElementById("notification").play();

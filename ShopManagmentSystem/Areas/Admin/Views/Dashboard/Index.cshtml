@@ -1,8 +1,36 @@
-﻿
+﻿@model AdminIndexVM
+
 <div class="container">
     <div class="row justify-content-between flex-wrap">
-        <h1>Admin Panel</h1>
-        <hr />        
+        <h1 class="text-warning" >Admin Panel</h1>
+        <hr />
+        <table class="table table-dark table-hover">
+            <tr>
+                <th class="text-primary">Today Info</th>
+                <th class="text-primary">Amount</th>
+            </tr>
+            <tr>
+                <td>Sales</td>
+                <td>@Model.SaleAmount  <i class="fa-solid fa-manat-sign"></i></td>
+            </tr>
+            <tr>
+                <td>Number of products sold</td>
+                <td>@Model.ProductAmount</td>
+            </tr>
+            <tr>
+                <td>Refunds</td>
+                <td><span class="refund-info">@Model.RefundsAmount </span> <i class="fa-solid fa-manat-sign"></i></td>
+            </tr>
+            <tr>
+                <td>Profit</td>
+                <td><span class="profit-info">@Model.ProfitAmount </span> <i class="fa-solid fa-manat-sign"></i></td>
+            </tr>
+            <tr>
+                <td>Total Salary</td>
+                <td><span class="salary-info">@Model.SalaryAmount</span>  <i class="fa-solid fa-manat-sign"></i></td>
+            </tr>
+
+        </table>
     </div>
 </div>
 

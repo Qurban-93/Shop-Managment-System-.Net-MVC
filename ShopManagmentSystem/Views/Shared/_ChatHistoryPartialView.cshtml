@@ -15,7 +15,7 @@
         {
             <li class="clearfix @(item.SenderId != Model.User.Id ? "text-start":"")">
                 <div class="message-data @(item.SenderId != Model.User.Id ? "":"text-end")">
-                    <span class="message-data-time">@item.CreateDate.ToString("dd MMMM yyyy , hh:mm")</span>
+                    <span class="message-data-time">@item.CreateDate.ToString("dd MMMM yyyy , hh:mm tt")</span>
                 </div>
                 <div class="@(item.SenderId != Model.User.Id ? "message my-message":"message other-message float-right")"><i style="font-size:10px;" class="fa-solid fa-circle text-danger"></i> @item.Content </div>
             </li>
@@ -24,7 +24,7 @@
         {
             <li class="clearfix @(item.SenderId != Model.User.Id ? "text-start":"")">
                 <div class="message-data @(item.SenderId != Model.User.Id ? "":"text-end")">
-                    <span class="message-data-time">@item.CreateDate.ToString("dd MMMM yyyy , hh:mm")</span>
+                    <span class="message-data-time">@item.CreateDate.ToString("dd MMMM yyyy , hh:mm tt")</span>
                 </div>
                 <div class="@(item.SenderId != Model.User.Id ? "message my-message":"message other-message float-right")"> @item.Content </div>
             </li>

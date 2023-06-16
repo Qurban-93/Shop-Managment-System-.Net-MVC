@@ -21,7 +21,7 @@ function formatAMPM(Date) {
     
     var hours = Date.getHours();
     var minutes = Date.getMinutes();
-    var ampm = hours >= 12 ? 'pm' : 'am';
+    var ampm = hours >= 12 ? 'PM' : 'AM';
     hours = hours % 12;
     hours = hours ? hours : 12; 
     minutes = minutes < 10 ? '0' + minutes : minutes;
@@ -123,7 +123,7 @@ connection.on("ShowMessage", function (senderUserId, message, destinationUserId)
         var day = d.getDate().toString();
         var month = months[d.getMonth().toString()];
         var year = d.getFullYear().toString();
-        var fullDate = day + " " + month + " " + year + " , " + formatAMPM(d)
+        var fullDate = day + " " + month + " " + year + " , " + formatAMPM(d).toUpperCase()
 
         let myMessage = `<li class="clearfix text-start">
             <div class="message-data">

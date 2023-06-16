@@ -4,11 +4,23 @@
     <div class="row">
         <h1>User Role Update Form</h1>
         <hr />
+         @if (TempData["Edit"] != null)
+        {
+            <div style="transition:all 0.5s ease" id="alert_refund" class="alert alert-warning" role="alert">
+                Yenilenme qeyde alindi !
+            </div>
+        }
+        @if (TempData["Create"] != null)
+        {
+            <div style="transition:all 0.5s ease" id="alert_refund" class="alert alert-warning" role="alert">
+                User elave edildi !
+            </div>
+        }
         <table class="table">
             <tr>
                 <th class="text-primary">User Name</th>
                 <th class="text-primary">User Branch</th>
-                <th class="text-primary">User Roles</th>
+                <th class="text-primary">User Roles</th>             
             </tr>
             <tr>
                 <td>@Model.User.UserName</td>
@@ -20,7 +32,7 @@
                         {
                             if (Model.UserRoles.Any(r => r == role.Name))
                             {
-                                <div class="col-6 row">
+                                <div class="col-9 row">
                                     <div class="col-6">
                                         <span>@role</span>
                                     </div>
@@ -31,7 +43,7 @@
                             }
                             else
                             {
-                                <div class="col-6 row">
+                                <div class="col-9 row">
                                     <div class="col-6">
                                         <span>@role</span>
                                     </div>
@@ -41,10 +53,10 @@
                                 </div>
                             }
                         }
-                        <button class="btn btn-primary">Change Role</button>
+                        <button class="my-btn mt-3">Change Role</button>
                     </form>
 
-                </td>
+                </td>               
             </tr>
         </table>
     </div>

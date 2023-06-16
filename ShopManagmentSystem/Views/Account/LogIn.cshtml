@@ -20,11 +20,11 @@
             <label asp-for="Password">Password</label>
             <span class="text-danger" asp-validation-for="Password"></span>
         </div>       
-        <div style="margin:auto;">
-            <button style="width:50%;" type="submit" class="btn btn-primary py-3 w-100 mb-4">Sign Up</button>
+        <div style="margin:auto;" class="text-center">
+            <button style="width:30%; padding:10px;" type="submit" class="btn btn-primary mb-4">Login</button>
         </div>
     </form>
-    
+    <div class="text-center"><small><a asp-action="ForgotPassword" asp-controller="Account" class="text-primary">Forgot Password</a></small></div>
 </div>
 
 

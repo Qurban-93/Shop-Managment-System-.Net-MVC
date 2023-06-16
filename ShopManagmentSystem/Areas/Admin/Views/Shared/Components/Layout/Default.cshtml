@@ -51,7 +51,7 @@
             </a>
             <span class="tooltip">Punishment</span>
         </li>
-        @if (User.IsInRole("SuperAdmin"))
+        @if (User.IsInRole("MainAdmin"))
         {
             <li>
                 <a asp-action="superadmin" asp-controller="dashboard">

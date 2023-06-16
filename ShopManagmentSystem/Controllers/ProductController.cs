@@ -25,27 +25,14 @@ namespace ShopManagmentSystem.Controllers
             if (!User.Identity.IsAuthenticated) return RedirectToAction("Login", "Account");
             AppUser user = await _userManager.FindByNameAsync(User.Identity.Name);
             if (user == null) return NotFound();
-            List<Product> products = new();
-            var query = _appDbContext.Products
+            List<Product> products = await _appDbContext.Products
                 .Include(p => p.ProductCategory)
                 .Include(p => p.ProductModel)
                 .Include(p => p.Brand)
                 .Include(p => p.Color)
-                .Where(p => !p.IsSold && p.BranchId == user.BranchId && !p.IsDeleted);
+                .Where(p => !p.IsSold && p.BranchId == user.BranchId && !p.IsDeleted).ToListAsync();
 
-            if (!string.IsNullOrWhiteSpace(search))
-            {
-                products = await query.Where(p =>
-                p.ProductModel.ModelName.ToUpper().Contains(search.Trim().ToUpper()) ||
-                p.Brand.BrandName.ToUpper().Contains(search.Trim().ToUpper()) ||
-                p.ProductCategory.Name.ToUpper().Contains(search.Trim().ToUpper()) ||
-                p.Series.Contains(search.Trim())).ToListAsync();
-
-            }
-            else
-            {
-                products = await query.ToListAsync();
-            }
+            
 
             List<Order> orders = await _appDbContext.Orders.Where(o => o.BranchId == user.BranchId)
                 .ToListAsync();

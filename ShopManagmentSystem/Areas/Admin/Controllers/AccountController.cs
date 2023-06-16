@@ -16,7 +16,7 @@ using System.Data;
 namespace ShopManagmentSystem.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    [Authorize(Roles = "SuperAdmin")]
+    [Authorize(Roles = "MainAdmin")]
     public class AccountController : Controller
     {
         private readonly UserManager<AppUser> _userManager;
@@ -267,9 +267,18 @@ namespace ShopManagmentSystem.Areas.Admin.Controllers
             await _userManager.RemoveFromRolesAsync(user, await _userManager.GetRolesAsync(user));
             await _userManager.AddToRolesAsync(user, role);     
             TempData["Edit"] = true;
+            Branch? branch = await _context.Branches.FirstOrDefaultAsync(x => x.Id == user.BranchId);
+            AccountEditVM editVM = new();
+            editVM.User = user;
+            editVM.Roles = roles;
+            editVM.UserRoles = role;
 
-            return RedirectToAction(nameof(Index));
-        }
+            if (branch != null)
+            {
+                editVM.Branch = branch;
+            }
+            return View(editVM);         
+        }       
         [HttpDelete]
         public async Task<IActionResult> Delete(string id)
         {

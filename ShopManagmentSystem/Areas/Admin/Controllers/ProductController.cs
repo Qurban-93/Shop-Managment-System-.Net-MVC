@@ -44,8 +44,9 @@ namespace ShopManagmentSystem.Areas.Admin.Controllers
             ViewBag.Brands = new SelectList(_context.Brands.Where(b=>!b.IsDeleted).ToList(), "Id", "BrandName");         
             ViewBag.Color = new SelectList(_context.Colors.Where(c => !c.IsDeleted).ToList(), "Id", "ColorName");
             ViewBag.ProdModel = new SelectList(_context.ProductModels.Where(pm => !pm.IsDeleted && pm.BrandId == _context.Brands.First().Id).ToList(), "Id", "ModelName");
-
-
+            ProductModel productModel = _context.ProductModels.Where(pm => !pm.IsDeleted && pm.BrandId == _context.Brands.First().Id).Include(pm=>pm.ProductCategory).First();         
+           
+            ViewBag.Disabled = productModel.ProductCategory.SeriesUniqueRequired;          
             return View();
         }
         [HttpPost]
@@ -53,18 +54,25 @@ namespace ShopManagmentSystem.Areas.Admin.Controllers
         public async Task<IActionResult> Create(ProductCreateVM productCreateVM)
         {
             AppUser? user = await _userManager.FindByNameAsync(User.Identity.Name);
+
             ViewBag.Brands = new SelectList(_context.Brands.Where(b => !b.IsDeleted).ToList(), "Id", "BrandName");
             ViewBag.Color = new SelectList(_context.Colors.Where(c => !c.IsDeleted).ToList(), "Id", "ColorName");
-            ViewBag.ProdModel = new SelectList(_context.ProductModels.Where(pm=>pm.BrandId == productCreateVM.BrandId && !pm.IsDeleted).ToList(), "Id", "ModelName");
+            ViewBag.ProdModel = new SelectList(_context.ProductModels.Where(pm => pm.BrandId == productCreateVM.BrandId && !pm.IsDeleted).ToList(), "Id", "ModelName");
+            ViewBag.Disabled = false;
+            
+            Brand? brand = await _context.Brands.Include(b => b.ProductModels).FirstOrDefaultAsync(b => b.Id == productCreateVM.BrandId);
+            ProductModel? productModel = await _context.ProductModels.Include(pm=>pm.ProductCategory).FirstOrDefaultAsync(pm => pm.Id == productCreateVM.ProductModelId);
+            Color? color = await _context.Colors.FirstOrDefaultAsync(c => c.Id == productCreateVM.ColorId);
+            if (productModel == null || brand == null || color == null) return NotFound();
+
+            ViewBag.Disabled = productModel.ProductCategory.SeriesUniqueRequired;
+
+
             if (!ModelState.IsValid) return View();
 
             Product product = new();
-
-            Brand? brand = await _context.Brands.Include(b => b.ProductModels).FirstOrDefaultAsync(b => b.Id == productCreateVM.BrandId);
-            ProductModel? productModel = await _context.ProductModels.FirstOrDefaultAsync(pm => pm.Id == productCreateVM.ProductModelId);
-            Color? color = await _context.Colors.FirstOrDefaultAsync(c => c.Id == productCreateVM.ColorId);
+       
             
-            if (productModel == null || brand == null  || color == null) return NotFound();
             ProductCategory? productCategory = await _context.ProductCategories.FirstOrDefaultAsync(pc => pc.Id == productModel.ProductCategoryId);
             if(productCategory == null) return NotFound();
             if (productCategory.SeriesUniqueRequired)
@@ -76,7 +84,7 @@ namespace ShopManagmentSystem.Areas.Admin.Controllers
                 }
                 if(productCreateVM.Series.Length < productCategory.SeriesMaxLength || productCreateVM.Series.Length > productCategory.SeriesMaxLength)
                 {
-                    ModelState.AddModelError("Series", "Imei seriya 15 reqemden az ve ya cox ola bilmez!");
+                    ModelState.AddModelError("Series", $"Imei seriya {productCategory.SeriesMaxLength} reqemden az ve ya cox ola bilmez!");
                     return View();
                 }
                 if(await _context.Products.Where(p=>p.ProductCategoryId == productCategory.Id).AnyAsync(p=>p.Series == productCreateVM.Series))
@@ -84,7 +92,11 @@ namespace ShopManagmentSystem.Areas.Admin.Controllers
                     ModelState.AddModelError("Series", "Imei artiq movcuddur!");
                     return View();
                 }
-            }  
+            }
+            else
+            {
+                product.Series = "";
+            } 
             
             if (!brand.ProductModels.Any(pm => pm.Id == productModel.Id))
             {
@@ -111,7 +123,7 @@ namespace ShopManagmentSystem.Areas.Admin.Controllers
             product.BranchId = user.BranchId;
             product.CostPrice = productCreateVM.CostPrice;
             product.CreateDate = DateTime.Now;
-            product.Series = productCreateVM.Series;
+            
             product.IsSold = false;
 
             _context.Products.Add(product);
@@ -226,6 +238,15 @@ namespace ShopManagmentSystem.Areas.Admin.Controllers
             if (brand == null) return NotFound();
             var options = new SelectList(brand.ProductModels, "Id", "ModelName");
             return Ok(options);
+        }
+
+        public async Task<IActionResult> GetUniqueSeries(int? id)
+        {
+            if(id == null || id == 0) return BadRequest();
+            ProductModel? productModel = await _context.ProductModels.Include(pm=>pm.ProductCategory).FirstOrDefaultAsync(x => x.Id == id);
+            if (productModel == null) return NotFound();
+            bool check = productModel.ProductCategory.SeriesUniqueRequired;
+            return Ok(check);
         }
 
     }

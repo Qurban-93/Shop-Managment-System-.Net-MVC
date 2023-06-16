@@ -30,19 +30,19 @@
             <table class="table">
                 <thead class="thead-light">
                     <tr>
-                        <th scope="col">Date</th>
-                        <th scope="col">Customer Name</th>                     
-                        <th scope="col">Seller Name</th>
-                        <th scope="col">Products Count</th>
-                        <th scope="col">Total Price</th>
-                        <th scope="col">Details</th>
+                        <th class="text-primary" scope="col">Date</th>
+                        <th class="text-primary" scope="col">Customer Name</th>                     
+                        <th class="text-primary" scope="col">Seller Name</th>
+                        <th class="text-primary" scope="col">Products Count</th>
+                        <th class="text-primary" scope="col">Total Price</th>
+                        <th class="text-primary" scope="col">Details</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach (Sale sale in Model)
                     {
                         <tr>
-                            <td>@sale.CreateDate.ToLocalTime().ToString("dd MMMM yyyy , hh:mm:ss")</td>
+                            <td>@sale.CreateDate.ToString("dd MMMM yyyy , hh:mm:ss tt")</td>
                             <td>@sale.Customer?.FullName</td>      
                             <td>@sale.Employee?.FullName</td>
                             <td>@sale.SaleProducts?.Count() eded</td>

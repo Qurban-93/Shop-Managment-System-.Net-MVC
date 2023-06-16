@@ -38,8 +38,12 @@
                             }
                         </tr>
                     }
-                }
+                }                                               
             </tbody>
         </table>
+        @if (Model.Products.Count == 0)
+        {
+            <h5 class="text-warning text-center">Enter the name of the product in the search bar !</h5>
+        }
     </div>
 </div>

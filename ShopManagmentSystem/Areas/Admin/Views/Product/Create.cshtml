@@ -30,13 +30,17 @@
             </div>
             <div class="mb-3">
                 <label asp-for=Series class="form-label text-primary"></label><span class="text-danger">*</span>
-                <input asp-for=Series class="form-control">
+                @if(ViewBag.Disabled){
+                    <input asp-for=Series class="form-control series-input">
+                }else{
+                    <input asp-for=Series class="form-control series-input" disabled>
+                }
                 <span class="text-danger" asp-validation-for="Series"></span>
             </div>
 
             <button class="btn btn-primary" type="submit">Add Product</button>
             <a class="btn btn-primary" asp-action="index">Go Back</a>
-
+            
         </form>
     </div>
 </div>

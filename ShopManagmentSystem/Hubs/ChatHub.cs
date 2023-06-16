@@ -68,7 +68,7 @@ namespace ShopManagmentSystem.Hubs
                 newMessage.SenderId = senderUserId;
                 newMessage.DestinationId = destinationUserId;
                 newMessage.Content = message;
-                newMessage.CreateDate = DateTime.Now;
+                newMessage.CreateDate = DateTime.Now.ToLocalTime();
 
                 _context.Messages.Add(newMessage);
                 await _context.SaveChangesAsync();

@@ -8,7 +8,7 @@ using ShopManagmentSystem.ViewModels;
 namespace ShopManagmentSystem.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    [Authorize(Roles = "SuperAdmin")]
+    [Authorize(Roles = "MainAdmin")]
     public class BranchController : Controller
     {
         private readonly AppDbContext _context;

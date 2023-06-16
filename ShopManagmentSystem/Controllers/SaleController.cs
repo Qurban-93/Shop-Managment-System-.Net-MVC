@@ -3,9 +3,11 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.SignalR;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using ShopManagmentSystem.DAL;
+using ShopManagmentSystem.Hubs;
 using ShopManagmentSystem.Models;
 using ShopManagmentSystem.ViewModels.SaleVMs;
 
@@ -16,11 +18,13 @@ public class SaleController : Controller
 {
     private readonly AppDbContext _context;
     private readonly UserManager<AppUser> _userManager;
+    private readonly IHubContext<UpdateHub> _hubContext;
 
-    public SaleController(AppDbContext context, UserManager<AppUser> userManager)
+    public SaleController(AppDbContext context, UserManager<AppUser> userManager, IHubContext<UpdateHub> hubContext)
     {
         _context = context;
         _userManager = userManager;
+        _hubContext = hubContext;
     }
     public async Task<IActionResult> Index(string search, DateTime? fromDate, DateTime? toDate)
     {
@@ -338,7 +342,7 @@ public class SaleController : Controller
         _context.Orders.RemoveRange(orders);
         await _context.SaveChangesAsync();
         TempData["Success"] = "ok";
-
+         
         return RedirectToAction("index", "sale");
     }
     public async Task<IActionResult> Details(int? id)
