@@ -138,7 +138,7 @@ namespace ShopManagmentSystem.Areas.Admin.Controllers
             ViewBag.Color = new SelectList(_context.Colors.Where(c => !c.IsDeleted).ToList(), "Id", "ColorName");
 
             if (id == null || id == 0) return NotFound();
-            Product? product = await _context.Products.FirstOrDefaultAsync(x => x.Id == id);
+            Product? product = await _context.Products.Include(p=>p.ProductCategory).FirstOrDefaultAsync(x => x.Id == id);
             if (product == null) return NotFound();
             ViewBag.ProdModel = new SelectList(_context.ProductModels.Where(pm=>pm.BrandId == product.BrandId && !pm.IsDeleted ).ToList(), "Id", "ModelName");
             ProductEditVM editVM = new()
@@ -150,6 +150,8 @@ namespace ShopManagmentSystem.Areas.Admin.Controllers
                 Series = product.Series,
             };
 
+            ViewBag.Disabled = product.ProductCategory.SeriesUniqueRequired;
+
             return View(editVM);
         }
         [HttpPost]
@@ -158,12 +160,13 @@ namespace ShopManagmentSystem.Areas.Admin.Controllers
         {
             ViewBag.Brands = new SelectList(_context.Brands.Where(b => !b.IsDeleted).ToList(), "Id", "BrandName");
             ViewBag.Color = new SelectList(_context.Colors.Where(c => !c.IsDeleted).ToList(), "Id", "ColorName");
-
+            Product? product = await _context.Products.Include(p => p.ProductCategory).FirstOrDefaultAsync(x => x.Id == id);
+            if (product == null) return NotFound();
+            ViewBag.ProdModel = new SelectList(_context.ProductModels.Where(pm => pm.BrandId == product.BrandId && !pm.IsDeleted).ToList(), "Id", "ModelName");
+            ViewBag.Disabled = product.ProductCategory.SeriesUniqueRequired;
             if (!ModelState.IsValid) return View();
             if(id == 0 || id == null ) return NotFound();
-            Product product = await _context.Products.FirstAsync(x => x.Id == id);
-            if (product == null ) return NotFound();
-            ViewBag.ProdModel = new SelectList(_context.ProductModels.Where(pm => pm.BrandId == product.BrandId && !pm.IsDeleted).ToList(), "Id", "ModelName");
+           
            
             Brand? brand = await _context.Brands.Include(b => b.ProductModels).FirstOrDefaultAsync(b => b.Id == editVM.BrandId);
             ProductModel? productModel = await _context.ProductModels.FirstOrDefaultAsync(pm => pm.Id == editVM.ProductModelId);
@@ -178,16 +181,21 @@ namespace ShopManagmentSystem.Areas.Admin.Controllers
                     ModelState.AddModelError("Series", "Bosh olmaz !");
                     return View();
                 }
-                if (editVM.Series.Length < productCategory.SeriesMaxLength || editVM.Series.Length > productCategory.SeriesMaxLength)
+                if (editVM.Series.Trim().Length < productCategory.SeriesMaxLength || editVM.Series.Trim().Length > productCategory.SeriesMaxLength)
                 {
-                    ModelState.AddModelError("Series", "Imei seriya 15 reqemden az ve ya cox ola bilmez!");
+                    ModelState.AddModelError("Series", $"Seriya {productCategory.SeriesMaxLength} reqemden az ve ya cox ola bilmez!");
                     return View();
                 }
                 if (await _context.Products.Where(p => p.ProductCategoryId == productCategory.Id).AnyAsync(p => p.Series == editVM.Series && p.Id != id))
                 {
-                    ModelState.AddModelError("Series", "Imei artiq movcuddur!");
+                    ModelState.AddModelError("Series", "Seriya artiq movcuddur!");
                     return View();
                 }
+                product.Series = editVM.Series.Trim();
+            }
+            else
+            {
+                product.Series = "";
             }
             if (!brand.ProductModels.Any(pm => pm.Id == productModel.Id))
             {
@@ -204,13 +212,13 @@ namespace ShopManagmentSystem.Areas.Admin.Controllers
                 ModelState.AddModelError("CostPrice", "Deyer '0' ola bilmez !");
                 return View();
             }
+           
 
             product.BrandId = brand.Id;
             product.ProductCategoryId = (int)productModel.ProductCategoryId;
             product.ProductModelId = productModel.Id;
             product.ColorId = color.Id;
-            product.CostPrice = editVM.CostPrice;
-            product.Series = editVM.Series;
+            product.CostPrice = editVM.CostPrice;          
             product.UpdateDate = DateTime.Now;
             product.ProductCategoryId = (int)productModel.ProductCategoryId;       
 
